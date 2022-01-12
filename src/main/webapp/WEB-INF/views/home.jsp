@@ -9,6 +9,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
-	여기가 홈이다.
+	이제 시작입니다.
 </body>
 </html>

@@ -38,4 +38,19 @@ public class ClubMemberController {
 		return "clubMember/memberList";
 	}
 	
+	@RequestMapping("/deleteMember")
+	public String deleteMember(int cpage, Model model) throws Exception {
+		System.out.println("!!");
+		
+		List<MemberDTO> list = club_member_service.selectByPaging(cpage, 5);
+		String navi = club_member_service.getPageNavi2(cpage);
+		
+		
+		model.addAttribute("cpage", cpage);
+		model.addAttribute("navi", navi);
+		model.addAttribute("list", list);
+		
+		return "clubMember/memberList";
+	}
+	
 }

@@ -119,7 +119,7 @@
 												<button
 													class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
 													삭제
-													<%-- <input type="hidden" class="seq_h" value="${dto.seq }"> --%>
+													<input type="hidden" class="id_h" value="${dto.mem_id }">
 												</button>
 											</p>
 										</td>
@@ -141,18 +141,26 @@
 	</div>
 	
 	<script>
+		// 페이징 스타일
 		$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
 		
+		// 멤버 추방하기
+		
+		$(".delBtn").on("click", function() {
+			if (confirm("정말 쫓아내겠습니까?")) {
+				let id_h = $(this).find($(".id_h")).val();
+				location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h;
+				return true;
+			} else {
+				return false;
+			}
+		})
+		
+		
+		
 	</script>
-	<%-- <c:if test="${cpage eq '1' }">
-		<script>
-			$("#paging1").addClass("bg-red-500");
-			$( "#paging1" ).css("color","white").css("disabled","false");
-			$( "#paging1" ).removeAttr('href');
-		</script>
-	</c:if> --%>
 	
-	
+		<!-- 페이징 스타일 변화 -->
 	<c:choose>
 		<c:when test="${cpage eq '1' }">
 			<script>

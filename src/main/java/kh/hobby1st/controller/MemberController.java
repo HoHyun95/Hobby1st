@@ -1,12 +1,20 @@
 package kh.hobby1st.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+
+import kh.hobby1st.dao.MemberDAO;
+import kh.hobby1st.dto.MemberDTO;
+import kh.hobby1st.service.MemberService;
 
 @Controller
 @RequestMapping("/member/")
@@ -14,6 +22,9 @@ public class MemberController {
 
 	@Autowired
 	private HttpSession session;
+
+	@Autowired
+	private MemberService mem_service;
 
 	//login_page
 	@RequestMapping("sign_in")
@@ -23,8 +34,11 @@ public class MemberController {
 
 	//login_click
 	@RequestMapping("login")
-	public String login(String mem_id, String me_pass) {
-		session.setAttribute("mem_id", mem_id);
+	public String login(String mem_id, String mem_pass) {
+		int result = (Integer)mem_service.login(mem_id, mem_pass);
+        if(0<result) {
+    		session.setAttribute("mem_id", mem_id);
+        }
 		return "redirect: /";
 	}
 
@@ -43,50 +57,73 @@ public class MemberController {
 
 	//signUp_lastPage
 	@RequestMapping("sign_up_last")
-	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_phone, String mem_email, String mem_birthday,
-			String mem_gender, String mem_category_1, String mem_category_2) {
+	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
+			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email) {
 		//값을 가져오기 위한 것 
 		session.setAttribute("mem_id", mem_id);
 		session.setAttribute("mem_pass", mem_pass);
 		session.setAttribute("mem_name", mem_name);
 		session.setAttribute("mem_phone", mem_phone);
 		session.setAttribute("mem_email", mem_email);
+		session.setAttribute("mem_address", mem_address);
 		session.setAttribute("mem_birthday", mem_birthday);
 		session.setAttribute("mem_gender", mem_gender);
 		session.setAttribute("mem_category_1", mem_category_1);
 		session.setAttribute("mem_category_2", mem_category_2);
 		return "member/sign_up_last";
 	}
-	
+
 	//member_add_click
 	@RequestMapping("member_add")
-	public String memberAdd(String mem_id, String mem_pass, String mem_name, String mem_phone, String mem_email, String mem_birthday,
-			String mem_gender, String mem_category_1, String mem_category_2, MultipartFile[] mem_photo) {
+	public String memberAdd(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
+			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
+		
+		String mem_lastlogin = "default";
+		
+		Date Date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(mem_birthday);
+		String formattedDate = simpleDateFormat.format(Date);
+		java.sql.Date sqldate = java.sql.Date.valueOf(formattedDate);
 		
 		
-//		int result = BService.insert(new BoardDTO(dto.getSeq(),writer,dto.getTitle(),dto.getContents(),dto.getView_count()));
-//
-//		if(!file[0].isEmpty()) {  // 첫번째 파일이 비어있지 않는다면
-//			for(MultipartFile mf : file) {
-//				String realPath = session.getServletContext().getRealPath("upload");
-//				File realPathFile = new File(realPath);
-//				if(!realPathFile.exists()) {realPathFile.mkdir();}
-//
-//				String oriName = mf.getOriginalFilename();         // 사용자가 업로드 한 파일의 원본 이름
-//				String sysName = UUID.randomUUID() + "_" + oriName;   // 서버쪽에 저장할 파일 이름 
-//
-//				// 서버에 업로드되어 메모리에 적재된 파일의 내용을 어디에 저장할지 결정하는 부분
-//				mf.transferTo(new File(realPath+"/"+sysName));
-//
-//				FService.insert(new FilesDTO(0, oriName, sysName, dto.getSeq()));  // 디비에 파일을 저장 
-//				System.out.println(mf.getName() + "동작확인");
-//			}
-//		}
-//		return "redirect: list";
-		
-		
-		
+		for(MultipartFile mf : mem_photo) {
+			try{
+				String realPath = session.getServletContext().getRealPath("upload");
+				File realPathFile = new File(realPath);
+				if(!realPathFile.exists()) {realPathFile.mkdir();}
+
+				String oriName = mf.getOriginalFilename();         
+				String sysName = UUID.randomUUID() + "_" + oriName;   
+				System.out.println(mem_id);
+				System.out.println(mem_pass);
+				System.out.println(mem_phone);
+				System.out.println(mem_email);
+				System.out.println(mem_name);
+				System.out.println(mem_nickname);
+				System.out.println(sqldate);
+				System.out.println(mem_gender);
+				System.out.println(mem_address);
+				System.out.println(mem_category_1);
+				System.out.println(mem_category_2);
+				System.out.println(sysName);
+				System.out.println(mem_lastlogin);
+
+
+				mf.transferTo(new File(realPath+"/"+sysName));
+
+				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender, 
+						mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email);
+				
+				System.out.println(mem_category_2);
+				
+				int result = mem_service.insert(dto);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
 		return "redirect: sign_in";
 	}
-
 }
+
+

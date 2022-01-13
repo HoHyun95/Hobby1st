@@ -37,6 +37,10 @@
 				<td><input type="text" placeholder="phone" name="mem_phone">
 			</tr>
 			<tr>
+				<td>address
+				<td><input type="text" placeholder="address" name="mem_address">
+			</tr>
+			<tr>
 				<td>email
 				<td><input type="text" placeholder="email" name="mem_email">
 			</tr>
@@ -47,9 +51,9 @@
 			</tr>
 			<tr>
 				<td>gender
-				<td><input type="radio" name="mem_gender" value="male">
-					<label for="male">M</label> <input type="radio"
-					name="mem_gender" value="female"> <label for="female">F</label>
+				<td><input type="radio" name="mem_gender" value="m">
+					<label for="m">M</label> <input type="radio" name="mem_gender"
+					value="f"> <label for="f">F</label>
 			</tr>
 			<tr>
 				<th colspan=2>category

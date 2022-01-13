@@ -20,8 +20,9 @@
 		<input type="text" name="mem_pass" value="${mem_pass }" hidden>
 		<input type="text" name="mem_name" value="${mem_name }" hidden>
 		<input type="text" name="mem_phone" value="${mem_phone }" hidden>
-		<input type="text" name="mem_eamil" value="${mem_email }" hidden>
+		<input type="text" name="mem_email" value="${mem_email }" hidden>
 		<input type="text" name="mem_birthday" value="${mem_birthday }" hidden>
+		<input type="text" name="mem_address" value="${mem_address }" hidden>
 		<input type="text" name="mem_gender" value="${mem_gender }" hidden>
 		<input type="text" name="mem_category_1" value="${mem_category_1 }" hidden>
 		<input type="text" name="mem_category_2" value="${mem_category_2 }" hidden>
@@ -36,11 +37,12 @@
 			</tr>
 			<tr>
 				<td>NickName
-				<td><input type="text">
+				<td><input type="text" name="mem_nickname">
 			</tr>
 			<tr>
-				<td colspan=2><input type="submit" value="signUp!">
+				<td colspan=2>
 				<button type="button" id="return">return</button>
+			    <input type="submit" value="signUp!">
 			</tr>
 		</table>
 	</form>

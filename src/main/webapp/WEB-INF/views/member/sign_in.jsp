@@ -25,6 +25,7 @@
 				<td><input type="password" name="mem_pass" placeholder="pass">
 			</tr>
 			<tr>
+			<!-- 이메일로 아이디찾기 구현 -->
 				<th><input type="submit" value="submit">
 					<button type="button" id="sign_up">Sign Up</button>
 			</tr>

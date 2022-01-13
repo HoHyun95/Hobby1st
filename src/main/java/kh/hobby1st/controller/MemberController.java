@@ -94,27 +94,10 @@ public class MemberController {
 
 				String oriName = mf.getOriginalFilename();         
 				String sysName = UUID.randomUUID() + "_" + oriName;   
-				System.out.println(mem_id);
-				System.out.println(mem_pass);
-				System.out.println(mem_phone);
-				System.out.println(mem_email);
-				System.out.println(mem_name);
-				System.out.println(mem_nickname);
-				System.out.println(sqldate);
-				System.out.println(mem_gender);
-				System.out.println(mem_address);
-				System.out.println(mem_category_1);
-				System.out.println(mem_category_2);
-				System.out.println(sysName);
-				System.out.println(mem_lastlogin);
-
 
 				mf.transferTo(new File(realPath+"/"+sysName));
 
 				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender, 
-						mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email);
-				
-				
 				int result = mem_service.insert(dto);
 
 			} catch (Exception e) {

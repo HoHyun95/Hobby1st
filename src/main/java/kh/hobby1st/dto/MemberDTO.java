@@ -1,10 +1,12 @@
 package kh.hobby1st.dto;
 
+import java.sql.Date;
+
 public class MemberDTO {
 
 	public MemberDTO() {} 
-	public MemberDTO(String mem_id, String mem_pass, String mem_phone, String mem_email, String mem_name, String mem_nickname, String mem_birthday, String mem_gender
-			,String mem_address, String mem_category_1, String mem_category_2, String mem_photo, String mem_lastlogin) {
+	public MemberDTO(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
+	String mem_address, String mem_category_1, String mem_category_2, String mem_photo, String mem_lastlogin, String mem_phone, String mem_email) {
 		super();
 		this.mem_id = mem_id;
 		this.mem_pass = mem_pass;

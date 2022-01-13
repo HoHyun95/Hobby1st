@@ -17,7 +17,6 @@
 <body>
 
   <!-- 네비바에서 로그인 버튼 누르면 이동하는 주소값은 "/member/sign_in" 입니다. -->
-	
 	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
 	<a href="/clubMember/memberList">동호회 회원정보</a>
   <!-- 여기서부터 main page -->
@@ -30,13 +29,13 @@
           </div>
           <ul class="login_list">
           	<c:choose>
-              <c:when test="${login_id !=null }">
-                <span id="login_id"><b>${login_id }</b>님 환영합니다</span>
+              <c:when test="${mem_id !=null }">
+                <span id="login_id"><b>${mem_id }</b>님 환영합니다</span>
                 <a href="/member/logout"><li class="login_list_item">로그아웃</li></a>
               </c:when>
               <c:otherwise>
                 <a href="/member/sign_in"><li class="login_list_item">로그인</li></a>
-                <li class="login_list_item">회원가입</li>
+                <a href="/member/sign_up"><li class="login_list_item">회원가입</li></a>
               </c:otherwise>
             </c:choose>
           </ul>

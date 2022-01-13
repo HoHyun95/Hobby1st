@@ -10,19 +10,22 @@
 <title>Sign_in</title>
 </head>
 <body>
-	<!-- 디자인은 후에 하겠습니다 로그인 하시고 기능 먼저 확인하세요 -->
+    <!-- 작업순서 -->
+    <!-- 1. 기능구현(진행중) 2. 디자인(미완료) 3. 정규표현식을 통한 제약(미완료) 4. 이메일인증(미완료)  -->
+	<!-- login -->
 	<form action="/member/login" method="post">
 		<table border=1 align="center">
 			<tr>
 				<th>sign_in Page
 			</tr>
 			<tr>
-				<td><input type="text" name="login_id" placeholder="id">
+				<td><input type="text" name="mem_id" placeholder="id">
 			</tr>
 			<tr>
-				<td><input type="password" name="login_pass" placeholder="pass">
+				<td><input type="password" name="mem_pass" placeholder="pass">
 			</tr>
 			<tr>
+			<!-- 이메일로 아이디찾기 구현 -->
 				<th><input type="submit" value="submit">
 					<button type="button" id="sign_up">Sign Up</button>
 			</tr>

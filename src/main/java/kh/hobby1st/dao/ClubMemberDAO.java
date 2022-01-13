@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 import kh.hobby1st.dto.MemberDTO;
 
 @Repository
-public class ClubBoardDAO {
+public class ClubMemberDAO {
 	
+	@Autowired
+	private SqlSessionTemplate mybatis;
 	
-	
+	public List<MemberDTO> memberInformation(int seq){
+		return mybatis.selectList("ClubMember.memberInfor",seq);
+	}
 
 }

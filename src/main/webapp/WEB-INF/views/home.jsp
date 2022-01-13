@@ -11,6 +11,7 @@
 <body>
 	<!-- login -->
 	<c:choose>
+<<<<<<< HEAD
 		<c:when test="${mem_id !=null }">
 		    ${mem_id }님<br> 
 			<a href="/member/logout">로그아웃</a><br>
@@ -18,7 +19,22 @@
 		</c:when>
         <c:otherwise>
         	<a href="/member/sign_in">로그인 버튼입니다.</a>
+=======
+		<c:when test="${login_id !=null }">
+		    ${login_id }님<br> 
+			<a href="/member/logout">로그아웃</a><br>
+		</c:when>
+        <c:otherwise>
+        	<a href="/member/sign_in">로그인버튼입니다.</a><br>
+>>>>>>> bdf629e9b8cec3fd05adbc0a01e59f86d15d05db
         </c:otherwise>
 	</c:choose>
+	
+	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
+	
+	
+	<a href="/clubMember/memberList">동호회 회원정보</a>
+	
+	
 </body>
 </html>

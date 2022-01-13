@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>pass
-				<td><input type="pass" placeholder="pass" name="mem_pass">
+				<td><input type="password" placeholder="pass" name="mem_pass">
 					<!-- 비밀번호 중복확인 기능 추가 -->
 			</tr>
 			<tr>

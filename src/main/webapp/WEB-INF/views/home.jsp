@@ -18,7 +18,7 @@
 
   <!-- 네비바에서 로그인 버튼 누르면 이동하는 주소값은 "/member/sign_in" 입니다. -->
 	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
-	<a href="/clubMember/memberList">동호회 회원정보</a>
+	<a href="/clubMember/memberList?cpage=1">동호회 회원정보</a>
   <!-- 여기서부터 main page -->
   <div class="wrap">
     <div class="header">
@@ -278,7 +278,7 @@
     <div class="footer">
       <div class="footer_inner">
         <div class="footer_logo">
-          <img src="LOGO.png">
+          <img src="/images/LOGO.png">
         </div>
         <div class="footer_contents">
           <div class="footer_desc">

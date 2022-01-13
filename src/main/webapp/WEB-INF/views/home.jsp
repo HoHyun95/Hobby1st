@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +13,38 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="/css/style.css">
+  <script>
+    window.onload = () => {
+      let loginform_btn = document.getElementById("loginform_btn");
+      let close_btn = document.getElementById("close_btn");
+      let sign_up = document.getElementById("sign_up");
+
+      loginform_btn.onclick = () => {
+        let modal_bg = document.querySelector(".modal_bg");
+        let loginForm = document.querySelector(".loginForm");
+        modal_bg.style.zIndex = 10;
+        modal_bg.style.display = "flex";
+        loginForm.style.zIndex = 11;
+        loginForm.style.display = "flex";
+      }
+
+      close_btn.onclick = () => {
+        let modal_bg = document.querySelector(".modal_bg");
+        let loginForm = document.querySelector(".loginForm");
+        modal_bg.style.zIndex = -1;
+        modal_bg.style.display = "none";
+        loginForm.style.zIndex = -1;
+        loginForm.style.display = "none";
+      }
+
+      sign_up.onclick = () => {
+        location.href = "/member/sign_up";
+      }
+    }
+  </script>
 </head>
 
 <body>
-
-  <!-- 네비바에서 로그인 버튼 누르면 이동하는 주소값은 "/member/sign_in" 입니다. -->
-	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
-	<a href="/clubMember/memberList">동호회 회원정보</a>
-  <!-- 여기서부터 main page -->
   <div class="wrap">
     <div class="header">
       <div class="header_inner">
@@ -28,14 +53,16 @@
             <img src="/images/LOGO.png">
           </div>
           <ul class="login_list">
-          	<c:choose>
+            <c:choose>
               <c:when test="${mem_id !=null }">
                 <span id="login_id"><b>${mem_id }</b>님 환영합니다</span>
-                <a href="/member/logout"><li class="login_list_item">로그아웃</li></a>
+                <a href="/member/logout">
+                  <li class="login_list_item">로그아웃</li>
+                </a>
               </c:when>
               <c:otherwise>
-                <a href="/member/sign_in"><li class="login_list_item">로그인</li></a>
-                <a href="/member/sign_up"><li class="login_list_item">회원가입</li></a>
+                <li class="login_list_item" id="loginform_btn">로그인</li>
+                <li class="login_list_item" id="signup_btn">회원가입</li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -49,8 +76,8 @@
             <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
           </ul>
           <ul class="icon_list">
-            <li class="icon_list_item"><i class="fab fa-facebook"></i></li>
-            <li class="icon_list_item"><i class="fab fa-instagram"></i></li>
+            <li class="icon_list_item"><a href="/clubMember/memberList?cpage=1"><i class="fab fa-facebook"></i></a></li>
+            <li class="icon_list_item"><a href="/clubList/createClubPage"><i class="fab fa-instagram"></i></a></li>
             <li class="icon_list_item"><i class="fab fa-twitter"></i></li>
             <li class="icon_list_item"><i class="fab fa-github"></i></li>
             <li class="icon_list_item"><i class="fab fa-google"></i></li>
@@ -205,7 +232,7 @@
         </div> -->
       </div>
     </div>
-    
+
     <div class="container">
       <div class="fav_club_list_title">
         <div class="fav_club_list_title_text">
@@ -278,7 +305,7 @@
     <div class="footer">
       <div class="footer_inner">
         <div class="footer_logo">
-          <img src="LOGO.png">
+          <img src="/images/LOGO.png">
         </div>
         <div class="footer_contents">
           <div class="footer_desc">
@@ -292,11 +319,33 @@
       </div>
     </div>
   </div>
+  <div class="modal_bg">
 
-	
-
-
-
+  </div>
+  <div class="loginForm">
+    <div class="logininput_wrap">
+      <span id="close_btn"><i class="far fa-times"></i></span>
+      <div class="logininput">
+        <form action="/member/login" method="post">
+          <table border=1 align="center">
+            <tr>
+              <th>sign_in Page
+            </tr>
+            <tr>
+              <td><input type="text" name="mem_id" placeholder="id">
+            </tr>
+            <tr>
+              <td><input type="password" name="mem_pass" placeholder="pass">
+            </tr>
+            <tr>
+              <th><input type="submit" value="submit">
+                <button type="button" id="sign_up">Sign Up</button>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

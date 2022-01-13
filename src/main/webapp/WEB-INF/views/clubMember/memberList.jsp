@@ -15,6 +15,11 @@
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 
 <style>
+	.navi{
+		text-align: center;
+		padding-top : 20px;
+	}
+
 </style>
 
 </head>
@@ -68,36 +73,36 @@
 							</thead>
 
 							<tbody>
-								<c:forEach var="dto" items="${list }">
+								<c:forEach var="dto" items="${list }" varStatus="status">
 									<tr>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
 											<div class="flex items-center">
 												<div class="ml-3">
-													<p class="text-gray-900 whitespace-no-wrap">1</p>
+													<p class="text-gray-900 whitespace-no-wrap">${status.count + ((cpage -1) * 10) }</p>
 												</div>
 											</div>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">서호현</p>
+											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_name}</p>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">suhoh01</p>
+											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_nickname}</p>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center text-center py-5 border-b border-gray-200 bg-white text-sm">
 											<p class="text-gray-900 whitespace-no-wrap">
-												suhoh01@naver.com</p>
+												${dto.mem_email}</p>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">문화생활</p>
+											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_category_1}</p>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">운동/스포츠</p>
+											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_category_2}</p>
 										</td>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
@@ -113,19 +118,73 @@
 											<p class="text-gray-900 whitespace-no-wrap">
 												<button
 													class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-													삭제<input type="hidden" class="seq_h" value="${dto.seq }">
+													삭제
+													<input type="hidden" class="id_h" value="${dto.mem_id }">
 												</button>
 											</p>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
+							 <tr>
+								<td colspan="9" width=1000 align="center"></td>
+							</tr> 
 						</table>
 					</div>
+					<div class="navi">
+						${navi }
+					</div>
+							
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		// 페이징 스타일
+		$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
+		
+		// 멤버 추방하기
+		
+		$(".delBtn").on("click", function() {
+			if (confirm("정말 쫓아내겠습니까?")) {
+				let id_h = $(this).find($(".id_h")).val();
+				location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h;
+				return true;
+			} else {
+				return false;
+			}
+		})
+		
+		
+		
+	</script>
+	
+		<!-- 페이징 스타일 변화 -->
+	<c:choose>
+		<c:when test="${cpage eq '1' }">
+			<script>
+				$("#paging1").addClass("bg-red-500");
+				$( "#paging1" ).css("color","white").css("disabled","false");
+				$( "#paging1" ).removeAttr('href');
+			</script>
+		</c:when>
+		<c:when test="${cpage eq '2' }">
+			<script>
+				$("#paging2").addClass("bg-red-500");
+				$( "#paging2" ).css("color","white").css("disabled","false");
+				$( "#paging2" ).removeAttr('href');
+			</script>
+		</c:when>
+		<c:when test="${cpage eq '3' }">
+			<script>
+				$("#paging3").addClass("bg-red-500");
+				$( "#paging3" ).css("color","white").css("disabled","false");
+				$( "#paging3" ).removeAttr('href');
+			</script>
+		</c:when>
+	</c:choose>
+	
 
 </body>
 </html>

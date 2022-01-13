@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <!-- 네비바에서 로그인 버튼 누르면 이동하는 주소값은 "/member/sign_in" 입니다. -->
 	
 	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
@@ -292,6 +293,11 @@
       </div>
     </div>
   </div>
+
+	
+
+
+
 </body>
 
 </html>

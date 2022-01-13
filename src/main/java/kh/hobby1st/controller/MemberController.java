@@ -10,37 +10,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
-   
+
 	@Autowired
 	private HttpSession session;
-	
-	// Navi 에서 로그인을 누르면 sign_in.jsp 로 이동
+
+	//login_page
 	@RequestMapping("sign_in")
 	public String sign_in() {
-		System.out.println("member/sign_in 입니다.");
 		return "member/sign_in";
 	}
-	
-	// 로그인 기능은 아직 안살렸습니다. 
+
+	//login_click
 	@RequestMapping("login")
-	public String login(String login_id, String login_pass) {
-		System.out.println("입력한 아이디 : " + login_id);
-		System.out.println("입력한 비밀번호 : " + login_pass);
-		
-        session.setAttribute("login_id", login_id);
+	public String login(String mem_id, String me_pass) {
+		session.setAttribute("mem_id", mem_id);
 		return "redirect: /";
 	}
-	
-	@RequestMapping("sign_up")
-	public String sign_up() {
-		System.out.println("sign_up 입니다.");
-		return "member/sign_up";
-	}
-	
+
+	//logout_click
 	@RequestMapping("logout")
 	public String logout() {
-		System.out.println("로그아웃입니다");
 		session.invalidate();
 		return "redirect: /";
+	}	
+
+	//signUp_page
+	@RequestMapping("sign_up")
+	public String sign_up() {
+		return "member/sign_up";
 	}
+
+	//signUp_lastPage
+	@RequestMapping("sign_up_last")
+	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_email, String mem_birthday,
+			String mem_gender, String mem_category_1, String mem_category_2) {
+		//다음 페이지로 사용자가 작성한 세션값을 넘김
+		session.setAttribute("mem_id", mem_id);
+		session.setAttribute("mem_pass", mem_pass);
+		session.setAttribute("mem_name", mem_name);
+		session.setAttribute("mem_email", mem_email);
+		session.setAttribute("mem_birthday", mem_birthday);
+		session.setAttribute("mem_gender", mem_gender);
+		session.setAttribute("mem_category_1", mem_category_1);
+		session.setAttribute("mem_category_2", mem_category_2);
+		return "member/sign_up_last";
+	}
+	
+	//member_add_click
+	@RequestMapping("member_add")
+	public String memberAdd(String mem_id, String mem_pass, String mem_name, String mem_email, String mem_birthday,
+			String mem_gender, String mem_category_1, String mem_category_2) {
+		return "redirect: sign_in";
+	}
+
 }

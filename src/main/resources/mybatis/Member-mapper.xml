@@ -9,7 +9,6 @@
 		values(#{mem_id},#{mem_pass},#{mem_phone},
 		#{mem_email},#{mem_name},#{mem_nickname},#{mem_birthday},#{mem_gender},#{mem_address},
 		#{mem_category_1},#{mem_category_2},#{mem_photo},default)
-
 	</insert>
 
 	<select id="login" resultType="Integer">

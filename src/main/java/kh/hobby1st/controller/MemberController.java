@@ -114,7 +114,6 @@ public class MemberController {
 				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender, 
 						mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email);
 				
-				System.out.println(mem_category_2);
 				
 				int result = mem_service.insert(dto);
 

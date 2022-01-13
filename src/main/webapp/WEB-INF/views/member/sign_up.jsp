@@ -33,6 +33,10 @@
 				<td><input type="text" placeholder="name" name="mem_name">
 			</tr>
 			<tr>
+				<td>phone
+				<td><input type="text" placeholder="phone" name="mem_phone">
+			</tr>
+			<tr>
 				<td>email
 				<td><input type="text" placeholder="email" name="mem_email">
 			</tr>
@@ -44,8 +48,8 @@
 			<tr>
 				<td>gender
 				<td><input type="radio" name="mem_gender" value="male">
-					<label for="male">male</label> <input type="radio"
-					name="mem_gender" value="female"> <label for="female">female</label>
+					<label for="male">M</label> <input type="radio"
+					name="mem_gender" value="female"> <label for="female">F</label>
 			</tr>
 			<tr>
 				<th colspan=2>category
@@ -63,8 +67,8 @@
 					for="TEST4">test4</label>
 			</tr>
 			<tr>
-				<td colspan=2><button type="button" id="sign_in">return</button> <input
-					type="submit" value="next">
+				<td colspan=2><button type="button" id="sign_in">return</button>
+					<input type="submit" value="next">
 			</tr>
 		</table>
 	</form>

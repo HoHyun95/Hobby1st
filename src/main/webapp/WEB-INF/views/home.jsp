@@ -13,11 +13,18 @@
 	<c:choose>
 		<c:when test="${login_id !=null }">
 		    ${login_id }님<br> 
-			<a href="/member/logout">로그아웃</a>
+			<a href="/member/logout">로그아웃</a><br>
 		</c:when>
         <c:otherwise>
-        	<a href="/member/sign_in">로그인버튼입니다.</a>
+        	<a href="/member/sign_in">로그인버튼입니다.</a><br>
         </c:otherwise>
 	</c:choose>
+	
+	<a href="/clubList/createClubPage">동호회 리스트 페이지 입니다</a><br>
+	
+	
+	<a href="/clubMember/memberList">동호회 회원정보</a>
+	
+	
 </body>
 </html>

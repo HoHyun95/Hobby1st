@@ -36,6 +36,12 @@ public class ClubListController {
 		System.out.println("동호회 만드는 임시 페이지 ");
 		return "clubList/createClub";
 	}
+	
+	@RequestMapping("clubListPage")
+	public String clubListPage() {
+		System.out.println(" 클럽 리스트 페이지  ");
+		return "clubList/clubList";
+	}
 
 	@RequestMapping("createClubProc")
 	public String createClub(ClubListDTO dto, MultipartFile file) throws Exception {
@@ -58,7 +64,6 @@ public class ClubListController {
 		
 			file.transferTo(new File(realPath+"/"+photoName));
 			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
-			System.out.println("3");
 		}
 		return "redirect:/";
 	}

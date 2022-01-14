@@ -51,7 +51,7 @@
       leftBtn.onclick = () => {
         if(Math.abs(position) < endpoint) {
           position -= MOVE_WIDTH;
-          main_bg_inner_bottom_list.style.transform = `translateX(${position}px)`
+          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
         console.log(Math.abs(position));
       }
@@ -59,7 +59,7 @@
       rightBtn.onclick = () => {
         if (position !== 0) {
           position += MOVE_WIDTH;
-          main_bg_inner_bottom_list.style.transform = `translateX(${position}px)`
+          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
         console.log(Math.abs(position));
       }
@@ -77,8 +77,8 @@
           </div>
           <ul class="login_list">
             <c:choose>
-              <c:when test="${mem_id !=null }">
-                <span id="login_id"><b>${mem_id }</b>님 환영합니다</span>
+              <c:when test="${login_id !=null }">
+                <span id="login_id"><b>${login_id }</b>님 환영합니다</span>
                 <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
@@ -99,9 +99,9 @@
             <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
           </ul>
           <ul class="icon_list">
-            <li class="icon_list_item"><a href="/clubMember/memberList?cpage=1"><i class="fab fa-facebook"></i></a></li>
-            <li class="icon_list_item"><a href="/clubList/createClubPage"><i class="fab fa-instagram"></i></a></li>
-            <li class="icon_list_item"><i class="fab fa-twitter"></i></li>
+            <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
+            <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-instagram"></i></li></a>
+            <a href="/clubBoard/boardList"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
             <li class="icon_list_item"><i class="fab fa-github"></i></li>
             <li class="icon_list_item"><i class="fab fa-google"></i></li>
           </ul>
@@ -122,8 +122,8 @@
           </div>
 
           <div class="main_bg_inner_bottom">
-            <div class="arrow" id="right"><i class="fas fa-chevron-right"></i></div>
-            <div class="arrow" id="left"><i class="fas fa-chevron-left"></i></div>
+            <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
+            <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
             <ul class="main_bg_inner_bottom_list">
               <li class="main_bg_inner_bottom_list_item_wrap">
                 <div class="main_bg_inner_bottom_list_item">
@@ -308,6 +308,7 @@
             </li>
           </ul>
         </div>
+        
         <div class="fav_club_list_add_btn">
           <input type="button" value="5개 더보기">
         </div>

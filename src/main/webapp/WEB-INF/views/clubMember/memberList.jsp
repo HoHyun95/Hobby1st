@@ -119,7 +119,7 @@
 											<p class="text-gray-900 whitespace-no-wrap">
 												<button
 													class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-													삭제 <input type="hidden" class="id_h" value="${dto.mem_id }">
+													추방 <input type="hidden" class="id_h" value="${dto.mem_id }">
 													<input type="hidden" class="name_h" value="${dto.mem_name }">
 												</button>
 											</p>

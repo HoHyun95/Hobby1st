@@ -18,6 +18,7 @@
       let loginform_btn = document.getElementById("loginform_btn");
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
+      let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
 
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
@@ -39,6 +40,28 @@
 
       sign_up.onclick = () => {
         location.href = "/member/sign_up";
+      }
+
+      const MOVE_WIDTH = 210;
+      let position = 0;
+      let offsetWidth = main_bg_inner_bottom_list.offsetWidth;
+      let endpoint = offsetWidth - (MOVE_WIDTH * 6);
+      console.log(offsetWidth);
+      console.log(Math.abs(position));
+      leftBtn.onclick = () => {
+        if(Math.abs(position) < endpoint) {
+          position -= MOVE_WIDTH;
+          main_bg_inner_bottom_list.style.transform = `translateX(${position}px)`
+        }
+        console.log(Math.abs(position));
+      }
+
+      rightBtn.onclick = () => {
+        if (position !== 0) {
+          position += MOVE_WIDTH;
+          main_bg_inner_bottom_list.style.transform = `translateX(${position}px)`
+        }
+        console.log(Math.abs(position));
       }
     }
   </script>

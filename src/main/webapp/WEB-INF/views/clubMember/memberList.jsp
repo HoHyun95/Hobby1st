@@ -15,11 +15,10 @@
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 
 <style>
-	.navi{
-		text-align: center;
-		padding-top : 20px;
-	}
-
+.navi {
+	text-align: center;
+	padding-top: 20px;
+}
 </style>
 
 </head>
@@ -73,7 +72,7 @@
 							</thead>
 
 							<tbody>
-								<c:forEach var="dto" items="${list }" varStatus="status">
+								<c:forEach var="dto" items="${memberList }" varStatus="status">
 									<tr>
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
@@ -104,42 +103,50 @@
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
 											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_category_2}</p>
 										</td>
+										
+											<td
+												class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
+												<p class="text-gray-900 whitespace-no-wrap">${clubMemberList[status.index].cm_sign_date }</p>
+											</td>
+										
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">2020-01-02</p>
+											<p class="text-gray-900 whitespace-no-wrap">${dto.mem_lastlogin }</p>
 										</td>
-										<td
-											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
-											<p class="text-gray-900 whitespace-no-wrap">2020-01-13
-												19:37:23</p>
-										</td>
+										
 										<td
 											class="px-5 w-1/12 text-center py-5 border-b border-gray-200 bg-white text-sm">
 											<p class="text-gray-900 whitespace-no-wrap">
 												<button
 													class="delBtn bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-													삭제
-													<input type="hidden" class="id_h" value="${dto.mem_id }">
+													삭제 <input type="hidden" class="id_h" value="${dto.mem_id }">
+													<input type="hidden" class="name_h" value="${dto.mem_name }">
 												</button>
 											</p>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
-							 <tr>
+							<tr>
 								<td colspan="9" width=1000 align="center"></td>
-							</tr> 
+							</tr>
 						</table>
 					</div>
-					<div class="navi">
-						${navi }
-					</div>
-							
+					<div class="navi">${navi }</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
+	<!-- 작성에 성공하였으면 알림띄우고 리스트로 돌아가기 -->
+	<c:if test="${result eq '1' }">
+		<script>
+			alert("${bye_mem} 추방해버리기~!");
+			location.href = "/clubMember/memberList?cpage=${cpage}";
+		</script>
+	</c:if>
+
 	<script>
 		// 페이징 스타일
 		$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
@@ -147,20 +154,20 @@
 		// 멤버 추방하기
 		
 		$(".delBtn").on("click", function() {
-			if (confirm("정말 쫓아내겠습니까?")) {
 				let id_h = $(this).find($(".id_h")).val();
-				location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h;
+				let name_h = $(this).find($(".name_h")).val();
+				let out = name_h + "님을 정말 쫒아내시겠습니까 ?"
+			if (confirm(out)) {
+				location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h + "&mem_name=" + name_h;
 				return true;
 			} else {
 				return false;
 			}
 		})
-		
-		
-		
 	</script>
-	
-		<!-- 페이징 스타일 변화 -->
+
+
+	<!-- 페이징 스타일 변화 -->
 	<c:choose>
 		<c:when test="${cpage eq '1' }">
 			<script>
@@ -184,7 +191,7 @@
 			</script>
 		</c:when>
 	</c:choose>
-	
+
 
 </body>
 </html>

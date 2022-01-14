@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.hobby1st.dao.ClubMemberDAO;
+import kh.hobby1st.dto.ClubMemberDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.statics.Statics;
 
@@ -19,7 +20,29 @@ public class ClubMemberService {
 		return dao.getRecordCount();
 	}
 	
-	public List<MemberDTO> selectByPaging(int cpage, int seq) throws Exception {
+	public int deleteMember(String id) {
+		return dao.deleteMember(id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<MemberDTO> selectMemberByPaging(int cpage, int seq) throws Exception {
 		int currentPage = cpage;
 
 		int pageTotalCount = this.getPageTotalCount();
@@ -33,7 +56,25 @@ public class ClubMemberService {
 		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
 		
-		return dao.selectByPaging(start, end, seq);
+		return dao.selectMemberByPaging(start, end, seq);
+
+	}
+	
+	public List<ClubMemberDTO> selectClubMemberByPaging(int cpage, int seq) throws Exception {
+		int currentPage = cpage;
+
+		int pageTotalCount = this.getPageTotalCount();
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+
+		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
+		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
+		
+		return dao.selectClubMemberByPaging(start, end, seq);
 
 	}
 	

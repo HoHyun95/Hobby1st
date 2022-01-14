@@ -57,10 +57,10 @@ i {
 	margin-right: 3px;
 }
 
-#cl_local{
-text-align : center;
-width : 97%;
-height : 48px;
+#cl_local {
+	text-align: center;
+	width: 97%;
+	height: 48px;
 }
 
 .line_effect {
@@ -105,9 +105,9 @@ height : 48px;
 <body>
 
 	<form action="/clubList/createClubProc" method="post"
-		id="clubCreateForm">
+		id="clubCreateForm" enctype="multipart/form-data" >
 
-		<!-- 	enctype="multipart/form-data" -->
+		
 
 		<div id="club_container">
 
@@ -123,11 +123,40 @@ height : 48px;
 			<div id="club_first_container">
 
 				<div>
-					<input style="display: block;" name="cl_photo" type="file"
+					<input style="display: block;" name="file" type="file"
 						id="input-image">
 				</div>
 
 				<script>
+
+
+$(document).ready(function() {
+    $("input:file[name='cl_photo']").change(function () {
+		
+        let str = $(this).val();
+        let fileName = str.split('\\').pop().toLowerCase();
+        checkFileName(fileName);
+    });
+});
+
+function checkFileName(str){
+ 
+ let ext =  str.split('.').pop().toLowerCase();
+ if($.inArray(ext, ['png','jpg', 'jpeg']) == -1) {
+
+	  alert(ext+'파일은 업로드 하실 수 없습니다.');
+	  $('#input-image').val("");
+ }
+
+ var pattern =   /[\{\}\/?,;:|*~`!^\+<>@\#$%&\\\=\'\"]/gi;
+ if(pattern.test(str) ){
+	  alert('파일명에 특수문자를 제거해주세요.');
+	  $('#input-image').val("");
+ }
+}
+
+
+
 function readImage(input) {
     if(input.files && input.files[0]) {
         const reader = new FileReader()
@@ -145,16 +174,31 @@ inputImage.addEventListener("change", e => {
 })
          </script>
 
-
 				<div class="club_name_box">
 					<i class="fas fa-users"></i> <input type="text" id="cl_name"
-						name="cl_name" placeholder="동호회명을 입력해주세요">
+						maxlength="30" name="cl_name" placeholder="동호회명을 입력해주세요">
 					<div id="nameSpan"></div>
 				</div>
 
-
 				<script>
-// ID값을 입력했을 때, 
+
+
+
+$('#cl_name').on('keyup', () => {
+	
+	if(
+		$('#cl_name').val().length < 3
+	){
+		console.log('sdad');
+		$('#nameSpan').text("동호회명은 3자 이상으로 작성해주세요");
+	}else if($('#cl_name').val().length > 29){
+		$('#nameSpan').text("30자 이내로 작성해주세요");
+	}else{
+		$('#nameSpan').text("");
+	}
+})
+
+
 $("#cl_name").on("blur", function() {
 	$.ajax({
 		url : "/clubList/nameCheck",
@@ -168,18 +212,12 @@ $("#cl_name").on("blur", function() {
 				$('#nameSpan').text("이미 사용중인 동호회명입니다.");
 				$('#cl_name').val('');
 				$('#cl_name').focus();
-
-			} 
-			
-			else {
+			} else {
 				$('#nameSpan').text("");
-
 			}
-			
 		} else {
 			$('#nameSpan').text("동호회명을 입력해주세요");
 		}
-
 	});
 
 });
@@ -219,13 +257,10 @@ $("#cl_name").on("blur", function() {
 					$('#maxMemCheck').text("");
 				}
 				
-			})
-			
-				
+			})				
 				</script>
 
 				<div class="line_effect"></div>
-
 
 				<div>
 					<select name="cl_local" id="cl_local">
@@ -244,20 +279,19 @@ $("#cl_name").on("blur", function() {
 				<div class="line_effect"></div>
 
 
-
 				<!-- //다음 버튼 누르면 다음 작성페이지 불러온다 -->
 				<button type="button" id="container_nextBtn">다음</button>
 				<script>
 				
-				
 		$('#container_nextBtn').on('click', () => {
-
-	  		if ($("cl_name").val() == "") {
+			
+				
+	  		if ($("#cl_name").val() == "") {
 				alert("동호회명을 입력해주세요");
 				return false;
 
 			}
-			if ($("#cl_maxMem").val() == "") {
+			if ($("#maxMem").val() == "") {
 				alert("정원을 입력해주세요");
 				return false;
 
@@ -314,7 +348,7 @@ $("#cl_name").on("blur", function() {
      $('#clSubmit').on('click', () => {
     	 
 			
-			if ($("cl.desc").html() == "") {
+			if ($("#cl_desc").val() == "") {
 				alert("동호회 소개글을 입력해주세요");
 				return false;
 
@@ -350,8 +384,5 @@ $("#cl_name").on("blur", function() {
 	<!--second container end line-->
 
 	</div>
-	
-	
-	<!-- Git Hub  -->
 </body>
 </html>

@@ -13,12 +13,13 @@ public class ClubListDAO {
 	private SqlSessionTemplate mybatis;
 
 	public int createClub(ClubListDTO dto) {
-		return mybatis.insert("ClubList.createClub",dto);
+		int result =  mybatis.insert("ClubList.createClub",dto);
+		return dto.getCl_id();
 	}
-	
+
 	public int nameCheck(String cl_name) {
-	System.out.println("dao 성공");
+		System.out.println("dao 성공");
 		return mybatis.selectOne("ClubList.nameCheck",cl_name);
-		
+
 	}
 }

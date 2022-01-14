@@ -20,7 +20,6 @@ public class ClubListService {
 	}
 	
 	public int  nameCheck(String cl_name) {
-		System.out.println("서비스 성공");
 		return cldao.nameCheck(cl_name);
 	}
 }

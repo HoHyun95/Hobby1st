@@ -27,7 +27,6 @@
         loginForm.style.zIndex = 11;
         loginForm.style.display = "flex";
       }
-
       close_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -36,7 +35,7 @@
         loginForm.style.zIndex = -1;
         loginForm.style.display = "none";
       }
-
+      
       sign_up.onclick = () => {
         location.href = "/member/sign_up";
       }
@@ -322,6 +321,7 @@
   <div class="modal_bg">
 
   </div>
+<!-- sign_in -->
   <div class="loginForm">
     <div class="logininput_wrap">
       <span id="close_btn"><i class="far fa-times"></i></span>
@@ -338,7 +338,7 @@
               <td><input type="password" name="mem_pass" placeholder="pass">
             </tr>
             <tr>
-              <th><input type="submit" value="submit">
+              <th><input type="submit" value="login">
                 <button type="button" id="sign_up">Sign Up</button>
             </tr>
           </table>

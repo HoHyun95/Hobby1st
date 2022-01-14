@@ -21,5 +21,9 @@ public class MemberService {
 	public int login(String mem_id, String mem_pass) {
 		return mem_dao.login(mem_id, mem_pass);
 	}
+	
+	public int id_check(String id) {
+		return mem_dao.id_check(id);
+	}
 
 }

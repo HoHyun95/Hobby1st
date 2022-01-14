@@ -27,4 +27,8 @@ public class MemberDAO {
 		map.put("mem_pass", mem_pass);
 		return mybatis.selectOne("member.login", map);
 	}
+	
+	public int id_check(String id) {
+		return mybatis.selectOne("member.id_check", id);
+	}
 }

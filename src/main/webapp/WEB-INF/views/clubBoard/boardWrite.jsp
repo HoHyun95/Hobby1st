@@ -25,7 +25,7 @@
 
 <body>
 
-	<form id="frm" action="/input.pet?check_num=${check_num }"
+	<form id="frm" action="/clubBoard/boardInsert"
 		method="post">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
@@ -36,7 +36,7 @@
 
 			<!-- 제목 입력 -->
 			<div>
-				<input name="title" id="title"
+				<input name="cb_title" id="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 					type="text" placeholder="제목을 입력해 주세요."
 					class="
@@ -56,7 +56,7 @@
 
 				<!-- textarea 태그에 작성 -->
 				<div>
-					<textarea name="contents" id="summernote"></textarea>
+					<textarea name="cb_contents" id="summernote"></textarea>
 				</div>
 
 
@@ -81,7 +81,7 @@
 	<!-- textarea에 summernote 적용 -->
 	<script>
 		$('#summernote').summernote({
-			placeholder : 'input',
+			placeholder : 'input contents',
 			tabsize : 2,
 			height : 600,
 			lang : "ko-KR",

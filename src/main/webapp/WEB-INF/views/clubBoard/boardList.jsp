@@ -34,7 +34,8 @@
 				<table class="w-full">
 					<thead>
 						<tr class="text-gray-800 border border-b-0 text-center">
-							<th colspan="6" class="px-4 py-3" style="width: 100%;"># 동호회 게시판
+							<th colspan="6" class="px-4 py-3" style="width: 100%;"># 동호회
+								게시판
 						</tr>
 
 
@@ -59,8 +60,8 @@
 								<td class="px-4 py-4 text-center">1</td>
 
 								<!-- 검색창에 키워드랑 내용같이 전달 -->
-								<c:choose>
-									<c:when test="${check_num == 4 }">
+								<!--	<c:choose>
+									 <c:when test="${check_num == 4 }">
 										<td class="px-4 py-4"><a
 											href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.title
                                                 }
@@ -71,7 +72,7 @@
 												</c:if>
 										</a></td>
 									</c:when>
-									<!-- <c:otherwise>
+									 <c:otherwise>
 											<td class="px-4 py-4"><a
 												href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">${dto.title }
 													<c:if test="${dto.comment_count ne 0 }">
@@ -79,8 +80,8 @@
 														<span style="color: red;">[3]</span>
 													</c:if>
 											</a></td>
-										</c:otherwise> -->
-								</c:choose>
+										</c:otherwise> 
+								</c:choose>-->
 								<td class="px-4 py-4 text-center">suhoh01</td>
 								<td class="px-4 py-4 text-center">2022-01-14 22:36:20</td>
 								<td class="px-4 py-4 text-center">30</td>
@@ -99,11 +100,11 @@
 		style="width: 70%; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
 
 		<!-- 게시판 페이징 -->
-		<div class="text-center">
+		<%-- <div class="text-center">
 			<c:forTokens var="item" items="${navi }" delims=",">
                     1 2 3 4 5
                 </c:forTokens>
-		</div>
+		</div> --%>
 
 		<script>
 			$(".page")
@@ -156,7 +157,22 @@
 			</div>
 		</form>
 	</div>
-	</div>
+
+	<!----------------------------------- 메인 스크립트 ------------------------------------->
+
+	<script>
+		$("#writeBtn").on("click", function() {
+			location.href = "/clubBoard/boardWrite?"
+		});
+		
+		
+		
+		
+		
+		
+		
+	</script>
+
 </body>
 
 </body>

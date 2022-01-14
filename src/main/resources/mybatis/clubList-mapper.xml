@@ -8,7 +8,11 @@
 	<insert id="createClub">
 		insert into clublist values(clublist_seq.nextval, #{cl_name}, #{cl_desc},
 		#{cl_boss_id}, #{cl_boss_name}, #{cl_maxMem}, #{cl_local}, default,
-		default, #{cl_photo}, #{cl_category_id}, #{cl_dCategory_id})
+		default, #{cl_category_id}, #{cl_dCategory_id})
+		
+		<selectKey resultType="int" order="AFTER" keyProperty="cl_id">
+			select clublist_seq.currval from dual
+		</selectKey>
 	</insert>
 	
 	<select id="nameCheck" resultType="int">

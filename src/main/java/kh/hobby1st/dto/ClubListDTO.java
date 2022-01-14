@@ -3,7 +3,7 @@ package kh.hobby1st.dto;
 import java.sql.Date;
 
 public class ClubListDTO {
-	private String cl_id;
+	private int cl_id;
 	private String cl_name;
 	private String cl_desc;
 	private String cl_boss_id;	//동호회 대표
@@ -12,12 +12,11 @@ public class ClubListDTO {
 	private String cl_local;
 	private Date cl_openDate;
 	private int cl_memCount;
-	private String cl_photo;
 	private String cl_category_id;
 	private String cl_dCategory_id;
 	public ClubListDTO() {}
-	public ClubListDTO(String cl_id, String cl_name, String cl_desc, String cl_boss_id, String cl_boss_name,
-			int cl_maxMem, String cl_local, Date cl_openDate, int cl_memCount, String cl_photo, String cl_category_id,
+	public ClubListDTO(int cl_id, String cl_name, String cl_desc, String cl_boss_id, String cl_boss_name,
+			int cl_maxMem, String cl_local, Date cl_openDate, int cl_memCount, String cl_category_id,
 			String cl_dCategory_id) {
 		super();
 		this.cl_id = cl_id;
@@ -29,14 +28,13 @@ public class ClubListDTO {
 		this.cl_local = cl_local;
 		this.cl_openDate = cl_openDate;
 		this.cl_memCount = cl_memCount;
-		this.cl_photo = cl_photo;
 		this.cl_category_id = cl_category_id;
 		this.cl_dCategory_id = cl_dCategory_id;
 	}
-	public String getCl_id() {
+	public int getCl_id() {
 		return cl_id;
 	}
-	public void setCl_id(String cl_id) {
+	public void setCl_id(int cl_id) {
 		this.cl_id = cl_id;
 	}
 	public String getCl_name() {
@@ -87,12 +85,7 @@ public class ClubListDTO {
 	public void setCl_memCount(int cl_memCount) {
 		this.cl_memCount = cl_memCount;
 	}
-	public String getCl_photo() {
-		return cl_photo;
-	}
-	public void setCl_photo(String cl_photo) {
-		this.cl_photo = cl_photo;
-	}
+
 	public String getCl_category_id() {
 		return cl_category_id;
 	}

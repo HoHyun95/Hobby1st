@@ -101,7 +101,7 @@ video {
 }
 
 div {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 a {
@@ -114,7 +114,6 @@ a:active {
   color: black;
 }
 /* All end */
-
 
 /* header */
 .header {
@@ -189,6 +188,7 @@ a:active {
 .icon_list {
   display: flex;
   list-style-type: none;
+  width: fit-content;
 }
 
 .icon_list_item {
@@ -315,9 +315,7 @@ a:active {
   top: 170px;
   left: 20px;
 }
-
 /* main_bg end */
-
 
 /* hobby1st_dashboard */
 .hobby1st_dashboard {
@@ -349,7 +347,6 @@ a:active {
 #dashboard2 {
   font-size: 1.2rem;
 }
-
 /* hobby1st_dashboard end */
 
 /* create_hobby1st_club */
@@ -382,7 +379,6 @@ a:active {
   color: var(--color2);
   cursor: pointer;
 }
-
 /* create_hobby1st_club end */
 
 /* search_area */
@@ -459,7 +455,6 @@ a:active {
   margin: 0 auto;
   height: fit-content;
 }
-
 /* search_result end */
 
 /* container */

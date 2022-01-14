@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.hobby1st.dao.MemberDAO;
@@ -55,6 +56,15 @@ public class MemberController {
 		return "member/sign_up";
 	}
 
+	//auto id_check
+	@ResponseBody
+	@RequestMapping(value="id_check")
+	public String id_check(String id) {
+		int result = (Integer)mem_service.id_check(id);
+		return String.valueOf(result);
+	}
+
+	
 	//signUp_lastPage
 	@RequestMapping("sign_up_last")
 	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
@@ -79,13 +89,6 @@ public class MemberController {
 			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
 		
 		String mem_lastlogin = "default";
-		
-		Date Date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(mem_birthday);
-		String formattedDate = simpleDateFormat.format(Date);
-		java.sql.Date sqldate = java.sql.Date.valueOf(formattedDate);
-		
-		
 		for(MultipartFile mf : mem_photo) {
 			try{
 				String realPath = session.getServletContext().getRealPath("upload");
@@ -99,7 +102,6 @@ public class MemberController {
 
 				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email); 
 				int result = mem_service.insert(dto);
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	

@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<td>pass_Check
-				<td><input type="password" placeholder="pass_check" id="pass_check"
+				<td><input type="password" placeholder="pass_check" id="pass_check2"
 					onChange="invaild()" class="pass">
 					<p class="pass_check"></p>
 			</tr>
@@ -38,7 +38,7 @@
 			</tr>
 			<tr>
 				<td>phone
-				<td><input type="text" placeholder="phone" name="mem_phone">
+				<td><input type="text" placeholder="phone" name="mem_phone" id="phone">
 			</tr>
 			<tr>
 				<td>address
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td>email
-				<td><input type="text" placeholder="email" name="mem_email">
+				<td><input type="text" placeholder="email" name="mem_email" id="email">
 			</tr>
 			<tr>
 				<td>birthday
@@ -95,46 +95,83 @@
 			 }
 		   })
 	   }
+	   
+	   
 	   <!-- Auto id regexr -->
-	   function checkid(id) {
-	   var idcheck = RegExp(/^[A-Za-z0-9]{4,20}$/);	 
+	   $("#id").focusout(function() {
+		   var idcheck = RegExp(/^[A-Za-z0-9]{4,20}$/);
+		   try{
 		   if(idcheck.test($("#id").val())){
 			   console.log("아이디 정규표현식 성공");
 		   } else{
-			   alert("아이디는 4~20글자 사이의 영어(대,소)만 입력해주세요")
 			   $("#id").val("");
-			   $("#id").focus();
-			   return fasle;
+			   alert("아이디는 4~20글자 사이의 영어(대,소)만 입력해주세요")
 		   }
-		   return true;
-	   }
-	   
+		   } catch (err) {
+			   $("#id").val("");
+		   }
+	   });
 	   
 	   <!-- Auto pass regexr -->
-	   var passcheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
-	   $("#pass_check").blur(function() {
+	   $("#pass_check").focusout(function() {
+		   var passcheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
+		   try{
 		   if(passcheck.test($("#pass_check").val())){
 			   console.log("비밀번호 정규표현식 성공");			   
 		   } else{
+			   $("#pass_check").val("");
 			   alert("비밀번호는 8~16글자 사이 영문(대소), 숫자, 특수문자를 하나이상 입력해주세요")
+		   }
+		   } catch (err) {
 			   $("#pass_check").val("");
 		   }
 	   });
 	   
 	   <!-- Auto name regexr -->
-	   var name_check = RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,6}$/);
-	   $("#name").blur(function() {
+	   $("#name").focusout(function() {
+		   var name_check = RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,6}$/);
+		   try{
 		   if(name_check.test($("#name").val())){
 			   console.log("이름 정규표현식 성공");			   
-
 		   } else{
+			   $("#name").val("");	  
 			   alert("이름은 2~6글자 사이의 한글만 입력해주세요.")
-			   $("#name").val("");
+		   }
+		   } catch (err) {
+			   $("#name").val("");	  
 		   }
 	   });
 	   
-	   
+	   <!-- Auto phone regexr -->
+	   $("#phone").focusout(function() {
+		   var phone_check = RegExp(/^01[0179][0-9]{7,9}$/);
+		   try{
+		   if(phone_check.test($("#phone").val())){
+			   console.log("전화번호 정규표현식 성공");			   
+		   } else{
+			   $("#phone").val("");	  
+			   alert("전화번호는 12글자 이하 '-' 없이 입력해주세요.")
+		   }
+		   } catch (err) {
+			   $("#phone").val("");	  
+		   }
+	   });
 	
+	   <!-- Auto email regexr -->
+	   $("#email").focusout(function() {
+		   var email_check = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		   try{
+		   if(email_check.test($("#email").val())){
+			   console.log("전화번호 정규표현식 성공");			   
+		   } else{
+			   $("#email").val("");	  
+			   alert("이메일은 형식에맞게 '@' 을 작성해주세요.")
+		   }
+		   } catch (err) {
+			   $("#email").val("");	  
+		   }
+	   });
+	   
        <!-- this is right password?(Auto)-->
 	   function invaild(e) {
 			let pwArr = document.getElementsByClassName("pass")

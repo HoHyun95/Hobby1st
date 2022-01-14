@@ -97,7 +97,7 @@ public class MemberController {
 
 				mf.transferTo(new File(realPath+"/"+sysName));
 
-				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender, 
+				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email); 
 				int result = mem_service.insert(dto);
 
 			} catch (Exception e) {

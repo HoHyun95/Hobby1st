@@ -115,7 +115,6 @@ a:active {
 }
 /* All end */
 
-
 /* header */
 .header {
   width: 100%;
@@ -150,7 +149,7 @@ a:active {
 #login_id {
   font-size: 0.9rem;
   padding-right: 20px;
-  line-height: 25px;
+  line-height: 20px;
 }
 
 .login_list_item {
@@ -189,6 +188,7 @@ a:active {
 .icon_list {
   display: flex;
   list-style-type: none;
+  width: fit-content;
 }
 
 .icon_list_item {
@@ -260,29 +260,29 @@ a:active {
 }
 
 .main_bg_inner_top_list_item {
-  padding: 5px 10px 0px 30px;
+  padding: 5px 10px 0px 10px;
   font-weight: 900;
 }
 
 .main_bg_inner_bottom {
   /* border: 1px solid var(--color1); */
   height: 85%;
-  overflow: hidden;
   display: flex;
+  overflow: hidden;
 }
 
 .main_bg_inner_bottom_list {
   display: flex;
   align-items: center;
   list-style-type: none;
-  padding: 20px;
+  padding: 10px;
   position: relative;
+  transition: all 1s ease;
 }
 
 .main_bg_inner_bottom_list_item_wrap {
-  padding: 0px 10px 0px 10px;
+  padding: 0px 10px 0px 0px;
 }
-
 
 .main_bg_inner_bottom_list_item {
   border: 1px solid var(--color1);
@@ -315,9 +315,7 @@ a:active {
   top: 170px;
   left: 20px;
 }
-
 /* main_bg end */
-
 
 /* hobby1st_dashboard */
 .hobby1st_dashboard {
@@ -349,7 +347,6 @@ a:active {
 #dashboard2 {
   font-size: 1.2rem;
 }
-
 /* hobby1st_dashboard end */
 
 /* create_hobby1st_club */
@@ -382,7 +379,6 @@ a:active {
   color: var(--color2);
   cursor: pointer;
 }
-
 /* create_hobby1st_club end */
 
 /* search_area */
@@ -459,7 +455,6 @@ a:active {
   margin: 0 auto;
   height: fit-content;
 }
-
 /* search_result end */
 
 /* container */
@@ -537,9 +532,6 @@ a:active {
   cursor: pointer;
 }
 /* container end */
-
-
-
 
 /* links */
 

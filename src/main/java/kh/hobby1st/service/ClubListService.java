@@ -17,15 +17,28 @@ public class ClubListService {
 	@Autowired
 	public ClubListDAO cldao; 
 	
+//	동호회 수
+	public int countClub() {
+		return cldao.countClub();
+	}
+//
+	
 	public int createClub(ClubListDTO dto) {
 		return cldao.createClub(dto);
 	}
-	
+
 	public int  nameCheck(String cl_name) {
 		return cldao.nameCheck(cl_name);
 	}
-	
+
 	public 	List<Map<String, Object>> selectAll() {
 		return cldao.selectAll();
 	}
+
+	public List<ClubListDTO> searchClub(String searchField, String searchText){
+		return cldao.searchClub(searchField, searchText);
+	}
+	
+
+
 }

@@ -179,53 +179,16 @@
             <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
             <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
             <ul class="main_bg_inner_bottom_list">
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-                  <h2>CLUB TITLE</h2>
-                  <b>CLUB OWNER</b>
-                  <span>CLUB LOC</span>
-                  <p>CLUB DESC</p>
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-                </div>
-              </li>
+              <c:forEach var="clubList" items="${list }">
+                <li class="main_bg_inner_bottom_list_item_wrap">
+                  <div class="main_bg_inner_bottom_list_item">
+                    <h2>${clubList.CL_NAME }</h2>
+                    <b>${clubList.CL_BOSS_NAME}</b> 
+                    <span>${clubList.CL_LOCAL }</span>
+                    <span>${clubList.CL_DESC }</span>
+                  </div>
+                </li>
+              </c:forEach>
             </ul>
           </div>
         </div>
@@ -236,7 +199,7 @@
     <div class="hobby1st_dashboard">
       <div class="hobby1st_dashboard_inner">
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard">12345 명의 회원 중 123개의 동호회에서 ${clCount }명이 활동중입니다.</span>
+          <span id="dashboard">${memberCount } 명의 회원 중 ${clCount }개의 동호회에서 ${clmemCount }명이 활동중입니다.</span>
         </div>
         <div class="hobby1st_dashboard_inner_text">
           <span id="dashboard2">지금 바로 Hobby1st에서 취미 활동을 시작해 보세요!</span>
@@ -408,7 +371,7 @@
         <form action="/member/login" method="post">
           <table border=1 align="center">
             <tr>
-              <th>sign_in Page
+              <th>Login Page
             </tr>
             <tr>
               <td><input type="text" name="mem_id" placeholder="id">

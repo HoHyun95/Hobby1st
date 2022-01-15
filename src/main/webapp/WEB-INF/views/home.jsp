@@ -134,6 +134,8 @@
                 <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
+                <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
+                <li class="login_list_item" id="signup_btn" style="display:none">회원가입</li>
               </c:when>
               <c:otherwise>
                 <li class="login_list_item" id="loginform_btn">로그인</li>
@@ -234,10 +236,10 @@
     <div class="hobby1st_dashboard">
       <div class="hobby1st_dashboard_inner">
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard">Hobby1st와 함께 하는 동호회 <b>32,767</b>개, Hobby1st의 소중한 가입자 <b>213,432</b>명</h2></span>
+          <span id="dashboard">12345 명의 회원 중 123개의 동호회에서 ${clCount }명이 활동중입니다.</span>
         </div>
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard2">여러분도 Hobby1st와 함께 꿈꿔왔던 취미 활동을 시작해 보세요!</span>
+          <span id="dashboard2">지금 바로 Hobby1st에서 취미 활동을 시작해 보세요!</span>
         </div>
       </div>
     </div>

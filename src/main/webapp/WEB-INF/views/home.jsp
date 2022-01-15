@@ -371,7 +371,7 @@
         <form action="/member/login" method="post">
           <table border=1 align="center">
             <tr>
-              <th>sign_in Page
+              <th>Login Page
             </tr>
             <tr>
               <td><input type="text" name="mem_id" placeholder="id">

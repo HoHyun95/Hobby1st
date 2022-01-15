@@ -15,4 +15,8 @@
 		select count(*) from member where
 		mem_id = #{mem_id} and mem_pass = #{mem_pass}
 	</select>
+	
+	<select id="id_check" resultType="Integer">
+		select count(*) from member where mem_id = #{id}
+	</select>
 </mapper>

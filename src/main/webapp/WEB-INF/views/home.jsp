@@ -19,6 +19,7 @@
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
+      let showMore = document.getElementById("showMore");
 
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
@@ -28,7 +29,6 @@
         loginForm.style.zIndex = 11;
         loginForm.style.display = "flex";
       }
-
       close_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -37,7 +37,7 @@
         loginForm.style.zIndex = -1;
         loginForm.style.display = "none";
       }
-
+      
       sign_up.onclick = () => {
         location.href = "/member/sign_up";
       }
@@ -49,7 +49,7 @@
       console.log(offsetWidth);
       console.log(Math.abs(position));
       leftBtn.onclick = () => {
-        if(Math.abs(position) < endpoint) {
+        if (Math.abs(position) < endpoint) {
           position -= MOVE_WIDTH;
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
@@ -62,6 +62,61 @@
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
         console.log(Math.abs(position));
+      }
+
+      let maxCount = 30;
+      let listCount = 23;
+      if(maxCount > listCount) {
+        maxCount = listCount;
+      }
+      let count = 5;
+      let target = 5;
+      showMore.onclick = () => {
+        listCount -= 5;
+        if(listCount > 0 && listCount < 5) {
+          target = listCount % 5;
+          console.log(listCount);
+        }
+
+        if (count <= maxCount-1) {
+          count += 5;
+          console.log("count :" + count);
+    
+          // let div = document.querySelector(".fav_club_list_row");
+          let div = document.querySelector(".fav_club_list_add_btn");
+
+          let div1 = document.createElement("div");
+          div1.classList.add("fav_club_list_row");
+          let ul = document.createElement("ul");
+          ul.classList.add("fav_club_list");
+
+          for (let i = 0; i < target; i++) {
+            let li = document.createElement("li");
+            li.classList.add("fav_club_list_item_wrap");
+            let div2 = document.createElement("div");
+            div2.classList.add("fav_club_list_item");
+            let h2 = document.createElement("h2");
+            h2.innerText = "CLUB TITLE";
+            let b = document.createElement("b");
+            b.innerText = "CLUB OWNER";
+            let span1 = document.createElement("span");
+            span1.innerText = "CLUB LOC";
+            let span2 = document.createElement("span");
+            span2.innerText = "CLUB DESC";
+
+            div2.appendChild(h2);
+            div2.appendChild(b);
+            div2.appendChild(span1);
+            div2.appendChild(span2);
+            li.appendChild(div2);
+            ul.appendChild(li);
+          }
+          div1.appendChild(ul);
+          div.before(div1);
+        }
+        if(count >= maxCount) {
+          showMore.style.display = "none";
+        }
       }
     }
   </script>
@@ -101,7 +156,7 @@
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
             <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-instagram"></i></li></a>
-            <a href="/clubBoard/boardList"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
+            <a href="/clubBoard/boardList?cpage=1"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
             <a href="/clubList/clubListPage"><li class="icon_list_item"><i class="fab fa-github"></i></li></a>
             <li class="icon_list_item"><i class="fab fa-google"></i></li>
           </ul>
@@ -308,9 +363,9 @@
             </li>
           </ul>
         </div>
-        
+
         <div class="fav_club_list_add_btn">
-          <input type="button" value="5개 더보기">
+          <input type="button" value="더보기" id="showMore">
         </div>
       </div>
     </div>
@@ -346,6 +401,7 @@
   <div class="modal_bg">
 
   </div>
+<!-- sign_in -->
   <div class="loginForm">
     <div class="logininput_wrap">
       <span id="close_btn"><i class="far fa-times"></i></span>
@@ -362,7 +418,7 @@
               <td><input type="password" name="mem_pass" placeholder="pass">
             </tr>
             <tr>
-              <th><input type="submit" value="submit">
+              <th><input type="submit" value="login">
                 <button type="button" id="sign_up">Sign Up</button>
             </tr>
           </table>

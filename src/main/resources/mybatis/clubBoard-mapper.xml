@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  <mapper namespace="ClubBoard">
+  	<insert id="insertBoard">
+  		insert into club_board values(#{cb_club_id}, club_board_seq.nextval, #{cb_writer}, #{cb_title}, #{cb_contents}, null, sysdate, default, default, default)
+   	</insert>
+  	
+  	
+  	
+  </mapper>

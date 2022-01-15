@@ -145,9 +145,9 @@ a:active {
 }
 
 #login_id {
-  font-size: 0.9rem;
-  padding-right: 20px;
-  line-height: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 5px 30px 5px 5px;
 }
 
 .login_list_item {

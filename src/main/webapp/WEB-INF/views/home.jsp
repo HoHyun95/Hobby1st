@@ -129,8 +129,8 @@
           </div>
           <ul class="login_list">
             <c:choose>
-              <c:when test="${login_id !=null }">
-                <span id="login_id"><b>${login_id }</b>님 환영합니다</span>
+              <c:when test="${mem_id !=null }">
+                <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
                 <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>

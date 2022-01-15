@@ -46,22 +46,19 @@
       let position = 0;
       let offsetWidth = main_bg_inner_bottom_list.offsetWidth;
       let endpoint = offsetWidth - (MOVE_WIDTH * 6);
-      console.log(offsetWidth);
-      console.log(Math.abs(position));
-      leftBtn.onclick = () => {
-        if (Math.abs(position) < endpoint) {
-          position -= MOVE_WIDTH;
-          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
-        }
-        console.log(Math.abs(position));
-      }
 
-      rightBtn.onclick = () => {
+      leftBtn.onclick = () => {
         if (position !== 0) {
           position += MOVE_WIDTH;
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
-        console.log(Math.abs(position));
+      }
+
+      rightBtn.onclick = () => {
+        if (Math.abs(position) < endpoint) {
+          position -= MOVE_WIDTH;
+          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
+        }
       }
 
       let maxCount = 30;

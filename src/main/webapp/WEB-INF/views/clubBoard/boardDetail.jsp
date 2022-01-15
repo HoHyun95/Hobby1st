@@ -39,8 +39,7 @@
 			style="float: right;">목록</button>
 	</div>
 
-	<form method="post"
-		action="/comment.pet?check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
+	<form method="post" action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -104,14 +103,14 @@
 								style="border-radius: 70%; height: 60px; width: 60px;"
 								src="${list_profile.get(status.index)}" alt="">
 							</td>
-							<td style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.writer }</td>
+							<td style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }</td>
 						</tr>
 
 						<tr>
 							<td>
 								<div id="content"
 									style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;"
-									rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.comments }
+									rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.cbr_reply }
 								</div>
 							</td>
 						</tr>
@@ -119,11 +118,11 @@
 						<tr>
 							<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
 							</td>
-							<c:if test="${replyList.writer eq loginID }">
+							<c:if test="${replyList.cbr_writer eq loginID }">
 								<td><button type="button" class="delComment"
 										style="color: red; float: right; margin-right: 20px;">
 										X<input class="replySeq" type="hidden"
-											value="${replyList.seq }">
+											value="${replyList.cbr_seq }">
 									</button></td>
 							</c:if>
 						</tr>
@@ -138,9 +137,9 @@
 
 				<!-- 댓글 입력받기 -->
 				<div>
-					<input type="hidden" name="seq" value="${list[0].seq }"> <input
+					<input type="hidden" name="seq" value="${detail.cb_seq }"> <input
 						type="hidden" name="cpage" value="${cpage }">
-					<textarea name="comment" id="message" placeholder="댓글을 남겨주세요."
+					<textarea name="cbr_reply" id="message" placeholder="댓글을 남겨주세요."
 						style="width: 100%; min-height: 30px; overflow-y: hidden; resize: none;"
 						rows="1" onkeyup="resize(this)" onkeydown="resize(this)"></textarea>
 					<!-- textarea 자동 높이조절-->
@@ -165,6 +164,14 @@
 				style="float: right; margin-bottom: 70px;">삭제하기</button>
 		</c:if>
 	</div>
+	
+	<!-- <script>
+		$("#commentBtn").on("click", function() {
+			location.href = "/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }";
+		})
+		
+	
+	</script> -->
 
 </body>
 </html>

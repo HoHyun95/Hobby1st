@@ -6,6 +6,16 @@
   
   
   <mapper namespace="ClubBoardReply">
+  	
+  	<insert id="insertReply">
+  		insert into club_board_reply values(#{cbr_par_seq}, club_board_reply_seq.nextval, #{cbr_writer}, #{cbr_reply}, sysdate)
+  	</insert>
+  	
+  	<select id="selectReply" resultType="kh.hobby1st.dto.ClubBoardReplyDTO">
+   		select * from club_board_reply where cbr_par_seq = #{value}
+   	</select>
+  	
+  	
 	  	
   	
   	

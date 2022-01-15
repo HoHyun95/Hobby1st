@@ -1,6 +1,7 @@
 package kh.hobby1st.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ClubBoardReplyDTO {
 	
@@ -52,6 +53,33 @@ public class ClubBoardReplyDTO {
 	public void setCbr_write_date(Timestamp cbr_write_date) {
 		this.cbr_write_date = cbr_write_date;
 	}
+	
+	
+	// 날자 형식 변환
+			public String getFormdDate() {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+				return sdf.format(this.cbr_write_date.getTime());
+			}
+			
+			
+			public String getDetailDate() {
+				long current_time = System.currentTimeMillis(); // 현재의 타임 스탬
+				long write_time = this.cbr_write_date.getTime(); // 글이 작성된 시청의 Timestamp
+				
+				long time_gap = current_time - write_time;
+				
+				if(time_gap < 6000) {
+					return "1분 이내";
+				}else if(time_gap < 300000) {
+					return "5분 이내";
+				}else if(time_gap < 3600000) {
+					return "1시간 이내";
+				}else if (time_gap < 7200000) {
+					return "2시간 이내";
+				}else {
+					return getFormdDate();
+				}
+			}
 	
 
 }

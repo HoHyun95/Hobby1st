@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.dao.ClubBoardDAO;
 import kh.hobby1st.dto.ClubBoardDTO;
+import kh.hobby1st.dto.ClubBoardReplyDTO;
+import kh.hobby1st.service.ClubBoardReplyService;
 import kh.hobby1st.service.ClubBoardService;
 
 @Controller
@@ -20,6 +22,9 @@ public class ClubBoardControllere {
 	
 	@Autowired
 	private ClubBoardService club_board_service;
+	
+	@Autowired
+	private ClubBoardReplyService club_board_reply_service;
 	
 	@RequestMapping("/boardList")
 	public String memberList(int cpage, Model model) throws Exception {
@@ -55,18 +60,33 @@ public class ClubBoardControllere {
 		int totalBoardCount = club_board_service.getRecordCount(5);
 		
 		
-		return "redirect:/clubBoard/boardList?cpage=1?totalBoardCount = 5";
+		return "redirect:/clubBoard/boardList?cpage=1&totalBoardNum=5";
 	}
 	
 	// 게시판 상세페이지 이동
 	@RequestMapping("/boardDetail")
-	public String boardDetail(int cb_seq, Model model){
+	public String boardDetail(int cb_seq, int cpage, Model model){
 		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
+		List<ClubBoardReplyDTO> replyList = club_board_reply_service.selectReply(cb_seq);
 		
+		model.addAttribute("replyList", replyList);
 		model.addAttribute("detail", detail);
 		return "clubBoard/boardDetail";
+	}
+	
+	// 게시판 댓글 작성
+	@RequestMapping("/insertReply")
+	public String insertReply(ClubBoardReplyDTO dto, int cb_seq) {
+		System.out.println(dto.getCbr_reply() + " + 여기");
+		
+		dto.setCbr_par_seq(cb_seq);
+		dto.setCbr_writer("suhoh01");
+		
+		int result = club_board_reply_service.insert(dto);
+		
+		return "redirect:/clubBoard/boardDetail?cpage=1&cb_seq=" + cb_seq;
 	}
 	
 	

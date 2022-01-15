@@ -179,53 +179,16 @@
             <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
             <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
             <ul class="main_bg_inner_bottom_list">
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-                  <h2>CLUB TITLE</h2>
-                  <b>CLUB OWNER</b>
-                  <span>CLUB LOC</span>
-                  <p>CLUB DESC</p>
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-
-                </div>
-              </li>
-              <li class="main_bg_inner_bottom_list_item_wrap">
-                <div class="main_bg_inner_bottom_list_item">
-                </div>
-              </li>
+              <c:forEach var="clubList" items="${list }">
+                <li class="main_bg_inner_bottom_list_item_wrap">
+                  <div class="main_bg_inner_bottom_list_item">
+                    <h2>${clubList.CL_NAME }</h2>
+                    <b>${clubList.CL_BOSS_NAME}</b> 
+                    <span>${clubList.CL_LOCAL }</span>
+                    <span>${clubList.CL_DESC }</span>
+                  </div>
+                </li>
+              </c:forEach>
             </ul>
           </div>
         </div>

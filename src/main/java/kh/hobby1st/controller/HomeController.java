@@ -1,5 +1,8 @@
 package kh.hobby1st.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +27,9 @@ public class HomeController {
 	public String home(Model model) throws Exception {
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
-		
+		List<Map<String, Object>> map = clService.selectAll();
+
+		model.addAttribute("list", map);
 		model.addAttribute("clmemCount", clmemCount);
 		model.addAttribute("clCount", clCount);
 		return "home";

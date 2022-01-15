@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
 
 
@@ -15,9 +16,16 @@ public class HomeController {
 	@Autowired
 	private ClubMemberService cService;
 	
+	@Autowired
+	private ClubListService clService;
+	
+	
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
-		int clCount = cService.totalClubMember();
+		int clmemCount = cService.totalClubMember();
+		int clCount = clService.countClub();
+		
+		model.addAttribute("clmemCount", clmemCount);
 		model.addAttribute("clCount", clCount);
 		return "home";
 	}

@@ -5,11 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ClubList</title>
-<link rel="stylesheet"
-	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-	crossorigin="anonymous" />
+<title>Search List about Club</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <style>
@@ -164,7 +160,7 @@ div {
 		<form action="/clubList/searchClub" method="post" id="search_form">
 			<div class="search_area">
 				<div class="search_area_inner">
-					<select name="searchField">
+					<select name="searchFiled">
 						<option value="cl_name">동호회명
 						<option value="cl_local">지역
 						<option value="cl_boss_name">동호회장
@@ -188,6 +184,7 @@ div {
                   ){
                     alert("공백은 허용되지않습니다");
                     $('#input_search').val() == "";
+                    return;
                   }else{
                     $('#search_form').submit();
                   }
@@ -200,25 +197,31 @@ div {
 			</div>
 		</form>
 
-
-		<!-- 동호회 리스트 반복문 시작 -->
 		<div class="fav_club_list_wrap">
 			<div class="fav_club_list_row">
-				<c:forEach var="clubList" items="${list }">
-					<ul class="fav_club_list">
-						<li class="fav_club_list_item_wrap">
-							<div class="fav_club_list_item">
-								<h2>${clubList.CL_NAME }</h2>
-								<b>${clubList.CL_BOSS_NAME}</b> <span>${clubList.CL_LOCAL }</span>
-								<p>${clubList.CL_DESC }</p>
-							</div>
-						</li>
-				</c:forEach>
 
-				<!-- 동호회 리스트 반복문 종료 -->
+				<c:choose>
+					<c:when test="${searchList }">
+						<c:forEach var="clubList" items="${searchList }">
+							<ul class="fav_club_list">
+								<li class="fav_club_list_item_wrap">
+									<div class="fav_club_list_item">
+										<h2>${clubList.cl_name }</h2>
+										<b>${clubList.cl_boss_name}</b> <span>${clubList.cl_local }</span>
+										<p>${clubList.cl_desc }</p>
+									</div>
+								</li>
+						</c:forEach>
+					</c:when>
+
+					<c:otherwise>
+						<div>검색 결과가 존재하지않습니다</div>
+					</c:otherwise>
+
+				</c:choose>
+
 				</ul>
 			</div>
-			<!--위에 ul div 수정시  CSS 무너짐 조심 -->
 
 
 			<div class="fav_club_list_add_btn">
@@ -226,6 +229,7 @@ div {
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>

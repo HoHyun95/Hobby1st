@@ -6,6 +6,7 @@
   <mapper namespace="clp_Photo">
   <insert id="insertPhoto">
   	insert into clublist_photo values(clublist_photo_seq.nextval, #{clp_id}, #{clp_photo})
-  
   </insert>
+  
+  
   </mapper>

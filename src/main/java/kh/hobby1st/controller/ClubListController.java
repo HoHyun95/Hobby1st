@@ -1,9 +1,7 @@
-
 package kh.hobby1st.controller;
 
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.ClubList_PhotoDTO;
+import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubList_PhotoService;
+import kh.hobby1st.service.MemberService;
 
 @Controller
 @RequestMapping("/clubList/")
@@ -31,13 +31,26 @@ public class ClubListController {
 
 	@Autowired
 	private ClubList_PhotoService clpService;
-
+	
+	@Autowired
+	private MemberService mService;
+	
 	@Autowired
 	private HttpSession session;
 
 	@RequestMapping("createClubPage")
-	public String createClub() {
+	public String createClub(Model model) {
 		System.out.println("동호회 만드는 임시 페이지 ");
+	
+		String mem_ID = (String)session.getAttribute("mem_id");
+
+		// 대표자 이름에 들어갈 멤버 불러온다.
+		List<MemberDTO> member = mService.getNameForCreateClub(mem_ID);
+		model.addAttribute("member", member);
+
+		
+		System.out.println("성공 ");
+		System.out.println(member);
 		return "clubList/createClub";
 	}
 
@@ -62,7 +75,7 @@ public class ClubListController {
 	public String searchClub(String searchField, String searchText, Model model) {
 
 		System.out.println(" 검색필드 :" +searchField);
-
+		
 		List<ClubListDTO> searchList = clService.searchClub(searchField, searchText);			
 
 			//검색 결과 없을 때 
@@ -104,11 +117,6 @@ public class ClubListController {
 		return "redirect:/";
 	}
 	
-//	@RequestMapping("")
-//	public String countClub() {
-//		clService.countClub();
-//		return "redirect:/";
-//	}
 
 	@ResponseBody
 	@RequestMapping("nameCheck")

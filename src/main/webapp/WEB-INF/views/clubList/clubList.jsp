@@ -161,7 +161,7 @@ div {
 <body>
 
 	<div class="container">
-		<form action="/clubList/searchClub" method="post" id="search_form">
+		<form action="/clubList/searchClub" method="get" id="search_form">
 			<div class="search_area">
 				<div class="search_area_inner">
 					<select name="searchField">

@@ -160,7 +160,7 @@ div {
 		<form action="/clubList/searchClub" method="post" id="search_form">
 			<div class="search_area">
 				<div class="search_area_inner">
-					<select name="searchFiled">
+					<select name="searchField">
 						<option value="cl_name">동호회명
 						<option value="cl_local">지역
 						<option value="cl_boss_name">동호회장
@@ -178,18 +178,18 @@ div {
 							</button>
 
 							<script>
-                $('#search_btn').on('click', () => {
-                  if($('#input_search').val() == "" ||
-                  $('#input_search').val() == " "
-                  ){
-                    alert("공백은 허용되지않습니다");
-                    $('#input_search').val() == "";
-                    return;
-                  }else{
-                    $('#search_form').submit();
-                  }
-                })
-              </script>
+            $('#search_btn').on('click', () => { 
+        if($('#input_search').val() == "" || 
+             $('#input_search').val() == " " 
+               ){ 
+                   alert("공백은 허용되지않습니다"); 
+                 $('#input_search').val() == ""; 
+                    return; 
+               }else{ 
+              $('#search_form').submit(); 
+                  } 
+              })
+             </script>
 
 						</div>
 					</div>
@@ -201,7 +201,7 @@ div {
 			<div class="fav_club_list_row">
 
 				<c:choose>
-					<c:when test="${searchList }">
+					<c:when test="${searchList!= null }">
 						<c:forEach var="clubList" items="${searchList }">
 							<ul class="fav_club_list">
 								<li class="fav_club_list_item_wrap">

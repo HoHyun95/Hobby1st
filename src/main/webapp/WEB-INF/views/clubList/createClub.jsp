@@ -112,7 +112,7 @@ i {
 		<div id="club_container">
 
 
-			<input type="hidden" name="cl_boss_id" value="Hidden">
+			<input type="hidden" name="cl_boss_id" value="${member[0].mem_id }">
 
 			<div id="container_header">동호회 등록</div>
 			<div id="image-container">
@@ -224,11 +224,11 @@ $("#cl_name").on("blur", function() {
 </script>
 
 
-
 				<div class="line_effect"></div>
 				<div class="cl_boss_box">
-					<i class="fas fa-male"></i> <input type="text" name="cl_boss_name"
-						placeholder="대표자">
+					<i class="fas fa-male"></i> <input type="text" 
+						placeholder="${member[0].mem_name }" disabled>
+						<input type="hidden" value="${member[0].mem_name }" name="cl_boss_name">
 				</div>
 
 				<!-- 		<div> -->

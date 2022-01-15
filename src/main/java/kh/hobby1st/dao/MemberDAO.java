@@ -1,7 +1,7 @@
 package kh.hobby1st.dao;
 
-import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -37,5 +37,10 @@ public class MemberDAO {
 	//회원가입 페이지에서 자동으로 아이디 중복여부를 체크합니다.
 	public int id_check(String id) {
 		return mybatis.selectOne("member.id_check", id);
+	}
+	
+	// ClubListController 에서 사용. 
+	public List<MemberDTO> getNameForCreateClub(String mem_ID){
+		return mybatis.selectList("member.getNameForCreateClub", mem_ID);
 	}
 }

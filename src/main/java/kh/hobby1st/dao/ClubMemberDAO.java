@@ -17,12 +17,19 @@ public class ClubMemberDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	// 동호회 회원 수
-	public int getRecordCount() {
-		return mybatis.selectOne("ClubMember.RecordCount");
+	
+	// 총 동호회 회원 가입 수
+	public int totalClubMember() {
+		return mybatis.selectOne("ClubMember.TotalClubMember");
 	}
 	
-	// 페이징해서 리스트 담기
+	
+	// 해당 동호회 회원 수
+	public int getRecordCount(int seq) {
+		return mybatis.selectOne("ClubMember.RecordCount", seq);
+	}
+	
+	// 동호회 회원 리스트 페이징해서 담기
 	public List<MemberDTO> selectMemberByPaging(int start, int end,int seq) {
 
 		Map<String, String> map = new HashMap<>();
@@ -34,6 +41,8 @@ public class ClubMemberDAO {
 		return mybatis.selectList("ClubMember.memberInfor", map);
 	}
 	
+	
+	// 동호회 가입일 페이징해서 담기
 	public List<ClubMemberDTO> selectClubMemberByPaging(int start, int end,int seq) {
 
 		Map<String, String> map = new HashMap<>();
@@ -45,10 +54,11 @@ public class ClubMemberDAO {
 		return mybatis.selectList("ClubMember.clubMemberInfor", map);
 	}
 	
-	
+	// 동호회 회원 추방시키기
 	public int deleteMember(String id) {
 		return mybatis.delete("ClubMember.deleteMember",id);
 	}
+	
 	
 	
 	

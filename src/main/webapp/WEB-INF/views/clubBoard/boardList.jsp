@@ -34,12 +34,8 @@
 				<table class="w-full">
 					<thead>
 						<tr class="text-gray-800 border border-b-0 text-center">
-							<th colspan="6" class="px-4 py-3" style="width: 100%;"># 동호회
-								게시판
+							<th colspan="6" class="px-4 py-3" style="width: 100%;"># 동호회 게시판
 						</tr>
-
-
-
 
 						<!-- 게시판 상단 목차 -->
 						<tr class="text-gray-800 border border-b-0 text-center text-sm">
@@ -54,38 +50,39 @@
 
 					<!------------------------------------- 게시판 리스트 작성 ------------------------------------->
 					<tbody>
-						<c:forEach var="dto" items="${list }">
+						<c:forEach var="dto" items="${clubBoardList }" varStatus="status">
 							<tr
 								class="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0 text-sm">
-								<td class="px-4 py-4 text-center">1</td>
+								<td class="px-4 py-4 text-center">${status.index }</td>
 
 								<!-- 검색창에 키워드랑 내용같이 전달 -->
-								<!--	<c:choose>
-									 <c:when test="${check_num == 4 }">
+								 <%-- <c:choose>
+									<c:when test="${check_num == 4 }">
 										<td class="px-4 py-4"><a
-											href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.title
+											href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title
                                                 }
-												<c:if test="${dto.comment_count ne 0 }">
+												<c:if test="${dto.cb_reply_count ne 0 }">
                                                     &nbsp <i
 														class="far fa-comment-dots"> </i>
 													<span style="color: red;">[2]</span>
 												</c:if>
 										</a></td>
 									</c:when>
-									 <c:otherwise>
-											<td class="px-4 py-4"><a
-												href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">${dto.title }
-													<c:if test="${dto.comment_count ne 0 }">
+									<c:otherwise>
+										<td class="px-4 py-4"><a
+											href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }">${dto.cb_title }
+												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
-														<span style="color: red;">[3]</span>
-													</c:if>
-											</a></td>
-										</c:otherwise> 
-								</c:choose>-->
-								<td class="px-4 py-4 text-center">suhoh01</td>
-								<td class="px-4 py-4 text-center">2022-01-14 22:36:20</td>
-								<td class="px-4 py-4 text-center">30</td>
-								<td class="px-4 py-4 text-center">3</td>
+													<span style="color: red;">[3]</span>
+												</c:if>
+										</a></td>
+									</c:otherwise>
+								</c:choose> --%>
+								<td class="px-4 py-4 text-center">${dto.cb_title }</td>
+								<td class="px-4 py-4 text-center">${dto.cb_writer }</td>
+								<td class="px-4 py-4 text-center">${dto.detailDate }</td>
+								<td class="px-4 py-4 text-center">${dto.cb_view_count }</td>
+								<td class="px-4 py-4 text-center">${dto.cb_like_count }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -164,13 +161,6 @@
 		$("#writeBtn").on("click", function() {
 			location.href = "/clubBoard/boardWrite?"
 		});
-		
-		
-		
-		
-		
-		
-		
 	</script>
 
 </body>

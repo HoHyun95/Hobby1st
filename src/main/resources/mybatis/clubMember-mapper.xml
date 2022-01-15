@@ -15,12 +15,17 @@
   	</select>
   	
   	<select id="RecordCount" resultType="int">
- 		select count(*) from member m join club_member cm on(m.mem_id = cm.cm_mem_id) where cm.cm_par_seq = 5
+ 		select count(*) from member m join club_member cm on(m.mem_id = cm.cm_mem_id) where cm.cm_par_seq = #{seq}
  	</select>
  	
  	<delete id="deleteMember">
 		delete from club_member where cm_mem_id = #{value}
 	</delete>
+	
+	
+	<select id="TotalClubMember" resultType="int">
+ 		select count(*) from club_member
+ 	</select>
   	
   	
   	

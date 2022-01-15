@@ -1,5 +1,7 @@
 package kh.hobby1st.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.dao.ClubBoardDAO;
 import kh.hobby1st.dto.ClubBoardDTO;
+import kh.hobby1st.dto.ClubMemberDTO;
 import kh.hobby1st.service.ClubBoardService;
 
 @Controller
@@ -17,24 +20,21 @@ public class ClubBoardControllere {
 	private ClubBoardDAO dao;
 	
 	@Autowired
-	private ClubBoardService club_member_service;
+	private ClubBoardService club_board_service;
 	
 	@RequestMapping("/boardList")
 	public String memberList(int cpage, Model model) throws Exception {
-		System.out.println("성공");
-		
-//		List<MemberDTO> memberList = club_member_service.selectMemberByPaging(cpage, 5);
-//		List<ClubMemberDTO> clubMemberList = club_member_service.selectClubMemberByPaging(cpage, 5);
-//		
-//		
-//		String navi = club_member_service.getPageNavi2(cpage);
+		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardByPaging(cpage, 5);
 		
 		
-//		model.addAttribute("cpage", cpage);
-//		model.addAttribute("navi", navi);
-//		model.addAttribute("memberList", memberList);
-//		model.addAttribute("clubMemberList", clubMemberList);
+		String navi = club_board_service.getPageNavi(cpage,5);
 		
+		
+		model.addAttribute("cpage", cpage);
+		model.addAttribute("navi", navi);
+		model.addAttribute("clubBoardList", clubBoardList);
+		
+		System.out.println("동작");
 		return "clubBoard/boardList";
 	}
 
@@ -50,7 +50,7 @@ public class ClubBoardControllere {
 		dto.setCb_club_id(5);
 		dto.setCb_writer("suhoh01");
 		
-		club_member_service.insert(dto);
+		club_board_service.insert(dto);
 		
 		System.out.println("성공");
 		

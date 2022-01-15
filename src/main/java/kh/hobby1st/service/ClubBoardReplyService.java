@@ -34,4 +34,16 @@ public class ClubBoardReplyService {
 		return cbrDao.replyCount(board_seq);
 	}
 
+	// 댓글 count 증가
+	public int plusReply(int board_seq) {
+		return cbrDao.plusReply(board_seq);
+	}
+
+	// 댓글 count 감소
+	public int minusReply(int board_seq) {
+		return cbrDao.minusReply(board_seq);
+	}
+
+	
+	
 }

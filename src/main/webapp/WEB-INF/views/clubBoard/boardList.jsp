@@ -70,14 +70,14 @@
 									</c:when>
 									<c:otherwise> --%>
 										<td class="px-4 py-4"><a
-											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&cpage=${cpage }">${dto.cb_title }
+											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
 													<span style="color: red;">[3]</span>
 												</c:if>
 										</a></td>
 									<%-- </c:otherwise>
-								</c:choose>  --%>
+								</c:choose>
 								<%-- <td class="px-4 py-4 text-center">${dto.cb_title }</td> --%>
 								<td class="px-4 py-4 text-center">${dto.cb_writer }</td>
 								<td class="px-4 py-4 text-center">${dto.detailDate }</td>

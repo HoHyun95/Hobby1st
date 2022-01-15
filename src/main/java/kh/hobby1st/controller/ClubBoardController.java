@@ -23,9 +23,6 @@ public class ClubBoardController {
 	private HttpSession session;
 
 	@Autowired
-	private ClubBoardDAO dao;
-
-	@Autowired
 	private ClubBoardService club_board_service;
 
 	@Autowired
@@ -81,24 +78,24 @@ public class ClubBoardController {
 		return "clubBoard/boardDetail";
 	}
 
-	// 게시판 댓글 작성
+	// 댓글 작성
 	@RequestMapping("/insertReply")
 	public String insertReply(ClubBoardReplyDTO dto, int cb_seq) {
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
 		dto.setCbr_par_seq(cb_seq);
-
+		
+		club_board_reply_service.plusReply(cb_seq);
 		int result = club_board_reply_service.insert(dto);
 
 		return "redirect:/clubBoard/boardDetail?cpage=1&cb_seq=" + cb_seq;
 	}
 
-	// 게시판 댓글 삭제
+	// 댓글 삭제
 	@RequestMapping("/deleteReply")
 	public String deleteReply(int cbr_seq, int cb_seq, int cpage) {
 
-		System.out.println();
-
+		club_board_reply_service.minusReply(cb_seq);
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq;

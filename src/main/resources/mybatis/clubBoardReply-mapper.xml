@@ -23,7 +23,13 @@
   		select count(*) from club_board_reply where cbr_par_seq  = #{value}
   	</select>
   	
-	  	
+	<update id="plusReply">
+		update club_board set cb_reply_count = cb_reply_count + 1 where cb_seq =#{value}
+	</update>
+	
+	<update id="minusReply">
+		update club_board set cb_reply_count = cb_reply_count - 1 where cb_seq =#{value}
+	</update>
   	
   	
   </mapper>

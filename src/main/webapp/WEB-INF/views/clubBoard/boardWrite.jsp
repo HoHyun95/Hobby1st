@@ -19,14 +19,13 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	
-	
+
+
 </head>
 
 <body>
 
-	<form id="frm" action="/clubBoard/boardInsert"
-		method="post">
+	<form id="frm" action="/clubBoard/boardInsert" method="post">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
@@ -64,7 +63,7 @@
 				<!-- 목록, 등록 버튼 생성 -->
 
 				<div style="text-align: right;">
-					<button type="button" id="list"
+					<button type="button" id="back"
 						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 						style="margin-right: 5px; height: 65%;">목록</button>
 
@@ -112,6 +111,11 @@
 				}
 			});
 		}
+
+		// 뒤로가기
+		$("#back").on("click", function() {
+			history.back();
+		})
 	</script>
 
 

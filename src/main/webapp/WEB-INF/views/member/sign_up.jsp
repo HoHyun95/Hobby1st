@@ -81,7 +81,7 @@
 		</table>
 	</form>
 	<script>
-	 <!-- Auto id_Check -->
+	 <!-- Auto id_Check 
 	   id.onblur = () => {
 		   $.ajax({
 			   url : "/member/id_check",
@@ -94,10 +94,10 @@
 				 $("#id_check").text("사용가능한 아이디입니다 ")
 			 }
 		   })
-	   }
+	   }-->
 	   
 	   
-	   <!-- Auto id regexr -->
+	   <!-- Auto id regexr 
 	   $("#id").focusout(function() {
 		   var idcheck = RegExp(/^[A-Za-z0-9]{4,20}$/);
 		   try{
@@ -110,9 +110,9 @@
 		   } catch (err) {
 			   $("#id").val("");
 		   }
-	   });
+	   });-->
 	   
-	   <!-- Auto pass regexr -->
+	   <!-- Auto pass regexr 
 	   $("#pass_check").focusout(function() {
 		   var passcheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
 		   try{
@@ -125,9 +125,9 @@
 		   } catch (err) {
 			   $("#pass_check").val("");
 		   }
-	   });
+	   });-->
 	   
-	   <!-- Auto name regexr -->
+	   <!-- Auto name regexr 
 	   $("#name").focusout(function() {
 		   var name_check = RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,6}$/);
 		   try{
@@ -140,7 +140,7 @@
 		   } catch (err) {
 			   $("#name").val("");	  
 		   }
-	   });
+	   });-->
 	   
 	   <!-- Auto phone regexr -->
 	   $("#phone").focusout(function() {
@@ -157,7 +157,7 @@
 		   }
 	   });
 	
-	   <!-- Auto email regexr -->
+	   <!-- Auto email regexr 
 	   $("#email").focusout(function() {
 		   var email_check = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 		   try{
@@ -170,7 +170,7 @@
 		   } catch (err) {
 			   $("#email").val("");	  
 		   }
-	   });
+	   });-->
 	   
        <!-- this is right password?(Auto)-->
 	   function invaild(e) {

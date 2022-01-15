@@ -46,22 +46,19 @@
       let position = 0;
       let offsetWidth = main_bg_inner_bottom_list.offsetWidth;
       let endpoint = offsetWidth - (MOVE_WIDTH * 6);
-      console.log(offsetWidth);
-      console.log(Math.abs(position));
-      leftBtn.onclick = () => {
-        if (Math.abs(position) < endpoint) {
-          position -= MOVE_WIDTH;
-          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
-        }
-        console.log(Math.abs(position));
-      }
 
-      rightBtn.onclick = () => {
+      leftBtn.onclick = () => {
         if (position !== 0) {
           position += MOVE_WIDTH;
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
-        console.log(Math.abs(position));
+      }
+
+      rightBtn.onclick = () => {
+        if (Math.abs(position) < endpoint) {
+          position -= MOVE_WIDTH;
+          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
+        }
       }
 
       let maxCount = 30;
@@ -132,11 +129,13 @@
           </div>
           <ul class="login_list">
             <c:choose>
-              <c:when test="${login_id !=null }">
-                <span id="login_id"><b>${login_id }</b>님 환영합니다</span>
+              <c:when test="${mem_id !=null }">
+                <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
                 <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
+                <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
+                <li class="login_list_item" id="signup_btn" style="display:none">회원가입</li>
               </c:when>
               <c:otherwise>
                 <li class="login_list_item" id="loginform_btn">로그인</li>
@@ -237,10 +236,10 @@
     <div class="hobby1st_dashboard">
       <div class="hobby1st_dashboard_inner">
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard">Hobby1st와 함께 하는 동호회 <b>32,767</b>개, Hobby1st의 소중한 가입자 <b>213,432</b>명</h2></span>
+          <span id="dashboard">12345 명의 회원 중 123개의 동호회에서 ${clCount }명이 활동중입니다.</span>
         </div>
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard2">여러분도 Hobby1st와 함께 꿈꿔왔던 취미 활동을 시작해 보세요!</span>
+          <span id="dashboard2">지금 바로 Hobby1st에서 취미 활동을 시작해 보세요!</span>
         </div>
       </div>
     </div>

@@ -12,40 +12,28 @@ import kh.hobby1st.statics.Statics;
 
 @Service
 public class ClubMemberService {
-	
+
 	@Autowired
 	public ClubMemberDAO dao;
-	
-	private int getRecordCount() {
-		return dao.getRecordCount();
+
+	// 총 동호회 회원 가입 수
+	public int totalClubMember() {
+		return dao.totalClubMember();
 	}
-	
+
+	// 해당 동호회 총 인원 수
+	private int getRecordCount(int seq) {
+		return dao.getRecordCount(seq);
+	}
+
 	public int deleteMember(String id) {
 		return dao.deleteMember(id);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public List<MemberDTO> selectMemberByPaging(int cpage, int seq) throws Exception {
 		int currentPage = cpage;
 
-		int pageTotalCount = this.getPageTotalCount();
+		int pageTotalCount = this.getPageTotalCount(seq);
 		if (currentPage < 1) {
 			currentPage = 1;
 		}
@@ -55,31 +43,13 @@ public class ClubMemberService {
 
 		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
-		
+
 		return dao.selectMemberByPaging(start, end, seq);
 
 	}
-	
-	public List<ClubMemberDTO> selectClubMemberByPaging(int cpage, int seq) throws Exception {
-		int currentPage = cpage;
 
-		int pageTotalCount = this.getPageTotalCount();
-		if (currentPage < 1) {
-			currentPage = 1;
-		}
-		if (currentPage > pageTotalCount) {
-			currentPage = pageTotalCount;
-		}
-
-		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
-		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
-		
-		return dao.selectClubMemberByPaging(start, end, seq);
-
-	}
-	
-	public int getPageTotalCount() throws Exception {
-		int recordTotalCount = this.getRecordCount();
+	public int getPageTotalCount(int seq) throws Exception {
+		int recordTotalCount = this.getRecordCount(seq);
 		int pageTotalCount = 0;
 
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
@@ -91,9 +61,9 @@ public class ClubMemberService {
 	}
 
 // 페이지 네비게이터
-	public String getPageNavi2(int cpage) throws Exception {
+	public String getPageNavi(int cpage, int seq) throws Exception {
 
-		int recordTotalCount = this.getRecordCount();
+		int recordTotalCount = this.getRecordCount(seq);
 		// 총 페이지의 개수
 		int pageTotalCount = 0;
 
@@ -140,13 +110,33 @@ public class ClubMemberService {
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a class='paging' id='paging"+i+"'"+ " href='/clubMember/memberList?cpage=" + i + "'>" + i + "</a> ";
+			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubMember/memberList?cpage=" + i + "'>" + i
+					+ "</a> ";
 		}
 
 		if (needNext) {
-			pageNavi += "<a href='/clubMember/memberList?cpage=1" + (endNavi + 1) + "'>></a>";
+			pageNavi += "<a href='/clubMember/memberList?cpage=" + (endNavi + 1) + "'>></a>";
 		}
 		return pageNavi;
+	}
+
+	//
+	public List<ClubMemberDTO> selectClubMemberByPaging(int cpage, int seq) throws Exception {
+		int currentPage = cpage;
+
+		int pageTotalCount = this.getPageTotalCount(seq);
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+
+		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
+		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
+
+		return dao.selectClubMemberByPaging(start, end, seq);
+
 	}
 
 }

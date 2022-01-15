@@ -14,7 +14,14 @@
   	<select id="selectReply" resultType="kh.hobby1st.dto.ClubBoardReplyDTO">
    		select * from club_board_reply where cbr_par_seq = #{value}
    	</select>
+   	
+   	<delete id="deleteReply">
+   		delete from club_board_reply where cbr_seq = #{value}
+   	</delete>
   	
+  	<select id="replyCount" resultType="int">
+  		select count(*) from club_board_reply where cbr_par_seq  = #{value}
+  	</select>
   	
 	  	
   	

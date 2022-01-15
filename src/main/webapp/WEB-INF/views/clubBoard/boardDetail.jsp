@@ -39,7 +39,8 @@
 			style="float: right;">목록</button>
 	</div>
 
-	<form method="post" action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }">
+	<form method="post"
+		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -118,8 +119,8 @@
 						<tr>
 							<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
 							</td>
-							<c:if test="${replyList.cbr_writer eq loginID }">
-								<td><button type="button" class="delComment"
+							<c:if test="${replyList.cbr_writer eq mem_id }">
+								<td><button type="button" id="delReply"
 										style="color: red; float: right; margin-right: 20px;">
 										X<input class="replySeq" type="hidden"
 											value="${replyList.cbr_seq }">
@@ -133,12 +134,12 @@
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
-				<div class="writer font-bold">${loginID }</div>
+				<div class="writer font-bold">${mem_id }</div>
 
 				<!-- 댓글 입력받기 -->
 				<div>
-					<input type="hidden" name="seq" value="${detail.cb_seq }"> <input
-						type="hidden" name="cpage" value="${cpage }">
+					<input type="hidden" name="seq" value="${detail.cb_seq }">
+					<input type="hidden" name="cpage" value="${cpage }">
 					<textarea name="cbr_reply" id="message" placeholder="댓글을 남겨주세요."
 						style="width: 100%; min-height: 30px; overflow-y: hidden; resize: none;"
 						rows="1" onkeyup="resize(this)" onkeydown="resize(this)"></textarea>
@@ -155,7 +156,7 @@
 
 	<!-- 수정하기 삭제하기 기능.  -->
 	<div id="modi" style="margin: auto; width: 800px;">
-		<c:if test="${list[0].id == loginID }">
+		<c:if test="${detail.cb_writer == mem_id }">
 			<button type="button" id="modify"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 				style="float: right; margin-left: 20px;">수정하기</button>
@@ -164,14 +165,41 @@
 				style="float: right; margin-bottom: 70px;">삭제하기</button>
 		</c:if>
 	</div>
-	
-	<!-- <script>
-		$("#commentBtn").on("click", function() {
-			location.href = "/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }";
+
+	<script>
+	// 댓글 textarea 자동 높이조절
+		function resize(obj) {
+
+			obj.style.height = "1px";
+			obj.style.height = (12 + obj.scrollHeight) + "px";
+		};
+		
+		// 비회원시 댓글 쓰기 막기
+		$("#commentBtn").on("click",function() {
+			if(${loginID == null}){
+				alert("로그인 후 이용해주세요.");
+			return false;
+			}else{
+				 let regex = /([\s\S]){1,2000}/;
+				   let contents = $("#message").val();
+				   let result = regex.test(contents);
+				   if(!result){
+				       alert("한글자 이상 입력해주세요.");
+				       return false;
+				   }
+			}
 		})
 		
+		
+		// 댓글 삭제 기능
+		$("#delReply").on("click", function() {
+			let replySeq = $(this).find(".replySeq").val();
+			 if (confirm("정말 삭제하시겠습니까?")) {
+				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+			} 
+		})
 	
-	</script> -->
+	</script>
 
 </body>
 </html>

@@ -2,6 +2,8 @@ package kh.hobby1st.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import kh.hobby1st.service.ClubBoardService;
 
 @Controller
 @RequestMapping("/clubBoard/")
-public class ClubBoardControllere {
+public class ClubBoardController {
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Autowired
 	private ClubBoardDAO dao;
@@ -79,14 +84,22 @@ public class ClubBoardControllere {
 	// 게시판 댓글 작성
 	@RequestMapping("/insertReply")
 	public String insertReply(ClubBoardReplyDTO dto, int cb_seq) {
-		System.out.println(dto.getCbr_reply() + " + 여기");
 		
+		dto.setCbr_writer((String)session.getAttribute("mem_id"));
 		dto.setCbr_par_seq(cb_seq);
-		dto.setCbr_writer("suhoh01");
 		
 		int result = club_board_reply_service.insert(dto);
 		
 		return "redirect:/clubBoard/boardDetail?cpage=1&cb_seq=" + cb_seq;
+	}
+	
+	// 게시판 댓글 삭제
+	@RequestMapping("/deleteReply")
+	public String deleteReply(int cb_seq, int cpage) {
+		
+		int result = club_board_reply_service.deleteReply(cb_seq);
+		
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq;
 	}
 	
 	

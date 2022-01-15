@@ -24,4 +24,14 @@ public class ClubBoardReplyService {
 		return cbrDao.selectReply(seq);
 	}
 
+	// 댓글 삭제하기
+	public int deleteReply(int reply_seq) {
+		return cbrDao.deleteReply(reply_seq);
+	}
+
+	// 해당 게시판 댓글 개수
+	public int replyCount(int board_seq) {
+		return cbrDao.replyCount(board_seq);
+	}
+
 }

@@ -46,7 +46,7 @@
 			<div class="title space-y-1">
 
 				<div class="text-2xl font-medium">
-					<span>${detail.cb_title }</span>
+					<span>${detail.cb_title } </span>
 				</div>
 				<div>
 					<span class="writer">${detail.cb_writer }</span>
@@ -84,7 +84,7 @@
 					</button>
 
 					<span style="margin-left: 10px;"><i
-						class="far fa-comment-dots"></i> 댓글 <span id="comment_n">4</span>
+						class="far fa-comment-dots"></i> 댓글 <span id="comment_n">${replycount }</span>
 					</span>
 				</div>
 			</div>
@@ -120,7 +120,7 @@
 							<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
 							</td>
 							<c:if test="${replyList.cbr_writer eq mem_id }">
-								<td><button type="button" id="delReply"
+								<td><button type="button" class="delReply"
 										style="color: red; float: right; margin-right: 20px;">
 										X<input class="replySeq" type="hidden"
 											value="${replyList.cbr_seq }">
@@ -167,7 +167,7 @@
 	</div>
 
 	<script>
-	// 댓글 textarea 자동 높이조절
+		// 댓글 textarea 자동 높이조절
 		function resize(obj) {
 
 			obj.style.height = "1px";
@@ -176,7 +176,7 @@
 		
 		// 비회원시 댓글 쓰기 막기
 		$("#commentBtn").on("click",function() {
-			if(${loginID == null}){
+			if(${mem_id == null}){
 				alert("로그인 후 이용해주세요.");
 			return false;
 			}else{
@@ -190,14 +190,19 @@
 			}
 		})
 		
-		
 		// 댓글 삭제 기능
-		$("#delReply").on("click", function() {
+		$(".delReply").on("click", function() {
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
 			} 
 		})
+		
+		// 뒤로가기
+		$("#back").on("click", function() {
+			location.href = "/clubBoard/boardList?cpage=${cpage}";			  
+							/* history.back(); */
+			})
 	
 	</script>
 

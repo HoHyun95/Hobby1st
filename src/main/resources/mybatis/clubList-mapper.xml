@@ -18,4 +18,8 @@
 	<select id="nameCheck" resultType="int">
 		select count(*) from clubList where cl_name = #{cl_name}
 	</select>
+	
+	<select id="selectAll" resultType="map">
+		select cl.*, clp.clp_photo from clublist cl, clublist_photo clp where cl.cl_id = clp.clp_id
+	</select>
 </mapper>

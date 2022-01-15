@@ -1,5 +1,9 @@
 package kh.hobby1st.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,9 +21,12 @@ public class ClubListDAO {
 		return dto.getCl_id();
 	}
 
+	//동호회명 중복 체크 
 	public int nameCheck(String cl_name) {
-		System.out.println("dao 성공");
 		return mybatis.selectOne("ClubList.nameCheck",cl_name);
-
+	}
+	
+	public List<Map<String, Object>>  selectAll(){
+	return mybatis.selectList("ClubList.selectAll");
 	}
 }

@@ -1,7 +1,8 @@
 package kh.hobby1st.dto;
 
-public class ClubList_PhotoDTO {
+import java.sql.Date;
 
+public class ClubList_PhotoDTO {
 	private int clp_seq;
 	private int clp_id;
 	private String clp_photo;
@@ -30,4 +31,6 @@ public class ClubList_PhotoDTO {
 	public void setClp_photo(String clp_photo) {
 		this.clp_photo = clp_photo;
 	}
+	
+	
 }

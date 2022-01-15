@@ -15,4 +15,6 @@ public class ClubList_PhotoDAO {
 	public int insertPhoto(ClubList_PhotoDTO dto) {
 		return mybatis.insert("clp_Photo.insertPhoto", dto);
 	}
+	
+
 }

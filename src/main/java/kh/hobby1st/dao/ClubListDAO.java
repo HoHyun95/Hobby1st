@@ -29,4 +29,19 @@ public class ClubListDAO {
 	public List<Map<String, Object>>  selectAll(){
 	return mybatis.selectList("ClubList.selectAll");
 	}
+	
+	public List<ClubListDTO> searchClub(String searchField, String searchText){
+	System.out.println(searchField +"+"+ searchText);
+	
+		Map<String, String> map = new HashMap<>();
+		map.put("column", searchField);
+		map.put("value", searchText);
+		return mybatis.selectList("ClubList.searchClub", map);
+	}
+	
+	// 동호회 수 
+	public int countClub() {
+		return mybatis.selectOne("ClubList.countClub");
+	}
+	//
 }

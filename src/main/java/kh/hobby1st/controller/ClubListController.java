@@ -48,46 +48,35 @@ public class ClubListController {
 
 		//동호회 리스트 + 동호회 사진 
 		List<Map<String, Object>> map = clService.selectAll();
-			
+
 		System.out.println(map.size());
 		System.out.println(map);
 		System.out.println(map.get(0));
-		
+
 		//동호회 출력 
 		model.addAttribute("list", map);
-		
-//		List<String> list = new ArrayList(); 
-	
-//		for(Map<String, Object> list : map) {
-//	
-//		}
-		
-//		for(int i = 0; i < map.size(); i++) {
-//			String cl_id = map.get(i).get("CL_ID").toString();
-//			String cl_name = map.get(i).get("CL_NAME").toString();
-//			String cl_boss_id = map.get(i).get("CL_BOSS_ID").toString();
-//			String cl_maxMem = map.get(i).get("CL_MAXMEM").toString();
-//			String cl_local = map.get(i).get("CL_LOCAL").toString();
-//			String cl_openDate = map.get(i).get("CL_OPENDATE").toString();
-//			String cl_memCount = map.get(i).get("CL_MEMCOUNT").toString();
-//			String cl_category_id = map.get(i).get("CL_CATEGORY_ID").toString();
-//			String cl_dCategory_id = map.get(i).get("CL_DCATEGORY_ID").toString();
-//			String clp_photo = map.get(i).get("CLP_PHOTO").toString();
-
-			
-//			list.add(i,cl_id);
-//			list.add(i,cl_name);
-//			list.add(i,cl_boss_id);
-//			list.add(i,cl_maxMem);
-//			list.add(i,cl_local);
-//			list.add(i,cl_openDate);
-//			list.add(i,cl_memCount);
-//			list.add(i,cl_category_id);
-//			list.add(i,cl_dCategory_id);
-//			list.add(i,clp_photo);
-	
-
 		return "clubList/clubList";
+	}
+
+	@RequestMapping("searchClub")
+	public String searchClub(String searchField, String searchText, Model model) {
+
+		System.out.println(" 검색필드 :" +searchField);
+
+		List<ClubListDTO> searchList = clService.searchClub(searchField, searchText);			
+
+			//검색 결과 없을 때 
+			int noResult = 0;
+
+			if(searchList.size() == 0) {
+				System.out.println("검색결과 없음");
+				model.addAttribute("noResult", noResult);
+			}else {
+				System.out.println("검색결과 존재함");
+				model.addAttribute("searchList", searchList);
+			}
+		
+		return "clubList/searchClub";
 	}
 
 	@RequestMapping("createClubProc")
@@ -114,6 +103,12 @@ public class ClubListController {
 		}
 		return "redirect:/";
 	}
+	
+//	@RequestMapping("")
+//	public String countClub() {
+//		clService.countClub();
+//		return "redirect:/";
+//	}
 
 	@ResponseBody
 	@RequestMapping("nameCheck")
@@ -122,8 +117,6 @@ public class ClubListController {
 		System.out.println(result);
 		return result;
 	}
-
-
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

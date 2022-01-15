@@ -1,25 +1,31 @@
 package kh.hobby1st.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import kh.hobby1st.service.ClubMemberService;
 
 
 @Controller
 public class HomeController {
 	
-	
+	@Autowired
+	private ClubMemberService cService;
 	
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model model) throws Exception {
+		int clCount = cService.totalClubMember();
+		model.addAttribute("clCount", clCount);
 		return "home";
 	}
 	
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e) {
+		e.printStackTrace();
+		System.out.println("예외 처리 코드가 실행되었습니다.");
+		return "redirect:/";
+	}
 }

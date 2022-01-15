@@ -18,7 +18,7 @@ public class ClubListService {
 	public ClubListDAO cldao; 
 	
 //	동호회 수
-	private int countClub() {
+	public int countClub() {
 		return cldao.countClub();
 	}
 //

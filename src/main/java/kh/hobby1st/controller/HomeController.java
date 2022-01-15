@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
+import kh.hobby1st.service.MemberService;
 
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private MemberService mService;
 	
 	@Autowired
 	private ClubMemberService cService;
@@ -25,11 +29,13 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
+		int memberCount = mService.totalMember();
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
 		List<Map<String, Object>> map = clService.selectAll();
 
 		model.addAttribute("list", map);
+		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("clmemCount", clmemCount);
 		model.addAttribute("clCount", clCount);
 		return "home";

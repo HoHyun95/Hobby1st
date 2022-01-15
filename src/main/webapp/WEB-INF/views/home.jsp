@@ -199,7 +199,7 @@
     <div class="hobby1st_dashboard">
       <div class="hobby1st_dashboard_inner">
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard">12345 명의 회원 중 ${clCount }개의 동호회에서 ${clmemCount }명이 활동중입니다.</span>
+          <span id="dashboard">${memberCount } 명의 회원 중 ${clCount }개의 동호회에서 ${clmemCount }명이 활동중입니다.</span>
         </div>
         <div class="hobby1st_dashboard_inner_text">
           <span id="dashboard2">지금 바로 Hobby1st에서 취미 활동을 시작해 보세요!</span>

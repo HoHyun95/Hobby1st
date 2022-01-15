@@ -19,4 +19,9 @@
 	<select id="id_check" resultType="Integer">
 		select count(*) from member where mem_id = #{id}
 	</select>
+	
+	<select id="totalMember" resultType="int">
+	    select count(*) from member
+	</select>
+	
 </mapper>

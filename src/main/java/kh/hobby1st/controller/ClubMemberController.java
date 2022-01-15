@@ -30,9 +30,7 @@ public class ClubMemberController {
 		List<MemberDTO> memberList = club_member_service.selectMemberByPaging(cpage, 5);
 		List<ClubMemberDTO> clubMemberList = club_member_service.selectClubMemberByPaging(cpage, 5);
 		
-		
-		String navi = club_member_service.getPageNavi2(cpage);
-		
+		String navi = club_member_service.getPageNavi(cpage,5);
 		
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("navi", navi);

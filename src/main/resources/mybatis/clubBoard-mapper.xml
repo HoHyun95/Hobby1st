@@ -17,6 +17,14 @@
    	<select id="RecordCount" resultType="int">
  		select count(*) from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{seq})
  	</select>
+ 	
+ 	<select id="boardDetail" resultType="kh.hobby1st.dto.ClubBoardDTO">
+ 		select * from club_board where cb_seq = #{value}
+ 	</select>
+ 	
+ 	<update id="increaseView">
+ 		update club_board set cb_view_count = cb_view_count + 1 where cb_seq = #{value}
+ 	</update>
   	
   	
   	

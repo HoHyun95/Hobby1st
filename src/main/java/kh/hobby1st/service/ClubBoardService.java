@@ -11,19 +11,32 @@ import kh.hobby1st.statics.Statics;
 
 @Service
 public class ClubBoardService {
-	
-	
+
 	@Autowired
 	public ClubBoardDAO cbdao;
-	
+
 	public int insert(ClubBoardDTO dto) {
 		return cbdao.insert(dto);
 	}
-	
-	private int getRecordCount(int seq) {
+
+	public int getRecordCount(int seq) {
 		return cbdao.getRecordCount(seq);
 	}
+
+	// 게시판 상제보기
+	public ClubBoardDTO boardDetail(int seq) {
+		return cbdao.boardDetail(seq);
+	}
 	
+	
+
+	// 게시판 조회수 증가
+	public int increaseView(int seq) {
+		return cbdao.increaseView(seq);
+	}
+	
+	
+
 	// 동호회 게시판 리스트
 	public List<ClubBoardDTO> selectBoardByPaging(int cpage, int seq) throws Exception {
 		int currentPage = cpage;
@@ -38,10 +51,10 @@ public class ClubBoardService {
 
 		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
-		
+
 		return cbdao.selectBoardByPaging(start, end, seq);
 	}
-	
+
 	// 게시판 총 페이지
 	public int getPageTotalCount(int seq) throws Exception {
 		int recordTotalCount = this.getRecordCount(seq);
@@ -105,7 +118,8 @@ public class ClubBoardService {
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a class='paging' id='paging"+i+"'"+ " href='/clubBoard/boardList?cpage=" + i + "'>" + i + "</a> ";
+			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/boardList?cpage=" + i + "'>" + i
+					+ "</a> ";
 		}
 
 		if (needNext) {
@@ -113,12 +127,5 @@ public class ClubBoardService {
 		}
 		return pageNavi;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

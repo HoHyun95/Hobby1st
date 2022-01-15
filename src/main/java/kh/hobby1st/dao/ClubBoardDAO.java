@@ -38,5 +38,29 @@ public class ClubBoardDAO {
 
 		return mybatis.selectList("ClubBoard.selectBoard", map);
 	}
+	
+	// 게시판 상제보기
+	public ClubBoardDTO boardDetail(int seq) {
+		return mybatis.selectOne("ClubBoard.boardDetail",seq);
+	}
+	
+	// 게시판 조회수 증가
+	public int increaseView(int seq) {
+		return mybatis.update("ClubBoard.increaseView",seq);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

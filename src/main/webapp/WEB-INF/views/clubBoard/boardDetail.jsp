@@ -46,16 +46,16 @@
 			<div class="title space-y-1">
 
 				<div class="text-2xl font-medium">
-					<span>추천합니다</span>
+					<span>${detail.cb_title }</span>
 				</div>
 				<div>
-					<span class="writer">suhoh01</span>
+					<span class="writer">${detail.cb_writer }</span>
 				</div>
 				<div class="grid grid-cols-2 text-gray-400"
 					style="padding-bottom: 10px; border-bottom: 1px solid rgb(202, 202, 202);">
-					<div class="write_date text-sm">2022-01-14 22:30</div>
+					<div class="write_date text-sm">${detail.detailDate }</div>
 					<div class="text-right">
-						<i class="far fa-eye"></i> 23
+						<i class="far fa-eye"></i> ${detail.cb_view_count }
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 			<div
 				style="border-bottom: 1px solid rgb(202, 202, 202); padding-bottom: 15px;">
 
-				<div style="margin-top: 10px;">요거 괜찮습니다</div>
+				<div style="margin-top: 10px;">${detail.cb_contents }</div>
 
 				<!-- 오른쪽 하단에 추천과 댓글수 조회 -->
 				<div class="content_b text-right text-base">

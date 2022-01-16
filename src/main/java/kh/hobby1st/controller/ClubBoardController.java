@@ -34,11 +34,13 @@ public class ClubBoardController {
 	@RequestMapping("/boardList")
 	public String memberList(int cpage, Model model) throws Exception {
 		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardByPaging(cpage, 5);
-
+		
+		int check_num = 1;
 		String navi = club_board_service.getPageNavi(cpage, 5);
 		int totalBoardCount = club_board_service.getRecordCount(5);
 
 		model.addAttribute("totalBoardCount", totalBoardCount);
+		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("navi", navi);
 		model.addAttribute("clubBoardList", clubBoardList);
@@ -136,7 +138,7 @@ public class ClubBoardController {
 	// 게시판 검색 기능
 	@RequestMapping("/searchBoard")
 	public String searchBoard(int cpage, String keyword, String searchWord, Model model) throws Exception {
-		
+		int check_num = 2;
 		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardSearchByPaging(cpage, 5, keyword, searchWord);
 		List<ClubBoardDTO> list = dao.selectBoardSearchByPaging(1, 10, 5, keyword, searchWord);
 		System.out.println(list.get(0).getCb_title());
@@ -148,6 +150,7 @@ public class ClubBoardController {
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("totalBoardCount", totalBoardCount);
+		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("navi", navi);
 		model.addAttribute("clubBoardList", clubBoardList);

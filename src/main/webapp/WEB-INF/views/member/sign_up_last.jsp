@@ -187,7 +187,8 @@
                <div class="body_box_wrap">
                  <div class="filebox">
                  <label for="photo_file">Upload!</label>
-                 <input type="file" class="body_box" id="photo_file" name="mem_photo">
+                 <input type="file" class="body_box" id="photo_file" name="mem_photo" accept="image/gif, image/jpeg, image/png"
+                 onchange="file_check(this)">
                 </div>
                </div>
 
@@ -195,18 +196,26 @@
                    <h7><b>당신의 닉네임을 등록하세요!</b></h7>
                 </div>
                <div class="body_box_wrap">
-                   <input type="text" placeholder="User Nick Name" class="body_box" name="mem_nickname">
+                   <input type="text" placeholder="User Nick Name" class="body_box" name="mem_nickname" id="nick">
                 </div>
             </div>
             <div class="lfooter">
                 <div class="footer_submit">
-                    <button class="button_login" type="submit" >Sign Up!</button>
+                    <button class="button_login" type="submit" id="null_check">Sign Up!</button>
                 </div>
             </div>
             </form>
           </div>
         </div>
-            <script>            
+            <script>
+            $("#null_check").on("click",function() {
+                let nick = $("#nick").val();
+                if(nick === ""){
+                	alert("닉네임을 입력해주세요")
+                	return false;
+                	}
+                })
+                
                 $(function() {
                     $("#photo_file").on("change", function(){
                     readURL(this);
@@ -221,6 +230,20 @@
                         reader.readAsDataURL(input.files[0]);
                     }
                 }
-                </script>
-</body>
+                
+                function file_check(e) {
+                	pathpoint = e.value.lastindexOf('.');
+                	filepoint = e.value.substring(pathpoint+1,e.length);
+                	filetype = filepoint.toLowerCase();
+                	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp"){
+                		alert("프로필 등록이 성공했습니다!");
+                	} else {
+                	    alert("이미지를 선택해주세요");
+                        parent = e.parentNode
+                        node = parent.replaceChild(e.cloneNode(true),e);
+                        return false;
+                	}	
+                }
+        </script>
+  </body>
 </html>

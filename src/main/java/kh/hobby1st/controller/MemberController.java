@@ -74,12 +74,20 @@ public class MemberController {
 		session.setAttribute("mem_pass", mem_pass);
 		session.setAttribute("mem_name", mem_name);
 		session.setAttribute("mem_phone", mem_phone);
-		session.setAttribute("mem_email", mem_email);
+		
+		String add_email = mem_email.replaceAll("[,]", "");
+		session.setAttribute("mem_email", add_email);
+		
 		session.setAttribute("mem_address", mem_address);
 		session.setAttribute("mem_birthday", mem_birthday);
 		session.setAttribute("mem_gender", mem_gender);
 		session.setAttribute("mem_category_1", mem_category_1);
 		session.setAttribute("mem_category_2", mem_category_2);
+		if(mem_category_2 == null) {
+			mem_category_2 = "no_category_2";
+			session.setAttribute("mem_category_2", mem_category_2);
+			return "member/sign_up_last";
+		}
 		return "member/sign_up_last";
 	}
 

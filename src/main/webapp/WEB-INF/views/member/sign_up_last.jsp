@@ -9,12 +9,11 @@
 <title>sign_up_last</title>
 </head>
 <body>
-	<!-- 작업순서 -->
-	<!-- 1. 기능구현(진행중) 2. 디자인(미완료) 3. 정규표현식을 통한 제약(미완료) 4. 이메일인증(미완료)  -->
-	<!-- signUp_lastPage -->
+
 
 	<form action="/member/member_add" method="post"
 		enctype="multipart/form-data">
+		
 		<!-- sgin_upPage 에서 사용자가 입력한 값 -->
 		<input type="text" name="mem_id" value="${mem_id }" hidden>
 		<input type="text" name="mem_pass" value="${mem_pass }" hidden>
@@ -48,11 +47,12 @@
 	</form>
 
 	<script>
+	<!-- 회원가입 첫 페이지로 이동합니다 -->
     $("#return").on("click", function() {
 		location.href = "/member/sign_up";
 	})
 	
-	<!-- preView_File-->
+	<!-- 사용자가 올린 파일을 보여줍니다.-->
 	$(function() {
 	    $("#photo_file").on("change", function(){
 	    readURL(this);

@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>Sign_up</title>
 </head>
 <body>
@@ -19,16 +18,15 @@
 				<td>id
 				<td><input type="text" placeholder="id" name="mem_id" id="id">
 					<p id="id_check"></p>
-					<p class="id_regexr"></p>
 			</tr>
 			<tr>
 				<td>pass
-				<td><input type="password" placeholder="pass" name="mem_pass" id="pass_check"
+				<td><input type="password" placeholder="pass" name="mem_pass"
 					class="pass" onChange="invaild()">
 			</tr>
 			<tr>
 				<td>pass_Check
-				<td><input type="password" placeholder="pass_check" id="pass_check2"
+				<td><input type="password" placeholder="pass_check" 
 					onChange="invaild()" class="pass">
 					<p class="pass_check"></p>
 			</tr>
@@ -80,9 +78,10 @@
 			</tr>
 		</table>
 	</form>
+	
 	<script>
-	 <!-- Auto id_Check 
-	   id.onblur = () => {
+	  <!-- Auto id_Check -->
+	  $("#id").on("blur", function() {
 		   $.ajax({
 			   url : "/member/id_check",
 			   data: {id:$("#id").val()}
@@ -94,9 +93,36 @@
 				 $("#id_check").text("사용가능한 아이디입니다 ")
 			 }
 		   })
-	   }-->
+	   })
 	   
+       <!-- this is right password?(Auto)-->
+	   function invaild(e) {
+			let pwArr = document.getElementsByClassName("pass")
+			if (checkPw(pwArr[0].value)) {
+				if (pwArr[1].value) {
+					let text = pwArr[0].value === pwArr[1].value ? "비밀번호 일치!"
+							: "비밀번호 불일치!"
+					document.getElementsByClassName("pass_check")[0].innerHTML = text;
+				}
+			} else {
+				document.getElementsByClassName("pass_check")[0].innerHTML = "값이 비어있습니다!"
+			}
+		}
 	   
+		function checkPw(val) {
+			let result = true
+			if (val == "")
+				result = false
+			return result;
+		}
+		
+		<!-- return login -->
+		sign_in.onclick = () => {
+				location.href = "/member/sign_in";
+	    }
+	   
+		</script>
+		
 	   <!-- Auto id regexr 
 	   $("#id").focusout(function() {
 		   var idcheck = RegExp(/^[A-Za-z0-9]{4,20}$/);
@@ -142,7 +168,7 @@
 		   }
 	   });-->
 	   
-	   <!-- Auto phone regexr -->
+	   <!-- Auto phone regexr 
 	   $("#phone").focusout(function() {
 		   var phone_check = RegExp(/^01[0179][0-9]{7,9}$/);
 		   try{
@@ -155,7 +181,7 @@
 		   } catch (err) {
 			   $("#phone").val("");	  
 		   }
-	   });
+	   });-->
 	
 	   <!-- Auto email regexr 
 	   $("#email").focusout(function() {
@@ -171,32 +197,5 @@
 			   $("#email").val("");	  
 		   }
 	   });-->
-	   
-       <!-- this is right password?(Auto)-->
-	   function invaild(e) {
-			let pwArr = document.getElementsByClassName("pass")
-			if (checkPw(pwArr[0].value)) {
-				if (pwArr[1].value) {
-					let text = pwArr[0].value === pwArr[1].value ? "Right pass"
-							: "Not pass"
-					document.getElementsByClassName("pass_check")[0].innerHTML = text;
-				}
-			} else {
-				document.getElementsByClassName("pass_check")[0].innerHTML = "Null pass"
-			}
-		}
-		function checkPw(val) {
-			let result = true
-			if (val == "")
-				result = false
-			return result;
-		}
-		
-		
-		<!-- return login -->
-		sign_in.onclick = () => {
-				location.href = "/member/sign_in";
-	    }
-	</script>
 </body>
 </html>

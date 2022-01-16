@@ -5,14 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>Sign_in</title>
 </head>
 <body>
-    <!-- 작업순서 -->
-    <!-- 1. 기능구현(진행중) 2. 디자인(미완료) 3. 정규표현식을 통한 제약(미완료) 4. 이메일인증(미완료)  -->
-	<!-- login -->
 	<form action="/member/login" method="post">
 		<table border=1 align="center">
 			<tr>

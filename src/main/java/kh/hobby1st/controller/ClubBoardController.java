@@ -68,14 +68,23 @@ public class ClubBoardController {
 
 	// 게시판 상세페이지 이동
 	@RequestMapping("/boardDetail")
-	public String boardDetail(int cb_seq, int cpage, Model model) {
-
+	public String boardDetail(int cb_seq, int cpage, Model model, int check_num, String keyword, String searchWord) {
+		
+		if(keyword.equals("title")) {
+			keyword = "제목";
+		}else if(keyword.equals("writer")) {
+			keyword = "작성자";
+		}
+		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
 		List<ClubBoardReplyDTO> replyList = club_board_reply_service.selectReply(cb_seq);
 		int replycount = club_board_reply_service.replyCount(cb_seq);
 
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("replycount", replycount);
+		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("detail", detail);
@@ -116,9 +125,12 @@ public class ClubBoardController {
 
 	// 게시판 수정페이지 이동
 	@RequestMapping("/modifyBoard")
-	public String modifyBoard(int cpage, int cb_seq, Model model) {
+	public String modifyBoard(int cpage, int cb_seq, Model model, int check_num, String keyword, String searchWord) {
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("detail", detail);
 		return "clubBoard/modify_boardWrite";
@@ -126,22 +138,29 @@ public class ClubBoardController {
 
 	// 게시판 수정페이지 수정
 	@RequestMapping("/updateBoard")
-	public String updateBoard(int cpage, Model model, ClubBoardDTO dto) {
-
+	public String updateBoard(int cpage, Model model, ClubBoardDTO dto, int check_num, String keyword, String searchWord) {
+		
+		if(keyword.equals("제목")) {
+			keyword = "title";
+		}else if(keyword.equals("작성자")) {
+			keyword = "writer";
+		}
+		
 		int result = club_board_service.modifyBoard(dto);
 
 		model.addAttribute("result", result);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq();
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq() 
+		+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 
 	// 게시판 검색 기능
 	@RequestMapping("/searchBoard")
 	public String searchBoard(int cpage, String keyword, String searchWord, Model model) throws Exception {
 		int check_num = 2;
+		System.out.println(keyword + searchWord);
 		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardSearchByPaging(cpage, 5, keyword, searchWord);
 		List<ClubBoardDTO> list = dao.selectBoardSearchByPaging(1, 10, 5, keyword, searchWord);
-		System.out.println(list.get(0).getCb_title());
 		
 		String navi = club_board_service.getSearchPageNavi(cpage, 5, keyword, searchWord);
 				

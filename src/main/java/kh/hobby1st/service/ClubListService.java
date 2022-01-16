@@ -34,11 +34,16 @@ public class ClubListService {
 	public 	List<Map<String, Object>> selectAll() {
 		return cldao.selectAll();
 	}
-
-	public List<ClubListDTO> searchClub(String searchField, String searchText){
-		return cldao.searchClub(searchField, searchText);
-	}
 	
+	public List<Map<String, Object>> selectClub(String cl_id){
+		return cldao.selectClub(cl_id);
+	}
 
-
+	public List<ClubListDTO> searchClub(String searchField, String searchText) {
+		String modifiedText = searchText;
+		if (searchText.contains(" ")) {
+			modifiedText = searchText.trim();
+		}
+		return cldao.searchClub(searchField, modifiedText);
+	}
 }

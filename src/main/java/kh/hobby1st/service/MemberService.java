@@ -1,6 +1,6 @@
 package kh.hobby1st.service;
 
-import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,4 +34,7 @@ public class MemberService {
 		return mem_dao.id_check(id);
 	}
 
+	public List<MemberDTO> getNameForCreateClub(String mem_ID){
+		return mem_dao.getNameForCreateClub(mem_ID);
+	}
 }

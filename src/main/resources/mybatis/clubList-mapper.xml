@@ -7,7 +7,8 @@
 
 	<!-- 동호회 수 -->
 	<select id="countClub" resultType="int">
-		select count(*) cl_count from clublist
+		select count(*) cl_count from
+		clublist
 	</select>
 	<!-- 동호회 -->
 
@@ -32,6 +33,11 @@
 	<select id="selectAll" resultType="map">
 		select cl.*, clp.clp_photo
 		from clublist cl, clublist_photo clp where cl.cl_id = clp.clp_id
+	</select>
+
+	<select id="selectClub" resultType="map">
+		select clublist.*, clp_photo from clublist_photo, clublist where cl_id =
+		${value}
 	</select>
 
 	<select id="searchClub" resultType="kh.hobby1st.dto.ClubListDTO">

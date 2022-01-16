@@ -30,6 +30,10 @@ public class ClubListDAO {
 	return mybatis.selectList("ClubList.selectAll");
 	}
 	
+	public List<Map<String, Object>> selectClub(String cl_id){
+		return mybatis.selectList("ClubList.selectClub", cl_id);
+	}
+	
 	public List<ClubListDTO> searchClub(String searchField, String searchText){
 	System.out.println(searchField +"+"+ searchText);
 	

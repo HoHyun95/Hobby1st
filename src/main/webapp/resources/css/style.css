@@ -1,209 +1,7 @@
-/* All */
-:root {
-  --color1 : #1e1f21;
-  --color2 : #ffffff;
-  --color3 : #181818;
-  --bg-color : rgba(158, 128, 247, 0.9);
-  --bg-color2 :rgba(184, 166, 189, 0.05);
-  --bg-color3 : rgba(0, 0, 0, 0.8);
-  --bg-color4 : #f8f8f8;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-}
-
-div {
-  /* border: 1px solid black; */
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:active {
-  text-decoration: none;
-  color: black;
-}
-/* All end */
-
-/* header */
-.header {
-  width: 100%;
-}
-
-.header_inner {
-  width: 1260px;
-  margin: 0 auto;
-}
-
-.header_inner_top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px 5px 10px 5px;
-}
-
-.logo {
-  height: 50px;
-}
-
-.logo img {
-  width: 100%;
-  height: 100%;
-}
-
-.login_list {
-  display: flex;
-  list-style-type: none;
-}
-
-#login_id {
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 5px 30px 5px 5px;
-}
-
-.login_list_item {
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 5px 10px 5px 5px;
-}
-
-.login_list_item:hover {
-  color: var(--bg-color);
-  cursor: pointer;
-}
-
-.header_inner_bottom { 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 3px 5px 3px 0px;
-}
-
-.menu_list {
-  display: flex;
-  list-style-type: none;
-}
-
-.menu_list_item {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 5px 30px 5px 5px;
-}
-
-.menu_list_item:hover {
-  cursor: pointer;
-}
-
-.icon_list {
-  display: flex;
-  list-style-type: none;
-  width: fit-content;
-}
-
-.icon_list_item {
-  font-size: 1.1rem;
-  font-weight: 900;
-  padding: 5px 10px 5px 5px;
-}
-
-.icon_list_item:hover {
-  cursor: pointer;
-}
-/* header end */
-
 /* main_bg */
 .main_bg {
   width: 100%;
-  height: 425px;
+  height: 450px;
   position: relative;
 }
 
@@ -211,7 +9,7 @@ a:active {
   content: "";
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 215px;
   background-color: var(--bg-color);
   z-index: -1;
 }
@@ -220,8 +18,8 @@ a:active {
   content: "";
   position: absolute;
   width: 100%;
-  height: 250px;
-  top: 170px;
+  height: 215px;
+  top: 215px;
   background-color: var(--bg-color2);
   z-index: -1;
 }
@@ -247,7 +45,7 @@ a:active {
 
 .main_bg_inner_top {
   /* border: 1px solid var(--color1); */
-  height: 15%;
+  height: 10%;
   display: flex;
   align-items: center;
 }
@@ -255,16 +53,17 @@ a:active {
 .main_bg_inner_top_list {
   display: flex;
   list-style-type: none;
+  padding-left: 20px;
 }
 
 .main_bg_inner_top_list_item {
-  padding: 5px 10px 0px 10px;
+  padding: 5px 10px 5px 10px;
   font-weight: 900;
 }
 
 .main_bg_inner_bottom {
   /* border: 1px solid var(--color1); */
-  height: 85%;
+  height: 90%;
   display: flex;
   overflow: hidden;
 }
@@ -279,7 +78,7 @@ a:active {
 }
 
 .main_bg_inner_bottom_list_item_wrap {
-  padding: 0px 10px 0px 0px;
+  padding: 0px 20px 0px 20px;
 }
 
 .main_bg_inner_bottom_list_item {
@@ -305,13 +104,13 @@ a:active {
 }
 
 #right {
-  top: 170px;
-  right: 20px;
+  top: 50%;
+  right: 10px;
 }
 
 #left {
-  top: 170px;
-  left: 20px;
+  top: 50%;
+  left: 10px;
 }
 /* main_bg end */
 
@@ -322,7 +121,7 @@ a:active {
 
 .hobby1st_dashboard_inner {
   width: 1260px;
-  height: 150px;
+  height: 250px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -331,7 +130,7 @@ a:active {
 }
 
 .hobby1st_dashboard_inner_text {
-  width: 80%;
+  width: 90%;
   height: 30%;
   display: flex;
   justify-content: center;
@@ -339,11 +138,13 @@ a:active {
 }
 
 #dashboard {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
 #dashboard2 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 900;
 }
 /* hobby1st_dashboard end */
 
@@ -364,7 +165,7 @@ a:active {
 .create_hobby1st_club_inner input[type="button"] {
   width: 500px;
   height: 50px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 900;
   background-color: transparent;
   border: 2px solid var(--bg-color);
@@ -531,111 +332,3 @@ a:active {
 }
 /* container end */
 
-/* links */
-
-.links {
-  width: 100%;
-  background-color: var(--bg-color4);
-  
-}
-
-.links_inner {
-  width: 1260px;
-  margin: 0 auto;
-}
-
-.links_inner_list {
-  display: flex;
-  padding: 5px 100px;
-  justify-content: space-between;
-  list-style-type: none;
-  font-size: 0.8rem;
-}
-/* linkes end */
-
-/* footer */
-.footer {
-  width: 100%;
-  border: 1px solid #eaeaea;
-  padding: 30px 0px 30px 0px;
-  background-color: var(--bg-color4);
-}
-
-.footer_inner {
-  width: 1260px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-.footer_inner img {
-  width: 150px;
-}
-
-.footer_contents {
-  padding-left: 30px;
-}
-
-.footer_desc_list {
-  list-style-type: none;
-  font-size: 0.7rem;
-}
-
-/* footer end */
-
-/* modal */
-.modal_bg {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  background-color: var(--color1);
-  opacity: 70%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
-  display: none;
-}
-
-.loginForm {
-  width: 525px;
-  height: 525px;
-  border: 1px solid var(--color1);
-  background-color: var(--color2);
-  position: fixed;
-  top: 20%;
-  left: 41%;
-  right: 0;
-  bottom: 0;
-  z-index: 11;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.logininput_wrap {
-  width: 500px;
-  height: 500px;
-  border: 1px solid var(--color1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 11;
-  position: relative;
-}
-
-#close_btn i {
-  font-size: 2rem;
-  color: red;
-  position: absolute;
-  top: 0;
-  left: 470px;
-  
-}
-
-#close_btn:hover {
-  cursor: pointer;
-}
-/* modal end */

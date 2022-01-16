@@ -28,7 +28,7 @@
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
 				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
-				<b># 게시판 수정하기</b>
+				<b># 게시판 수정하기 </b>
 			</div>
 
 			<!-- 제목 입력 -->

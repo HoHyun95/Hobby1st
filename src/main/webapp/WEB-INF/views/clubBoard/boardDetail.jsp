@@ -40,7 +40,7 @@
 	</div>
 
 	<form method="post"
-		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=4&keyword=${keyword }&searchWord=${searchWord }">
+		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=1&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">
@@ -200,9 +200,12 @@
 		
 		// 뒤로가기
 		$("#back").on("click", function() {
-			location.href = "/clubBoard/boardList?cpage=${cpage}";			  
-							/* history.back(); */
-			})
+			if(${check_num} == 1){
+				location.href = "/clubBoard/boardList?cpage=${cpage}";
+			}else if(${check_num} == 2){
+				 location.href = "/clubBoard/searchBoard?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }";
+			}
+		})
 			
 			
 		// 게시글 수정하기

@@ -70,7 +70,7 @@
 									</c:when>
 									<c:otherwise> --%>
 										<td class="px-4 py-4"><a
-											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
+											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
 													<span style="color: red;">[${dto.cb_reply_count}]</span>
@@ -113,7 +113,7 @@
 
 		<!-- 검색 기능 -->
 		<form method="post"
-			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=${check_num }">
+			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=2">
 			<div>
 				<div class=""
 					style="text-align: center; height: 70px; margin-bottom: 100px;">

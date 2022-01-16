@@ -39,7 +39,6 @@ public class ClubBoardReplyDAO {
 		return mybatis.update("ClubBoardReply.plusReply", board_seq);
 	}
 	
-	
 	// 댓글 count 감소
 	public int minusReply(int board_seq) {
 		return mybatis.update("ClubBoardReply.minusReply", board_seq);

@@ -12,7 +12,10 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/default.css">
+  <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/footer.css">
   <script>
     window.onload = () => {
       let loginform_btn = document.getElementById("loginform_btn");
@@ -42,11 +45,13 @@
         location.href = "/member/sign_up";
       }
 
-      const MOVE_WIDTH = 210;
+      const MOVE_WIDTH = 240;
       let position = 0;
       let offsetWidth = main_bg_inner_bottom_list.offsetWidth;
       let endpoint = offsetWidth - (MOVE_WIDTH * 6);
-
+      let leftBtn = document.getElementById("leftBtn");
+      let rightBtn = document.getElementById("rightBtn");
+      
       leftBtn.onclick = () => {
         if (position !== 0) {
           position += MOVE_WIDTH;
@@ -72,16 +77,12 @@
         listCount -= 5;
         if(listCount > 0 && listCount < 5) {
           target = listCount % 5;
-          console.log(listCount);
         }
 
         if (count <= maxCount-1) {
           count += 5;
-          console.log("count :" + count);
-    
-          // let div = document.querySelector(".fav_club_list_row");
-          let div = document.querySelector(".fav_club_list_add_btn");
 
+          let div = document.querySelector(".fav_club_list_add_btn");
           let div1 = document.createElement("div");
           div1.classList.add("fav_club_list_row");
           let ul = document.createElement("ul");
@@ -174,7 +175,6 @@
               <li class="main_bg_inner_top_list_item">#Theme4</li>
             </ul>
           </div>
-
           <div class="main_bg_inner_bottom">
             <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
             <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
@@ -199,10 +199,10 @@
     <div class="hobby1st_dashboard">
       <div class="hobby1st_dashboard_inner">
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard">${memberCount } 명의 회원 중 ${clCount }개의 동호회에서 ${clmemCount }명이 활동중입니다.</span>
+          <span id="dashboard">Hobby1st의 소중한 회원 수 ${memberCount } 명</span>
         </div>
         <div class="hobby1st_dashboard_inner_text">
-          <span id="dashboard2">지금 바로 Hobby1st에서 취미 활동을 시작해 보세요!</span>
+          <span id="dashboard2">현재 ${clCount }개의 동호회에서 ${clmemCount }명이 함께 하고 있습니다!!</span>
         </div>
       </div>
     </div>
@@ -389,5 +389,4 @@
     </div>
   </div>
 </body>
-
 </html>

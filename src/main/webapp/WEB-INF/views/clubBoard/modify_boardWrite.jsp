@@ -23,7 +23,7 @@
 </head>
 <body>
 	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')"
-		action="/modify_board.pet?seq=${list[0].seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
+		action="/clubBoard/updateBoard?cb_seq=${detail.cb_seq }&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
@@ -33,9 +33,9 @@
 
 			<!-- 제목 입력 -->
 			<div>
-				<input name="title" id="title"
+				<input name="cb_title" id="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
-					type="text" value="${list[0].title }"
+					type="text" value="${detail.cb_writer }"
 					class="
                     placeholder-gray-400
                     text-gray-600 
@@ -53,14 +53,14 @@
 
 				<!-- textarea 태그에 작성 -->
 				<div>
-					<textarea name="contents" id="summernote">${list[0].contents }</textarea>
+					<textarea name="cb_contents" id="summernote">${detail.cb_contents }</textarea>
 				</div>
 
 
 				<!-- 목록, 등록 버튼 생성 -->
 
 				<div style="text-align: right;">
-					<button type="button" id="list"
+					<button type="button" id="back"
 						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 						style="margin-right: 5px; height: 65%;">돌아가기</button>
 
@@ -86,11 +86,10 @@
 		})
 
 		// <!-- '목록' 클릭시 게시판리스트로 돌아가기 -->
-		$("#list").on("click", function() {
+		$("#back").on("click", function() {
 			history.go(-1);
 		});
 
-		$("#category").val("${list[0].category}");
 	</script>
 
 	<!-- textarea에 summernote 적용 -->

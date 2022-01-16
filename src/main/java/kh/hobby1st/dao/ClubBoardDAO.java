@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.hobby1st.dto.ClubBoardDTO;
-import kh.hobby1st.dto.MemberDTO;
 
 @Repository
 public class ClubBoardDAO {
@@ -39,17 +38,25 @@ public class ClubBoardDAO {
 		return mybatis.selectList("ClubBoard.selectBoard", map);
 	}
 	
-	// 게시판 상제보기
-	public ClubBoardDTO boardDetail(int seq) {
-		return mybatis.selectOne("ClubBoard.boardDetail",seq);
+	// 게시판 상세보기
+	public ClubBoardDTO boardDetail(int board_seq) {
+		return mybatis.selectOne("ClubBoard.boardDetail",board_seq);
 	}
 	
 	// 게시판 조회수 증가
-	public int increaseView(int seq) {
-		return mybatis.update("ClubBoard.increaseView",seq);
+	public int increaseView(int reply_seq) {
+		return mybatis.update("ClubBoard.increaseView",reply_seq);
 	}
 	
+	// 게시판 삭제
+	public int deleteBoard(int board_seq) {
+		return mybatis.delete("ClubBoard.deleteBoard", board_seq);
+	}
 	
+	// 게시판 수정
+	public int modifyBoard(ClubBoardDTO dto) {
+		return mybatis.update("ClubBoard.modifyBoard", dto);
+	}
 	
 	
 	

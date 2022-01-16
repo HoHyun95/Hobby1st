@@ -203,6 +203,21 @@
 			location.href = "/clubBoard/boardList?cpage=${cpage}";			  
 							/* history.back(); */
 			})
+			
+			
+		// 게시글 수정하기
+		$("#modify").on("click", function() {
+				location.href = "/clubBoard/modifyBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
+				
+		}) 
+
+		 // 게시글 삭제하기
+		 $("#delete").on("click", function() {
+			 if (confirm("정말 삭제하시겠습니까? 하시겠습니까??")) {
+				location.href = "/clubBoard/deleteBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
+				 /* history.back(); */
+			}
+		}) 
 	
 	</script>
 

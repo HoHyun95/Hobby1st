@@ -27,13 +27,30 @@ public class ClubBoardService {
 	public ClubBoardDTO boardDetail(int seq) {
 		return cbdao.boardDetail(seq);
 	}
-	
-	
 
 	// 게시판 조회수 증가
 	public int increaseView(int seq) {
 		return cbdao.increaseView(seq);
 	}
+
+	// 게시판 삭제
+	public int deleteBoard(int board_seq) {
+		return cbdao.deleteBoard(board_seq);
+	}
+
+	// 게시판 수정
+	public int modifyBoard(ClubBoardDTO dto) {
+		return cbdao.modifyBoard(dto);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

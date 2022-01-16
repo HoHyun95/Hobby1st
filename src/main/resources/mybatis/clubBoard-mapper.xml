@@ -11,7 +11,7 @@
    	</insert>
    	
    	<select id="selectBoard" resultType="kh.hobby1st.dto.ClubBoardDTO">
-   		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{cb_seq}) where rn between #{start} and #{end}
+   		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{club_board_id}) where rn between #{start} and #{end}
    	</select>
    	
    	<select id="RecordCount" resultType="int">
@@ -37,7 +37,25 @@
   		update club_board set cb_title = #{cb_title},  cb_contents = #{cb_contents}, cb_write_date = sysdate where cb_seq = #{cb_seq}
   	</update>
   	
+  	<!-- 게시판 제목 검색 -->
+  	<select id="searchTitle" resultType="kh.hobby1st.dto.ClubBoardDTO">
+  		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{club_board_id} and cb_title like '%'|| #{searchWord}||'%') where rn between #{start} and #{end}
+  	</select>
   	
+  	<!-- 게시판  작성자 검색 -->
+  	<select id="searchWriter" resultType="kh.hobby1st.dto.ClubBoardDTO">
+  		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{club_board_id} and cb_writer = #{searchWord}) where rn between #{start} and #{end}
+  	</select>
+  	
+  	<!-- 제목 검색시 총 개수 -->
+  	<select id="searchTitleCount" resultType="int">
+ 		select count(*) from club_board where cb_club_id = #{club_board_id} and cb_title like '%'|| #{searchWord}||'%'
+ 	</select>
+ 	
+ 	<!-- 작성자 검색시 총 개수 -->
+  	<select id="searchWriterCount" resultType="int">
+ 		select count(*) from club_board where cb_club_id = #{club_board_id} and cb_writer = #{searchWord}
+ 	</select>
   	
   	
   	

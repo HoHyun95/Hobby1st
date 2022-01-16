@@ -21,6 +21,9 @@ public class ClubBoardController {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private ClubBoardDAO dao;
 
 	@Autowired
 	private ClubBoardService club_board_service;
@@ -40,7 +43,6 @@ public class ClubBoardController {
 		model.addAttribute("navi", navi);
 		model.addAttribute("clubBoardList", clubBoardList);
 
-		System.out.println("동작");
 		return "clubBoard/boardList";
 	}
 
@@ -123,12 +125,34 @@ public class ClubBoardController {
 	// 게시판 수정페이지 수정
 	@RequestMapping("/updateBoard")
 	public String updateBoard(int cpage, Model model, ClubBoardDTO dto) {
-		
+
 		int result = club_board_service.modifyBoard(dto);
 
 		model.addAttribute("result", result);
-		
+
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq();
+	}
+
+	// 게시판 검색 기능
+	@RequestMapping("/searchBoard")
+	public String searchBoard(int cpage, String keyword, String searchWord, Model model) throws Exception {
+		
+		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardSearchByPaging(cpage, 5, keyword, searchWord);
+		List<ClubBoardDTO> list = dao.selectBoardSearchByPaging(1, 10, 5, keyword, searchWord);
+		System.out.println(list.get(0).getCb_title());
+		
+		String navi = club_board_service.getSearchPageNavi(cpage, 5, keyword, searchWord);
+				
+		int totalBoardCount = club_board_service.getRecordSearchCount(5, keyword, searchWord);
+
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("totalBoardCount", totalBoardCount);
+		model.addAttribute("cpage", cpage);
+		model.addAttribute("navi", navi);
+		model.addAttribute("clubBoardList", clubBoardList);
+
+		return "clubBoard/boardList";
 	}
 
 }

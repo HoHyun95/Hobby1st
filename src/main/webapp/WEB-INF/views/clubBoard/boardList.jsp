@@ -113,7 +113,7 @@
 
 		<!-- 검색 기능 -->
 		<form method="post"
-			action="/search.pet?cpage=${cpage }&check_num=${check_num }&check_category=${check_category }">
+			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=${check_num }">
 			<div>
 				<div class=""
 					style="text-align: center; height: 70px; margin-bottom: 100px;">

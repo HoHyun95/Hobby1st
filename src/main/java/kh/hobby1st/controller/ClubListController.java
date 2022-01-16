@@ -31,24 +31,24 @@ public class ClubListController {
 
 	@Autowired
 	private ClubList_PhotoService clpService;
-	
+
 	@Autowired
 	private MemberService mService;
-	
+
 	@Autowired
 	private HttpSession session;
 
 	@RequestMapping("createClubPage")
 	public String createClub(Model model) {
 		System.out.println("동호회 만드는 임시 페이지 ");
-	
+
 		String mem_ID = (String)session.getAttribute("mem_id");
 
 		// 대표자 이름에 들어갈 멤버 불러온다.
 		List<MemberDTO> member = mService.getNameForCreateClub(mem_ID);
 		model.addAttribute("member", member);
 
-		
+
 		System.out.println("성공 ");
 		System.out.println(member);
 		return "clubList/createClub";
@@ -64,7 +64,6 @@ public class ClubListController {
 
 		System.out.println(map.size());
 		System.out.println(map);
-		System.out.println(map.get(0));
 
 		//동호회 출력 
 		model.addAttribute("list", map);
@@ -75,21 +74,36 @@ public class ClubListController {
 	public String searchClub(String searchField, String searchText, Model model) {
 
 		System.out.println(" 검색필드 :" +searchField);
-		
+
 		List<ClubListDTO> searchList = clService.searchClub(searchField, searchText);			
 
-			//검색 결과 없을 때 
-			int noResult = 0;
+		//검색 결과 없을 때 
+		int noResult = 0;
 
-			if(searchList.size() == 0) {
-				System.out.println("검색결과 없음");
-				model.addAttribute("noResult", noResult);
-			}else {
-				System.out.println("검색결과 존재함");
-				model.addAttribute("searchList", searchList);
-			}
-		
+		if(searchList.size() == 0) {
+			System.out.println("검색결과 없음");
+			model.addAttribute("noResult", noResult);
+		}else {
+			System.out.println("검색결과 존재함");
+			model.addAttribute("searchList", searchList);
+		}
+
 		return "clubList/searchClub";
+	}
+
+
+	// 동호회 상세 페이지
+	@RequestMapping("clubInfo")
+	public String clubInfo(String cl_id, Model model) {
+
+		System.out.println("cl_id 값  :"+cl_id);
+		List<Map<String, Object>> map = clService.selectClub(cl_id);
+
+		System.out.println(map.size());
+
+		model.addAttribute("list", map);
+		return "/clubList/temp";
+
 	}
 
 	@RequestMapping("createClubProc")
@@ -115,8 +129,7 @@ public class ClubListController {
 			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
 		}
 		return "redirect:/";
-	}
-	
+	}	
 
 	@ResponseBody
 	@RequestMapping("nameCheck")

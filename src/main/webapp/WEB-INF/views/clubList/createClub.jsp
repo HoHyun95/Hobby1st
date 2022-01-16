@@ -7,112 +7,20 @@
 <meta charset="UTF-8">
 <title>Create Club</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="/css/clubList/createClub.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
 	integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
 	crossorigin="anonymous">
-<style>
-input {
-	width: 88%;
-	height: 48px;
-	border: none;
-	padding-left: 10px;
-}
-
-i {
-	padding: 5px;
-}
-
-#nameSpan, #maxMemCheck {
-	margin-left: 34px;
-}
-
-#club_container {
-	width: 480px;
-	height: 650px;
-	margin: auto;
-	border: 1px solid black;
-}
-
-#container_header {
-	text-align: center;
-}
-
-#club_first_container, #club_second_container {
-	width: 100%;
-	height: 100%;
-}
-
-#image-container {
-	margin: auto;
-	text-align: center;
-	width: 80%;
-	height: 30%;
-	border: 1px solid black;
-}
-
-.cl_boss_box>i {
-	width: 15px;
-	font-size: 20px;
-	margin-right: 3px;
-}
-
-#cl_local {
-	text-align: center;
-	width: 97%;
-	height: 48px;
-}
-
-.line_effect {
-	margin: auto;
-	margin-bottom: 5px;
-	margin-top: 2px;
-	border: 1px solid rgb(44, 26, 26);
-	height: 0px;
-	width: 80%;
-}
-
-#club_second_container {
-	display: none;
-}
-
-#cl_category, #cl_dCategory {
-	margin: auto;
-	border: 1px solid black;
-	width: 80%;
-	height: 20%;
-}
-
-.categories {
-	display: flex;
-}
-
-.category {
-	border: 1px solid blue;
-	border-radius: 50%;
-	height: 80%;
-	width: 20%;
-}
-
-.category>input {
-	border: none;
-	height: 70%;
-	width: 50%;
-	margin: auto;
-}
-</style>
 </head>
 <body>
 
 	<form action="/clubList/createClubProc" method="post"
-		id="clubCreateForm" enctype="multipart/form-data" >
+		id="clubCreateForm" enctype="multipart/form-data">
 
-		
 
 		<div id="club_container">
 
-
-			<input type="hidden" name="cl_boss_id" value="${member[0].mem_id }">
 
 			<div id="container_header">동호회 등록</div>
 			<div id="image-container">
@@ -226,9 +134,10 @@ $("#cl_name").on("blur", function() {
 
 				<div class="line_effect"></div>
 				<div class="cl_boss_box">
-					<i class="fas fa-male"></i> <input type="text" 
-						placeholder="${member[0].mem_name }" disabled>
-						<input type="hidden" value="${member[0].mem_name }" name="cl_boss_name">
+					<i class="fas fa-male"></i> <input type="text"
+						placeholder="${member[0].mem_name }" disabled> <input
+						type="hidden" value="${member[0].mem_name }" name="cl_boss_name">
+					<input type="hidden" name="cl_boss_id" value="${member[0].mem_id }">
 				</div>
 
 				<!-- 		<div> -->

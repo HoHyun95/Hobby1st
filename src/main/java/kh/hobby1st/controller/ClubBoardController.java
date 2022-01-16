@@ -54,7 +54,7 @@ public class ClubBoardController {
 	@RequestMapping("/boardInsert")
 	public String boardInsert(ClubBoardDTO dto, Model model) {
 		dto.setCb_club_id(5);
-		dto.setCb_writer("suhoh01");
+		dto.setCb_writer((String) session.getAttribute("mem_id"));
 
 		club_board_service.insert(dto);
 		int totalBoardCount = club_board_service.getRecordCount(5);
@@ -84,7 +84,7 @@ public class ClubBoardController {
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
 		dto.setCbr_par_seq(cb_seq);
-		
+
 		club_board_reply_service.plusReply(cb_seq);
 		int result = club_board_reply_service.insert(dto);
 
@@ -99,6 +99,36 @@ public class ClubBoardController {
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq;
+	}
+
+	// 게시판 삭제
+	@RequestMapping("/deleteBoard")
+	public String deleteBoard(int cpage, int cb_seq) {
+
+		int result = club_board_service.deleteBoard(cb_seq);
+
+		return "redirect:/clubBoard/boardList?cpage=" + cpage;
+	}
+
+	// 게시판 수정페이지 이동
+	@RequestMapping("/modifyBoard")
+	public String modifyBoard(int cpage, int cb_seq, Model model) {
+		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
+
+		model.addAttribute("cpage", cpage);
+		model.addAttribute("detail", detail);
+		return "clubBoard/modify_boardWrite";
+	}
+
+	// 게시판 수정페이지 수정
+	@RequestMapping("/updateBoard")
+	public String updateBoard(int cpage, Model model, ClubBoardDTO dto) {
+		
+		int result = club_board_service.modifyBoard(dto);
+
+		model.addAttribute("result", result);
+		
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq();
 	}
 
 }

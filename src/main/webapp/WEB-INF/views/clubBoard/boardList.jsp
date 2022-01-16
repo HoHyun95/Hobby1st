@@ -73,7 +73,7 @@
 											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
-													<span style="color: red;">[3]</span>
+													<span style="color: red;">[${dto.cb_reply_count}]</span>
 												</c:if>
 										</a></td>
 									<%-- </c:otherwise>

@@ -22,9 +22,23 @@
  		select * from club_board where cb_seq = #{value}
  	</select>
  	
+ 	<!-- 조회수 증가 -->
  	<update id="increaseView">
  		update club_board set cb_view_count = cb_view_count + 1 where cb_seq = #{value}
  	</update>
+  	
+  	<!-- 게시판 삭제 -->
+  	<delete id="deleteBoard">
+  		delete from club_board where cb_seq = #{value}
+  	</delete>
+  	
+  	<!-- 게시판 수정 -->
+  	<update id="modifyBoard">
+  		update club_board set cb_title = #{cb_title},  cb_contents = #{cb_contents}, cb_write_date = sysdate where cb_seq = #{cb_seq}
+  	</update>
+  	
+  	
+  	
   	
   	
   </mapper>

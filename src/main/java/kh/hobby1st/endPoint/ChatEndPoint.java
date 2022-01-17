@@ -47,7 +47,7 @@ public class ChatEndPoint {
 			}
 		}
 	}
-
+//test
 	@OnClose
 	public void onClose(Session session) {
 		clients.remove(session);

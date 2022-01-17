@@ -33,6 +33,10 @@ public class MemberService {
 	public int id_check(String id) {
 		return mem_dao.id_check(id);
 	}
+	
+	public int email_check(String user_email) {
+		return mem_dao.email_check(user_email);
+	}
 
 	public List<MemberDTO> getNameForCreateClub(String mem_ID){
 		return mem_dao.getNameForCreateClub(mem_ID);

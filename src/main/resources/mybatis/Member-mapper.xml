@@ -24,7 +24,12 @@
 	    select count(*) from member
 	</select>
 	
-		<select id="getNameForCreateClub" resultType="kh.hobby1st.dto.MemberDTO">
+    <select id="getNameForCreateClub" resultType="kh.hobby1st.dto.MemberDTO">
 		select * from member where mem_id = #{id}
 	</select>
+	
+	<select id="email_check" resultType="Integer">
+	    select count(*) from member where mem_email = #{user_email}
+	</select>
+	
 </mapper>

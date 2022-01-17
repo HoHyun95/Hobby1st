@@ -1,8 +1,6 @@
 package kh.hobby1st.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kh.hobby1st.dao.MemberDAO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.MemberService;
 
@@ -116,6 +113,25 @@ public class MemberController {
 		}
 		return "redirect: sign_in";
 	}
+	
+	//find_email_PAGE
+	@RequestMapping("find_email")
+	public String member_email() {
+		return "member/member_Find";
+	}
+	
+	//find_user_email
+	@RequestMapping("email_send")
+	public String user_Email(String user_email) {
+		int result = (Integer)mem_service.email_check(user_email);
+		if(0<result) {
+			System.out.println(user_email);
+			session.setAttribute("user_email", user_email);
+			return "member/member_Find";
+		}
+		return "member/member_Find";
+	}
+	
 }
 
 

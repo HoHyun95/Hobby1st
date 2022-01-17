@@ -154,7 +154,7 @@ public class ClubBoardService {
 	
 	
 	
-	//---------------------- 동호회 게시판 리스트 페이징 ----------------------
+	//---------------------- 게시판 검색 리스트 페이징 ----------------------
 		public List<ClubBoardDTO> selectBoardSearchByPaging(int cpage, int seq, String keyword, String searchWord) throws Exception {
 			int currentPage = cpage;
 
@@ -231,16 +231,16 @@ public class ClubBoardService {
 			String pageNavi = "";
 
 			if (needPrev) {
-				pageNavi += "<a href='/clubBoard/boardList?cpage=" + (startNavi - 1) + "'><</a>";
+				pageNavi += "<a href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord=" + searchWord + "'><</a>";
 			}
 
 			for (int i = startNavi; i <= endNavi; i++) {
-				pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/boardList?cpage=" + i + "'>" + i
+				pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/searchBoard?cpage=" + i + "&keyword=" + keyword + "&searchWord=" + searchWord + "'>" + i
 						+ "</a> ";
 			}
 
 			if (needNext) {
-				pageNavi += "<a href='/clubBoard/boardList?cpage=" + (endNavi + 1) + "'>></a>";
+				pageNavi += "<a href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) +  "&keyword=" + keyword + "&searchWord=" + searchWord + "'>></a>";
 			}
 			return pageNavi;
 		}

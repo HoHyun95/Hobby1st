@@ -93,7 +93,7 @@ public class ClubBoardController {
 
 	// 댓글 작성
 	@RequestMapping("/insertReply")
-	public String insertReply(ClubBoardReplyDTO dto, int cb_seq) {
+	public String insertReply(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
 		dto.setCbr_par_seq(cb_seq);
@@ -101,17 +101,19 @@ public class ClubBoardController {
 		club_board_reply_service.plusReply(cb_seq);
 		int result = club_board_reply_service.insert(dto);
 
-		return "redirect:/clubBoard/boardDetail?cpage=1&cb_seq=" + cb_seq;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq
+				+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 
 	// 댓글 삭제
 	@RequestMapping("/deleteReply")
-	public String deleteReply(int cbr_seq, int cb_seq, int cpage) {
+	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
 
 		club_board_reply_service.minusReply(cb_seq);
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq
+		+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 
 	// 게시판 삭제

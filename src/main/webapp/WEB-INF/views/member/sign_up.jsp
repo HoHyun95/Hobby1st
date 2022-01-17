@@ -431,6 +431,7 @@
 		   if(idcheck.test($("#id").val())){
 			   console.log("아이디 정규표현식 성공");
                $("#id_check2").text("");
+               $("#id_check").text("");
 		   } else{
 			   $("#id").val("");
                $("#id_check").text("");

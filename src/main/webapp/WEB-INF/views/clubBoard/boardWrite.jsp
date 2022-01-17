@@ -113,7 +113,7 @@
 					console.log(sysName);
 					setTimeout(function() {
 						$(editor).summernote('insertImage', '/images/LOGO.png')
-					}, 4000);
+					}, 500);
 				}
 			});
 		}

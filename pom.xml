@@ -109,6 +109,13 @@
 			<version>${org.aspectj-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- 대용량 파일 처리 -->
+          <dependency>
+              <groupId>commons-io</groupId>
+              <artifactId>commons-io</artifactId>
+              <version>2.6</version>
+          </dependency>
 
 		<!-- File Realted -->
 		<dependency>

@@ -137,7 +137,7 @@ public class ClubBoardService {
 		String pageNavi = "";
 
 		if (needPrev) {
-			pageNavi += "<a href='/clubBoard/boardList?cpage=" + (startNavi - 1) + "'><</a>";
+			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (startNavi - 1) + "'><</a>";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
@@ -146,7 +146,7 @@ public class ClubBoardService {
 		}
 
 		if (needNext) {
-			pageNavi += "<a href='/clubBoard/boardList?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (endNavi + 1) + "'>></a>";
 		}
 		return pageNavi;
 	}
@@ -231,7 +231,7 @@ public class ClubBoardService {
 			String pageNavi = "";
 
 			if (needPrev) {
-				pageNavi += "<a href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord=" + searchWord + "'><</a>";
+				pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord=" + searchWord + "'><</a>";
 			}
 
 			for (int i = startNavi; i <= endNavi; i++) {
@@ -240,7 +240,7 @@ public class ClubBoardService {
 			}
 
 			if (needNext) {
-				pageNavi += "<a href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) +  "&keyword=" + keyword + "&searchWord=" + searchWord + "'>></a>";
+				pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) +  "&keyword=" + keyword + "&searchWord=" + searchWord + "'>></a>";
 			}
 			return pageNavi;
 		}

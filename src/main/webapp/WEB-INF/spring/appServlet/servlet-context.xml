@@ -15,6 +15,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/images/club_board/**" location="C:\Users\my\Desktop\2021_09_Java\hobby1st\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hobby1st\resources\images/" />
 	<resources mapping="/images/**" location="/resources/images/" />
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/clubPic/**" location="/clubPic/"/>

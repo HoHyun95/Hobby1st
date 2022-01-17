@@ -40,6 +40,11 @@ public class HomeController {
 		model.addAttribute("clCount", clCount);
 		return "home";
 	}
+	// 메인페이지 이동
+	@RequestMapping("fullpage")
+	public String main() {
+		return "fullpage/fullpage";
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

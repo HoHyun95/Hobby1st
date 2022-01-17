@@ -1,8 +1,7 @@
 package kh.hobby1st.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kh.hobby1st.dao.MemberDAO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.MemberService;
 
@@ -36,10 +34,21 @@ public class MemberController {
 	//login_click
 	@RequestMapping("login")
 	public String login(String mem_id, String mem_pass) {
+
+
 		int result = (Integer)mem_service.login(mem_id, mem_pass);
-        if(0<result) {
-    		session.setAttribute("mem_id", mem_id);
-        }
+		if(0<result) {
+
+			//사용자 이름 session 저장
+			List<MemberDTO> list = mem_service.getNameForCreateClub(mem_id);
+			String user_name = list.get(0).getMem_name();
+			
+			session.setAttribute("mem_id", mem_id);
+			session.setAttribute("user_name", user_name);
+
+			System.out.println("세션 아이디 : " + session.getAttribute("mem_id"));
+			System.out.println("세션 멤버 이름 :" + session.getAttribute("user_name"));
+		}
 		return "redirect: /";
 	}
 
@@ -64,7 +73,7 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 
-	
+
 	//signUp_lastPage
 	@RequestMapping("sign_up_last")
 	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
@@ -74,10 +83,10 @@ public class MemberController {
 		session.setAttribute("mem_pass", mem_pass);
 		session.setAttribute("mem_name", mem_name);
 		session.setAttribute("mem_phone", mem_phone);
-		
+
 		String add_email = mem_email.replaceAll("[,]", "");
 		session.setAttribute("mem_email", add_email);
-		
+
 		session.setAttribute("mem_address", mem_address);
 		session.setAttribute("mem_birthday", mem_birthday);
 		session.setAttribute("mem_gender", mem_gender);
@@ -95,7 +104,7 @@ public class MemberController {
 	@RequestMapping("member_add")
 	public String memberAdd(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
 			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
-		
+
 		String mem_lastlogin = "default";
 		for(MultipartFile mf : mem_photo) {
 			try{

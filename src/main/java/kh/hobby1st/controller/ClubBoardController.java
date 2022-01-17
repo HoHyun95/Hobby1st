@@ -1,13 +1,25 @@
 package kh.hobby1st.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonObject;
 
 import kh.hobby1st.dao.ClubBoardDAO;
 import kh.hobby1st.dto.ClubBoardDTO;
@@ -93,7 +105,13 @@ public class ClubBoardController {
 
 	// 댓글 작성
 	@RequestMapping("/insertReply")
-	public String insertReply(ClubBoardReplyDTO dto, int cb_seq) {
+	public String insertReply(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
+		
+		if(keyword.equals("제목")) {
+			keyword = "title";
+		}else if(keyword.equals("작성자")) {
+			keyword = "writer";
+		}
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
 		dto.setCbr_par_seq(cb_seq);
@@ -101,17 +119,25 @@ public class ClubBoardController {
 		club_board_reply_service.plusReply(cb_seq);
 		int result = club_board_reply_service.insert(dto);
 
-		return "redirect:/clubBoard/boardDetail?cpage=1&cb_seq=" + cb_seq;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq
+				+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 
 	// 댓글 삭제
 	@RequestMapping("/deleteReply")
-	public String deleteReply(int cbr_seq, int cb_seq, int cpage) {
+	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
+		
+		if(keyword.equals("제목")) {
+			keyword = "title";
+		}else if(keyword.equals("작성자")) {
+			keyword = "writer";
+		}
 
 		club_board_reply_service.minusReply(cb_seq);
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq
+		+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 
 	// 게시판 삭제
@@ -176,5 +202,51 @@ public class ClubBoardController {
 
 		return "clubBoard/boardList";
 	}
+	
+	// 썸머노트 이미지 업로드
+	@ResponseBody
+	@RequestMapping(value="/imageUpload", produces = "application/json; charset=UTF-8")
+	public String imageUpload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		System.out.println("성공");
+		JsonObject jsonObject = new JsonObject();
+		
+        /*
+		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+		 */
+		
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		System.out.println(contextRoot);
+		String fileRoot = contextRoot+"resources/images/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "/resources/images/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

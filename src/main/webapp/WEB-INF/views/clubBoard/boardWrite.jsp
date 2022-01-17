@@ -88,10 +88,13 @@
 			maxHeight : null,
 			focus : true,
 			callbacks : {
-				onImageUpload : function(files) {
-					sendFile(files[0], this);
+				onImageUpload : function(files, editor, welEditable) {
+		            // 파일 업로드(다중업로드를 위해 반복문 사용)
+		            for (var i = files.length - 1; i >= 0; i--) {
+		            	sendFile(files[i],this);
 				}
 			}
+		}
 		});
 
 		//<!-- 이미지 업로드 -->
@@ -101,13 +104,16 @@
 			$.ajax({
 				data : form_data,
 				type : "POST",
-				url : "/imageUpload.pet",
+				url : "/clubBoard/imageUpload",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",
 				processData : false,
 				success : function(sysName) {
-					$(editor).summernote('insertImage', '/upload/' + sysName);
+					console.log(sysName);
+					setTimeout(function() {
+						$(editor).summernote('insertImage', '/images/LOGO.png')
+					}, 4000);
 				}
 			});
 		}

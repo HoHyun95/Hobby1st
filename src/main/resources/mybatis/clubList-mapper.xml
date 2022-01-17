@@ -36,8 +36,7 @@
 	</select>
 
 	<select id="selectClub" resultType="map">
-		select clublist.*, clp_photo from clublist_photo, clublist where cl_id =
-		${value}
+	select clublist.*, clp_photo from clublist,(select * from clublist_photo where clp_id =${value}) where cl_id = ${value}
 	</select>
 
 	<select id="searchClub" resultType="kh.hobby1st.dto.ClubListDTO">

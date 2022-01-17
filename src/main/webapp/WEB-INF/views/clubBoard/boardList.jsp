@@ -55,20 +55,6 @@
 								class="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0 text-sm">
 								<td class="px-4 py-4 text-center">${totalBoardCount - ((cpage-1) * 10) - status.index}</td>
 
-								<!-- 검색창에 키워드랑 내용같이 전달 -->
-								  <%-- <c:choose>
-									<c:when test="${check_num == 4 }">
-										<td class="px-4 py-4"><a
-											href="/detail.pet?seq=${dto.seq }&cpage=${cpage }&check_category=${check_category }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title
-                                                }
-												<c:if test="${dto.cb_reply_count ne 0 }">
-                                                    &nbsp <i
-														class="far fa-comment-dots"> </i>
-													<span style="color: red;">[2]</span>
-												</c:if>
-										</a></td>
-									</c:when>
-									<c:otherwise> --%>
 										<td class="px-4 py-4"><a
 											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
@@ -76,9 +62,6 @@
 													<span style="color: red;">[${dto.cb_reply_count}]</span>
 												</c:if>
 										</a></td>
-									<%-- </c:otherwise>
-								</c:choose>
-								<%-- <td class="px-4 py-4 text-center">${dto.cb_title }</td> --%>
 								<td class="px-4 py-4 text-center">${dto.cb_writer }</td>
 								<td class="px-4 py-4 text-center">${dto.detailDate }</td>
 								<td class="px-4 py-4 text-center">${dto.cb_view_count }</td>
@@ -92,23 +75,21 @@
 		</div>
 	</div>
 
-	<!-- 게시판 하단 -->
-	<div class="footer"
-		style="width: 70%; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
+	<!-- 게시판 페이징 밑 글쓰기 -->
+		<div class="footer" style="width: 70%; height:60px; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
+			<div class="navi" style="text-align : center; line-height: 60px">
+				${navi }
+				<button type="button" id="writeBtn"
+					class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 "
+					style="margin-right: 10px; margin-top: 10px; height:35px; line-height:35px; float: right;">글쓰기
+				</button>
+			</div>
+			
+			
+		</div>
 
-		<div class="navi">${navi }</div>
 
-		<script>
-		// 페이징 스타일
-		$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
 		
-			$(".page")
-					.addClass(
-							"text-green-500 bg-transparent border border-green-500  hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none  focus:outline-none mb-1 ease-linear transition-all duration-150");
-			$(".page").css("text-align", "center").css("margin-top", "10px");
-
-			console.log($(".page").text());
-		</script>
 
 
 		<!-- 검색 기능 -->
@@ -156,6 +137,10 @@
 	<!----------------------------------- 메인 스크립트 ------------------------------------->
 
 	<script>
+	// 페이징 스타일
+	$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
+	
+	
 		$("#writeBtn").on("click", function() {
 			location.href = "/clubBoard/boardWrite?"
 		});

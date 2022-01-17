@@ -4,6 +4,7 @@ package kh.hobby1st.controller;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,9 +49,6 @@ public class ClubListController {
 		List<MemberDTO> member = mService.getNameForCreateClub(mem_ID);
 		model.addAttribute("member", member);
 
-
-		System.out.println("성공 ");
-		System.out.println(member);
 		return "clubList/createClub";
 	}
 
@@ -92,7 +90,7 @@ public class ClubListController {
 	}
 
 
-	// 동호회 상세 페이지
+	// clubList , clubSearch 에서 동호회명 클릭시 동호회 상세 페이지 -> 임시로 -> temp.jsp 로 보낸다. 
 	@RequestMapping("clubInfo")
 	public String clubInfo(String cl_id, Model model) {
 
@@ -122,11 +120,13 @@ public class ClubListController {
 
 		if(!file.isEmpty()) {
 
-			String photoName = file.getOriginalFilename();
-			System.out.println(photoName);
+			String photoOriName = file.getOriginalFilename();
+			String photoSysName = UUID.randomUUID()+"_"+photoOriName;
+			
+			System.out.println(photoSysName);
 
-			file.transferTo(new File(realPath+"/"+photoName));
-			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
+			file.transferTo(new File(realPath+"/"+photoSysName));
+			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoSysName));
 		}
 		return "redirect:/";
 	}	

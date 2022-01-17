@@ -192,6 +192,7 @@ $("#cl_name").on("blur", function() {
 				<button type="button" id="container_nextBtn">다음</button>
 				<script>
 				
+//다음 버튼 클릭시 동호회명 , 정원 입력했는지 확인한다.
 		$('#container_nextBtn').on('click', () => {
 			
 				
@@ -230,6 +231,47 @@ $("#cl_name").on("blur", function() {
 					</div>
 				</div>
 
+
+				<!-- 동호회 카테고리 임시 로직 -->
+				<!-- 				<div id="categoryBoxes"> -->
+				<!-- 					<div id="categoryBox_music" class="category"> -->
+				<!-- 						<span>음악</span> <input type="hidden" name="cl_category_id" -->
+				<!-- 							class="cl_category_id" id="music_category"> -->
+				<!-- 					</div> -->
+
+				<!-- 					<div id="categoryBox_sports" class="category"> -->
+				<!-- 						<span>스포츠</span> <input type="hidden" name="cl_category_id" -->
+				<!-- 							class="cl_category_id" id="sports_category"> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+
+				<script> 
+
+// 등록하기 클릭시 동호회 분류가 선택되어있는지 확인한
+//  $('#clSubmit').on('click', () => {
+//     if($('.cl_category_id').val=""){
+//        alert('관심있는 동호회 분류를 선택해주세요');
+//     }
+//  })
+
+ //음악 카테고리 출력시 다른 카테고리에 값 무효화 시키고 음악 값을 넣어준다. 
+//  $('#categoryBox_music').on('click', () => {
+//     $('.cl_category_id').val="";
+//     $('#music_category').val="음악";
+//  })
+
+//  $('#categoryBox_sprots').on('click', () => {
+//     $('.cl_category_id').val="";
+//     $('#sports_category').val="스포츠";
+//  })
+		
+</script>
+
+				<!-- 동호회 카테고리 임시 로직 끝  -->
+
+
+
+
 				<div>동호회 등록 소분류</div>
 
 				<div id="cl_dCategory" class="categories">
@@ -247,13 +289,14 @@ $("#cl_name").on("blur", function() {
 				</div>
 	</form>
 
+	<!-- 돌아가기 버튼 클릭시 첫번째 컨테이너 나타내고 두번째 컨테이너 숨긴다. -->
 	<script>
       $('#container_back').on('click', () => {
          $('#club_first_container').show(1000);
          $('#club_second_container').hide(1000);
       })
 
-      
+	//등록하기 버튼 클릭시 작성되어있지 않은 곳이 있는지 확인 
      $('#clSubmit').on('click', () => {
     	 
 			
@@ -273,6 +316,7 @@ $("#cl_name").on("blur", function() {
 				return false;
 			}
 			
+			//동호회 이름 및 정원을 기재하지않거나, 정규식에 부합하는 경우 메세지를 출력하는데 메세지가 있다면 Submit 막는다.
 			if(
 					$('#maxMemCheck').text() != "" ||
 					$('#nameSpan').text() != ""	

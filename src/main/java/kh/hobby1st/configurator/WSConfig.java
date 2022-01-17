@@ -13,7 +13,8 @@ public class WSConfig extends Configurator {
 		
 		
 		HttpSession session = (HttpSession)request.getHttpSession();
-		sec.getUserProperties().put("mem_id", session);
+		
+		sec.getUserProperties().put("user_name", session);
 		
 		super.modifyHandshake(sec, request, response);
 	}

@@ -3,6 +3,8 @@ package kh.hobby1st.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ public class HomeController {
 	@Autowired
 	private ClubListService clService;
 	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
@@ -44,6 +48,15 @@ public class HomeController {
 	@RequestMapping("fullpage")
 	public String main() {
 		return "fullpage/fullpage";
+	}
+	
+	// MyPage
+	@RequestMapping("myPage")
+	public String myPage() {
+		if((String)session.getAttribute("mem_id") == null) {
+			return "redirect:/";
+		}
+		return "myPage";
 	}
 	
 	@ExceptionHandler(Exception.class)

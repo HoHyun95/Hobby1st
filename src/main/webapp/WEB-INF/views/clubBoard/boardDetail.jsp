@@ -40,7 +40,7 @@
 	</div>
 
 	<form method="post"
-		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=1&keyword=${keyword }&searchWord=${searchWord }">
+		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
 		<!-- 게시판 상세보기 header 부분 -->
 		<div class="body rounded-md">
 			<div class="title space-y-1">

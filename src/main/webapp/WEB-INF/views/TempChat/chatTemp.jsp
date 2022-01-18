@@ -51,6 +51,8 @@
 
 					<!-- 메세지 컨텐츠 시작 -->
 					<div id="chat_contents">
+			
+			
 						<div class="incoming_msg">
 							<div class="received_msg">
 
@@ -137,13 +139,33 @@
 
 
 			<script>
+		
 			
      let ws = new WebSocket("ws://localhost/chat");
+    
+     $('#chatSendBtn').on('click', () => {
 
+    	 $.ajax({
+    			url : "/chat/insertChatIntoDB",
+    			method : "post",
+    			data : {
+    				chat_cl_id : "${clubInfo[0].CL_ID}",
+    					chat_cl_name : "${clubInfo[0].CL_NAME}",
+    					chat_contents :  $('#sendText').val(),
+    					chat_writer : "${member[0].mem_name}"
+    			}
+    	 })
+    	 
+    		let text = $('#sendText').val();
+    	    $('#sendText').val("");
+    	    $('#sendText').focus();
+    	    ws.send(text);
+    		
+    		})
+     
      ws.onmessage = function(e){
  		let eData = e.data;
 
- 		
  		  let htmlData ="";
 
     		function sendMsg(){
@@ -152,7 +174,7 @@
         		htmlData += "<div class='outgoing_msg'>";
     			htmlData +=   	"<div class='sent_msg'>";
         		htmlData +=			"<p>"+eData+"</p>";
-        		htmlData += 		"<span class='time_date'>오늘</span>"
+        		htmlData += 		"<span class='time_date'>시간 설정 준비중..</span>"
         		htmlData += 	"</div>"
         		htmlData +=	"</div>"
         		}
@@ -180,19 +202,9 @@
     	}
 
 
- $('#chatSendBtn').on('click', () => {
-	 
-	 $.ajax({
-			url : "/chat/insertChatIntoDB",
-			method : "post",
-			data : {
-				chat_cl_id : "${clubInfo[0].CL_ID}",
-					chat_cl_name : "${clubInfo[0].CL_NAME}",
-					chat_contents : $('#sendText').val(),
-					chat_writer : "${member[0].mem_name}"
-			}
-		
-		})
+
+
+	
 // 		.done(function(resp)
 // 				{
 // 			if(resp == 1){
@@ -205,11 +217,7 @@
 // 				receiveMsg();
 // 				return;
 		
-		    let text = $('#sendText').val();
-    $('#sendText').val("");
-    $('#sendText').focus();
-    ws.send(text);
-})
+
 	 
 	 
 

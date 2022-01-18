@@ -35,6 +35,7 @@ public class ClubListService {
 		return cldao.selectAll();
 	}
 	
+	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보-> 
 	public List<Map<String, Object>> selectClub(String cl_id){
 		return cldao.selectClub(cl_id);
 	}

@@ -41,7 +41,6 @@ public class ClubListController {
 
 	@RequestMapping("createClubPage")
 	public String createClub(Model model) {
-		System.out.println("동호회 만드는 임시 페이지 ");
 
 		String mem_ID = (String)session.getAttribute("mem_id");
 

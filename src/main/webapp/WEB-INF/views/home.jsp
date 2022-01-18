@@ -152,7 +152,7 @@
             <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
             <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
             <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
-            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Main</i></li></a>
+            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Fullpage</i></li></a>
           </ul>
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>

@@ -17,8 +17,7 @@ public class ClubListDAO {
 	private SqlSessionTemplate mybatis;
 
 	public int createClub(ClubListDTO dto) {
-		int result =  mybatis.insert("ClubList.createClub",dto);
-		return dto.getCl_id();
+		return  mybatis.insert("ClubList.createClub",dto);
 	}
 
 	//동호회명 중복 체크 
@@ -26,11 +25,11 @@ public class ClubListDAO {
 		return mybatis.selectOne("ClubList.nameCheck",cl_name);
 	}
 	
-	public List<Map<String, Object>>  selectAll(){
+	public List<ClubListDTO>  selectAll(){
 	return mybatis.selectList("ClubList.selectAll");
 	}
 	
-	public List<Map<String, Object>> selectClub(String cl_id){
+	public List<ClubListDTO> selectClub(String cl_id){
 		return mybatis.selectList("ClubList.selectClub", cl_id);
 	}
 	

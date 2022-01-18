@@ -135,9 +135,9 @@ $("#cl_name").on("blur", function() {
 				<div class="line_effect"></div>
 				<div class="cl_boss_box">
 					<i class="fas fa-male"></i> <input type="text"
-						placeholder="${member[0].mem_name }" disabled> <input
-						type="hidden" value="${member[0].mem_name }" name="cl_boss_name">
-					<input type="hidden" name="cl_boss_id" value="${member[0].mem_id }">
+						placeholder="${mem_id }" disabled> <input
+						type="hidden" value="${user_name }" name="cl_boss_name">
+					<input type="hidden" name="cl_boss_id" value="${mem_id }">
 				</div>
 
 				<!-- 		<div> -->

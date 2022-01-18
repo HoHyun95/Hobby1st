@@ -1,7 +1,6 @@
 package kh.hobby1st.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
 import kh.hobby1st.service.MemberService;
@@ -36,7 +36,7 @@ public class HomeController {
 		int memberCount = mService.totalMember();
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
-		List<Map<String, Object>> map = clService.selectAll();
+		List<ClubListDTO> map = clService.selectAll();
 
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);

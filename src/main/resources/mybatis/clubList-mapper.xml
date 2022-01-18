@@ -19,7 +19,7 @@
 		#{cl_desc},
 		#{cl_boss_id}, #{cl_boss_name}, #{cl_maxMem}, #{cl_local},
 		default,
-		default, #{cl_category_id}, #{cl_dCategory_id}, default)
+		default, #{cl_category_id}, #{cl_dCategory_id}, default, #{cl_photo})
 
 		<selectKey resultType="int" order="AFTER"
 			keyProperty="cl_id">
@@ -33,12 +33,11 @@
 	</select>
 
 	<select id="selectAll" resultType="map">
-		select cl.*, clp.clp_photo
-		from club_list cl, clublist_photo clp where cl.cl_id = clp.clp_id
+		select * from club_list
 	</select>
 
 	<select id="selectClub" resultType="map">
-	select club_list.*, clp_photo from club_list,(select * from clublist_photo where clp_id =${value}) where cl_id = ${value}
+	select * from club_list where cl_id = ${value}
 	</select>
 
 	<select id="searchClub" resultType="kh.hobby1st.dto.ClubListDTO">

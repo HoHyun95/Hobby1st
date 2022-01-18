@@ -19,6 +19,7 @@
 	<resources mapping="/images/**" location="/resources/images/" />
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/clubPic/**" location="/clubPic/"/>
+	<resources mapping="/chat/**" location="/chat/"/>
 	
 	<resources mapping="/js/**" location="/resources/js/"/><!-- fullpage.js -->
 	

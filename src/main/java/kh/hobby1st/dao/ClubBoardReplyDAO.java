@@ -18,6 +18,11 @@ public class ClubBoardReplyDAO {
 	public int insert(ClubBoardReplyDTO dto) {
 		return mybatis.insert("ClubBoardReply.insertReply", dto);
 	}
+	
+	// 게시판 대댓글 작성하기
+	public int insert_rec(ClubBoardReplyDTO dto) {
+		return mybatis.insert("ClubBoardReply.insertReply_rec", dto);
+	}
 
 	// 해당 게시판 댓글 가져오기
 	public List<ClubBoardReplyDTO> selectReply(int board_seq) {
@@ -27,6 +32,11 @@ public class ClubBoardReplyDAO {
 	// 댓글 삭제하기
 	public int deleteReply(int reply_seq) {
 		return mybatis.delete("ClubBoardReply.deleteReply", reply_seq);
+	}
+	
+	// 대댓글 삭제하기
+	public int deleteReply_r(int reply_r_seq) {
+		return mybatis.delete("ClubBoardReply.deleteReply_r", reply_r_seq);
 	}
 	
 	// 해당 게시판 댓글 개수

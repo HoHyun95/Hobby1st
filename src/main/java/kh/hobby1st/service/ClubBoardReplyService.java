@@ -19,6 +19,11 @@ public class ClubBoardReplyService {
 		return cbrDao.insert(dto);
 	}
 
+	// 게시판 대댓글 작성하기
+	public int insert_rec(ClubBoardReplyDTO dto) {
+		return cbrDao.insert_rec(dto);
+	}
+
 	// 해당 게시판 댓글 가져오기
 	public List<ClubBoardReplyDTO> selectReply(int seq) {
 		return cbrDao.selectReply(seq);
@@ -27,6 +32,11 @@ public class ClubBoardReplyService {
 	// 댓글 삭제하기
 	public int deleteReply(int reply_seq) {
 		return cbrDao.deleteReply(reply_seq);
+	}
+
+	// 대댓글 삭제하기
+	public int deleteReply_r(int reply_r_seq) {
+		return cbrDao.deleteReply_r(reply_r_seq);
 	}
 
 	// 해당 게시판 댓글 개수
@@ -44,6 +54,4 @@ public class ClubBoardReplyService {
 		return cbrDao.minusReply(board_seq);
 	}
 
-	
-	
 }

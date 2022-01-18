@@ -39,98 +39,197 @@
 			style="float: right;">목록</button>
 	</div>
 
-	<form method="post"
-		action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
-		<!-- 게시판 상세보기 header 부분 -->
-		<div class="body rounded-md">
-			<div class="title space-y-1">
 
-				<div class="text-2xl font-medium">
-					<span>${detail.cb_title } </span>
+	<!-- 게시판 상세보기 header 부분 -->
+	<div class="body rounded-md">
+		<div class="title space-y-1">
+
+			<div class="text-2xl font-medium">
+				<span>${detail.cb_title } </span>
+			</div>
+			<div>
+				<span class="writer">${detail.cb_writer }</span>
+			</div>
+			<div class="grid grid-cols-2 text-gray-400"
+				style="padding-bottom: 10px; border-bottom: 1px solid rgb(202, 202, 202);">
+				<div class="write_date text-sm">${detail.detailDate }</div>
+				<div class="text-right">
+					<i class="far fa-eye"></i> ${detail.cb_view_count }
 				</div>
-				<div>
-					<span class="writer">${detail.cb_writer }</span>
-				</div>
-				<div class="grid grid-cols-2 text-gray-400"
-					style="padding-bottom: 10px; border-bottom: 1px solid rgb(202, 202, 202);">
-					<div class="write_date text-sm">${detail.detailDate }</div>
-					<div class="text-right">
-						<i class="far fa-eye"></i> ${detail.cb_view_count }
+			</div>
+		</div>
+
+		<!-- 게시글 본문내용 삽입 -->
+		<div
+			style="border-bottom: 1px solid rgb(202, 202, 202); padding-bottom: 15px;">
+
+			<div style="margin-top: 10px;">${detail.cb_contents }</div>
+
+			<!-- 오른쪽 하단에 추천과 댓글수 조회 -->
+			<div class="content_b text-right text-base">
+				<br>
+
+				<!-- 추천시 하트 아이콘이 변하고 추천수가 올라가는 기능 -->
+				<button type="button" class="nice" id="good">
+					<span style="font-size: 17px;" id="heart"> <c:choose>
+							<c:when test="${user == 0 }">
+								<i class='fas fa-heart'></i>
+							</c:when>
+							<c:otherwise>
+								<i class='far fa-heart'></i>
+							</c:otherwise>
+						</c:choose>
+					</span> 추천 <span id="good_n">${detail.cb_like_count }</span>
+				</button>
+
+				<span style="margin-left: 10px;"><i
+					class="far fa-comment-dots"></i> 댓글 <span id="comment_n">${replycount }</span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- 댓글 삽입 기능 -->
+		<c:forEach var="replyList" items="${replyList }" varStatus="status">
+			<c:choose>
+				<c:when test="${replyList.deep eq '0'}">
+					<div class="input_commend">
+						<table
+							style="border-bottom: 1px solid rgb(202, 202, 202); width: 100%; margin-top: 15px;">
+
+
+							<tr>
+								<td rowspan="3"
+									style="border-radius: 70%; height: 80px; width: 80px; padding-right: 10px;">
+									<img id="profile"
+									style="border-radius: 70%; height: 60px; width: 60px;"
+									src="${list_profile.get(status.index)}" alt="">
+								</td>
+								<td
+									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div id="content"
+										style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;"
+										rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.cbr_reply }
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
+									&nbsp
+									<button class="reply_r${replyList.cbr_seq }" type="button">답글쓰기
+									</button>
+								</td>
+								<c:if test="${replyList.cbr_writer eq mem_id }">
+									<td><button type="button" class="delReply"
+											style="color: red; float: right; margin-right: 20px;">
+											X<input class="replySeq" type="hidden"
+												value="${replyList.cbr_seq }">
+										</button></td>
+								</c:if>
+							</tr>
+						</table>
 					</div>
-				</div>
-			</div>
 
-			<!-- 게시글 본문내용 삽입 -->
-			<div
-				style="border-bottom: 1px solid rgb(202, 202, 202); padding-bottom: 15px;">
+					<!------ 답글 쓰기 ------->
+					<tr>
+						<form method="post"
+							action="/clubBoard/insertReply_rec?cb_seq=${detail.cb_seq }&cbr_seq=${replyList.cbr_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
+							<!-- 댓글달기 기능 -->
+							<div id="reply_rec${replyList.cbr_seq }"
+								class="commend space-y-2 rounded-md"
+								style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px; display: none; width: 90%; height: 80%; margin-left: 73px;">
+								<div class="writer font-bold">${mem_id }</div>
 
-				<div style="margin-top: 10px;">${detail.cb_contents }</div>
-
-				<!-- 오른쪽 하단에 추천과 댓글수 조회 -->
-				<div class="content_b text-right text-base">
-					<br>
-
-					<!-- 추천시 하트 아이콘이 변하고 추천수가 올라가는 기능 -->
-					<button type="button" class="nice" id="good">
-						<span style="font-size: 17px;" id="heart"> <c:choose>
-								<c:when test="${user == 0 }">
-									<i class='fas fa-heart'></i>
-								</c:when>
-								<c:otherwise>
-									<i class='far fa-heart'></i>
-								</c:otherwise>
-							</c:choose>
-						</span> 추천 <span id="good_n">3</span>
-					</button>
-
-					<span style="margin-left: 10px;"><i
-						class="far fa-comment-dots"></i> 댓글 <span id="comment_n">${replycount }</span>
-					</span>
-				</div>
-			</div>
-
-
-			<!-- 댓글 삽입 기능 -->
-			<c:forEach var="replyList" items="${replyList }" varStatus="status">
-				<div class="input_commend">
-					<table
-						style="border-bottom: 1px solid rgb(202, 202, 202); width: 100%; margin-top: 15px;">
-
-
-						<tr>
-							<td rowspan="3"
-								style="border-radius: 70%; height: 80px; width: 80px; padding-right: 10px;">
-								<img id="profile"
-								style="border-radius: 70%; height: 60px; width: 60px;"
-								src="${list_profile.get(status.index)}" alt="">
-							</td>
-							<td style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }</td>
-						</tr>
-
-						<tr>
-							<td>
-								<div id="content"
-									style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;"
-									rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.cbr_reply }
+								<!-- 댓글 입력받기 -->
+								<div>
+									<input type="hidden" name="seq_r" value="${detail.cb_seq }">
+									<input type="hidden" name="cpage" value="${cpage }">
+									<textarea name="cbr_reply" id="message"
+										placeholder="${replyList.cbr_writer }님에게 남기는 댓글."
+										style="width: 100%; min-height: 30px; overflow-y: hidden; resize: none;"
+										rows="1" onkeyup="resize(this)" onkeydown="resize(this)"></textarea>
+									<!-- textarea 자동 높이조절-->
 								</div>
-							</td>
-						</tr>
 
-						<tr>
-							<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
-							</td>
-							<c:if test="${replyList.cbr_writer eq mem_id }">
-								<td><button type="button" class="delReply"
-										style="color: red; float: right; margin-right: 20px;">
-										X<input class="replySeq" type="hidden"
-											value="${replyList.cbr_seq }">
-									</button></td>
-							</c:if>
-						</tr>
-					</table>
-				</div>
-			</c:forEach>
+								<div style="height: 20px;">
 
+									<button id="commentBtn"
+										class="summit float-right text-green-400" type="submit">등록</button>
+
+									<button type="button" id="cencelBtn${replyList.cbr_seq }"
+										class="summit float-right text-green-400" type="submit"
+										style="margin-right: 15px;">취소</button>
+								</div>
+							</div>
+						</form>
+					</tr>
+					<script>
+						// 대댓글 작성 창 띄우기
+						$(".reply_r${replyList.cbr_seq }").on("click", function() {
+							$("#reply_rec${replyList.cbr_seq }").css('display','block');
+						})
+		
+						// 대댓글 창 취소
+						$("#cencelBtn${replyList.cbr_seq }").on("click", function() {
+							$("#reply_rec${replyList.cbr_seq }").css('display','none');
+						})
+		
+					</script>
+				</c:when>
+
+
+
+				<c:when test="${replyList.deep eq '1'}">
+					<div style="border-bottom: 1px solid rgb(202, 202, 202);"
+						class="input_commend">
+						<table style="width: 90%; margin-top: 15px; margin-left: 73px;">
+							<tr>
+								<td rowspan="3"
+									style="border-radius: 70%; height: 80px; width: 86px; padding-right: 10px;">
+									<img id="profile"
+									style="border-radius: 70%; height: 60px; width: 60px;"
+									src="${list_profile.get(status.index)}" alt="">
+								</td>
+								<td
+									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }
+									</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div id="content"
+										style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;"
+										rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.cbr_reply }
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
+								</td>
+								<c:if test="${replyList.cbr_writer eq mem_id }">
+									<td><button type="button" class="delReply_r"
+											style="color: red; float: right; margin-right: 20px;">
+											X<input class="replySeq_r" type="hidden"
+												value="${replyList.cbr_r_seq }">
+										</button></td>
+								</c:if>
+							</tr>
+						</table>
+					</div>
+				</c:when>
+
+			</c:choose>
+
+
+		</c:forEach>
+		<form method="post"
+			action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
@@ -151,7 +250,7 @@
 						type="submit">등록</button>
 				</div>
 			</div>
-		</div>
+	</div>
 	</form>
 
 	<!-- 수정하기 삭제하기 기능.  -->
@@ -167,6 +266,31 @@
 	</div>
 
 	<script>
+		
+		
+		
+	
+		// 추천 기능
+		$("#good").on("click", function() {
+			if(${mem_id != null}){
+				$.ajax({
+					url : "/clubBoard/clubBoardRec?cb_seq=${detail.cb_seq }",
+					dataType: "json"
+				}).done(function(resp){
+					console.log(resp);
+					$("#good_n").text(resp[0]);
+					if(resp[1] == 1){
+						$("#heart").html("<i class='fas fa-heart'></i>");
+					}else if(resp[1] == 0){
+						$("#heart").html("<i class='far fa-heart'></i>");
+					}
+				});
+			}else{
+				alert("로그인 후 이용가능합니다.")
+			}
+		})
+	
+	
 		// 댓글 textarea 자동 높이조절
 		function resize(obj) {
 
@@ -195,6 +319,14 @@
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
 				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+			} 
+		})
+		
+		// 대댓글 삭제 기능
+		$(".delReply_r").on("click", function() {
+			let replySeq_r = $(this).find(".replySeq_r").val();
+			 if (confirm("정말 삭제하시겠습니까?")) {
+				location.href = "/clubBoard/deleteReply_r?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_r_seq=" + replySeq_r + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
 			} 
 		})
 		

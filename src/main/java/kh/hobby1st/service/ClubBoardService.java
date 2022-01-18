@@ -1,6 +1,8 @@
 package kh.hobby1st.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,12 @@ public class ClubBoardService {
 	public int insert(ClubBoardDTO dto) {
 		return cbdao.insert(dto);
 	}
-	
+
 	// 해당 동호회 게시판 총 개수
 	public int getRecordCount(int seq) {
 		return cbdao.getRecordCount(seq);
 	}
-	
+
 	// 검색된 결과 개수
 	public int getRecordSearchCount(int club_board_id, String keyword, String searchWord) {
 		return cbdao.getRecordSearchCount(club_board_id, keyword, searchWord);
@@ -48,19 +50,57 @@ public class ClubBoardService {
 	public int modifyBoard(ClubBoardDTO dto) {
 		return cbdao.modifyBoard(dto);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	//---------------------- 동호회 게시판 리스트 페이징 ----------------------
+	// -------------------------- 추천 기능 --------------------------
+
+	// 추천 여부 확인
+	public int checkRec(int cb_seq, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cb_seq", String.valueOf(cb_seq));
+		map.put("rec_id", rec_id);
+
+		return cbdao.checkRec(cb_seq, rec_id);
+	}
+
+	// 추천한 게시글에 id 저장
+	public int insertRec(int cb_seq, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cb_seq", String.valueOf(cb_seq));
+		map.put("rec_id", rec_id);
+
+		return cbdao.insertRec(cb_seq, rec_id);
+	}
+
+	// 추천 쉬소
+	public int deleteRec(int cb_seq, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cb_seq", String.valueOf(cb_seq));
+		map.put("rec_id", rec_id);
+
+		return cbdao.deleteRec(cb_seq, rec_id);
+	}
+
+	// 추천수 갱신
+	public int updateRec(int cb_seq) {
+		return cbdao.updateRec(cb_seq);
+	}
+
+	// 추천수
+	public int recCount(int cb_seq) {
+		return cbdao.recCount(cb_seq);
+	}
+
+	
+	
+	
+	
+	// ---------------------- 동호회 게시판 리스트 페이징 ----------------------
 	public List<ClubBoardDTO> selectBoardByPaging(int cpage, int seq) throws Exception {
 		int currentPage = cpage;
 
@@ -150,102 +190,99 @@ public class ClubBoardService {
 		}
 		return pageNavi;
 	}
-	
-	
-	
-	
-	//---------------------- 게시판 검색 리스트 페이징 ----------------------
-		public List<ClubBoardDTO> selectBoardSearchByPaging(int cpage, int seq, String keyword, String searchWord) throws Exception {
-			int currentPage = cpage;
 
-			int pageTotalCount = this.getRecordSearchCount(seq, keyword, searchWord);
-			if (currentPage < 1) {
-				currentPage = 1;
-			}
-			if (currentPage > pageTotalCount) {
-				currentPage = pageTotalCount;
-			}
+	// ---------------------- 게시판 검색 리스트 페이징 ----------------------
+	public List<ClubBoardDTO> selectBoardSearchByPaging(int cpage, int seq, String keyword, String searchWord)
+			throws Exception {
+		int currentPage = cpage;
 
-			int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
-			int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
-
-			return cbdao.selectBoardSearchByPaging(start, end, seq, keyword, searchWord);
+		int pageTotalCount = this.getRecordSearchCount(seq, keyword, searchWord);
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
 		}
 
-		// 게시판 총 페이지
-		public int getSearchTotalCount(int club_board_id, String keyword, String searchWord) throws Exception {
-			int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
-			int pageTotalCount = 0;
+		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
+		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
 
-			if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			} else {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
-			}
-			return pageTotalCount;
+		return cbdao.selectBoardSearchByPaging(start, end, seq, keyword, searchWord);
+	}
+
+	// 게시판 총 페이지
+	public int getSearchTotalCount(int club_board_id, String keyword, String searchWord) throws Exception {
+		int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
+		int pageTotalCount = 0;
+
+		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
+			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
+		} else {
+			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
+		return pageTotalCount;
+	}
 
 	// 페이지 네비게이터
-		public String getSearchPageNavi(int cpage, int club_board_id, String keyword, String searchWord) throws Exception {
+	public String getSearchPageNavi(int cpage, int club_board_id, String keyword, String searchWord) throws Exception {
 
-			int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
-			// 총 페이지의 개수
-			int pageTotalCount = 0;
+		int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
+		// 총 페이지의 개수
+		int pageTotalCount = 0;
 
-			if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-				// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
-			} else {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
-			}
-
-			// 현재 페이지
-			int currentPage = cpage;
-
-			// 혹시라도 현재페이지가 1페이지보다 작으면 1로 만들어라, 현재페이지가 토달 카운트 보다 크면 현재페이지는 토탈카운트 페이지로.
-			if (currentPage < 1) {
-				currentPage = 1;
-			} else if (currentPage > pageTotalCount) {
-				currentPage = pageTotalCount;
-			}
-
-			int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-			int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
-
-			// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
-			if (endNavi > pageTotalCount) {
-				endNavi = pageTotalCount;
-			}
-
-			boolean needPrev = true;
-			boolean needNext = true;
-
-			if (startNavi == 1) {
-				needPrev = false;
-			}
-
-			if (endNavi == pageTotalCount) {
-				needNext = false;
-			}
-
-			String pageNavi = "";
-
-			if (needPrev) {
-				pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword=" + keyword + "&searchWord=" + searchWord + "'><</a>";
-			}
-
-			for (int i = startNavi; i <= endNavi; i++) {
-				pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/searchBoard?cpage=" + i + "&keyword=" + keyword + "&searchWord=" + searchWord + "'>" + i
-						+ "</a> ";
-			}
-
-			if (needNext) {
-				pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) +  "&keyword=" + keyword + "&searchWord=" + searchWord + "'>></a>";
-			}
-			return pageNavi;
+		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
+			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
+			// 페이지가 딱 떨어지지 않으면 1을 더해서 페이지를 하나 더 만들어라
+		} else {
+			pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
 		}
-	
-	
-	
+
+		// 현재 페이지
+		int currentPage = cpage;
+
+		// 혹시라도 현재페이지가 1페이지보다 작으면 1로 만들어라, 현재페이지가 토달 카운트 보다 크면 현재페이지는 토탈카운트 페이지로.
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
+		int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
+
+		// 공식에 의해 발생한 endnavi 값이 실제 페이지 전체 개수보다 클경우
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		String pageNavi = "";
+
+		if (needPrev) {
+			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword="
+					+ keyword + "&searchWord=" + searchWord + "'><</a>";
+		}
+
+		for (int i = startNavi; i <= endNavi; i++) {
+			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/searchBoard?cpage=" + i
+					+ "&keyword=" + keyword + "&searchWord=" + searchWord + "'>" + i + "</a> ";
+		}
+
+		if (needNext) {
+			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) + "&keyword=" + keyword
+					+ "&searchWord=" + searchWord + "'>></a>";
+		}
+		return pageNavi;
+	}
 
 }

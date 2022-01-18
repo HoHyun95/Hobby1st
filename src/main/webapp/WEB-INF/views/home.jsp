@@ -183,7 +183,7 @@
               <c:forEach var="clubList" items="${list }">
                 <li class="main_bg_inner_bottom_list_item_wrap">
                   <div class="main_bg_inner_bottom_list_item">
-                    <h2>${clubList.CL_NAME }</h2>
+                    <h2><a href="/clubMainIntro/clubIntro?cl_id=${clubList.CL_ID }">${clubList.CL_NAME }</a></h2>
                     <b>${clubList.CL_BOSS_NAME}</b> 
                     <span>${clubList.CL_LOCAL }</span>
                     <span>${clubList.CL_DESC }</span>

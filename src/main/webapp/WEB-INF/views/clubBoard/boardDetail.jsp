@@ -213,10 +213,10 @@
 								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
 								</td>
 								<c:if test="${replyList.cbr_writer eq mem_id }">
-									<td><button type="button" class="delReply"
+									<td><button type="button" class="delReply_r"
 											style="color: red; float: right; margin-right: 20px;">
-											X<input class="replySeq" type="hidden"
-												value="${replyList.cbr_seq }">
+											X<input class="replySeq_r" type="hidden"
+												value="${replyList.cbr_r_seq }">
 										</button></td>
 								</c:if>
 							</tr>
@@ -267,10 +267,6 @@
 
 	<script>
 		
-		// 대댓글 작성 창 띄우기
-		$(".reply_r").on("click", function() {
-			
-		})
 		
 		
 	
@@ -323,6 +319,14 @@
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
 				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+			} 
+		})
+		
+		// 대댓글 삭제 기능
+		$(".delReply_r").on("click", function() {
+			let replySeq_r = $(this).find(".replySeq_r").val();
+			 if (confirm("정말 삭제하시겠습니까?")) {
+				location.href = "/clubBoard/deleteReply_r?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_r_seq=" + replySeq_r + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
 			} 
 		})
 		

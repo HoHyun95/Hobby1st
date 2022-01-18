@@ -65,7 +65,7 @@
       <div class="header_inner">
         <div class="header_inner_top">
           <div class="logo">
-            <img src="/images/LOGO.png">
+            <a href="home"><img src="/images/LOGO.png"></a>
           </div>
           <ul class="login_list">
             <c:choose>

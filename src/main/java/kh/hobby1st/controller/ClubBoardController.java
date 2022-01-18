@@ -174,7 +174,22 @@ public class ClubBoardController {
 					+ "&searchWord=" + searchWord + "&check_num=" + check_num;
 		}
 	
-	
+		// 대댓글 삭제
+		@RequestMapping("/deleteReply_r")
+		public String deleteReply_r(int cbr_r_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
+
+			if (keyword.equals("제목")) {
+				keyword = "title";
+			} else if (keyword.equals("작성자")) {
+				keyword = "writer";
+			}
+
+			club_board_reply_service.minusReply(cb_seq);
+			int result = club_board_reply_service.deleteReply_r(cbr_r_seq);
+
+			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
+					+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+		}
 	
 	
 	

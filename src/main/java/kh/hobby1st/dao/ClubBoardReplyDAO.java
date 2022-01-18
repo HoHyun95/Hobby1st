@@ -18,6 +18,11 @@ public class ClubBoardReplyDAO {
 	public int insert(ClubBoardReplyDTO dto) {
 		return mybatis.insert("ClubBoardReply.insertReply", dto);
 	}
+	
+	// 게시판 대댓글 작성하기
+	public int insert_rec(ClubBoardReplyDTO dto) {
+		return mybatis.insert("ClubBoardReply.insertReply_rec", dto);
+	}
 
 	// 해당 게시판 댓글 가져오기
 	public List<ClubBoardReplyDTO> selectReply(int board_seq) {

@@ -22,8 +22,14 @@
    		select * from club_board_reply where cbr_par_seq = #{value} order by 2, cbr_r_seq
    	</select>
    	
+   	<!-- 댓글 삭제 -->
    	<delete id="deleteReply">
    		delete from club_board_reply where cbr_seq = #{value}
+   	</delete>
+   	
+   	<!-- 대댓글 삭제 -->
+   	<delete id="deleteReply_r">
+   		delete from club_board_reply where cbr_r_seq = #{value}
    	</delete>
   	
   	<select id="replyCount" resultType="int">

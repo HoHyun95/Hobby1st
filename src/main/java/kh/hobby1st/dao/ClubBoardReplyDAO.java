@@ -34,6 +34,11 @@ public class ClubBoardReplyDAO {
 		return mybatis.delete("ClubBoardReply.deleteReply", reply_seq);
 	}
 	
+	// 대댓글 삭제하기
+	public int deleteReply_r(int reply_r_seq) {
+		return mybatis.delete("ClubBoardReply.deleteReply_r", reply_r_seq);
+	}
+	
 	// 해당 게시판 댓글 개수
 	public int replyCount(int board_seq) {
 		return mybatis.selectOne("ClubBoardReply.replyCount", board_seq);

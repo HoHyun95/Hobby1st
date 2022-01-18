@@ -1,6 +1,8 @@
 package kh.hobby1st.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 
 public class ChatDTO {
 	private int chat_seq;
@@ -57,5 +59,10 @@ public class ChatDTO {
 	public void setChat_write_date(Timestamp chat_write_date) {
 		this.chat_write_date = chat_write_date;
 	}
+	
+	public String getFormDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+		return sdf.format(this.getChat_write_date());
+		}
 
 }

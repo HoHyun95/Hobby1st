@@ -22,7 +22,8 @@ public class MypageController {
 	// login_page
 	@RequestMapping("/")
 	public String mypage() {
-		return "mypage/mypage";
+		System.out.println("여기");
+		return "mypage/mainPage";
 	}
 
 }

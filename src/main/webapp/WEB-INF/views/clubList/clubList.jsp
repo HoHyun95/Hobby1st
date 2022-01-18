@@ -65,7 +65,7 @@
 					<ul class="fav_club_list">
 						<li class="fav_club_list_item_wrap">
 							<div class="fav_club_list_item">
-								<h2><a href="/clubList/clubInfo?cl_id=${clubList.CL_ID }">${clubList.CL_NAME }</a></h2>
+								<h2><a href="/clubMainIntro/clubIntro?cl_id=${clubList.CL_ID }">${clubList.CL_NAME }</a></h2>
 								<b>${clubList.CL_BOSS_NAME}</b> <span>${clubList.CL_LOCAL }</span>
 								<p>${clubList.CL_DESC }</p>
 							</div>

@@ -149,7 +149,7 @@
           <ul class="menu_list">
             <li class="menu_list_item"><i class="fas fa-stream"></i></li>
             <li class="menu_list_item"><i class="fab fa-hubspot"> Hobby1st</i></li>
-            <li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li>
+            <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
             <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
             <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
             <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Main</i></li></a>

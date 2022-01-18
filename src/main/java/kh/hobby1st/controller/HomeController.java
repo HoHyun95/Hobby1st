@@ -59,6 +59,15 @@ public class HomeController {
 		return "myPage";
 	}
 	
+	// club 
+	@RequestMapping("club")
+	public String club() {
+		if((String)session.getAttribute("mem_id") == null) {
+			return "redirect:/";
+		}
+		return "club";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

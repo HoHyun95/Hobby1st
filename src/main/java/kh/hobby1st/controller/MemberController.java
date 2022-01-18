@@ -135,35 +135,31 @@ public class MemberController {
 		return "redirect: sign_in";
 	}
 	
-	//email_page
-	@RequestMapping("find_email") 
-	public String find_email() {
-		return "member/sign_email";
-	}
+
 	
 	//find-email!!
 	@RequestMapping(value="send_email")
 	public String send_email(String email, Model model) {
 		System.out.println("접속 확인입니다. : " + email);
-	    int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+	    int random_num = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 
-	    String from = "nocoolboy@naver.com";
-	    String to= email;
+	    String send_from = "nocoolboy@naver.com";
+	    String user_email= email;
 	    String title = "회원가입시 필요한 인증번호 입니다.";
-	    String content = "[인증번호] "+ serti +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
+	    String content = "[인증번호] "+ random_num +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
 	    String num = "";
 		
 	    try {
 	    	MimeMessage mail = mailSender.createMimeMessage();
 	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
 	        
-	        mailHelper.setFrom(from);
-	        mailHelper.setTo(to);
+	        mailHelper.setFrom(send_from);
+	        mailHelper.setTo(user_email);
 	        mailHelper.setSubject(title);
 	        mailHelper.setText(content, true);       
 	        
 	        mailSender.send(mail);
-	        num = Integer.toString(serti);
+	        num = Integer.toString(random_num);
 	        System.out.println("이메일 전송 성공 :" + num);
 	        model.addAttribute("num",num);
 	        
@@ -179,6 +175,7 @@ public class MemberController {
 		System.out.println(num + "의 값은" + email_num);
 		return "member/sign_email";
 	}
+
 
 }
 

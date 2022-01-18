@@ -57,7 +57,6 @@
 								<!-- DB 에서 출력 후 보낸 사람을 출력하자  -->
 								<div class="sender">temp sender</div>
 
-								<!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
 								<div class="received_withd_msg">
 									<p>Lorem Ipsum is simply dummy text</p>
 									<span class="time_date"> 11:01 AM | June 9</span>
@@ -72,6 +71,43 @@
 								<span class="time_date"> 11:01 AM | June 9</span>
 							</div>
 						</div>
+
+
+
+						<!-- 채팅 작성자와 session 아이디 일치한 경우 자신이 보낸 메세지로 취급 -->
+						<c:forEach var="chatList" items="${chatList }">
+							<c:choose>
+
+
+								<c:when test="${chatList.chat_writer eq user_name }">
+
+									<div class="outgoing_msg">
+										<div class="sent_msg">
+											<p>${chatList.chat_contents }</p>
+											<span class="time_date">${chatList.chat_write_date }</span>
+										</div>
+									</div>
+
+								</c:when>
+
+
+								<c:otherwise>
+
+									<div class="sender">${chatList.chat_writer }</div>
+
+									<div class="received_withd_msg">
+										<p>${chatList.chat_contents }</p>
+										<span class="time_date">${chatList.chat_write_date }</span>
+									</div>
+
+
+
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+						<!--  채팅 작성자와 Session 아이디 일치하지 않은 경우 자신의 메세지가 아닌걸로 취급 -->
+
 					</div>
 
 					<!--메세지 보내는 라인-->
@@ -101,24 +137,15 @@
 
 
 			<script>
-
-// 	        function updateScroll() {
-// 	            var element = document.getElementById("contents");
-// 	            $(element).scrollTop(element.scrollHeight);
-// 	        }
-
-			console.log("세션 멤버 이름 : "+$('#session_user_name').val());
 			
      let ws = new WebSocket("ws://localhost/chat");
 
      ws.onmessage = function(e){
  		let eData = e.data;
-//  		console.log("eData 값 :" + eData);
+
  		
  		  let htmlData ="";
-     		let identity = 0;
- 		  
-     		
+
     		function sendMsg(){
         		console.log("내가 보내는 메세지 ");
         		
@@ -128,8 +155,6 @@
         		htmlData += 		"<span class='time_date'>오늘</span>"
         		htmlData += 	"</div>"
         		htmlData +=	"</div>"
-        		
-        		identity = 1;
         		}
     		
     		function receiveMsg(){
@@ -142,10 +167,7 @@
                 htmlData += " 		</div>";
                 htmlData += " 	</div>";
                 htmlData += "</div>";
-                
-                identity = 0;
         		}
-    		
      		
     	if($('#mem_writer').val() == $('#session_user_name').val()){
     		sendMsg();		
@@ -166,28 +188,30 @@
 			data : {
 				chat_cl_id : "${clubInfo[0].CL_ID}",
 					chat_cl_name : "${clubInfo[0].CL_NAME}",
-					chat_contents : "$('#sendText').val()",
-					chat_writer : "${member[0].mem_id}"
+					chat_contents : $('#sendText').val(),
+					chat_writer : "${member[0].mem_name}"
 			}
 		
-		}).done(function(resp){
-			if(resp == true){
-				sendMsg();
-			}else{
-				receiveMsg();
-			}
 		})
-	 
-	 
-    let text = $('#sendText').val();
+// 		.done(function(resp)
+// 				{
+// 			if(resp == 1){
+			
+// 				console.log("여기는 성공 ");
+// 				sendMsg();
+// 				return;
+// 			}else{
+// 				console.log("여기는 실패 ");
+// 				receiveMsg();
+// 				return;
+		
+		    let text = $('#sendText').val();
     $('#sendText').val("");
     $('#sendText').focus();
     ws.send(text);
- });
-     
- 
-
-
+})
+	 
+	 
 
    </script>
 </body>

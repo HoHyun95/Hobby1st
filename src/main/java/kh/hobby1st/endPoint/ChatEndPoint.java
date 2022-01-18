@@ -25,7 +25,7 @@ public class ChatEndPoint {
 	public void onConnect(Session session, EndpointConfig config) {
 		clients.add(session);
 		this.session = (HttpSession)config.getUserProperties().get("user_name");
-		
+
 		System.out.println("연결 확인");
 
 	}
@@ -33,21 +33,22 @@ public class ChatEndPoint {
 	@OnMessage
 	public void onMessage(String msg) {
 		System.out.println("보낸 메세지 :" + msg);
-		
+
 		//사용자 아이디 넘어오지만 동호회 채팅은 실명으로 사용하는 게 좋다.
-		String userID = (String)this.session.getAttribute("user_name");
+		String incomingMsgID = (String)this.session.getAttribute("user_name");
 
 		synchronized(clients) {
 			for(Session client : clients) {
 				try {
-					client.getBasicRemote().sendText(userID+ " : " + msg);
+					client.getBasicRemote().sendText(incomingMsgID + " : " + msg);
+
 				}catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
-//test
+
 	@OnClose
 	public void onClose(Session session) {
 		clients.remove(session);

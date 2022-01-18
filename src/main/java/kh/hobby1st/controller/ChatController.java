@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.hobby1st.dto.ChatDTO;
 import kh.hobby1st.dto.MemberDTO;
+import kh.hobby1st.service.ChatService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.MemberService;
 
@@ -27,6 +30,9 @@ public class ChatController {
 	@Autowired
 	private MemberService mem_service;
 	
+	@Autowired
+	private ChatService chatService;
+	
 	@RequestMapping("/clubChat")
 	public String moveClubChat(Model model) {
 		
@@ -38,6 +44,7 @@ public class ChatController {
 		
 		String user_name = (String)session.getAttribute("user_name");
 		String mem_id =(String)session.getAttribute("mem_id");
+		model.addAttribute("user_name", user_name);
 		
 		List<Map<String, Object>> map = clService.selectClub(cl_id);	
 		model.addAttribute("clubInfo", map);
@@ -49,11 +56,21 @@ public class ChatController {
 		
 		System.out.println("controller memName : " +memberInfo.get(0).getMem_name());
 		
+		
+		List<ChatDTO> chatList = chatService.chatSelectAll();
 	
-		model.addAttribute("user_name", user_name);
+		
 		
 		return "/TempChat/chatTemp";
 	}
 	
+	
+	// 메세지 전송 값 저장
+	@RequestMapping("insertChatIntoDB")
+	@ResponseBody
+	public void insertChatIntoDB(ChatDTO dto) {
+		
+		chatService.insertChatIntoDB(dto);
+	}
 	
 }

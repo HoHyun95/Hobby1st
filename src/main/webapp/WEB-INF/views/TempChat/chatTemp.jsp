@@ -15,8 +15,8 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-	
-	<link rel="stylesheet" href="/css/chat/chat.css">
+
+<link rel="stylesheet" href="/css/chat/chat.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 
@@ -32,11 +32,11 @@
 							class="msg-box list-inline text-left d-inline-block float-left">
 							<li><i class="fas fa-arrow-left" id="back"></i></li>
 							<li>
-							<img src="${pageContext.request.contextPath}/clubPic/${clubInfo[0].CLP_PHOTO}" class="club_photo">
-								
-								
-					
-								 <span> ${clubInfo[0].CL_NAME } </span> <br></li>
+								<!--  동호회 채팅 이미지 --> <img
+								src="${pageContext.request.contextPath}/clubPic/${clubInfo[0].CLP_PHOTO}"
+								class="club_photo"> <!--  동호회 이름 --> <span>
+									${clubInfo[0].CL_NAME } </span> <br>
+							</li>
 						</ul>
 
 						<ul
@@ -53,11 +53,11 @@
 					<div id="chat_contents">
 						<div class="incoming_msg">
 							<div class="received_msg">
-							
-							<!-- DB 에서 출력 후 보낸 사람을 출력하자  -->
-							 <div class="sender"> temp sender </div>
-							 
-							 <!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
+
+								<!-- DB 에서 출력 후 보낸 사람을 출력하자  -->
+								<div class="sender">temp sender</div>
+
+								<!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
 								<div class="received_withd_msg">
 									<p>Lorem Ipsum is simply dummy text</p>
 									<span class="time_date"> 11:01 AM | June 9</span>
@@ -77,95 +77,117 @@
 					<!--메세지 보내는 라인-->
 					<div class="send-message">
 
-						<input type="text" class="form-control" name="chat_writer"
+						<input type="text" class="form-control" name="chat_contents"
 							id="sendText" placeholder="Type your message here ..." />
 
 						<!--  멤버 리스트 가져와서 멤버 이름 넣는다 .  -->
 
-					
+
 						<input type="hidden" id="mem_writer"
 							value="${member[0].mem_name }">
 
 
 						<!-- session 의 멤버 이름 -->
 						<input type="hidden" id="session_user_name" value="${user_name }">
-						
-						
+
+
 						<!--이모티콘, 사진, 전송 버튼-->
 						<ul class="list-inline">
 							<li><i class="fas fa-paper-plane" id="chatSendBtn"></i></li>
 						</ul>
 					</div>
-
-
 				</div>
 			</div>
 
 
-
 			<script>
 
-			
-		      
 // 	        function updateScroll() {
 // 	            var element = document.getElementById("contents");
 // 	            $(element).scrollTop(element.scrollHeight);
 // 	        }
-			
-	        console.log("dd");
-			
-			console.log(""+$('#mem_writer').val());
+
 			console.log("세션 멤버 이름 : "+$('#session_user_name').val());
 			
      let ws = new WebSocket("ws://localhost/chat");
 
      ws.onmessage = function(e){
  		let eData = e.data;
- 		console.log("eData 값 :" + eData);
+//  		console.log("eData 값 :" + eData);
  		
  		  let htmlData ="";
      		let identity = 0;
  		  
+     		
+    		function sendMsg(){
+        		console.log("내가 보내는 메세지 ");
+        		
+        		htmlData += "<div class='outgoing_msg'>";
+    			htmlData +=   	"<div class='sent_msg'>";
+        		htmlData +=			"<p>"+eData+"</p>";
+        		htmlData += 		"<span class='time_date'>오늘</span>"
+        		htmlData += 	"</div>"
+        		htmlData +=	"</div>"
+        		
+        		identity = 1;
+        		}
+    		
+    		function receiveMsg(){
+        		console.log("수신 메세지");
+        		
+                htmlData += "<div class='incoming-msg'>";
+                htmlData += "	<div class='received_msg'>";
+                htmlData += "		<div class='received_withd_msg'>";
+                htmlData += "			<p>"+eData+"</p>";
+                htmlData += " 		</div>";
+                htmlData += " 	</div>";
+                htmlData += "</div>";
+                
+                identity = 0;
+        		}
+    		
+     		
     	if($('#mem_writer').val() == $('#session_user_name').val()){
-    		
-    		console.log("내가 보내는 메세지 ");
-    		
-    		htmlData += "<div class='outgoing_msg'>";
-			htmlData +=   	"<div class='sent_msg'>";
-    		htmlData +=			"<p>"+eData+"</p>";
-    		htmlData += 		"<span class='time_date'>오늘</span>"
-    		htmlData += 	"</div>"
-    		htmlData +=	"</div>"
-    		
-    		identity = 1;
+    		sendMsg();		
     		
     	}else{
-    		
-    		console.log("수신 메세지");
-    		
-            htmlData += "<div class='incoming-msg'>";
-            htmlData += "	<div class='received_msg'>";
-            htmlData += "		<div class='received_withd_msg'>";
-            htmlData += "			<p>"+eData+"</p>";
-            htmlData += " 		</div>";
-            htmlData += " 	</div>";
-            htmlData += "</div>";
-            
-            identity = 0;
+    		recevieMsg();
          }
     	
         $('#chat_contents').append(htmlData);
-    	};
+    	}
 
-      
+
  $('#chatSendBtn').on('click', () => {
+	 
+	 $.ajax({
+			url : "/chat/insertChatIntoDB",
+			method : "post",
+			data : {
+				chat_cl_id : "${clubInfo[0].CL_ID}",
+					chat_cl_name : "${clubInfo[0].CL_NAME}",
+					chat_contents : "$('#sendText').val()",
+					chat_writer : "${member[0].mem_id}"
+			}
+		
+		}).done(function(resp){
+			if(resp == true){
+				sendMsg();
+			}else{
+				receiveMsg();
+			}
+		})
+	 
+	 
     let text = $('#sendText').val();
     $('#sendText').val("");
     $('#sendText').focus();
-
     ws.send(text);
-    
- })
+ });
+     
+ 
+
+
 
    </script>
 </body>

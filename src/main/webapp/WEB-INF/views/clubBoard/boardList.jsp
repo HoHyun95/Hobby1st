@@ -11,7 +11,20 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+	
+<style>
+
+	.title:hover {
+		color: rgb(231, 75, 55);
+	}
+
+
+</style>
+	
 </head>
+
+
+
 <body>
 <body>
 	<!-- 글쓰기 버튼 -->
@@ -52,16 +65,16 @@
 					<tbody>
 						<c:forEach var="dto" items="${clubBoardList }" varStatus="status">
 							<tr
-								class="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0 text-sm">
+								class="w-full font-light text-gray-700 bg-gray-50 whitespace-no-wrap border border-b-0 text-sm hover:bg-gray-200">
 								<td class="px-4 py-4 text-center">${totalBoardCount - ((cpage-1) * 10) - status.index}</td>
 
-										<td class="px-4 py-4"><a
-											href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}">${dto.cb_title }
+										<td class="title px-4 py-4" style="cursor: pointer;"  onclick="location.href='/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+											${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
 													<span style="color: red;">[${dto.cb_reply_count}]</span>
 												</c:if>
-										</a></td>
+										</td>
 								<td class="px-4 py-4 text-center">${dto.cb_writer }</td>
 								<td class="px-4 py-4 text-center">${dto.detailDate }</td>
 								<td class="px-4 py-4 text-center">${dto.cb_view_count }</td>

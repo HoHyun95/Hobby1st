@@ -39,6 +39,11 @@ public class MemberDAO {
 		return mybatis.selectOne("member.id_check", id);
 	}
 	
+	public int email_check(String user_email) {
+		return mybatis.selectOne("member.email_check", user_email);
+	}
+	
+	
 	// ClubListController 에서 사용. 
 	public List<MemberDTO> getNameForCreateClub(String mem_ID){
 		return mybatis.selectList("member.getNameForCreateClub", mem_ID);

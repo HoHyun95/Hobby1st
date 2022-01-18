@@ -10,6 +10,8 @@
 		select count(*) cl_count from
 		clublist
 	</select>
+	
+	
 	<!-- 동호회 -->
 
 	<insert id="createClub">

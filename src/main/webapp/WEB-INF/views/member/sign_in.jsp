@@ -86,7 +86,7 @@
                    <button class="button_login" type="submit">login</button>
                </div>
                <div class="footer_font">
-                   <a class="a_login" href="/member/find_email">이메일찾기</a>
+                   <a class="a_login" href="/member/send_email">이메일찾기</a>
                    <a class="a_login" href="/member/sign_up">회원가입</a>
                </div>
            </div>

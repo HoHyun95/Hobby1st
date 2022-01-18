@@ -17,7 +17,7 @@
 		#{cl_desc},
 		#{cl_boss_id}, #{cl_boss_name}, #{cl_maxMem}, #{cl_local},
 		default,
-		default, #{cl_category_id}, #{cl_dCategory_id})
+		default, #{cl_category_id}, #{cl_dCategory_id}, default)
 
 		<selectKey resultType="int" order="AFTER"
 			keyProperty="cl_id">

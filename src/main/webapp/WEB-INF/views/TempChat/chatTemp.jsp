@@ -51,8 +51,8 @@
 
 					<!-- 메세지 컨텐츠 시작 -->
 					<div id="chat_contents">
-			
-			
+
+
 						<div class="incoming_msg">
 							<div class="received_msg">
 
@@ -86,7 +86,7 @@
 									<div class="outgoing_msg">
 										<div class="sent_msg">
 											<p>${chatList.chat_contents }</p>
-											<span class="time_date">${chatList.chat_write_date }</span>
+											<span class="time_date">${chatList.formDate}</span>
 										</div>
 									</div>
 
@@ -99,7 +99,7 @@
 
 									<div class="received_withd_msg">
 										<p>${chatList.chat_contents }</p>
-										<span class="time_date">${chatList.chat_write_date }</span>
+										<span class="time_date">${chatList.formDate }</span>
 									</div>
 
 
@@ -139,8 +139,51 @@
 
 
 			<script>
-		
 			
+			
+		let date = new Date();
+		let si = date.getHours();
+		let bun = date.getMinutes();
+		
+		
+		console.log(date.getFullYear()); //년
+		console.log(date.getMonth()+1); //월
+		console.log(date.getDate()); //일 
+		console.log(date.getHours()); //시 
+		console.log(date.getMinutes()); //분
+			
+
+		// 수신 / 송신 구분 div 
+		 let htmlData ="";
+		 
+
+  		function sendMsg(eData){
+  		
+  			 
+      		console.log("내가 보내는 메세지 ");
+      		
+      		htmlData += "<div class='outgoing_msg'>";
+  			htmlData +=   	"<div class='sent_msg'>";
+      		htmlData +=			"<p>"+eData+"</p>";
+      		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
+      		htmlData += 	"</div>"
+      		htmlData +=	"</div>"
+      		}
+  		
+  		function receiveMsg(eData){
+  			
+      		console.log("수신 메세지");
+      		
+              htmlData += "<div class='incoming-msg'>";
+              htmlData += "	<div class='received_msg'>";
+              htmlData += "		<div class='received_withd_msg'>";
+              htmlData += "			<p>"+eData+"</p>";
+              htmlData += " 		</div>";
+              htmlData += " 	</div>";
+              htmlData += "</div>";
+      		}
+		
+		
      let ws = new WebSocket("ws://localhost/chat");
     
      $('#chatSendBtn').on('click', () => {
@@ -166,45 +209,21 @@
      ws.onmessage = function(e){
  		let eData = e.data;
 
- 		  let htmlData ="";
-
-    		function sendMsg(){
-        		console.log("내가 보내는 메세지 ");
-        		
-        		htmlData += "<div class='outgoing_msg'>";
-    			htmlData +=   	"<div class='sent_msg'>";
-        		htmlData +=			"<p>"+eData+"</p>";
-        		htmlData += 		"<span class='time_date'>시간 설정 준비중..</span>"
-        		htmlData += 	"</div>"
-        		htmlData +=	"</div>"
-        		}
-    		
-    		function receiveMsg(){
-        		console.log("수신 메세지");
-        		
-                htmlData += "<div class='incoming-msg'>";
-                htmlData += "	<div class='received_msg'>";
-                htmlData += "		<div class='received_withd_msg'>";
-                htmlData += "			<p>"+eData+"</p>";
-                htmlData += " 		</div>";
-                htmlData += " 	</div>";
-                htmlData += "</div>";
-        		}
-     		
     	if($('#mem_writer').val() == $('#session_user_name').val()){
-    		sendMsg();		
-    		
+    		sendMsg(eData);		
+    	    $('#chat_contents').append(htmlData);
+    		htmlData="";
+  
+
     	}else{
-    		recevieMsg();
+    		recevieMsg(eData);
+    	    $('#chat_contents').append(htmlData);
+    		htmlData="";
+    	}
+    	
          }
     	
-        $('#chat_contents').append(htmlData);
-    	}
 
-
-
-
-	
 // 		.done(function(resp)
 // 				{
 // 			if(resp == 1){

@@ -8,14 +8,14 @@
 	<!-- 동호회 수 -->
 	<select id="countClub" resultType="int">
 		select count(*) cl_count from
-		clublist
+		club_list
 	</select>
 	
 	
 	<!-- 동호회 -->
 
 	<insert id="createClub">
-		insert into clublist values(clublist_seq.nextval, #{cl_name},
+		insert into club_list values(clublist_seq.nextval, #{cl_name},
 		#{cl_desc},
 		#{cl_boss_id}, #{cl_boss_name}, #{cl_maxMem}, #{cl_local},
 		default,
@@ -28,21 +28,21 @@
 	</insert>
 
 	<select id="nameCheck" resultType="int">
-		select count(*) from clubList
+		select count(*) from club_list
 		where cl_name = #{cl_name}
 	</select>
 
 	<select id="selectAll" resultType="map">
 		select cl.*, clp.clp_photo
-		from clublist cl, clublist_photo clp where cl.cl_id = clp.clp_id
+		from club_list cl, clublist_photo clp where cl.cl_id = clp.clp_id
 	</select>
 
 	<select id="selectClub" resultType="map">
-	select clublist.*, clp_photo from clublist,(select * from clublist_photo where clp_id =${value}) where cl_id = ${value}
+	select club_list.*, clp_photo from club_list,(select * from clublist_photo where clp_id =${value}) where cl_id = ${value}
 	</select>
 
 	<select id="searchClub" resultType="kh.hobby1st.dto.ClubListDTO">
-		select * from clublist where
+		select * from club_list where
 		${column} like '%' || #{value} || '%'
 	</select>
 

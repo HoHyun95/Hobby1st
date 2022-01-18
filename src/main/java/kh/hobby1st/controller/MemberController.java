@@ -4,10 +4,15 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +26,11 @@ public class MemberController {
 
 	@Autowired
 	private HttpSession session;
+	
 
+    @Autowired
+    private JavaMailSenderImpl mailSender;
+	
 	@Autowired
 	private MemberService mem_service;
 
@@ -36,7 +45,7 @@ public class MemberController {
 	public String login(String mem_id, String mem_pass) {
 
 
-		int result = (Integer)mem_service.login(mem_id, mem_pass);
+		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
 
 			//사용자 이름 session 저장
@@ -125,6 +134,52 @@ public class MemberController {
 		}
 		return "redirect: sign_in";
 	}
+	
+	//email_page
+	@RequestMapping("find_email") 
+	public String find_email() {
+		return "member/sign_email";
+	}
+	
+	//find-email!!
+	@RequestMapping(value="send_email")
+	public String send_email(String email, Model model) {
+		System.out.println("접속 확인입니다. : " + email);
+	    int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+
+	    String from = "nocoolboy@naver.com";
+	    String to= email;
+	    String title = "회원가입시 필요한 인증번호 입니다.";
+	    String content = "[인증번호] "+ serti +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
+	    String num = "";
+		
+	    try {
+	    	MimeMessage mail = mailSender.createMimeMessage();
+	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+	        
+	        mailHelper.setFrom(from);
+	        mailHelper.setTo(to);
+	        mailHelper.setSubject(title);
+	        mailHelper.setText(content, true);       
+	        
+	        mailSender.send(mail);
+	        num = Integer.toString(serti);
+	        System.out.println("이메일 전송 성공 :" + num);
+	        model.addAttribute("num",num);
+	        
+	    } catch(Exception e) {
+	    	System.out.println(num);
+	        num = "error";
+	    }
+		return "member/sign_email";
+	}
+	
+	@RequestMapping(value="email_num")
+	public String num_email(String email_num, String num) {
+		System.out.println(num + "의 값은" + email_num);
+		return "member/sign_email";
+	}
+
 }
 
 

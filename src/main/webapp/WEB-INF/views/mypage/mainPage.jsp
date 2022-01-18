@@ -12,6 +12,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+   <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   <link rel="stylesheet" href="/css/default.css">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/mypage.css">
@@ -114,6 +115,9 @@
       <div class="profile_desc_area">
         <div class="profile_name">
           <div id="profile_name_text">11HERTZ 님의 마이페이지</div>
+          내가 만든 동호회 갯수 : ${fn:length(clubList_make)}
+          내가 가입한 동호회 갯수 : ${fn:length(clubList_join)}
+          내가 관심있는 동호회 갯수 : ${fn:length(clubList_interest)}
         </div>
       </div>
       <div class="profile_dashboard">

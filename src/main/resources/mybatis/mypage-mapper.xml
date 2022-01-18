@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  <mapper namespace="Mypage">
+  	
+  	<select id="clubList_make" resultType="kh.hobby1st.dto.ClubListDTO">
+  		select * from clublist where cl_boss_id = #{value}
+  	</select>
+  	
+  	<select id="clubList_join" resultType="kh.hobby1st.dto.ClubListDTO">
+  		select l.* from club_member m  join clublist l on(m.cm_par_seq = l.cl_id) where cm_mem_id = #{value} and cl_boss_id != #{value}
+  	</select>
+  	
+  	<select id="clubList_interest" resultType="kh.hobby1st.dto.ClubListDTO">
+  		select l.* from club_list_rec r join clublist l on(r.cl_seq = l.cl_id) where r.rec_id = #{value}
+  	</select>
+  	
+  	
+  </mapper>

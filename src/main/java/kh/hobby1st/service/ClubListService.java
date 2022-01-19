@@ -21,7 +21,7 @@ public class ClubListService {
 	public int countClub() {
 		return cldao.countClub();
 	}
-//
+
 	
 	public int createClub(ClubListDTO dto) {
 		return cldao.createClub(dto);
@@ -31,12 +31,12 @@ public class ClubListService {
 		return cldao.nameCheck(cl_name);
 	}
 
-	public 	List<Map<String, Object>> selectAll() {
+	public 	List<ClubListDTO> selectAll() {
 		return cldao.selectAll();
 	}
 	
 	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보-> 
-	public List<Map<String, Object>> selectClub(String cl_id){
+	public List<ClubListDTO> selectClub(String cl_id){
 		return cldao.selectClub(cl_id);
 	}
 

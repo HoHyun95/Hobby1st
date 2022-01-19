@@ -47,7 +47,7 @@ public class ClubListController {
 
 
 		//동호회 리스트 + 동호회 사진 
-		List<Map<String, Object>> map = clService.selectAll();
+		List<ClubListDTO> map = clService.selectAll();
 			
 		System.out.println(map.size());
 		System.out.println(map);
@@ -93,8 +93,9 @@ public class ClubListController {
 	@RequestMapping("createClubProc")
 	public String createClub(ClubListDTO dto, MultipartFile file) throws Exception {
 
-		int cl_id = clService.createClub(dto);
-
+		System.out.println(dto.getCl_maxMem());
+		System.out.println(dto.getCl_local());
+		System.out.println(dto.getCl_desc());
 
 		String realPath = session.getServletContext().getRealPath("clubPic");
 
@@ -110,9 +111,12 @@ public class ClubListController {
 			System.out.println(photoName);
 
 			file.transferTo(new File(realPath+"/"+photoName));
-			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
+//			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
+			dto.setCl_photo(realPath+"/"+photoName);
+			int result = clService.createClub(dto);
 		}
 		return "redirect:/";
+		
 	}
 
 	@ResponseBody

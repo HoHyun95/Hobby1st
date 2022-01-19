@@ -36,7 +36,7 @@
 		select * from club_list
 	</select>
 
-	<select id="selectClub" resultType="map">
+	<select id="selectClub" resultType="kh.hobby1st.dto.ClubListDTO">
 	select * from club_list where cl_id = ${value}
 	</select>
 

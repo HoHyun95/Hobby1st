@@ -29,8 +29,8 @@ public class ClubListDAO {
 	return mybatis.selectList("ClubList.selectAll");
 	}
 	
-	public List<ClubListDTO> selectClub(String cl_id){
-		return mybatis.selectList("ClubList.selectClub", cl_id);
+	public ClubListDTO selectClub(String cl_id){
+		return mybatis.selectOne("ClubList.selectClub", cl_id);
 	}
 	
 	public List<ClubListDTO> searchClub(String searchField, String searchText){

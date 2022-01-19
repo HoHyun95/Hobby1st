@@ -37,7 +37,7 @@
 								
 								
 								<!--  동호회 이름 --> <span>
-									${clubInfo[0].CL_NAME } </span> <br>
+									${clubInfo.CL_NAME } </span> <br>
 							</li>
 						</ul>
 

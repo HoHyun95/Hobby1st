@@ -50,7 +50,7 @@
       for (let i = 0; i < myclub_list_box.length; i++) {
         myclub_list_box[i].onclick = () => {
           let clickedList = myclub_list_box[i].children[5].value;
-          location.href = "/clublist/showList?cl_id=" + clickedList;
+          location.href = "/clubHouse?cl_id=" + clickedList;
         }
       }
     }

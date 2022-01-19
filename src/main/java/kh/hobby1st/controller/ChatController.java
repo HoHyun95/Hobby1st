@@ -1,7 +1,6 @@
 package kh.hobby1st.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.hobby1st.dto.ChatDTO;
+import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.ChatService;
 import kh.hobby1st.service.ClubListService;
@@ -44,7 +44,7 @@ public class ChatController {
 		String mem_id =(String)session.getAttribute("mem_id");
 		model.addAttribute("user_name", user_name);
 
-		List<Map<String, Object>> map = clService.selectClub(cl_id);	
+		List<ClubListDTO> map = clService.selectClub(cl_id);	
 		model.addAttribute("clubInfo", map);
 
 		// 로그인 멤버 정보

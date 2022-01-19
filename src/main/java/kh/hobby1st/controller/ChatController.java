@@ -44,7 +44,7 @@ public class ChatController {
 		String mem_id =(String)session.getAttribute("mem_id");
 		model.addAttribute("user_name", user_name);
 
-		List<ClubListDTO> map = clService.selectClub(cl_id);	
+		ClubListDTO map = clService.selectClub(cl_id);	
 		model.addAttribute("clubInfo", map);
 
 		// 로그인 멤버 정보

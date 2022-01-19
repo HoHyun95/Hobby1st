@@ -88,6 +88,14 @@ public class HomeController {
 		return "club";
 	}
 	
+	@RequestMapping("clubHouse")
+	public String clubHouse(String cl_id, Model model) {
+		ClubListDTO club = clService.selectClub(cl_id);
+		model.addAttribute("club", club);
+		return "clubHouse";
+	}
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

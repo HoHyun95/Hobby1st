@@ -98,10 +98,10 @@
         <div class="club_profile_box">
           <div class="club_profile_desc">
             <div class="club_profile_desc_contents">
-              <div class="club_profile_title">CLUB TITLE</div>
-              <div class="club_profile_member_count">MEMBER COUNT</div>
-              <div class="club_profile_loc">CLUB LOCATION</div>
-              <div class="club_profile_themes">CLUB THEME1 / CLUB THEME2</div>
+              <div class="club_profile_title">${club.cl_name }</div>
+              <div class="club_profile_member_count">${club.cl_memCount } / ${club.cl_maxMem }</div>
+              <div class="club_profile_loc">${club.cl_local }</div>
+              <div class="club_profile_themes">${club.cl_category_id } / ${club.cl_dCategory_id }</div>
             </div>
           </div>
           <div class="club_profile_btns">

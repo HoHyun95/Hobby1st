@@ -88,18 +88,22 @@ public class HomeController {
 		return "club";
 	}
 	
+	// club 상세페이지
 	@RequestMapping("clubHouse")
 	public String clubHouse(String cl_id, Model model) {
 		ClubListDTO club = clService.selectClub(cl_id);
+		String mem_id = (String)session.getAttribute("mem_id");
+		int checkMember = clService.checkMember(Integer.parseInt(cl_id), mem_id);
+		
 		model.addAttribute("club", club);
+		model.addAttribute("checkMember", checkMember);
 		return "clubHouse";
 	}
-	
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		System.out.println("예외 처리 코드가 실행되었습니다.");
-		return "redirect:/";
+		return "error";
 	}
 }

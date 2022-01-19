@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -33,8 +32,11 @@
 							<li><i class="fas fa-arrow-left" id="back"></i></li>
 							<li>
 								<!--  동호회 채팅 이미지 --> <img
-								src="${pageContext.request.contextPath}/clubPic/${clubInfo[0].CLP_PHOTO}"
-								class="club_photo"> <!--  동호회 이름 --> <span>
+								src=""
+								class="club_photo"> 
+								
+								
+								<!--  동호회 이름 --> <span>
 									${clubInfo[0].CL_NAME } </span> <br>
 							</li>
 						</ul>
@@ -139,27 +141,44 @@
 
 
 			<script>
+			 let ws = new WebSocket("ws://172.30.1.30/chat");
 			
-			
-		let date = new Date();
-		let si = date.getHours();
-		let bun = date.getMinutes();
-		
-		
-		console.log(date.getFullYear()); //년
-		console.log(date.getMonth()+1); //월
-		console.log(date.getDate()); //일 
-		console.log(date.getHours()); //시 
-		console.log(date.getMinutes()); //분
-			
+			 
+		     ws.onmessage = function(e){
+		      	let eData = e.data;
 
+		         if($('#mem_writer').val() == $('#session_user_name').val()){
+		         	sendMsg(eData);		
+		             $('#chat_contents').append(htmlData);
+		       		htmlData="";
+
+		        }else{
+		       		recevieMsg(eData);
+		       	    $('#chat_contents').append(htmlData);
+		       		htmlData="";
+		       		}
+	         	}
+			
+			
+			let date = new Date();
+			let si = date.getHours();			
+			let bun = date.getMinutes();
+			
+			if(si < 10){
+				si = "0"+si;
+			
+				}
+			
+			if(bun < 10){
+				bun = "0"+bun;
+			
+			}
+
+		
 		// 수신 / 송신 구분 div 
 		 let htmlData ="";
 		 
-
-  		function sendMsg(eData){
-  		
-  			 
+  		function sendMsg(eData){	 
       		console.log("내가 보내는 메세지 ");
       		
       		htmlData += "<div class='outgoing_msg'>";
@@ -168,10 +187,10 @@
       		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
+      		
       		}
   		
   		function receiveMsg(eData){
-  			
       		console.log("수신 메세지");
       		
               htmlData += "<div class='incoming-msg'>";
@@ -181,64 +200,83 @@
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";
+     	
       		}
+  		
+  		
+   		 function insertIntoDB(){ 
+    	 	$.ajax({
+   				url : "/chat/insertChatIntoDB",
+   				method : "post",
+   				data : {
+   					chat_cl_id : "${clubInfo[0].CL_ID}",
+   					chat_cl_name : "${clubInfo[0].CL_NAME}",
+   					chat_contents :  $('#sendText').val(),
+   					chat_writer : "${member[0].mem_name}"
+   					}
+   			 	})
+   			}
 		
 		
-     let ws = new WebSocket("ws://localhost/chat");
     
+   		$('#sendText').on('keyup', () => {
+   			
+   			let textValue = $('#sendText').val();
+   		
+   			if(
+   				textValue.length > 198
+   			){
+				alert("200자 이상 전송할 수 없습니다");
+				return false;
+				
+   			}else{
+   				return true;
+   			}
+   		})
+     
+     $('#sendText').on("keypress",function(e){
+    	 
+			let textValue = $('#sendText').val();
+   			let trimedValue = $.trim(textValue);
+    	 
+    	 
+         if(e.keyCode==13 && e.shiftKey==false){
+
+           if($('#sendText').val() == ""){
+        	   return false;
+           
+           }else if(trimedValue == "" ){
+				alert("공백은 전송할 수 없습니다");
+				return false;
+           }
+           
+
+			let text = textValue;
+     	    ws.send(text);
+            	 
+     	    insertIntoDB();
+  	 
+ 	    $('#sendText').val("");
+  	    $('#sendText').focus();   
+
+     		}
+         })
+
+         
      $('#chatSendBtn').on('click', () => {
 
-    	 $.ajax({
-    			url : "/chat/insertChatIntoDB",
-    			method : "post",
-    			data : {
-    				chat_cl_id : "${clubInfo[0].CL_ID}",
-    					chat_cl_name : "${clubInfo[0].CL_NAME}",
-    					chat_contents :  $('#sendText').val(),
-    					chat_writer : "${member[0].mem_name}"
-    			}
-    	 })
-    	 
     		let text = $('#sendText').val();
-    	    $('#sendText').val("");
-    	    $('#sendText').focus();
     	    ws.send(text);
     		
+			insertIntoDB();
+    	    	
+	   		 $('#sendText').val("");
+ 	   		 $('#sendText').focus();
     		})
      
-     ws.onmessage = function(e){
- 		let eData = e.data;
+    		
 
-    	if($('#mem_writer').val() == $('#session_user_name').val()){
-    		sendMsg(eData);		
-    	    $('#chat_contents').append(htmlData);
-    		htmlData="";
-  
 
-    	}else{
-    		recevieMsg(eData);
-    	    $('#chat_contents').append(htmlData);
-    		htmlData="";
-    	}
-    	
-         }
-    	
-
-// 		.done(function(resp)
-// 				{
-// 			if(resp == 1){
-			
-// 				console.log("여기는 성공 ");
-// 				sendMsg();
-// 				return;
-// 			}else{
-// 				console.log("여기는 실패 ");
-// 				receiveMsg();
-// 				return;
-		
-
-	 
-	 
 
    </script>
 </body>

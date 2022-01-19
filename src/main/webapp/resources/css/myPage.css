@@ -1,0 +1,339 @@
+/* profile */
+.profile {
+  margin-top: 30px;
+  margin: 0 auto;
+  width: 1260px;
+  height: 175px;
+  background-color: var(--color2);
+  box-shadow: 1px 1px 1px 1px darkgrey;
+}
+
+.profile_box {
+  margin-top: 10px;
+  padding: 20px 30px 0px 30px;
+  border: none;
+  display: flex;
+}
+
+.profile_contents_area {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  padding: 20px 0px 0px 0px;
+}
+
+.profile_photo_area {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  overflow: hidden;
+  border: none;
+}
+
+.profile_photo img {
+  width: 100%;
+  height: 100%;
+}
+
+.profile_text_area {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile_text {
+  width: 100%;
+}
+
+.profile_text_name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  padding: 0px 0px 3px 30px;
+}
+
+.profile_text_loc, .profile_text_email, .profile_text_phone {
+  font-size: 0.9rem;
+  padding: 2px 0px 2px 30px;
+}
+
+.profile_text_loc i, .profile_text_email i, .profile_text_phone i {
+  font-size: 1.0rem;
+  color: darkgrey;
+}
+
+.profile_btn_area {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+}
+
+.btn_item {
+  border: none;
+  width: 100%;
+}
+
+button {
+  width: 150px;
+  height: 35px;
+  font-size: 0.8rem;
+}
+
+#showProfile {
+  border: 1px solid var(--color1);
+  background-color: var(--color2);
+  color: var(--color1);
+}
+
+#showProfile:hover {
+  border: 1px solid var(--color1);
+  background-color: var(--color1);
+  color: var(--color2);
+  cursor: pointer;
+}
+
+/* profile end */
+
+/* profile dashboard */
+.profile_dashboard {
+  width: 1260px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 0px 30px 0px 30px;
+  box-shadow: 1px 1px 1px 1px darkgrey;
+}
+
+.profile_dashboard_text {
+  width: 1260px;
+  font-size: 1.1rem;
+  padding: 20px 0px 10px 0px;
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.profile_dashboard_contents_wrap {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile_dashboard_contents {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px darkgrey;
+  background-color: var(--color2);
+}
+
+.profile_dashboard_contents_icon {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+#my {
+  color: dodgerblue;
+}
+
+#join {
+  color: mediumaquamarine;
+}
+
+#like {
+  color: tomato;
+}
+
+#write_count {
+  color: orange;
+}
+
+
+.profile_dashboard_contents_desc {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_dashboard_contents_desc_title {
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.profile_dashboard_contents_desc_no {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+/* profile dashboard end */
+
+/* recent_act */
+.recent_act {
+  width: 1260px;
+  height: fit-content;
+  margin: 0 auto;
+  padding: 20px 30px 20px 30px;
+  box-shadow: 1px 1px 1px 1px darkgrey;
+}
+
+.recent_act_title_text {
+  font-size: 1.1rem;
+  padding: 0px 0px 10px 0px;
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.recent_act_contents_wrap {
+  height: 100%;
+  box-shadow: 1px 1px 1px 1px dimgrey;
+  border-radius: 3px;
+  background-color: var(--color2);
+}
+
+.recent_act_contents_header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px 0px 5px 0px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: dimgrey;
+  border: none;
+  border-bottom: 1px solid dimgrey;
+  background-color: var(--bg-color4);
+  text-align: center;
+}
+
+.recent_act_contents_header_list {
+  width: 25%;
+}
+
+.recent_act_contents {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px 0px 5px 0px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: dimgrey;
+  border: none;
+  border-bottom: 1px solid dimgrey;
+  text-align: center;
+}
+
+.recent_act_contents_list {
+  width: 25%;
+}
+
+#no1 {
+  border: 1px solid dimgrey;
+  padding: 0px 5px 0px 5px;
+  font-size: 0.7rem;
+  color: dimgrey;
+}
+
+#no2 {
+  border: 1px solid dodgerblue;
+  padding: 0px 5px 0px 5px;
+  font-size: 0.7rem;
+  color: dodgerblue;
+}
+
+#no3 {
+  border: 1px solid mediumaquamarine;
+  padding: 0px 5px 0px 5px;
+  font-size: 0.7rem;
+  color: mediumaquamarine;
+}
+
+#no4 {
+  border: 1px solid tomato;
+  padding: 0px 5px 0px 5px;
+  font-size: 0.7rem;
+  color: tomato;
+}
+/* recent_act end */
+
+/* container */
+.container {
+  width: 1260px;
+  height: fit-content;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  padding: 10px 20px 10px 20px;
+  box-shadow: 1px 1px 1px 1px dimgrey;
+}
+
+.myclub_lis_title_text {
+  font-size: 1.1rem;
+  padding: 10px 0px 0px 10px;
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.myclub_list_wrap {
+  height: 100%;
+  padding: 0px 0px 30px 0px;
+  border: 1px solid var(--bg-color5);
+}
+
+.myclub_list {
+  height: 100%;
+  padding: 0px 0px 10px 0px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  
+}
+
+.myclub_list_box_wrap {
+  width: 20%;
+  height: 300px;
+  display: flex;
+  padding: 10px 10px 20px 10px;
+}
+
+.myclub_list_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--color1);
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+/* container end */

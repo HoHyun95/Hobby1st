@@ -34,11 +34,15 @@ public class MemberService {
 		return mem_dao.id_check(id);
 	}
 	
-	public int email_check(String user_email) {
-		return mem_dao.email_check(user_email);
+	//이메일 찾기 기능
+	public int email_check(String email) {
+		return mem_dao.email_check(email);
 	}
+
 
 	public MemberDTO selectOne(String mem_ID){
 		return mem_dao.selectOne(mem_ID);
 	}
+
+	
 }

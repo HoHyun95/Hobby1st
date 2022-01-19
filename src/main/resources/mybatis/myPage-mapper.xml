@@ -21,6 +21,6 @@
   	
   	
   	<select id="clubBoardList" resultType="kh.hobby1st.dto.ClubBoardDTO">
-  		select count(*) from club_board where cb_writer = #{value}
+  		select * from club_board where cb_writer = #{value}
   	</select>
   </mapper>

@@ -54,7 +54,7 @@
       <div class="header_inner">
         <div class="header_inner_top">
           <div class="logo">
-            <a href="home"><img src="/images/LOGO.png"></a>
+            <a href="/"><img src="/images/LOGO.png"></a>
           </div>
           <ul class="login_list">
             <c:choose>
@@ -106,8 +106,18 @@
           </div>
           <div class="club_profile_btns">
             <div class="club_profile_btns_item">
-              <button type="button" id="joinClub"><i class="fas fa-user-check"></i> 가입하기</button>
-              <button type="button" id="likeClub"><i class="far fa-thumbs-up"></i> 관심등록</button>
+             	<c:if test="${checkMember eq 0}">
+              	  <button type="button" id="joinClub"><i class="fas fa-user-check"></i> 가입하기</button>
+              	</c:if>
+              	<c:if test="${checkMember eq 1}">
+              	  <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
+              	</c:if>
+              	<c:if test="${checkMember eq 2}">
+              	  <button type="button" id="controlClub"><i class="fas fa-address-book"></i> 동호회 관리</button>
+                  <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
+              	</c:if>
+              <!-- <button type="button" id="likeClub"><i class="far fa-heart"></i> LIKE</button>
+              <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button>  -->
             </div>
           </div>
         </div>

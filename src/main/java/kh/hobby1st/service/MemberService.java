@@ -38,7 +38,7 @@ public class MemberService {
 		return mem_dao.email_check(user_email);
 	}
 
-	public List<MemberDTO> getNameForCreateClub(String mem_ID){
-		return mem_dao.getNameForCreateClub(mem_ID);
+	public MemberDTO selectOne(String mem_ID){
+		return mem_dao.selectOne(mem_ID);
 	}
 }

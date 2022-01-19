@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -38,7 +37,7 @@
 								
 								
 								<!--  동호회 이름 --> <span>
-									${clubInfo[0].cl_name } </span> <br>
+									${clubInfo[0].CL_NAME } </span> <br>
 							</li>
 						</ul>
 
@@ -142,7 +141,7 @@
 
 
 			<script>
-			 let ws = new WebSocket("ws://localhost/chat");
+			 let ws = new WebSocket("ws://172.30.1.30/chat");
 			
 			 
 		     ws.onmessage = function(e){
@@ -210,8 +209,8 @@
    				url : "/chat/insertChatIntoDB",
    				method : "post",
    				data : {
-   					chat_cl_id : "${clubInfo[0].cl_id}",
-   					chat_cl_name : "${clubInfo[0].cl_name}",
+   					chat_cl_id : "${clubInfo[0].CL_ID}",
+   					chat_cl_name : "${clubInfo[0].CL_NAME}",
    					chat_contents :  $('#sendText').val(),
    					chat_writer : "${member[0].mem_name}"
    					}
@@ -252,11 +251,10 @@
            }
            
 
-//            	let text = $('#sendText').val();
 			let text = textValue;
      	    ws.send(text);
             	 
-//      	    insertIntoDB();
+     	    insertIntoDB();
   	 
  	    $('#sendText').val("");
   	    $('#sendText').focus();   
@@ -270,7 +268,7 @@
     		let text = $('#sendText').val();
     	    ws.send(text);
     		
-// 			insertIntoDB();
+			insertIntoDB();
     	    	
 	   		 $('#sendText').val("");
  	   		 $('#sendText').focus();

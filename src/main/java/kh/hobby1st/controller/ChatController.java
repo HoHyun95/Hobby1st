@@ -48,7 +48,7 @@ public class ChatController {
 		model.addAttribute("clubInfo", map);
 
 		// 로그인 멤버 정보
-		List<MemberDTO> memberInfo = mem_service.getNameForCreateClub(mem_id);
+		MemberDTO memberInfo = mem_service.selectOne(mem_id);
 		// Login ID 를 통해 로그인한 멤버의 정보를 가져온다.
 		model.addAttribute("member", memberInfo);
 

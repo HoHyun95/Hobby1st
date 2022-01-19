@@ -1,7 +1,6 @@
 package kh.hobby1st.dao;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,8 +45,8 @@ public class MemberDAO {
 	
 	
 	// ClubListController 에서 사용. 
-	public List<MemberDTO> getNameForCreateClub(String mem_ID){
-		return mybatis.selectList("member.getNameForCreateClub", mem_ID);
+	public MemberDTO selectOne(String mem_ID){
+		return mybatis.selectOne("member.selectOne", mem_ID);
 	}
 	
 

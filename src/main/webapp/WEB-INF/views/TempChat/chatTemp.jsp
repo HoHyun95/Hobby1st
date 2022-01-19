@@ -141,7 +141,7 @@
 
 
 			<script>
-			 let ws = new WebSocket("ws://172.30.1.30/chat");
+			 let ws = new WebSocket("ws://172.30.1.30:22000/chat");
 			
 			 
 		     ws.onmessage = function(e){

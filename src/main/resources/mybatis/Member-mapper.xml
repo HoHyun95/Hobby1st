@@ -24,7 +24,7 @@
 	    select count(*) from member
 	</select>
 	
-    <select id="getNameForCreateClub" resultType="kh.hobby1st.dto.MemberDTO">
+    <select id="selectOne" resultType="kh.hobby1st.dto.MemberDTO">
 		select * from member where mem_id = #{id}
 	</select>
 	

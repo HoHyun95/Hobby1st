@@ -38,8 +38,9 @@ public class MemberDAO {
 		return mybatis.selectOne("member.id_check", id);
 	}
 	
-	public int email_check(String user_email) {
-		return mybatis.selectOne("member.email_check", user_email);
+	//이메일 인증시 이메일 존재여부 체크
+	public int email_check(String email) {
+		return mybatis.selectOne("member.email_check", email);
 	}
 	
 	
@@ -47,4 +48,6 @@ public class MemberDAO {
 	public MemberDTO selectOne(String mem_ID){
 		return mybatis.selectOne("member.selectOne", mem_ID);
 	}
+	
+
 }

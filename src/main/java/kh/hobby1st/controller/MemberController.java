@@ -26,11 +26,10 @@ public class MemberController {
 
 	@Autowired
 	private HttpSession session;
-	
 
-    @Autowired
-    private JavaMailSenderImpl mailSender;
-	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+
 	@Autowired
 	private MemberService mem_service;
 
@@ -44,19 +43,16 @@ public class MemberController {
 	@RequestMapping("login")
 	public String login(String mem_id, String mem_pass) {
 
-
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
 
 			//사용자 이름 session 저장
+
 			MemberDTO mem_dto = mem_service.selectOne(mem_id);
 			String user_name = mem_dto.getMem_name();
 			
 			session.setAttribute("mem_id", mem_id);
 			session.setAttribute("user_name", user_name);
-
-			System.out.println("세션 아이디 : " + session.getAttribute("mem_id"));
-			System.out.println("세션 멤버 이름 :" + session.getAttribute("user_name"));
 		}
 		return "redirect: /";
 	}
@@ -134,49 +130,49 @@ public class MemberController {
 		}
 		return "redirect: sign_in";
 	}
-	
 
-	
+
+
 	//find-email!!
-	@RequestMapping(value="send_email")
-	public String send_email(String email, Model model) {
-		System.out.println("접속 확인입니다. : " + email);
-	    int random_num = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+	@RequestMapping(value="find_email")
+	public String find_email(String email, Model model) {
+		int result = mem_service.email_check(email);
 
-	    String send_from = "nocoolboy@naver.com";
-	    String user_email= email;
-	    String title = "회원가입시 필요한 인증번호 입니다.";
-	    String content = "[인증번호] "+ random_num +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
-	    String num = "";
-		
-	    try {
-	    	MimeMessage mail = mailSender.createMimeMessage();
-	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-	        
-	        mailHelper.setFrom(send_from);
-	        mailHelper.setTo(user_email);
-	        mailHelper.setSubject(title);
-	        mailHelper.setText(content, true);       
-	        
-	        mailSender.send(mail);
-	        num = Integer.toString(random_num);
-	        System.out.println("이메일 전송 성공 :" + num);
-	        model.addAttribute("num",num);
-	        
-	    } catch(Exception e) {
-	    	System.out.println(num);
-	        num = "error";
-	    }
+		if(result != 0) {
+			int random_num = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+			String num = "";		
+			try {
+				MimeMessage mail = mailSender.createMimeMessage();
+				MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");	        
+				mailHelper.setFrom("nocoolboy@naver.com"); // 보내는이 
+				mailHelper.setTo(email); // 받는이 
+				mailHelper.setSubject("[하비퍼스트] 회원정보를 찾기 위해 필요한 인증번호입니다. "); // 메일 제목
+				mailHelper.setText("[인증번호]" + random_num + " 입니다. <br/> "
+						+ "인증번호를 확인하여 기입해주세요.", true);  //메일내용     	    
+				mailSender.send(mail);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("random_num", random_num);
+			return "member/sign_email";
+		}else if(result == 0) {
+			model.addAttribute("result",result);
+			return "member/sign_email";
+		}
+		return "member/sign_email";
+	}
+
+	// email page
+	@RequestMapping("send_email")
+	public String send_email() {
 		return "member/sign_email";
 	}
 	
-	@RequestMapping(value="email_num")
-	public String num_email(String email_num, String num) {
-		System.out.println(num + "의 값은" + email_num);
+	@RequestMapping("emailOk")
+	public String email_test() {
+		System.out.println("이메일 인증 성공!");
 		return "member/sign_email";
 	}
-
-
-}
+ }
 
 

@@ -49,8 +49,8 @@ public class MemberController {
 		if(0<result) {
 
 			//사용자 이름 session 저장
-			List<MemberDTO> list = mem_service.getNameForCreateClub(mem_id);
-			String user_name = list.get(0).getMem_name();
+			MemberDTO mem_dto = mem_service.selectOne(mem_id);
+			String user_name = mem_dto.getMem_name();
 			
 			session.setAttribute("mem_id", mem_id);
 			session.setAttribute("user_name", user_name);

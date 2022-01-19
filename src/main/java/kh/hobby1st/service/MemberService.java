@@ -39,6 +39,7 @@ public class MemberService {
 		return mem_dao.email_check(email);
 	}
 
+	// ClubListController 에서 사용. 
 	public List<MemberDTO> getNameForCreateClub(String mem_ID){
 		return mem_dao.getNameForCreateClub(mem_ID);
 	}

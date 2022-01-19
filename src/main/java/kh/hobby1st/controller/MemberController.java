@@ -27,7 +27,6 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 
-
 	@Autowired
 	private JavaMailSenderImpl mailSender;
 
@@ -153,11 +152,9 @@ public class MemberController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("이메일전송에 성공!");
 			model.addAttribute("random_num", random_num);
 			return "member/sign_email";
 		}else if(result == 0) {
-			System.out.println("옳지않은 값입니다. :" + result);
 			model.addAttribute("result",result);
 			return "member/sign_email";
 		}
@@ -169,6 +166,12 @@ public class MemberController {
 	public String send_email() {
 		return "member/sign_email";
 	}
-}
+	
+	@RequestMapping("emailOk")
+	public String email_test() {
+		System.out.println("이메일 인증 성공!");
+		return "member/sign_email";
+	}
+ }
 
 

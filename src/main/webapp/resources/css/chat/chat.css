@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 section {
 	padding-top: 60px;
 	padding-bottom: 60px;
@@ -13,6 +11,20 @@ section {
 ::-webkit-scrollbar-thumb {
 	background: #000;
 	border-radius: 5px;
+}
+
+#cl_name_span {
+	position: absolute;
+	top: 16px;
+	left: 90px;
+}
+
+#cl_memCount {
+	position: absolute;
+	top: 43px;
+	left: 93px;
+	font-size: 13px;
+	border: 1px solid white;
 }
 
 .chat-list-box {
@@ -30,16 +42,15 @@ section {
 	top: 7px;
 }
 
-.club_photo{
-	width : 55px;
-	height : 55px;
-	border-radius : 50%;
+.club_photo {
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
 }
 
 ul.list-inline.text-left.d-inline-block.float-left {
 	margin-bottom: 0;
 }
-
 
 .message-box {
 	display: inline-block;
@@ -96,6 +107,7 @@ span.chat-time {
 }
 
 .head-box-1 {
+	position: relative;
 	display: flow-root;
 	padding: 10px;
 	background: #007bff;
@@ -115,15 +127,13 @@ span.chat-time {
 #chat_contents {
 	padding: 10px;
 	height: 400px;
-	  overflow-y:auto;
-	
+	overflow-y: auto;
 }
 
-.incoming_msg_img {
-	display: inline-block;
-	width: 6%;
-}
-
+/* .incoming_msg_img { */
+/* 	display: inline-block; */
+/* 	width: 6%; */
+/* } */
 .timee {
 	position: absolute;
 	left: 115px;
@@ -143,8 +153,8 @@ span.chat-time {
 	width: 57%;
 }
 
-.sender{
-    font-size: 13px;
+.sender {
+	font-size: 13px;
 }
 
 .received_withd_msg p {
@@ -163,15 +173,14 @@ span.chat-time {
 	color: #747474;
 	display: block;
 	font-size: 12px;
-	margin: 8px 0 0;
+	text-align: end;
 }
 
-.incoming_msg_img img {
-	width: 100%;
-	border-radius: 50px;
-	float: left;
-}
-
+/* .incoming_msg_img img { */
+/* 	width: 100%; */
+/* 	border-radius: 50px; */
+/* 	float: left; */
+/* } */
 .outgoing_msg {
 	overflow: hidden;
 	margin: 10px 0 10px;
@@ -200,9 +209,29 @@ span.chat-time {
 }
 
 .send-message {
+	position: relative;
 	padding: 15px;
 	background: #007bff;
 	height: auto;
+}
+
+.emojiBox {
+	display: none;
+	position: absolute;
+	bottom: 68px;
+	left: 17px;
+	width: 94%;
+	height: 50%;
+	align-items: end;
+	background-color: pink;
+	border-radius: 5px 5px 0px 0px;
+	opacity: 0.7;
+	z-index: 1;
+	margin: auto;
+}
+
+.list-inline>i {
+	pointer: cursor;
 }
 
 .send-message textarea:focus {
@@ -239,5 +268,40 @@ span.chat-time {
 	position: relative;
 }
 
+/*
+emoji
+*/
 
+/* 텍스트 입력창 이모티콘*/
+.emojies {
+	margin: auto;
+	margin-left: 15px;
+}
 
+/* 텍스트 입력창에 불러온 이모티콘 */
+.emojies img {
+	border: 1px solid grey;
+	width: 100px;
+	height: 100px;
+	padding: 10px;
+	margin: auto;
+	cursor: pointer;
+}
+
+/* 텍스트 입력창에 불러온 이모티콘에 마우스 올릴시 */
+.emojies img:hover {
+	transform: scale(1.3);
+}
+
+/* 채팅창 내 이모티콘  */
+.sent_msg>img {
+	height: 70%;
+	width: 70%;
+	margin: auto;
+}
+/* 채팅창 내 이모티콘  */
+.received_withd_msg>img {
+	height: 70%;
+	width: 70%;
+	margin: auto;
+}

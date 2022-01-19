@@ -52,8 +52,6 @@ public class ChatController {
 		// Login ID 를 통해 로그인한 멤버의 정보를 가져온다.
 		model.addAttribute("member", memberInfo);
 
-		System.out.println("controller memName : " +memberInfo.get(0).getMem_name());
-
 		//		chatService.insertChatIntoDB(dto);
 
 		List<ChatDTO> chatList = chatService.chatSelectAll();

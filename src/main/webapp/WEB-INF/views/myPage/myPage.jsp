@@ -24,7 +24,8 @@
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
-
+      let myclub_list_box = document.querySelectorAll(".myclub_list_box");
+      
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -44,6 +45,13 @@
 
       sign_up.onclick = () => {
         location.href = "/member/sign_up";
+      }
+      
+      for (let i = 0; i < myclub_list_box.length; i++) {
+        myclub_list_box[i].onclick = () => {
+          let clickedList = myclub_list_box[i].children[5].value;
+          location.href = "/clublist/showList?cl_id=" + clickedList;
+        }
       }
     }
   </script>
@@ -113,10 +121,10 @@
           </div>
           <div class="profile_text_area">
             <div class="profile_text">
-              <div class="profile_text_name">KIHOON LEE</div>
-              <div class="profile_text_loc"><i class="fas fa-building"></i> SEOUL</div>
-              <div class="profile_text_email"><i class="far fa-envelope"></i> REACHZIN@NAVER.COM</div>
-              <div class="profile_text_phone"><i class="fas fa-phone-alt"></i> 01026720311</div>
+              <div class="profile_text_name">${memberInfo.mem_name }</div>
+              <div class="profile_text_loc"><i class="fas fa-building"></i> ${memberInfo.mem_address }</div>
+              <div class="profile_text_email"><i class="far fa-envelope"></i> ${memberInfo.mem_email }</div>
+              <div class="profile_text_phone"><i class="fas fa-phone-alt"></i> ${memberInfo.mem_phone }</div>
             </div>
           </div>
         </div>
@@ -168,7 +176,7 @@
           </div>
           <div class="profile_dashboard_contents_desc">
             <div class="profile_dashboard_contents_desc_title">작성글 수</div>
-            <div class="profile_dashboard_contents_desc_no">13</div>
+            <div class="profile_dashboard_contents_desc_no">${fn:length(clubBoardList)}</div>
           </div>
         </div>
       </div>
@@ -250,35 +258,65 @@
       <div class="myclub_lis_title_text">MY CLUB LIST</div>
       <div class="myclub_list_wrap">
         <div class="myclub_list">
+          <c:forEach var="my" items="${clubList_make }">
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="my">MY</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
+              <h3>${my.cl_name }</h3>
+              <h5>${my.cl_boss_name }</h5>
+              <h5>${my.cl_local }</h5>
+              <c:choose>
+			    <c:when test="${fn:length(my.cl_desc) gt 15}">
+			      <c:out value="${fn:substring(my.cl_desc, 0, 15)}" />
+			    </c:when>
+			    <c:otherwise>
+			      <h5><c:out value="${my.cl_desc}" /></h5>
+			    </c:otherwise>
+			  </c:choose>
+           	  <input type="hidden" name="cl_id" value="${my.cl_id }">
             </div>
           </div>
-
+          </c:forEach>
+          
+		  <c:forEach var="join" items="${clubList_join }">
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="join">JOIN</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
+              <h3>${join.cl_name }</h3>
+              <h5>${join.cl_boss_name }</h5>
+              <h5>${join.cl_local }</h5>
+              <c:choose>
+			    <c:when test="${fn:length(join.cl_desc) gt 15}">
+			      <c:out value="${fn:substring(join.cl_desc, 0, 15)}" />
+			    </c:when>
+			    <c:otherwise>
+			      <h5><c:out value="${join.cl_desc}" /></h5>
+			    </c:otherwise>
+			  </c:choose>
+           	  <input type="hidden" name="cl_id" value="${join.cl_id }">
             </div>
           </div>
-
+		  </c:forEach>
+		  
+		  <c:forEach var="like" items="${clubList_interest }">
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="like">LIKE</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
+              <h3>${like.cl_name }</h3>
+              <h5>${like.cl_boss_name }</h5>
+              <h5>${like.cl_local }</h5>
+              <c:choose>
+			    <c:when test="${fn:length(like.cl_desc) gt 15}">
+			      <c:out value="${fn:substring(like.cl_desc, 0, 15)}" />
+			    </c:when>
+			    <c:otherwise>
+			      <h5><c:out value="${like.cl_desc}" /></h5>
+			    </c:otherwise>
+			  </c:choose>
+           	  <input type="hidden" name="cl_id" value="${like.cl_id }">
             </div>
           </div>
+          </c:forEach>
         </div>
       </div>
     </div>

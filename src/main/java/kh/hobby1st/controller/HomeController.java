@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
@@ -30,7 +31,7 @@ public class HomeController {
 	private ClubListService clService;
 	
 	@Autowired
-	private MyPageService mpService;
+	private MyPageService myService;
 	
 	@Autowired
 	private HttpSession session;
@@ -63,11 +64,12 @@ public class HomeController {
 		}
 		String my_id = (String) session.getAttribute("mem_id");
 	
-		List<ClubListDTO> clubList_make = mpService.clubList_make(my_id);	// 내가 만든 동호회 리스트
-		List<ClubListDTO> clubList_join = mpService.clubList_join(my_id);	// 내가 가입한 동호회 리스트
-		List<ClubListDTO> clubList_interest = mpService.clubList_interest(my_id);	// 내가 관심있는 동호회 리스트
+		List<ClubListDTO> clubList_make = myService.clubList_make(my_id);	// 내가 만든 동호회 리스트
+		List<ClubListDTO> clubList_join = myService.clubList_join(my_id);	// 내가 가입한 동호회 리스트
+		List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	// 내가 관심있는 동호회 리스트
+		List<ClubBoardDTO> clubBoardList = myService.clubBoardList(my_id);
 		
-		
+		model.addAttribute("clubBoardList", clubBoardList); 
 		model.addAttribute("clubList_make", clubList_make); 
 		model.addAttribute("clubList_join", clubList_join);
 		model.addAttribute("clubList_interest", clubList_interest);

@@ -10,17 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.dto.ClubListDTO;
-import kh.hobby1st.service.MypageService;
+import kh.hobby1st.service.MyPageService;
 
 @Controller
 @RequestMapping("/mypage/")
-public class MypageController {
+public class MyPageController {
 
 	@Autowired
 	private HttpSession session;
 
 	@Autowired
-	private MypageService my_service;
+	private MyPageService my_service;
 
 	// login_page
 	@RequestMapping("/")

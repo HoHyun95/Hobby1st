@@ -50,7 +50,7 @@ public class HomeController {
 		return "fullpage/fullpage";
 	}
 	
-	// MyPage
+	// myPage
 	@RequestMapping("myPage")
 	public String myPage() {
 		if((String)session.getAttribute("mem_id") == null) {

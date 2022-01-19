@@ -1,33 +1,32 @@
-package kh.hobby1st.service;
+package kh.hobby1st.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import kh.hobby1st.dao.MemberDAO;
-import kh.hobby1st.dao.MypageDAO;
 import kh.hobby1st.dto.ClubListDTO;
 
-@Service
-public class MypageService {
-
+@Repository
+public class MyPageDAO {
+	
 	@Autowired
-	public MypageDAO my_dao;
-
+	private SqlSessionTemplate mybatis;
+	
 	// 내가 만든 동호회 리스트
 	public List<ClubListDTO> clubList_make(String id) {
-		return my_dao.clubList_make(id);
+		return mybatis.selectList("Mypage.clubList_make", id);
 	}
-
+	
 	// 내가 가입한 동호회 리스트
 	public List<ClubListDTO> clubList_join(String id) {
-		return my_dao.clubList_join(id);
+		return mybatis.selectList("Mypage.clubList_join", id);
 	}
-
+	
 	// 내가 좋아요 한 동호회 리스트
 	public List<ClubListDTO> clubList_interest(String id) {
-		return my_dao.clubList_interest(id);
+		return mybatis.selectList("Mypage.clubList_interest", id);
 	}
 
 }

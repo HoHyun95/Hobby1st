@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="email_check" resultType="Integer">
-	    select count(*) from member where mem_email = #{user_email}
+	    select count(*) from member where mem_email = #{email}
 	</select>
 	
 </mapper>

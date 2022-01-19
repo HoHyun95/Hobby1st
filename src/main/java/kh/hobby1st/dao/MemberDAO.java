@@ -39,8 +39,8 @@ public class MemberDAO {
 		return mybatis.selectOne("member.id_check", id);
 	}
 	
-	public int email_check(String user_email) {
-		return mybatis.selectOne("member.email_check", user_email);
+	public int email_check(String email) {
+		return mybatis.selectOne("member.email_check", email);
 	}
 	
 	

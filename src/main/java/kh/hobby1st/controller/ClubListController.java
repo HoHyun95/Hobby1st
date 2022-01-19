@@ -37,7 +37,6 @@ public class ClubListController {
 
 	@RequestMapping("createClubPage")
 	public String createClub() {
-		System.out.println("동호회 만드는 임시 페이지 ");
 		return "clubList/createClub";
 	}
 

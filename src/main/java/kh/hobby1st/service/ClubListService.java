@@ -13,30 +13,28 @@ import kh.hobby1st.dto.ClubListDTO;
 @Service
 public class ClubListService {
 
-
 	@Autowired
-	public ClubListDAO cldao; 
-	
+	public ClubListDAO cldao;
+
 //	동호회 수
 	public int countClub() {
 		return cldao.countClub();
 	}
 
-	
 	public int createClub(ClubListDTO dto) {
 		return cldao.createClub(dto);
 	}
 
-	public int  nameCheck(String cl_name) {
+	public int nameCheck(String cl_name) {
 		return cldao.nameCheck(cl_name);
 	}
 
-	public 	List<ClubListDTO> selectAll() {
+	public List<ClubListDTO> selectAll() {
 		return cldao.selectAll();
 	}
-	
-	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보-> 
-	public ClubListDTO selectClub(String cl_id){
+
+	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보->
+	public ClubListDTO selectClub(String cl_id) {
 		return cldao.selectClub(cl_id);
 	}
 
@@ -47,4 +45,10 @@ public class ClubListService {
 		}
 		return cldao.searchClub(searchField, modifiedText);
 	}
+
+	// 해당 동호회 가입 여부 확인
+	public int checkMember(int cl_seq, String mem_id) {
+		return cldao.checkMember(cl_seq, mem_id);
+	}
+
 }

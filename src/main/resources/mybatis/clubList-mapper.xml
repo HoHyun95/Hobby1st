@@ -44,5 +44,12 @@
 		select * from club_list where
 		${column} like '%' || #{value} || '%'
 	</select>
+	
+	<!-- 해당 동호회 가입 여부 확인 -->
+	<select id="checkMember" resultType="int">
+		select count(*) from club_list l join club_member m on (l.cl_id = m.cm_seq) where m.cm_mem_id = #{mem_id} and l.cl_id = #{cl_seq}
+	</select>
+	
+	
 
 </mapper>

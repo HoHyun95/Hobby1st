@@ -46,5 +46,15 @@ public class ClubListDAO {
 	public int countClub() {
 		return mybatis.selectOne("ClubList.countClub");
 	}
-	//
+	
+	
+	// 해당 동호회 가입 여부 확인
+	public int checkMember(int cl_seq, String mem_id) {
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("cl_seq", String.valueOf(cl_seq));
+		map.put("mem_id", mem_id);
+		
+		return mybatis.selectOne("ClubList.checkMember", map);
+	}
 }

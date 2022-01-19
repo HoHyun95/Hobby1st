@@ -33,9 +33,12 @@
 							<li><i class="fas fa-arrow-left" id="back"></i></li>
 							<li>
 								<!--  동호회 채팅 이미지 --> <img
-								src="${pageContext.request.contextPath}/clubPic/${clubInfo[0].CLP_PHOTO}"
-								class="club_photo"> <!--  동호회 이름 --> <span>
-									${clubInfo[0].CL_NAME } </span> <br>
+								src=""
+								class="club_photo"> 
+								
+								
+								<!--  동호회 이름 --> <span>
+									${clubInfo[0].cl_name } </span> <br>
 							</li>
 						</ul>
 
@@ -207,8 +210,8 @@
    				url : "/chat/insertChatIntoDB",
    				method : "post",
    				data : {
-   					chat_cl_id : "${clubInfo[0].CL_ID}",
-   					chat_cl_name : "${clubInfo[0].CL_NAME}",
+   					chat_cl_id : "${clubInfo[0].cl_id}",
+   					chat_cl_name : "${clubInfo[0].cl_name}",
    					chat_contents :  $('#sendText').val(),
    					chat_writer : "${member[0].mem_name}"
    					}
@@ -253,7 +256,7 @@
 			let text = textValue;
      	    ws.send(text);
             	 
-     	    insertIntoDB();
+//      	    insertIntoDB();
   	 
  	    $('#sendText').val("");
   	    $('#sendText').focus();   
@@ -267,7 +270,7 @@
     		let text = $('#sendText').val();
     	    ws.send(text);
     		
-			insertIntoDB();
+// 			insertIntoDB();
     	    	
 	   		 $('#sendText').val("");
  	   		 $('#sendText').focus();

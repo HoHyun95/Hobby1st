@@ -47,8 +47,31 @@ public class ClubListService {
 	}
 
 	// 해당 동호회 가입 여부 확인
-	public int checkMember(int cl_seq, String mem_id) {
-		return cldao.checkMember(cl_seq, mem_id);
+	public int checkMember(int cl_id, String mem_id) {
+		int checkMember = 0;
+		
+		// 보스 여부
+		int clubBoss = cldao.checkClubBoss(cl_id, mem_id);
+		// 일반회원 여부
+		int clubMember = cldao.checkMember(cl_id, mem_id);
+		
+		
+		if(clubMember == 0) {
+			checkMember = 0;
+		}else if(clubMember == 1) {
+			checkMember = 1;
+		}
+		
+		if (clubBoss == 1) {
+			checkMember = 2;
+		}
+		
+		return checkMember;
 	}
+	
+	
+	
+	
+	
 
 }

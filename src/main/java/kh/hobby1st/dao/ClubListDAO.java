@@ -17,44 +17,54 @@ public class ClubListDAO {
 	private SqlSessionTemplate mybatis;
 
 	public int createClub(ClubListDTO dto) {
-		return  mybatis.insert("ClubList.createClub",dto);
+		return mybatis.insert("ClubList.createClub", dto);
 	}
 
-	//동호회명 중복 체크 
+	// 동호회명 중복 체크
 	public int nameCheck(String cl_name) {
-		return mybatis.selectOne("ClubList.nameCheck",cl_name);
+		return mybatis.selectOne("ClubList.nameCheck", cl_name);
 	}
-	
-	public List<ClubListDTO>  selectAll(){
-	return mybatis.selectList("ClubList.selectAll");
+
+	public List<ClubListDTO> selectAll() {
+		return mybatis.selectList("ClubList.selectAll");
 	}
-	
-	public ClubListDTO selectClub(String cl_id){
+
+	public ClubListDTO selectClub(String cl_id) {
 		return mybatis.selectOne("ClubList.selectClub", cl_id);
 	}
-	
-	public List<ClubListDTO> searchClub(String searchField, String searchText){
-	System.out.println(searchField +"+"+ searchText);
-	
+
+	public List<ClubListDTO> searchClub(String searchField, String searchText) {
+		System.out.println(searchField + "+" + searchText);
+
 		Map<String, String> map = new HashMap<>();
 		map.put("column", searchField);
 		map.put("value", searchText);
 		return mybatis.selectList("ClubList.searchClub", map);
 	}
-	
-	// 동호회 수 
+
+	// 동호회 수
 	public int countClub() {
 		return mybatis.selectOne("ClubList.countClub");
 	}
-	
-	
+
 	// 해당 동호회 가입 여부 확인
-	public int checkMember(int cl_seq, String mem_id) {
-		
+	public int checkMember(int cl_id, String mem_id) {
+
 		Map<String, String> map = new HashMap<>();
-		map.put("cl_seq", String.valueOf(cl_seq));
+		map.put("cl_id", String.valueOf(cl_id));
 		map.put("mem_id", mem_id);
-		
+
 		return mybatis.selectOne("ClubList.checkMember", map);
 	}
+
+	// 해당 동호회 가입 여부 확인
+	public int checkClubBoss(int cl_id, String mem_id) {
+
+		Map<String, String> map = new HashMap<>();
+		map.put("cl_id", String.valueOf(cl_id));
+		map.put("mem_id", mem_id);
+
+		return mybatis.selectOne("ClubList.checkClubBoss", map);
+	}
+
 }

@@ -30,8 +30,13 @@ public class ClubListDAO {
 	}
 	
 	// 동호회 리스트 10개씩 가져오기
-	public List<ClubListDTO> selectSplit(){
-		return mybatis.selectList("ClubList.selectSplit");
+	public List<ClubListDTO> selectSplit(int start, int end){
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+		
+		return mybatis.selectList("ClubList.selectSplit", map);
 	}
 
 	public ClubListDTO selectClub(String cl_id) {

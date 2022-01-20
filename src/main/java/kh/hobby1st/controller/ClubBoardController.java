@@ -73,7 +73,7 @@ public class ClubBoardController {
 	@RequestMapping("/boardInsert")
 	public String boardInsert(ClubBoardDTO dto, Model model) {
 		dto.setCb_club_id(5);
-		dto.setCb_writer((String) session.getAttribute("mem_id"));
+		dto.setCb_writer((String) session.getAttribute("user_nickName"));
 
 		club_board_service.insert(dto);
 		int totalBoardCount = club_board_service.getRecordCount(5);

@@ -38,7 +38,7 @@
 	
 	<select id="selectSplit" resultType="kh.hobby1st.dto.ClubListDTO">
 		select * from (select club_list.*, row_number() over (order by cl_id asc) rn from club_list)
-								where rn between 1 and 10
+								where rn between #{start} and #{end}
 	</select>
 
 	<select id="selectClub" resultType="kh.hobby1st.dto.ClubListDTO">

@@ -34,8 +34,8 @@ public class ClubListService {
 	}
 	
 	//
-	public List<ClubListDTO> selectSplit(){
-		return cldao.selectSplit();
+	public List<ClubListDTO> selectSplit(int start, int end){
+		return cldao.selectSplit(start,end);
 	}
 	
 	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보->

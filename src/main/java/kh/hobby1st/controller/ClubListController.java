@@ -48,7 +48,7 @@ public class ClubListController {
 		List<ClubListDTO> map = clService.selectAll();
 			
 		// 더보기 클릭시 동호회 10 개씩 가져오기
-		List<ClubListDTO> splitList = clService.selectSplit();
+		List<ClubListDTO> splitList = clService.selectSplit(1,10); // start, end 값 넣어야함
 		
 		//동호회 출력 
 		model.addAttribute("list", map);

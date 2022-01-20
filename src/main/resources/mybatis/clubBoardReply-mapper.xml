@@ -9,12 +9,12 @@
   	
   	<!-- 댓글 삽입 -->
   	<insert id="insertReply">
-  		insert into club_board_reply values(#{cbr_par_seq}, club_board_reply_seq.nextval, 0, #{cbr_writer}, #{cbr_reply}, sysdate,0)
+  		insert into club_board_reply values(#{cbr_par_seq}, club_board_reply_seq.nextval, 0, #{cbr_writer}, #{cbr_reply}, sysdate,0,#{cbr_nickname})
   	</insert>
   	
   	<!-- 대댓글 삽입 -->
   	<insert id="insertReply_rec">
-  		insert into club_board_reply values(#{cbr_par_seq}, #{cbr_seq}, club_board_reply_seq_r.nextval, #{cbr_writer}, #{cbr_reply}, sysdate,1)
+  		insert into club_board_reply values(#{cbr_par_seq}, #{cbr_seq}, club_board_reply_seq_r.nextval, #{cbr_writer}, #{cbr_reply}, sysdate,1,#{cbr_nickname})
   	</insert>
   	
   	

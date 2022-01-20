@@ -106,7 +106,7 @@
 									src="${list_profile.get(status.index)}" alt="">
 								</td>
 								<td
-									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }</td>
+									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_nickname }</td>
 							</tr>
 
 							<tr>
@@ -143,14 +143,14 @@
 							<div id="reply_rec${replyList.cbr_seq }"
 								class="commend space-y-2 rounded-md"
 								style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px; display: none; width: 90%; height: 80%; margin-left: 73px;">
-								<div class="writer font-bold">${mem_id }</div>
+								<div class="writer font-bold">${user_nickName }</div>
 
 								<!-- 댓글 입력받기 -->
 								<div>
 									<input type="hidden" name="seq_r" value="${detail.cb_seq }">
 									<input type="hidden" name="cpage" value="${cpage }">
 									<textarea name="cbr_reply" id="message"
-										placeholder="${replyList.cbr_writer }님에게 남기는 댓글."
+										placeholder="${replyList.cbr_nickname }님에게 남기는 댓글."
 										style="width: 100%; min-height: 30px; overflow-y: hidden; resize: none;"
 										rows="1" onkeyup="resize(this)" onkeydown="resize(this)"></textarea>
 									<!-- textarea 자동 높이조절-->
@@ -196,7 +196,7 @@
 									src="${list_profile.get(status.index)}" alt="">
 								</td>
 								<td
-									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_writer }
+									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_nickname }
 									</td>
 							</tr>
 
@@ -233,7 +233,7 @@
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
-				<div class="writer font-bold">${mem_id }</div>
+				<div class="writer font-bold">${user_nickName }</div>
 
 				<!-- 댓글 입력받기 -->
 				<div>

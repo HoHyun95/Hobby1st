@@ -35,7 +35,7 @@
 			<div>
 				<input name="cb_title" id="title"
 					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
-					type="text" value="${detail.cb_writer }"
+					type="text" value="${detail.cb_title }"
 					class="
                     placeholder-gray-400
                     text-gray-600 

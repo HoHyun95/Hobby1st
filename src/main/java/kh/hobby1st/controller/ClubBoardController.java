@@ -128,6 +128,7 @@ public class ClubBoardController {
 		}
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
+		dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
 		dto.setCbr_par_seq(cb_seq);
 
 		club_board_reply_service.plusReply(cb_seq);
@@ -166,6 +167,7 @@ public class ClubBoardController {
 			}
 			
 			dto.setCbr_writer((String) session.getAttribute("mem_id"));
+			dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
 			dto.setCbr_par_seq(cb_seq);
 
 			club_board_reply_service.plusReply(cb_seq);

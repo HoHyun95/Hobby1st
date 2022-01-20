@@ -78,6 +78,15 @@ public class ChatController {
 
 	}
 
-
+	@RequestMapping("isThisMyChat")
+	@ResponseBody
+	public int isThisMyChat(String chat_writer) {
+		System.out.println(chat_writer);
+		int result = chatService.isThisMyChat(chat_writer);
+		System.out.println("값이 있으면 내가 쓴 글(DB) null 이면 남의 글 (DB)"+result);
+		
+		return result;
+	}
+	
 
 }

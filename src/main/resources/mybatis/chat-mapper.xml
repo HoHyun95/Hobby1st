@@ -11,4 +11,10 @@
   	<select id="chatSelectAll" resultType="kh.hobby1st.dto.ChatDTO">
   		select * from chat order by chat_seq asc
   	</select>
+  	
+  	<select id="isThisMyChat" resultType="int">
+  	select max(chat_seq) from chat where #{value} = 
+  	(select chat_writer from chat where chat_seq = 
+  	(select max(chat_seq) from chat))
+  	</select>
   </mapper>

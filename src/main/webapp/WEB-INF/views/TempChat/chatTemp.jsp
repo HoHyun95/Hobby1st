@@ -170,26 +170,34 @@
 
 			<script>
 			 let ws = new WebSocket("ws://localhost/chat");
-
+			 
 		     ws.onmessage = function(e){
 		      	let eData = e.data;
-		      	
-		      	
-		      	let senderName = eData.substring(0,3);
-		      	let liveMsg = eData.substring(3);
-
+		    	 
+				//웹 소켓에 보낸 문자 그대로를 변수로 지정
+				
+				
 		         if($('#mem_writer').val() == $('#session_user_name').val()){
-		        	
-		        	sendMsg(liveMsg);
-		             $('#chat_contents').append(htmlData);
+		      		let myMsg = eData.substring(3);
+					sendMsg(myMsg);
+					$('#chat_contents').append(htmlData);
 		       		htmlData="";
 
-		        }else{
-		        	 receiveMsg(liveMsg);
+				
+				}else{
+					// 메세지 부분 
+					let liveMsg = eData.substring(3);
+				
+					// 메세지 작성자 이름 부분
+					let senderName = eData.substring(0,3);
+				
+					receiveMsg(liveMsg, senderName);
 		       	    $('#chat_contents').append(htmlData);
 		       		htmlData="";
-		       		}
-	         	}
+		       		
+					}
+		     	}
+
 			
    let emojiVal ="";
    const emoji1 = $('#emoji1'); 
@@ -201,6 +209,7 @@
    const emoji7 = $('#emoji7');
    const emoji8 = $('#emoji8');
 
+   				// 메세지 송신 시간
 			let date = new Date();
 			let si = date.getHours();			
 			let bun = date.getMinutes();
@@ -212,12 +221,13 @@
 				bun = "0"+bun;
 			}
 
-		
-		// 수신 / 송신 구분 div 
-		 let htmlData ="";
 		 
+		 let htmlData ="";
+		
+		// 메세지 송신 
   		function sendMsg(liveMsg){	 
 
+			//이모티콘 있을 때 
          if(liveMsg.indexOf("emoji") == 0){
             let emojiData = liveMsg;
             
@@ -228,6 +238,7 @@
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
 
+      		//이모티콘 없을 때
          }else if(liveMsg.indexOf("emoji") != 0){
       		console.log("내가 보내는 메세지 ");
       		
@@ -243,8 +254,11 @@
   			}
          
 
-  		function receiveMsg(liveMsg){
+			//메세지 수신 
+  		function receiveMsg(liveMsg, senderName){
 
+				
+			//이모티콘 있을 때
          if(liveMsg.indexOf("emoji") == 0){
         	 
         	 let emojiData = liveMsg;
@@ -259,9 +273,9 @@
               htmlData += "</div>";
               htmlData += "</div>"
 
+              //이모티콘 없을 때 
          }else if(liveMsg.indexOf("emoji") != 0){
-      		console.log("수신 메세지");
-      		
+
       		  htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
@@ -277,7 +291,7 @@
          	}		
          }
   		
-
+			// 데이터베이스에 메세지 저장
    		 function insertIntoDB(){ 
     	 	$.ajax({
    				url : "/chat/insertChatIntoDB",
@@ -290,7 +304,8 @@
    					}
    			 	})
    			}
-		
+			
+			//데이터 베이스에 이모티콘 메세지 저장
             function insertEmojiIntoDB(emojiVal){
                
                ws.send(emojiVal);
@@ -345,7 +360,9 @@
         	   true;
            }
            
+           
 			let text = textValue;
+	
      	    ws.send(text);
             	 
      	    insertIntoDB();
@@ -367,6 +384,7 @@
     		}else if(trimedValue == ""){
     			alert("공백은 전송할 수 없습니다");
     		}else{
+
     	    ws.send(text);
     		
 			insertIntoDB();

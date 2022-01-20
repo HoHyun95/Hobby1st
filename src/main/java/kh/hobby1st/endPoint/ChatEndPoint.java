@@ -32,13 +32,14 @@ public class ChatEndPoint {
 
 	@OnMessage
 	public void onMessage(String msg) {
-	
+
 		//사용자 아이디 넘어오지만 동호회 채팅은 실명으로 사용하는 게 좋다.
 		String incomingMsgID = (String)this.session.getAttribute("user_name");
 
 		synchronized(clients) {
 			for(Session client : clients) {
 				try {
+
 					client.getBasicRemote().sendText(incomingMsgID+msg);
 
 				}catch (IOException e) {
@@ -51,7 +52,7 @@ public class ChatEndPoint {
 	@OnClose
 	public void onClose(Session session) {
 		clients.remove(session);
-	
+
 	}
 }
 

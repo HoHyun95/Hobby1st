@@ -80,8 +80,9 @@
 
 
 						<!-- 채팅 작성자와 session 아이디 일치한 경우 자신이 보낸 메세지로 취급 -->
-								<!-- DB에 이모티콘이 저장되어있다면 이모티콘을 img 로 출력 -->
-									<!--  이모티콘 중 내가 보낸 이모티콘일경우 -->   <!-- choose 안에 주석 삽입시 "에러" -->
+						<!-- DB에 이모티콘이 저장되어있다면 이모티콘을 img 로 출력 -->
+						<!--  이모티콘 중 내가 보낸 이모티콘일경우 -->
+						<!-- choose 안에 주석 삽입시 "에러" -->
 						<c:forEach var="chatList" items="${chatList }">
 							<c:choose>
 
@@ -91,7 +92,7 @@
 									<c:if test="${chatList.chat_writer eq user_name }">
 										<div class="outgoing_msg">
 											<div class="sent_msg">
-									<img src="/images/chatImg/${chatList.chat_contents }.gif">
+												<img src="/images/chatImg/${chatList.chat_contents }.gif">
 												<span class="time_date">${chatList.formDate}</span>
 											</div>
 										</div>
@@ -102,7 +103,7 @@
 										<div class="sender">${chatList.chat_writer }</div>
 
 										<div class="received_withd_msg">
-										<img src="/images/chatImg/${chatList.chat_contents }.gif">
+											<img src="/images/chatImg/${chatList.chat_contents }.gif">
 											<span class="time_date">${chatList.formDate }</span>
 										</div>
 									</c:if>
@@ -111,15 +112,15 @@
 
 								<c:otherwise>
 
-								<c:if test="${chatList.chat_writer eq user_name }">
+									<c:if test="${chatList.chat_writer eq user_name }">
 
-									<div class="outgoing_msg">
-										<div class="sent_msg">
-											<p>${chatList.chat_contents }</p>
-											<span class="time_date">${chatList.formDate}</span>
+										<div class="outgoing_msg">
+											<div class="sent_msg">
+												<p>${chatList.chat_contents }</p>
+												<span class="time_date">${chatList.formDate}</span>
+											</div>
 										</div>
-									</div>
-								</c:if>
+									</c:if>
 
 									<c:if test="${chatList.chat_writer != user_name }">
 
@@ -172,14 +173,19 @@
 
 		     ws.onmessage = function(e){
 		      	let eData = e.data;
+		      	
+		      	
+		      	let senderName = eData.substring(0,3);
+		      	let liveMsg = eData.substring(3);
 
 		         if($('#mem_writer').val() == $('#session_user_name').val()){
-		         	sendMsg(eData);		
+		        	
+		        	sendMsg(liveMsg);
 		             $('#chat_contents').append(htmlData);
 		       		htmlData="";
 
 		        }else{
-		       		recevieMsg(eData);
+		        	 receiveMsg(liveMsg);
 		       	    $('#chat_contents').append(htmlData);
 		       		htmlData="";
 		       		}
@@ -210,55 +216,67 @@
 		// 수신 / 송신 구분 div 
 		 let htmlData ="";
 		 
-  		function sendMsg(eData){	 
+  		function sendMsg(liveMsg){	 
 
-         if(eData.indexOf("emoji") == 0){
-            let emojiData = eData;
+         if(liveMsg.indexOf("emoji") == 0){
+            let emojiData = liveMsg;
             
             htmlData += "<div class='outgoing_msg'>";
-  			   htmlData +=   	"<div class='sent_msg'>";
+  		    htmlData +=   	"<div class='sent_msg'>";
             htmlData +=			"<img src='/images/chatImg/"+emojiData+".gif"+"'>";
       		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
 
-         }else{
+         }else if(liveMsg.indexOf("emoji") != 0){
       		console.log("내가 보내는 메세지 ");
       		
       		htmlData += "<div class='outgoing_msg'>";
-  			   htmlData +=   	"<div class='sent_msg'>";
-      		htmlData +=			"<p>"+eData+"</p>";
+  			htmlData +=   	"<div class='sent_msg'>";
+      		htmlData +=			"<p>"+liveMsg+"</p>";
       		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
+              }else{
+            	  return;
               }
-         }
+  			}
+         
 
-  		function receiveMsg(eData){
+  		function receiveMsg(liveMsg){
 
-         if(eData.indexOf("emoji") == 0){
-
-            htmlData += "<div class='incoming-msg'>";
+         if(liveMsg.indexOf("emoji") == 0){
+        	 
+        	 let emojiData = liveMsg;
+        	  
+        	 htmlData +="<div class='sender'>"+senderName;
+              htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
               htmlData +=			"<img src='/images/chatImg/"+emojiData+".gif"+"'>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";
+              htmlData += "</div>"
 
-         }else{
+         }else if(liveMsg.indexOf("emoji") != 0){
       		console.log("수신 메세지");
       		
+      		  htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
-              htmlData += "			<p>"+eData+"</p>";
+              htmlData += "			<p>"+liveMsg+"</p>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";
-      		}		
+              htmlData += "</div>";
+              
+         	}else{
+         		return;
+         	}		
          }
-
+  		
 
    		 function insertIntoDB(){ 
     	 	$.ajax({

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,7 @@
       for (let i = 0; i < club_list_box.length; i++) {
         club_list_box[i].onclick = () => {
           let clickedList = club_list_box[i].children[5].value;
-          location.href = "/clublist/showList?name=club&value=" + clickedList;
+          location.href = "/clubHouse?cl_id=" + clickedList;
         }
       }
     }
@@ -168,145 +169,26 @@
           <div class="no_search_result_text"> 검색 결과가 없습니다.</div>
         </div> -->
         <div class="club_list">
+          <c:forEach var="cl" items="${clubList }">
           <div class="club_list_box_wrap">
             <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club1">
+              <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
+              <div class="like"><i class="far fa-heart" id="likeBtn"></i></div>
+              <h3>${cl.CL_NAME }</h3>
+              <h5>${cl.CL_BOSS_NAME }</h5>
+              <h5>${cl.CL_LOCAL }</h5>
+              <c:choose>
+			    <c:when test="${fn:length(cl.cl_desc) gt 15}">
+			      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
+			    </c:when>
+			    <c:otherwise>
+			      <h5><c:out value="${cl.CL_DESC}" /></h5>
+			    </c:otherwise>
+			  </c:choose>
+              <input type="hidden" name="cl_id" value="${cl.CL_ID }">
             </div>
           </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club2">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club3">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club4">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </div>

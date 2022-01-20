@@ -26,6 +26,10 @@
 	padding: 30px;
 	margin-bottom: 20px;
 }
+
+.profile>div{
+	float: left;
+}
 </style>
 </head>
 
@@ -47,15 +51,26 @@
 			<div class="text-2xl font-medium">
 				<span>${detail.cb_title } </span>
 			</div>
-			<div>
-				<span class="writer">${detail.cb_nickname }</span>
-			</div>
-			<div class="grid grid-cols-2 text-gray-400"
-				style="padding-bottom: 10px; border-bottom: 1px solid rgb(202, 202, 202);">
-				<div class="write_date text-sm">${detail.detailDate }</div>
-				<div class="text-right">
-					<i class="far fa-eye"></i> ${detail.cb_view_count }
+			<div class="profile" style="height: 70px; border-bottom: 1px solid rgb(202, 202, 202);">
+				<div style="width: 10%; height: 50px;">
+					<img id="profile"
+									style="border-radius: 70%; height: 60px; width: 55px;"
+									src="${myProfile}" alt="">
 				</div>
+
+				<div style="width: 90%; height: 50px;">
+					<div>
+					<span class="writer">${detail.cb_nickname }</span>
+				</div>
+				<div class="grid grid-cols-2 text-gray-400 pt-1"
+					style="padding-bottom: 10px;">
+					<div class="write_date text-sm">${detail.detailDate }</div>
+					<div class="text-right">
+						<i class="far fa-eye"></i> ${detail.cb_view_count }
+					</div>
+				</div>
+				</div>
+				
 			</div>
 		</div>
 
@@ -100,7 +115,7 @@
 
 							<tr>
 								<td rowspan="3"
-									style="border-radius: 70%; height: 80px; width: 80px; padding-right: 10px;">
+									style="border-radius: 70%; height: 77px; width: 75px; padding-right: 1px;">
 									<img id="profile"
 									style="border-radius: 70%; height: 60px; width: 60px;"
 									src="${reply_profile.get(status.index)}" alt="">
@@ -190,14 +205,14 @@
 						<table style="width: 90%; margin-top: 15px; margin-left: 73px;">
 							<tr>
 								<td rowspan="3"
-									style="border-radius: 70%; height: 80px; width: 86px; padding-right: 10px;">
+									style="border-radius: 70%; height: 77px; width: 75px; padding-right: 1px;">
 									<img id="profile"
 									style="border-radius: 70%; height: 60px; width: 60px;"
-									src="${list_profile.get(status.index)}" alt="">
+									src="${reply_profile.get(status.index)}" alt="">
 								</td>
 								<td
 									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_nickname }
-									</td>
+								</td>
 							</tr>
 
 							<tr>
@@ -233,10 +248,7 @@
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
-				<div class="writer font-bold">
-				<img id="profile" style="border-radius: 70%; height: 60px; width: 60px;" src="${myProfile}" alt="">
-				${user_nickName }
-				</div>
+				<div class="writer font-bold">${user_nickName }</div>
 
 				<!-- 댓글 입력받기 -->
 				<div>

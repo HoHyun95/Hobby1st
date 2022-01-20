@@ -112,7 +112,7 @@
 				success : function(sysName) {
 					console.log(sysName);
 					setTimeout(function() {
-						$(editor).summernote('insertImage', '/images/LOGO.png')
+						$(editor).summernote('insertImage', sysName.url)
 					}, 500);
 				}
 			});

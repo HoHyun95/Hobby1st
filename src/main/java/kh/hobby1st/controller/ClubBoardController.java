@@ -275,9 +275,11 @@ public class ClubBoardController {
 		 */
 
 		// 내부경로로 저장
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+//		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 		System.out.println(contextRoot);
-		String fileRoot = contextRoot + "resources/images/";
+//		String fileRoot = contextRoot + "resources/images/";
+		String fileRoot = contextRoot + "/";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -287,7 +289,8 @@ public class ClubBoardController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+//			jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "/upload/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {

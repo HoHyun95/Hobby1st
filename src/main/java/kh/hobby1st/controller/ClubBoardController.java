@@ -300,7 +300,7 @@ public class ClubBoardController {
 
 	}
 
-	// 게시판 검색 기능
+	// 게시판 추천 기능
 	@ResponseBody
 	@RequestMapping("/clubBoardRec")
 	public String clubBoardRec(int cb_seq) throws Exception {

@@ -56,6 +56,12 @@
   	<select id="searchWriterCount" resultType="int">
  		select count(*) from club_board where cb_club_id = #{club_board_id} and cb_nickname = #{searchWord}
  	</select>
+ 	
+ 	<!-- 게시판 작성자 프로필 가져오기 -->
+ 	<select id="writerProfile" resultType="String">
+ 		select m.mem_photo from member m ,(select * from club_board where cb_seq = #{value}) b where m.mem_id = b.cb_writer
+ 	</select>
+ 	
   	
   	
   	

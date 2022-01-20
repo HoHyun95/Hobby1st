@@ -55,7 +55,7 @@
 				<div style="width: 10%; height: 50px;">
 					<img id="profile"
 									style="border-radius: 70%; height: 60px; width: 55px;"
-									src="${myProfile}" alt="">
+									src="${writerProfile}" alt="">
 				</div>
 
 				<div style="width: 90%; height: 50px;">

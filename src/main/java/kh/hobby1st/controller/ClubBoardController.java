@@ -45,8 +45,6 @@ public class ClubBoardController {
 	@Autowired
 	private ClubBoardReplyService club_board_reply_service;
 	
-	@Autowired
-	private MemberService mem_service;
 	
 	Gson g = new Gson();
 
@@ -103,9 +101,10 @@ public class ClubBoardController {
 		} else if(check == 0) {
 			user = 1;
 		}
-		String myProfile = mem_service.selectOne(rec_id).getMem_photo();
+		String writerProfile = club_board_service.writerProfile(cb_seq);
 		
-		System.out.println(myProfile);
+		System.out.println(writerProfile);
+		
 		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
@@ -115,7 +114,7 @@ public class ClubBoardController {
 		
 		System.out.println(reply_profile.size());
 
-		model.addAttribute("myProfile", myProfile);
+		model.addAttribute("writerProfile", writerProfile);
 		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);

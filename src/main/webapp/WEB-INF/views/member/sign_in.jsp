@@ -124,32 +124,39 @@
         	  const mobile=naverLogin.user.getMobile();
               const age=naverLogin.user.getAge();
               const birthday=naverLogin.user.getBirthday();
+              const nickname=naverLogin.user.getNickName();
 
              if(age===null||age===undefined ){ 
                  alert("나이를 선택해주세요!");
                  naverLogin.reprompt(); 
-                 return ;  
+                 return  
              }else if(birthday===null||birthday===undefined) {
             	 alert("생년월일을 선택해주세요!");
             	 naverLogin.reprompt();
-            	 return;
+            	 return
              }else if(name===null||name===undefined) {
                  alert("이름을 선택해주세요!");
                  naverLogin.reprompt(); 
-                 return ; 
+                 return
              }else if(email===null||email===undefined) {
                  alert("이메일을 선택해주세요!");
                  naverLogin.reprompt(); 
-                 return ; 
+                 return
              }else if(mobile===null||mobile===undefined) {
                  alert("전화번호를 선택해주세요!");
                  naverLogin.reprompt(); 
-                 return ; 
+                 return
+             }else if(nickname===null||nickname===undefined) {
+                 alert("닉네임을 선택해주세요!");
+                 naverLogin.reprompt(); 
+                 return 
              }else{
               setLoginStatus(); 
              }
           }
         });
+      
+      console.log(naverLogin)
       
       function setLoginStatus(){
           const message_area=document.getElementById('message');

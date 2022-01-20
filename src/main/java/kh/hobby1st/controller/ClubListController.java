@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.ClubList_PhotoDTO;
 import kh.hobby1st.service.ClubListService;
@@ -39,6 +41,8 @@ public class ClubListController {
 	public String createClub() {
 		return "clubList/createClub";
 	}
+	
+	Gson g = new Gson();
 
 	@RequestMapping("clubListPage")
 	public String clubListPage(Model model) {
@@ -94,6 +98,33 @@ public class ClubListController {
 		System.out.println(result);
 		return result;
 	}
+	
+	
+	// 동호회 추천 기능
+		@ResponseBody
+		@RequestMapping("/clubBoardRec")
+		public String clubBoardRec(int cl_id) throws Exception {
+			
+			String rec_id = (String) session.getAttribute("mem_id");
+			
+			int checkRec = clService.clubRecommend(cl_id, rec_id);
+			
+			int num = clService.recCount(cl_id);
+			
+			int[] arr = new int[2];
+			arr[0] = num; // 추천수
+			arr[1] = checkRec; // 추천 유무
+			
+			return g.toJson(arr);
+		}
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
@@ -102,5 +133,6 @@ public class ClubListController {
 		e.printStackTrace();
 		return "redirect:/";
 	}
+	
 
 }

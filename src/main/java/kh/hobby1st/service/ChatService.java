@@ -24,4 +24,8 @@ public class ChatService {
 		return chatDao.chatSelectAll();
 	}
 	
+	public int isThisMyChat(String chat_writer) {
+		return chatDao.isThisMyChat(chat_writer);
+	}
+	
 }

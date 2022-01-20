@@ -92,10 +92,9 @@
 
 	</script>
 
-	<!-- textarea에 summernote 적용 -->
 	<script>
 		$('#summernote').summernote({
-			placeholder : 'input',
+			placeholder : 'input contents',
 			tabsize : 2,
 			height : 600,
 			lang : "ko-KR",
@@ -103,34 +102,32 @@
 			maxHeight : null,
 			focus : true,
 			callbacks : {
-				onImageUpload : function(files) {
-					console.log(files[0]);
-					sendFile(files[0], this);
+				onImageUpload : function(files, editor, welEditable) {
+		            // 파일 업로드(다중업로드를 위해 반복문 사용)
+		            for (var i = files.length - 1; i >= 0; i--) {
+		            	sendFile(files[i],this);
 				}
 			}
+		}
 		});
-	</script>
 
-	<!-- 이미지 업로드 -->
-	<script>
+		//<!-- 이미지 업로드 -->
 		function sendFile(file, editor) {
 			var form_data = new FormData();
 			form_data.append('file', file);
 			$.ajax({
 				data : form_data,
 				type : "POST",
-				url : "/imageUpload.pet",
+				url : "/clubBoard/imageUpload",
 				cache : false,
 				contentType : false,
 				enctype : "multipart/form-data",
 				processData : false,
 				success : function(sysName) {
-					console.log(sysName + "b")
-
+					console.log(sysName);
 					setTimeout(function() {
-						$(editor).summernote('insertImage',
-								'/board/img/' + sysName);
-					}, 3500);
+						$(editor).summernote('insertImage', sysName.url)
+					}, 500);
 				}
 			});
 		}

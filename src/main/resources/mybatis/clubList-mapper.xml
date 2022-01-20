@@ -64,27 +64,27 @@
 	
 	<!-- 아이디 중복 체크 -->
 	<select id="checkRec" resultType="int">
-   		select count(*) from club_board_rec where cb_seq = #{cb_seq} and rec_id = #{rec_id}
+   		select count(*) from club_list_rec where cl_seq = #{cl_id} and rec_id = #{rec_id}
    	</select>
    	
    	<!-- 추천 -->
   	<insert id="insertRec">
-  		insert into club_board_rec values(#{cb_seq}, #{rec_id})
+  		insert into club_list_rec values(#{cl_id}, #{rec_id})
   	</insert>
    	
    	<!-- 추천 취소 -->
    	<delete id="deleteRec">
-   		delete from club_board_rec where cb_seq = #{cb_seq} and rec_id = #{rec_id}
+   		delete from club_list_rec where cl_seq = #{cl_id} and rec_id = #{rec_id}
    	</delete>
   	
   	<!-- 추천수 갱신 -->
 	<update id="updateRec">
-		update club_board set cb_like_count = (select count(*) from club_board_rec where cb_seq = #{value}) where cb_seq = #{value}
+		update club_list set cl_rec_count = (select count(*) from club_list_rec where cl_seq = #{value}) where cl_id = #{value}
 	</update>
 	
 	<!-- 추천수 조회 -->
 	<select id="recCount" resultType="int">
-  		select cb_like_count from club_board where cb_seq = #{value}
+  		select cl_rec_count from club_list where cl_id = #{value}
   	</select>
 	
 	

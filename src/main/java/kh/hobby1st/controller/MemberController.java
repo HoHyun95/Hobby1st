@@ -41,18 +41,34 @@ public class MemberController {
 
 	//login_click
 	@RequestMapping("login")
-	public String login(String mem_id, String mem_pass) {
+	public String login(String mem_id, String mem_pass, String naver_id, String naver_mobile,
+			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
+			String naver_birthday, String naver_gender) {
 
+		
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
-
 			//사용자 이름 session 저장
-
 			MemberDTO mem_dto = mem_service.selectOne(mem_id);
 			String user_name = mem_dto.getMem_name();
-			
+
 			session.setAttribute("mem_id", mem_id);
 			session.setAttribute("user_name", user_name);
+		} else if(naver_id != null) {
+			int naver_result = mem_service.naver_idCheck(naver_id);
+			if(0<naver_result) {
+				session.setAttribute("mem_id", naver_id);
+			}else if(0 == naver_result) {
+				String naver_login = "naver_login";
+				String mem_birthday = naver_birthyear + "-" + naver_birthday;
+				String mem_lastlogin = "default";
+			
+				session.setAttribute("naver_id", naver_id);
+				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, naver_mobile, naver_email); 
+				int naver_Rinsert = mem_service.naver_insert(dto);
+				return "member/sign_in";
+
+			}
 		}
 		return "redirect: /";
 	}
@@ -167,12 +183,20 @@ public class MemberController {
 	public String send_email() {
 		return "member/sign_email";
 	}
-	
+
+	// email Ok
 	@RequestMapping("emailOk")
 	public String email_test() {
 		System.out.println("이메일 인증 성공!");
 		return "member/sign_email";
 	}
- }
+
+	//naver_login
+	@RequestMapping("naver_login")
+	public String naverLogin(String naver_id) {
+		System.out.println("제대로 된 값이 넘어왔을까?" + naver_id);
+		return "redirect: /";
+	}
+}
 
 

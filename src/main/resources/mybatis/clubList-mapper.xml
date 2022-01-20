@@ -35,6 +35,11 @@
 	<select id="selectAll" resultType="map">
 		select * from club_list
 	</select>
+	
+	<select id="selectSplit" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from (select club_list.*, row_number() over (order by cl_id asc) rn from club_list)
+								where rn between 1 and 10
+	</select>
 
 	<select id="selectClub" resultType="kh.hobby1st.dto.ClubListDTO">
 	select * from club_list where cl_id = ${value}

@@ -44,50 +44,19 @@ public class ClubListController {
 	public String clubListPage(Model model) {
 		System.out.println(" 클럽 리스트 페이지  ");
 
-
 		//동호회 리스트 + 동호회 사진 
 		List<ClubListDTO> map = clService.selectAll();
 			
-		System.out.println(map.size());
-		System.out.println(map);
-		System.out.println(map.get(0));
+		// 더보기 클릭시 동호회 10 개씩 가져오기
+		List<ClubListDTO> splitList = clService.selectSplit();
 		
 		//동호회 출력 
 		model.addAttribute("list", map);
+		model.addAttribute("splitList", splitList);
 		
-//		List<String> list = new ArrayList(); 
-	
-//		for(Map<String, Object> list : map) {
-//	
-//		}
-		
-//		for(int i = 0; i < map.size(); i++) {
-//			String cl_id = map.get(i).get("CL_ID").toString();
-//			String cl_name = map.get(i).get("CL_NAME").toString();
-//			String cl_boss_id = map.get(i).get("CL_BOSS_ID").toString();
-//			String cl_maxMem = map.get(i).get("CL_MAXMEM").toString();
-//			String cl_local = map.get(i).get("CL_LOCAL").toString();
-//			String cl_openDate = map.get(i).get("CL_OPENDATE").toString();
-//			String cl_memCount = map.get(i).get("CL_MEMCOUNT").toString();
-//			String cl_category_id = map.get(i).get("CL_CATEGORY_ID").toString();
-//			String cl_dCategory_id = map.get(i).get("CL_DCATEGORY_ID").toString();
-//			String clp_photo = map.get(i).get("CLP_PHOTO").toString();
-
-			
-//			list.add(i,cl_id);
-//			list.add(i,cl_name);
-//			list.add(i,cl_boss_id);
-//			list.add(i,cl_maxMem);
-//			list.add(i,cl_local);
-//			list.add(i,cl_openDate);
-//			list.add(i,cl_memCount);
-//			list.add(i,cl_category_id);
-//			list.add(i,cl_dCategory_id);
-//			list.add(i,clp_photo);
-	
-
 		return "clubList/clubList";
 	}
+	
 
 	@RequestMapping("createClubProc")
 	public String createClub(ClubListDTO dto, MultipartFile file) throws Exception {

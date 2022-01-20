@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	
+
+	
 <title>user_email</title>
 </head>
 <body>
@@ -37,6 +40,8 @@
 			</tr>
 		</table>
 	</form>
+	
+
  <script>
  $("#emailNum_btn").on("click",function(){
 	 if($("#dum").val() === $("#email_num").val()){

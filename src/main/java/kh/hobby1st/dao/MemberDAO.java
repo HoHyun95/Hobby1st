@@ -38,6 +38,10 @@ public class MemberDAO {
 		return mybatis.selectOne("member.id_check", id);
 	}
 	
+	public int naver_idCheck(String naver_id) {
+		return mybatis.selectOne("member.naver_idCheck", naver_id);
+	}
+	
 	//이메일 인증시 이메일 존재여부 체크
 	public int email_check(String email) {
 		return mybatis.selectOne("member.email_check", email);

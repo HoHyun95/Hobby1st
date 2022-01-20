@@ -19,8 +19,18 @@ public class MemberService {
 		return mem_dao.totalMember();
 	}
 	
+	// 네이버 아이디 디비에 저장되어있는지 확인
+	public int naver_idCheck(String naver_id) {
+		return mem_dao.naver_idCheck(naver_id);
+	}
+	
 	//회원가입 성공!
 	public int insert(MemberDTO dto) {
+		return mem_dao.insert(dto);
+	}
+
+	//네이버 회원가입 성공
+	public int naver_insert(MemberDTO dto) {
 		return mem_dao.insert(dto);
 	}
 	

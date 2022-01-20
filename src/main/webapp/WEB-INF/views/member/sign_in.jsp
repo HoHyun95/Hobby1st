@@ -76,7 +76,7 @@
         <div class="login_wrap">
            <div class="head">
                <div class="head_log"><h2>WelCome</h2></div>
-               <div class="head_font"><span><b>어서오세요 환영합니다!</b></span></div>     
+               <div class="head_font"><span><b>어서오세요 환영합니다! </b></span></div>     
            </div>
         <form action="/member/login" method="post">
            <div class="lbody">
@@ -86,17 +86,14 @@
                <div class="body_pass"><input type="password" placeholder="User Password" id="body_box" name="mem_pass"></div>
            </div>
            <div class="lfooter">
-               <div id="message">
-                   왜 안되냐고 정보 나오라고
-               </div>
-
                <div class="footer_submit">
                    <button class="button_login" type="submit">login</button>
                </div>
                <div id="button_area">
                    <div id="naverIdLogin"></div>
                </div>
-               
+               <div id="message" style="display: none;">
+               </div>
                <div class="footer_font">
                    <a class="a_login" href="/member/send_email">이메일찾기</a>
                    <a class="a_login" href="/member/sign_up">회원가입</a>
@@ -111,7 +108,7 @@
   			{
   				clientId: "lBYZ6xYGSN3wiVHC2ZK4",
   				callbackUrl: "http://localhost/member/sign_in",
-  				loginButton: {color: "green", type: 4, height: 40}
+  				loginButton: {color: "green", type: 3, height: 30}
   			}
   		);
       naverLogin.init();
@@ -123,6 +120,7 @@
         	  const gender=naverLogin.user.getGender();
         	  const mobile=naverLogin.user.getMobile();
               const age=naverLogin.user.getAge();
+              const birthyear=naverLogin.user.getBirthyear();
               const birthday=naverLogin.user.getBirthday();
               const nickname=naverLogin.user.getNickName();
 
@@ -151,35 +149,33 @@
                  naverLogin.reprompt(); 
                  return 
              }else{
-              setLoginStatus(); 
+                 const message_area=document.getElementById('message');
+                 message_area.innerHTML=`
+                 <input type=text name=naver_id value=` + nickname + `>
+                 <input type=text name=naver_mobile value=` + mobile + `>
+                 <input type=text name=naver_email value=` + email + `>
+                 <input type=text name=naver_name value=` + name + `>
+                 <input type=text name=naver_nickname value=` + nickname + `>
+                 <input type=text name=naver_birthyear value=` + birthyear + `>
+                 <input type=text name=naver_birthday value=` + birthday + `>
+                 <input type=text name=naver_gender value=` + gender + `>
+                 `
+                 setLoginStatus(); 
              }
           }
         });
-      
-      console.log(naverLogin)
-      
-      function setLoginStatus(){
-          const message_area=document.getElementById('message');
-          message_area.innerHTML=`
-              <h3> Login 성공 </h3>
-              <div> 시이게 되나 봐라 : ${naverLogin}  </div>
-              <div>user Nickname : ${naverLogin.user.nickname}.text</div>
-              <div>user Age(범위) : ${naverLogin.user.age}</div>
-              <div>user Birthday : ${naverLogin.user.birthday}</div>
-          `;
-    	  
+      function setLoginStatus(){ 	  
           const button_area=document.getElementById('button_area');
-          button_area.innerHTML="<button id='btn_logout' type='button'>로그아웃</button>";
-
+          button_area.innerHTML="<button id='btn_logout' type='submit'>네이버 아이디로 로그인하기</button>";
+   	  
           const logout=document.getElementById('btn_logout');
           logout.addEventListener('click',(e)=>{
               naverLogin.logout();
-              location.replace("http://localhost/member/sign_in");
-          })        	  
+          });   
       }     
       </script>    
       <script>
-  	  $("#sign_up").on("click", function() {
+      $("#sign_up").on("click", function() {
 		location.href = "/member/sign_up";
 	  })
       </script>    

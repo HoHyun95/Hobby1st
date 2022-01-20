@@ -9,12 +9,12 @@
   	
   	<!-- 댓글 삽입 -->
   	<insert id="insertReply">
-  		insert into club_board_reply values(#{cbr_par_seq}, club_board_reply_seq.nextval, 0, #{cbr_writer}, #{cbr_reply}, sysdate,0)
+  		insert into club_board_reply values(#{cbr_par_seq}, club_board_reply_seq.nextval, 0, #{cbr_writer}, #{cbr_reply}, sysdate,0,#{cbr_nickname})
   	</insert>
   	
   	<!-- 대댓글 삽입 -->
   	<insert id="insertReply_rec">
-  		insert into club_board_reply values(#{cbr_par_seq}, #{cbr_seq}, club_board_reply_seq_r.nextval, #{cbr_writer}, #{cbr_reply}, sysdate,1)
+  		insert into club_board_reply values(#{cbr_par_seq}, #{cbr_seq}, club_board_reply_seq_r.nextval, #{cbr_writer}, #{cbr_reply}, sysdate,1,#{cbr_nickname})
   	</insert>
   	
   	
@@ -43,7 +43,11 @@
 	<update id="minusReply">
 		update club_board set cb_reply_count = cb_reply_count - 1 where cb_seq =#{value}
 	</update>
-  	
+	
+	<!-- 댓글 쓴 유저 프로필 가져오기  -->
+  	<select id="reply_profile" resultType="String">
+  		select m.mem_photo from member m ,(select * from club_board_reply where cbr_par_seq = #{value} order by 2, cbr_r_seq) r where m.mem_id = r.cbr_writer
+  	</select>
   	
   	
   	

@@ -142,5 +142,15 @@ public class ClubBoardDAO {
 		return mybatis.selectOne("ClubBoardRec.recCount", cb_seq);
 	}
 	
+	// 댓글 프로필 불러오기
+	public List<String> reply_profile(int cb_seq) {
+		return mybatis.selectList("ClubBoardReply.reply_profile",cb_seq);
+	}
+	
+	// 작성자 프로필 가져오기
+	public String writerProfile(int cb_seq) {
+		return mybatis.selectOne("ClubBoard.writerProfile", cb_seq);
+	}
+	
 
 }

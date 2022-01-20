@@ -12,9 +12,13 @@ public class ClubBoardReplyDTO {
 	private Timestamp cbr_write_date;
 	private int cbr_r_seq;
 	private int deep;
+	private String cbr_nickname;
 
+	
+	public ClubBoardReplyDTO() {}
+	
 	public ClubBoardReplyDTO(int cbr_par_seq, int cbr_seq, String cbr_writer, String cbr_reply,
-			Timestamp cbr_write_date, int cbr_r_seq, int deep) {
+			Timestamp cbr_write_date, int cbr_r_seq, int deep, String cbr_nickname) {
 		super();
 		this.cbr_par_seq = cbr_par_seq;
 		this.cbr_seq = cbr_seq;
@@ -23,6 +27,7 @@ public class ClubBoardReplyDTO {
 		this.cbr_write_date = cbr_write_date;
 		this.cbr_r_seq = cbr_r_seq;
 		this.deep = deep;
+		this.cbr_nickname = cbr_nickname;
 	}
 
 	public int getCbr_par_seq() {
@@ -81,8 +86,16 @@ public class ClubBoardReplyDTO {
 		this.deep = deep;
 	}
 
-	public ClubBoardReplyDTO() {
+	public String getCbr_nickname() {
+		return cbr_nickname;
 	}
+
+	public void setCbr_nickname(String cbr_nickname) {
+		this.cbr_nickname = cbr_nickname;
+	}
+
+	
+	
 
 	// 날자 형식 변환
 	public String getFormdDate() {

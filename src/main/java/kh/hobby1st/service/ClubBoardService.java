@@ -52,7 +52,7 @@ public class ClubBoardService {
 	}
 
 	// -------------------------- 추천 기능 --------------------------
-	
+
 	public int clubRecommend(int cl_id, String rec_id) {
 
 		int check = cbdao.checkRec(cl_id, rec_id);
@@ -69,15 +69,22 @@ public class ClubBoardService {
 		cbdao.updateRec(cl_id);
 		return checkRec;
 	}
-	
-	
 
 	// 추천 여부 확인
 	public int checkRec(int cb_seq, String rec_id) {
 		return cbdao.checkRec(cb_seq, rec_id);
 	}
-	
-	
+
+	// 댓글 프로필 불러오기
+	public List<String> reply_profile(int cb_Seq) {
+		return cbdao.reply_profile(cb_Seq);
+	}
+
+	// 작성자 프로필 가져오기
+	public String writerProfile(int cb_seq) {
+		return cbdao.writerProfile(cb_seq);
+	}
+
 //	// 추천한 게시글에 id 저장
 //	public int insertRec(int cb_seq, String rec_id) {
 //
@@ -100,10 +107,6 @@ public class ClubBoardService {
 		return cbdao.recCount(cb_seq);
 	}
 
-	
-	
-	
-	
 	// ---------------------- 동호회 게시판 리스트 페이징 ----------------------
 	public List<ClubBoardDTO> selectBoardByPaging(int cpage, int seq) throws Exception {
 		int currentPage = cpage;

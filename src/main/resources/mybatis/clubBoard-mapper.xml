@@ -7,7 +7,7 @@
   
   <mapper namespace="ClubBoard">
   	<insert id="insertBoard">
-  		insert into club_board values(#{cb_club_id}, club_board_seq.nextval, #{cb_writer}, #{cb_title}, #{cb_contents}, null, sysdate, default, default, default)
+  		insert into club_board values(#{cb_club_id}, club_board_seq.nextval, #{cb_writer}, #{cb_title}, #{cb_contents}, null, sysdate, default, default, default,#{cb_nickname})
    	</insert>
    	
    	<select id="selectBoard" resultType="kh.hobby1st.dto.ClubBoardDTO">
@@ -44,7 +44,7 @@
   	
   	<!-- 게시판  작성자 검색 -->
   	<select id="searchWriter" resultType="kh.hobby1st.dto.ClubBoardDTO">
-  		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{club_board_id} and cb_writer = #{searchWord}) where rn between #{start} and #{end}
+  		select * from (select club_board.*, row_number() over(order by cb_seq desc) rn from club_board where cb_club_id = #{club_board_id} and cb_nickname = #{searchWord}) where rn between #{start} and #{end}
   	</select>
   	
   	<!-- 제목 검색시 총 개수 -->
@@ -54,8 +54,14 @@
  	
  	<!-- 작성자 검색시 총 개수 -->
   	<select id="searchWriterCount" resultType="int">
- 		select count(*) from club_board where cb_club_id = #{club_board_id} and cb_writer = #{searchWord}
+ 		select count(*) from club_board where cb_club_id = #{club_board_id} and cb_nickname = #{searchWord}
  	</select>
+ 	
+ 	<!-- 게시판 작성자 프로필 가져오기 -->
+ 	<select id="writerProfile" resultType="String">
+ 		select m.mem_photo from member m ,(select * from club_board where cb_seq = #{value}) b where m.mem_id = b.cb_writer
+ 	</select>
+ 	
   	
   	
   	

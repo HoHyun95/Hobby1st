@@ -75,7 +75,7 @@
 													<span style="color: red;">[${dto.cb_reply_count}]</span>
 												</c:if>
 										</td>
-								<td class="px-4 py-4 text-center">${dto.cb_writer }</td>
+								<td class="px-4 py-4 text-center">${dto.cb_nickname }</td>
 								<td class="px-4 py-4 text-center">${dto.detailDate }</td>
 								<td class="px-4 py-4 text-center">${dto.cb_view_count }</td>
 								<td class="px-4 py-4 text-center">${dto.cb_like_count }</td>

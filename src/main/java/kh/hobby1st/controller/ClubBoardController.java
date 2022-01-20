@@ -27,6 +27,7 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubBoardReplyDTO;
 import kh.hobby1st.service.ClubBoardReplyService;
 import kh.hobby1st.service.ClubBoardService;
+import kh.hobby1st.service.MemberService;
 
 @Controller
 @RequestMapping("/clubBoard/")
@@ -43,6 +44,7 @@ public class ClubBoardController {
 
 	@Autowired
 	private ClubBoardReplyService club_board_reply_service;
+	
 	
 	Gson g = new Gson();
 
@@ -74,6 +76,7 @@ public class ClubBoardController {
 	public String boardInsert(ClubBoardDTO dto, Model model) {
 		dto.setCb_club_id(5);
 		dto.setCb_writer((String) session.getAttribute("mem_id"));
+		dto.setCb_nickname((String) session.getAttribute("user_nickName"));
 
 		club_board_service.insert(dto);
 		int totalBoardCount = club_board_service.getRecordCount(5);
@@ -98,12 +101,21 @@ public class ClubBoardController {
 		} else if(check == 0) {
 			user = 1;
 		}
-
+		String writerProfile = club_board_service.writerProfile(cb_seq);
+		
+		System.out.println(writerProfile);
+		
+		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
 		List<ClubBoardReplyDTO> replyList = club_board_reply_service.selectReply(cb_seq);
 		int replycount = club_board_reply_service.replyCount(cb_seq);
+		List<String> reply_profile = club_board_service.reply_profile(cb_seq);
+		
+		System.out.println(reply_profile.size());
 
+		model.addAttribute("writerProfile", writerProfile);
+		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("replycount", replycount);
@@ -127,6 +139,7 @@ public class ClubBoardController {
 		}
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
+		dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
 		dto.setCbr_par_seq(cb_seq);
 
 		club_board_reply_service.plusReply(cb_seq);
@@ -165,6 +178,7 @@ public class ClubBoardController {
 			}
 			
 			dto.setCbr_writer((String) session.getAttribute("mem_id"));
+			dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
 			dto.setCbr_par_seq(cb_seq);
 
 			club_board_reply_service.plusReply(cb_seq);
@@ -279,7 +293,7 @@ public class ClubBoardController {
 		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 		System.out.println(contextRoot);
 //		String fileRoot = contextRoot + "resources/images/";
-		String fileRoot = contextRoot + "/";
+		String fileRoot = contextRoot + "/summernote/";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -290,7 +304,7 @@ public class ClubBoardController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
 //			jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
-			jsonObject.addProperty("url", "/upload/" + savedFileName);
+			jsonObject.addProperty("url", "/upload/summernote/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {

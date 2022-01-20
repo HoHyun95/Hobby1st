@@ -275,9 +275,11 @@ public class ClubBoardController {
 		 */
 
 		// 내부경로로 저장
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+//		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 		System.out.println(contextRoot);
-		String fileRoot = contextRoot + "resources/images/";
+//		String fileRoot = contextRoot + "resources/images/";
+		String fileRoot = contextRoot + "/";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -287,7 +289,8 @@ public class ClubBoardController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+//			jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "/upload/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {
@@ -300,31 +303,20 @@ public class ClubBoardController {
 
 	}
 
-	// 게시판 검색 기능
+	// 게시판 추천 기능
 	@ResponseBody
 	@RequestMapping("/clubBoardRec")
 	public String clubBoardRec(int cb_seq) throws Exception {
 		
 		String rec_id = (String) session.getAttribute("mem_id");
 		
-		int check = club_board_service.checkRec(cb_seq, rec_id);
-		
-		int user = 0;
-		if(check ==1){
-			club_board_service.deleteRec(cb_seq, rec_id);
-			user = 0;
-		} else if(check == 0) {
-			club_board_service.insertRec(cb_seq, rec_id);
-			user = 1;
-		}
-		
-		club_board_service.updateRec(cb_seq);
+		int checkRec = club_board_service.clubRecommend(cb_seq, rec_id);
 		
 		int num = club_board_service.recCount(cb_seq);
 		
 		int[] arr = new int[2];
 		arr[0] = num; // 추천수
-		arr[1] = user; // 추천 유무
+		arr[1] = checkRec; // 추천 유무
 		
 		return g.toJson(arr);
 	}

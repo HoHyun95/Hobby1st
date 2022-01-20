@@ -21,4 +21,9 @@ public class ChatDAO {
 	public List<ChatDTO> chatSelectAll(){
 		return mybatis.selectList("Chat.chatSelectAll");
 	}
+	
+	public int isThisMyChat(String chat_writer) {
+		System.out.println("DAO 도착 ! ");
+		return mybatis.selectOne("Chat.isThisMyChat", chat_writer);
+	}
 }

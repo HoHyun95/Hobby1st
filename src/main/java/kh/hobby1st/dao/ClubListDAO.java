@@ -28,10 +28,15 @@ public class ClubListDAO {
 	public List<ClubListDTO> selectAll() {
 		return mybatis.selectList("ClubList.selectAll");
 	}
-	
+
 	// 동호회 리스트 10개씩 가져오기
-	public List<ClubListDTO> selectSplit(){
-		return mybatis.selectList("ClubList.selectSplit");
+	public List<ClubListDTO> selectSplit(int start, int end) {
+
+		Map<String, String> map = new HashMap<>();
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+
+		return mybatis.selectList("ClubList.selectSplit", map);
 	}
 
 	public ClubListDTO selectClub(String cl_id) {
@@ -70,6 +75,51 @@ public class ClubListDAO {
 		map.put("mem_id", mem_id);
 
 		return mybatis.selectOne("ClubList.checkClubBoss", map);
+	}
+
+	// -------- 추천 기능 ----------
+
+	// 추천 여부 확인
+	public int checkRec(int cl_id, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cl_id", String.valueOf(cl_id));
+		map.put("rec_id", rec_id);
+
+		return mybatis.selectOne("ClubList.checkRec", map);
+	}
+
+	// 추천한 게시글에 id 저장
+	public int insertRec(int cl_id, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cl_id", String.valueOf(cl_id));
+		map.put("rec_id", rec_id);
+
+		return mybatis.insert("ClubList.insertRec", map);
+	}
+
+	// 추천 쉬소
+	public int deleteRec(int cl_id, String rec_id) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cl_id", String.valueOf(cl_id));
+		map.put("rec_id", rec_id);
+
+		return mybatis.insert("ClubList.deleteRec", map);
+	}
+
+	// 추천수 갱신
+	public int updateRec(int cl_id) {
+		return mybatis.update("ClubList.updateRec", cl_id);
+	}
+
+	// 추천수
+	public int recCount(int cl_id) {
+		return mybatis.selectOne("ClubList.recCount", cl_id);
 	}
 
 }

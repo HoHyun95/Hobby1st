@@ -38,7 +38,7 @@
 	
 	<select id="selectSplit" resultType="kh.hobby1st.dto.ClubListDTO">
 		select * from (select club_list.*, row_number() over (order by cl_id asc) rn from club_list)
-								where rn between 1 and 10
+								where rn between #{start} and #{end}
 	</select>
 
 	<select id="selectClub" resultType="kh.hobby1st.dto.ClubListDTO">
@@ -60,6 +60,32 @@
 		select count(*) from club_list where cl_boss_id = #{mem_id} and cl_id = #{cl_id}
 	</select>
 	
+	<!-- 추천 관련 -->
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="checkRec" resultType="int">
+   		select count(*) from club_list_rec where cl_seq = #{cl_id} and rec_id = #{rec_id}
+   	</select>
+   	
+   	<!-- 추천 -->
+  	<insert id="insertRec">
+  		insert into club_list_rec values(#{cl_id}, #{rec_id})
+  	</insert>
+   	
+   	<!-- 추천 취소 -->
+   	<delete id="deleteRec">
+   		delete from club_list_rec where cl_seq = #{cl_id} and rec_id = #{rec_id}
+   	</delete>
+  	
+  	<!-- 추천수 갱신 -->
+	<update id="updateRec">
+		update club_list set cl_rec_count = (select count(*) from club_list_rec where cl_seq = #{value}) where cl_id = #{value}
+	</update>
+	
+	<!-- 추천수 조회 -->
+	<select id="recCount" resultType="int">
+  		select cl_rec_count from club_list where cl_id = #{value}
+  	</select>
 	
 	
 

@@ -51,9 +51,13 @@ public class MemberController {
 			//사용자 이름 session 저장
 			MemberDTO mem_dto = mem_service.selectOne(mem_id);
 			String user_name = mem_dto.getMem_name();
+			String user_nickName = mem_dto.getMem_nickname();
+			
+			System.out.println(user_name+user_nickName);
 
 			session.setAttribute("mem_id", mem_id);
 			session.setAttribute("user_name", user_name);
+			session.setAttribute("user_nickName", user_nickName);
 		} else if(naver_id != null) {
 			int naver_result = mem_service.naver_idCheck(naver_id);
 			if(0<naver_result) {
@@ -129,7 +133,8 @@ public class MemberController {
 		String mem_lastlogin = "default";
 		for(MultipartFile mf : mem_photo) {
 			try{
-				String realPath = session.getServletContext().getRealPath("upload");
+//				String realPath = session.getServletContext().getRealPath("upload");
+				String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
 				File realPathFile = new File(realPath);
 				if(!realPathFile.exists()) {realPathFile.mkdir();}
 
@@ -137,8 +142,8 @@ public class MemberController {
 				String sysName = UUID.randomUUID() + "_" + oriName;   
 
 				mf.transferTo(new File(realPath+"/"+sysName));
-
-				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, sysName, mem_lastlogin, mem_phone, mem_email); 
+				String profile = "/upload/profile/"+sysName;
+				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email); 
 				int result = mem_service.insert(dto);
 			} catch (Exception e) {
 				e.printStackTrace();

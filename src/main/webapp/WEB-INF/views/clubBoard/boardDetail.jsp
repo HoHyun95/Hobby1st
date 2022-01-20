@@ -48,7 +48,7 @@
 				<span>${detail.cb_title } </span>
 			</div>
 			<div>
-				<span class="writer">${detail.cb_writer }</span>
+				<span class="writer">${detail.cb_nickname }</span>
 			</div>
 			<div class="grid grid-cols-2 text-gray-400"
 				style="padding-bottom: 10px; border-bottom: 1px solid rgb(202, 202, 202);">

@@ -54,24 +54,6 @@
         location.href = "/member/sign_up";
       }
 
-      
-      /* for (let i = 0; i < h3.length; i++) {
-    	  h3[i].onclick = () => {
-          let clickedList = hidden[i].value;
-          location.href = "/clubHouse?cl_id=" + clickedList;
-        }
-      } */
-      
-      document.addEventListener('click', (e) => {
-    	console.log(e);
-    	if(e.target == 'h3'){
-          let clickedList = 30;
-          console.log(clickedList);
-          location.href = "/clubHouse?cl_id=" + clickedList;
-        }
-      });
-      
-      
       document.addEventListener('click', (e) => {
         if(e.target && e.target.id== 'likeBtn'){
           e.target.classList.toggle("fas");
@@ -104,6 +86,7 @@
             let div3 = document.createElement("div");
             let div4 = document.createElement("div");
 
+            let a = document.createElement("a");
             let h3 = document.createElement("h3");
             let h5_1 = document.createElement("h5");
             let h5_2 = document.createElement("h5");
@@ -115,31 +98,27 @@
             div2.classList.add("club_list_box");
             div3.classList.add("badge");
             div3.id = "theme1";
-            div3.innerHTML = "THEME";
+            div3.innerHTML = res[k].cl_category_id;
             div4.classList.add("like");
                   
             i.classList.add("far");
             i.classList.add("fa-heart");
             i.id = "likeBtn";
-                  
+            
+            a.href = "/clubHouse?cl_id="+res[k].cl_id;
             h3.innerHTML = res[k].cl_name;
             h5_1.innerHTML = res[k].cl_boss_name;
             h5_2.innerHTML = res[k].cl_local;
             h5_3.innerHTML = res[k].cl_desc;
-                  
-            input.type = "hidden";
-            input.name = "cl_id";
-            input.classList.add("cl_id");
-            input.value = res[k].cl_id;
-                  
+     
             div4.appendChild(i);
             div2.appendChild(div3);
             div2.appendChild(div4);
-            div2.appendChild(h3);
+            a.appendChild(h3);
+            div2.appendChild(a);
             div2.appendChild(h5_1);
             div2.appendChild(h5_2);
             div2.appendChild(h5_3);
-            div2.appendChild(input);
             div1.appendChild(div2);
 
             document.querySelector('.club_list').appendChild(div1);
@@ -251,7 +230,7 @@
     <!-- club_list_title -->
     <div class="club_list_title">
       <div class="club_list_title_contents"> 
-        <!-- <div class="club_list_title_text"> 20 개 / 총 동호회 수 456개 </div> -->
+        <div class="club_list_title_text"> 총 ${fn:length(clubList)}개의 동호회가 있습니다.</div>
     </div>
     <!-- club_list_title end-->
 
@@ -267,7 +246,7 @@
             <div class="club_list_box">
               <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
               <div class="like"><i class="far fa-heart" id="likeBtn"></i></div>
-              <h3>${cl.CL_NAME }</h3>
+              <a href="/clubHouse?cl_id=${cl.CL_ID }"><h3>${cl.CL_NAME }</h3></a>
               <h5>${cl.CL_BOSS_NAME }</h5>
               <h5>${cl.CL_LOCAL }</h5>
               <c:choose>
@@ -278,7 +257,6 @@
 			      <h5><c:out value="${cl.CL_DESC}" /></h5>
 			    </c:otherwise>
 			  </c:choose>
-              <input type="hidden" name="cl_id" class="cl_id" value="${cl.CL_ID }">
             </div>
           </div>
           </c:forEach>

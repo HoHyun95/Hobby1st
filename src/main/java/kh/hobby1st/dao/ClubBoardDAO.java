@@ -142,5 +142,10 @@ public class ClubBoardDAO {
 		return mybatis.selectOne("ClubBoardRec.recCount", cb_seq);
 	}
 	
+	// 댓글 프로필 불러오기
+	public List<String> reply_profile(int cb_Seq) {
+		return mybatis.selectList("ClubBoardReply.reply_profile",cb_Seq);
+	}
+	
 
 }

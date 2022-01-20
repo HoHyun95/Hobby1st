@@ -103,7 +103,7 @@
 									style="border-radius: 70%; height: 80px; width: 80px; padding-right: 10px;">
 									<img id="profile"
 									style="border-radius: 70%; height: 60px; width: 60px;"
-									src="${list_profile.get(status.index)}" alt="">
+									src="${reply_profile.get(status.index)}" alt="">
 								</td>
 								<td
 									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.cbr_nickname }</td>
@@ -139,13 +139,13 @@
 					<tr>
 						<form method="post"
 							action="/clubBoard/insertReply_rec?cb_seq=${detail.cb_seq }&cbr_seq=${replyList.cbr_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
-							<!-- 댓글달기 기능 -->
+							<!-- 답글달기 기능 -->
 							<div id="reply_rec${replyList.cbr_seq }"
 								class="commend space-y-2 rounded-md"
 								style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px; display: none; width: 90%; height: 80%; margin-left: 73px;">
 								<div class="writer font-bold">${user_nickName }</div>
 
-								<!-- 댓글 입력받기 -->
+								<!-- 답글 입력받기 -->
 								<div>
 									<input type="hidden" name="seq_r" value="${detail.cb_seq }">
 									<input type="hidden" name="cpage" value="${cpage }">
@@ -233,7 +233,10 @@
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
-				<div class="writer font-bold">${user_nickName }</div>
+				<div class="writer font-bold">
+				<img id="profile" style="border-radius: 70%; height: 60px; width: 60px;" src="${myProfile}" alt="">
+				${user_nickName }
+				</div>
 
 				<!-- 댓글 입력받기 -->
 				<div>

@@ -77,6 +77,10 @@ public class ClubBoardService {
 		return cbdao.checkRec(cb_seq, rec_id);
 	}
 	
+	// 댓글 프로필 불러오기
+		public List<String> reply_profile(int cb_Seq) {
+			return cbdao.reply_profile(cb_Seq);
+		}
 	
 //	// 추천한 게시글에 id 저장
 //	public int insertRec(int cb_seq, String rec_id) {

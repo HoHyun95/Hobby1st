@@ -27,6 +27,7 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubBoardReplyDTO;
 import kh.hobby1st.service.ClubBoardReplyService;
 import kh.hobby1st.service.ClubBoardService;
+import kh.hobby1st.service.MemberService;
 
 @Controller
 @RequestMapping("/clubBoard/")
@@ -43,6 +44,9 @@ public class ClubBoardController {
 
 	@Autowired
 	private ClubBoardReplyService club_board_reply_service;
+	
+	@Autowired
+	private MemberService mem_service;
 	
 	Gson g = new Gson();
 
@@ -99,12 +103,20 @@ public class ClubBoardController {
 		} else if(check == 0) {
 			user = 1;
 		}
-
+		String myProfile = mem_service.selectOne(rec_id).getMem_photo();
+		
+		System.out.println(myProfile);
+		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
 		List<ClubBoardReplyDTO> replyList = club_board_reply_service.selectReply(cb_seq);
 		int replycount = club_board_reply_service.replyCount(cb_seq);
+		List<String> reply_profile = club_board_service.reply_profile(cb_seq);
+		
+		System.out.println(reply_profile.size());
 
+		model.addAttribute("myProfile", myProfile);
+		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("replycount", replycount);

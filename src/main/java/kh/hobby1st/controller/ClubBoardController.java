@@ -307,24 +307,13 @@ public class ClubBoardController {
 		
 		String rec_id = (String) session.getAttribute("mem_id");
 		
-		int check = club_board_service.checkRec(cb_seq, rec_id);
-		
-		int user = 0;
-		if(check ==1){
-			club_board_service.deleteRec(cb_seq, rec_id);
-			user = 0;
-		} else if(check == 0) {
-			club_board_service.insertRec(cb_seq, rec_id);
-			user = 1;
-		}
-		
-		club_board_service.updateRec(cb_seq);
+		int checkRec = club_board_service.clubRecommend(cb_seq, rec_id);
 		
 		int num = club_board_service.recCount(cb_seq);
 		
 		int[] arr = new int[2];
 		arr[0] = num; // 추천수
-		arr[1] = user; // 추천 유무
+		arr[1] = checkRec; // 추천 유무
 		
 		return g.toJson(arr);
 	}

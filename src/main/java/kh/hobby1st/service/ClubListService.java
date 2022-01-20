@@ -32,12 +32,12 @@ public class ClubListService {
 	public List<ClubListDTO> selectAll() {
 		return cldao.selectAll();
 	}
-	
+
 	//
-	public List<ClubListDTO> selectSplit(int start, int end){
-		return cldao.selectSplit(start,end);
+	public List<ClubListDTO> selectSplit(int start, int end) {
+		return cldao.selectSplit(start, end);
 	}
-	
+
 	// 동호회 리스트 및 검색 결과에서 동호회 명 클릭시 해당 동호회 상세 정보->
 	public ClubListDTO selectClub(String cl_id) {
 		return cldao.selectClub(cl_id);
@@ -54,29 +54,47 @@ public class ClubListService {
 	// 해당 동호회 가입 여부 확인
 	public int checkMember(int cl_id, String mem_id) {
 		int checkMember = 0;
-		
+
 		// 보스 여부
 		int clubBoss = cldao.checkClubBoss(cl_id, mem_id);
 		// 일반회원 여부
 		int clubMember = cldao.checkMember(cl_id, mem_id);
-		
-		
-		if(clubMember == 0) {
+
+		if (clubMember == 0) {
 			checkMember = 0;
-		}else if(clubMember == 1) {
+		} else if (clubMember == 1) {
 			checkMember = 1;
 		}
-		
+
 		if (clubBoss == 1) {
 			checkMember = 2;
 		}
-		
+
 		return checkMember;
 	}
-	
-	
-	
-	
-	
+
+	// 추천 ajax 기능
+
+	public int clubRecommend(int cl_id, String rec_id) {
+
+		int check = cldao.checkRec(cl_id, rec_id);
+
+		int checkRec = 0;
+		if (check == 1) {
+			cldao.deleteRec(cl_id, rec_id);
+			checkRec = 0;
+		} else if (check == 0) {
+			cldao.insertRec(cl_id, rec_id);
+			checkRec = 1;
+		}
+
+		cldao.updateRec(cl_id);
+		return checkRec;
+	}
+
+	// 추천수
+	public int recCount(int cl_id) {
+		return cldao.recCount(cl_id);
+	}
 
 }

@@ -52,44 +52,48 @@ public class ClubBoardService {
 	}
 
 	// -------------------------- 추천 기능 --------------------------
+	
+	public int clubRecommend(int cl_id, String rec_id) {
+
+		int check = cbdao.checkRec(cl_id, rec_id);
+
+		int checkRec = 0;
+		if (check == 1) {
+			cbdao.deleteRec(cl_id, rec_id);
+			checkRec = 0;
+		} else if (check == 0) {
+			cbdao.insertRec(cl_id, rec_id);
+			checkRec = 1;
+		}
+
+		cbdao.updateRec(cl_id);
+		return checkRec;
+	}
+	
+	
 
 	// 추천 여부 확인
 	public int checkRec(int cb_seq, String rec_id) {
-
-		Map<String, String> map = new HashMap<>();
-
-		map.put("cb_seq", String.valueOf(cb_seq));
-		map.put("rec_id", rec_id);
-
 		return cbdao.checkRec(cb_seq, rec_id);
 	}
-
-	// 추천한 게시글에 id 저장
-	public int insertRec(int cb_seq, String rec_id) {
-
-		Map<String, String> map = new HashMap<>();
-
-		map.put("cb_seq", String.valueOf(cb_seq));
-		map.put("rec_id", rec_id);
-
-		return cbdao.insertRec(cb_seq, rec_id);
-	}
-
-	// 추천 쉬소
-	public int deleteRec(int cb_seq, String rec_id) {
-
-		Map<String, String> map = new HashMap<>();
-
-		map.put("cb_seq", String.valueOf(cb_seq));
-		map.put("rec_id", rec_id);
-
-		return cbdao.deleteRec(cb_seq, rec_id);
-	}
-
-	// 추천수 갱신
-	public int updateRec(int cb_seq) {
-		return cbdao.updateRec(cb_seq);
-	}
+	
+	
+//	// 추천한 게시글에 id 저장
+//	public int insertRec(int cb_seq, String rec_id) {
+//
+//		return cbdao.insertRec(cb_seq, rec_id);
+//	}
+//
+//	// 추천 쉬소
+//	public int deleteRec(int cb_seq, String rec_id) {
+//
+//		return cbdao.deleteRec(cb_seq, rec_id);
+//	}
+//
+//	// 추천수 갱신
+//	public int updateRec(int cb_seq) {
+//		return cbdao.updateRec(cb_seq);
+//	}
 
 	// 추천수
 	public int recCount(int cb_seq) {

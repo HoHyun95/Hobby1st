@@ -313,7 +313,7 @@ svg {
   padding: 10px 10px 10px 10px;
 }
 
-.club_list_box:hover {
+h3:hover {
   cursor: pointer;
 }
 

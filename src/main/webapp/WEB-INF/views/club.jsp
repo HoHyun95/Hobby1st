@@ -27,8 +27,11 @@
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
-      let club_list_box = document.querySelectorAll(".club_list_box");
-
+      let likeBtn = document.querySelectorAll("#likeBtn");
+      let h3 = document.querySelectorAll("h3");
+	  let hidden = document.querySelectorAll("input[type='hidden']");
+	  let club_list_box = document.querySelectorAll(".club_list_box");
+      
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -37,6 +40,7 @@
         loginForm.style.zIndex = 11;
         loginForm.style.display = "flex";
       }
+      
       close_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -50,13 +54,102 @@
         location.href = "/member/sign_up";
       }
 
-      for (let i = 0; i < club_list_box.length; i++) {
-        club_list_box[i].onclick = () => {
-          let clickedList = club_list_box[i].children[5].value;
+      
+      /* for (let i = 0; i < h3.length; i++) {
+    	  h3[i].onclick = () => {
+          let clickedList = hidden[i].value;
           location.href = "/clubHouse?cl_id=" + clickedList;
         }
-      }
-    }
+      } */
+      
+      document.addEventListener('click', (e) => {
+    	console.log(e);
+    	if(e.target == 'h3'){
+          let clickedList = 30;
+          console.log(clickedList);
+          location.href = "/clubHouse?cl_id=" + clickedList;
+        }
+      });
+      
+      
+      document.addEventListener('click', (e) => {
+        if(e.target && e.target.id== 'likeBtn'){
+          e.target.classList.toggle("fas");
+        }
+      });
+      
+      
+      // 무한 스크롤
+      let totalList = ${fn:length(clubList)}
+      let count = 10;
+      let start = 11;
+      let end = 20;
+      
+      window.onscroll = function (e) {
+    	 
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        
+       	$.ajax({
+       	    url: "/splitList?start=" + (start) + "&end=" + (end), 
+       	    type: "get",
+       	    dataType: "json" 
+       	}).done((res) => {
+          if(res.length > 0) {
+          start += count;
+          end += count;  
+          for(let k = 1; k < res.length; k++) {
+        	setTimeout(() => {
+            let div1 = document.createElement("div");
+            let div2 = document.createElement("div");
+            let div3 = document.createElement("div");
+            let div4 = document.createElement("div");
+
+            let h3 = document.createElement("h3");
+            let h5_1 = document.createElement("h5");
+            let h5_2 = document.createElement("h5");
+            let h5_3 = document.createElement("h5");
+            let i = document.createElement("i");
+            let input = document.createElement("input");
+
+            div1.classList.add("club_list_box_wrap");
+            div2.classList.add("club_list_box");
+            div3.classList.add("badge");
+            div3.id = "theme1";
+            div3.innerHTML = "THEME";
+            div4.classList.add("like");
+                  
+            i.classList.add("far");
+            i.classList.add("fa-heart");
+            i.id = "likeBtn";
+                  
+            h3.innerHTML = res[k].cl_name;
+            h5_1.innerHTML = res[k].cl_boss_name;
+            h5_2.innerHTML = res[k].cl_local;
+            h5_3.innerHTML = res[k].cl_desc;
+                  
+            input.type = "hidden";
+            input.name = "cl_id";
+            input.classList.add("cl_id");
+            input.value = res[k].cl_id;
+                  
+            div4.appendChild(i);
+            div2.appendChild(div3);
+            div2.appendChild(div4);
+            div2.appendChild(h3);
+            div2.appendChild(h5_1);
+            div2.appendChild(h5_2);
+            div2.appendChild(h5_3);
+            div2.appendChild(input);
+            div1.appendChild(div2);
+
+            document.querySelector('.club_list').appendChild(div1);
+          }, 1000)
+          }
+          }
+       }); 	  
+     }
+   }
+  }
   </script>
 </head>
 
@@ -169,7 +262,7 @@
           <div class="no_search_result_text"> 검색 결과가 없습니다.</div>
         </div> -->
         <div class="club_list">
-          <c:forEach var="cl" items="${clubList }">
+          <c:forEach var="cl" items="${clubList }" begin="0" end="9" step="1">
           <div class="club_list_box_wrap">
             <div class="club_list_box">
               <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
@@ -185,7 +278,7 @@
 			      <h5><c:out value="${cl.CL_DESC}" /></h5>
 			    </c:otherwise>
 			  </c:choose>
-              <input type="hidden" name="cl_id" value="${cl.CL_ID }">
+              <input type="hidden" name="cl_id" class="cl_id" value="${cl.CL_ID }">
             </div>
           </div>
           </c:forEach>

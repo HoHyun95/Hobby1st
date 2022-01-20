@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubListDTO;
@@ -87,7 +91,6 @@ public class HomeController {
 		}
 		
 		List<ClubListDTO> clubList = clService.selectAll();
-		System.out.println(clubList);
 		
 		model.addAttribute("clubList", clubList);
 		return "club";
@@ -104,6 +107,19 @@ public class HomeController {
 		model.addAttribute("checkMember", checkMember);
 		return "clubHouse";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "splitList", produces = "application/json; charset=UTF-8")
+	public String loadSplitList(int start, int end) {
+		Gson g = new Gson();
+		System.out.println(start);
+		System.out.println(end);
+		List<ClubListDTO> selectSplit = clService.selectSplit(start, end);
+		String result = g.toJson(selectSplit);
+		
+		return result;
+	}
+	
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

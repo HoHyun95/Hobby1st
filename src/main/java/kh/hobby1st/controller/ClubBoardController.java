@@ -275,8 +275,8 @@ public class ClubBoardController {
 		 */
 
 		// 내부경로로 저장
-//		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+//		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 		System.out.println(contextRoot);
 //		String fileRoot = contextRoot + "resources/images/";
 		String fileRoot = contextRoot + "/";

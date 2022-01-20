@@ -44,7 +44,6 @@ public class MemberController {
 	public String login(String mem_id, String mem_pass, String naver_id, String naver_mobile,
 			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
 			String naver_birthday, String naver_gender) {
-
 		
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
@@ -56,18 +55,23 @@ public class MemberController {
 			session.setAttribute("user_name", user_name);
 		} else if(naver_id != null) {
 			int naver_result = mem_service.naver_idCheck(naver_id);
+
 			if(0<naver_result) {
+				MemberDTO mem_dto = new MemberDTO();		
+				String user_name = mem_dto.getMem_name();
+				
+				session.setAttribute("user_name", user_name);
 				session.setAttribute("mem_id", naver_id);
 			}else if(0 == naver_result) {
+				String modf_mobile = naver_mobile.replaceAll("[-]", "");		
 				String naver_login = "naver_login";
 				String mem_birthday = naver_birthyear + "-" + naver_birthday;
 				String mem_lastlogin = "default";
 			
 				session.setAttribute("naver_id", naver_id);
-				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, naver_mobile, naver_email); 
+				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
 				int naver_Rinsert = mem_service.naver_insert(dto);
 				return "member/sign_in";
-
 			}
 		}
 		return "redirect: /";

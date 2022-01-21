@@ -155,7 +155,7 @@
                   PASSWORD
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="password" id="mem_pass" maxlength="20">
+                  <input type="password" id="mem_pass" maxlength="20" autocomplete="off">
                 </div>
               </div>
               <div class="input_btn1">

@@ -129,6 +129,11 @@
      }
    }
   }
+    
+    $(document).on("click",".club_list_box_wrap", function() {
+    	console.log("a");
+    	alert("아아앙아아아아아!!!!!!");
+    })
   </script>
 </head>
 

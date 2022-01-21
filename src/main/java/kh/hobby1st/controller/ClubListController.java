@@ -69,7 +69,7 @@ public class ClubListController {
 		System.out.println(dto.getCl_local());
 		System.out.println(dto.getCl_desc());
 
-		String realPath = session.getServletContext().getRealPath("clubPic");
+		String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
 
 		File realPathFile = new File(realPath);
 

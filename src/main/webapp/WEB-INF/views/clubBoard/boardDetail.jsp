@@ -43,9 +43,6 @@
 			style="float: right;">목록</button>
 	</div>
 	
-	<img id="profile"
-									style="border-radius: 70%; height: 60px; width: 55px;"
-									src="${list}" alt="">
 
 
 	<!-- 게시판 상세보기 header 부분 -->

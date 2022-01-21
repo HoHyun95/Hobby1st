@@ -108,9 +108,9 @@ public class ClubBoardController {
 		
 		System.out.println(writerProfile);
 		
-		ClubListDTO list = club_list_service.selectClub("54");
-		
-		System.out.println("리스트" + list.getCl_photo());
+//		ClubListDTO list = club_list_service.selectClub("54");
+//		
+//		System.out.println("리스트" + list.getCl_photo());
 		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
@@ -120,7 +120,7 @@ public class ClubBoardController {
 		
 		System.out.println(reply_profile.size());
 
-		model.addAttribute("list", list);
+//		model.addAttribute("list", list.getCl_photo());
 		model.addAttribute("writerProfile", writerProfile);
 		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);

@@ -493,7 +493,7 @@
               </div>
               <div id="naver">
                  <a id="naverIdLogin_loginButton" href="#">
-                 <button type="button" id="naverIdLogin"> Naver LOGIN </button></a>             
+                 <button type="button" id="naverIdLogin"> Naver SignUp </button></a>             
               </div>
                 <div id="naver_message" style="display: none;"></div>
    			  </form>

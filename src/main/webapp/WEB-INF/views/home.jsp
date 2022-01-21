@@ -444,6 +444,6 @@
 
   </div>
 <!-- sign_in -->
-  <jsp:include page="login.jsp"></jsp:include>
+<jsp:include page="login.jsp"></jsp:include>
 </body>
 </html>

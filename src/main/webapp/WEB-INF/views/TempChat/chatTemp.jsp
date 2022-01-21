@@ -44,7 +44,7 @@
 					<!-- 메세지 컨텐츠 시작 -->
 					<div id="chat_contents">
 					
-					<div><span class="club_openDate">${clubInfo.formDate }</span></div>
+					<div><div class="club_openDate">${clubInfo.formDate } 동호회가 개설 되었습니다</div></div>
 					
 						<div class="emojiBox">
 							<div class="emojies">
@@ -59,26 +59,26 @@
 							</div>
 						</div>
 
-						<div class="incoming_msg">
-							<div class="received_msg">
+<!-- 						<div class="incoming_msg"> -->
+<!-- 							<div class="received_msg"> -->
 
-								<!-- DB 에서 출력 후 보낸 사람을 출력하자  -->
-								<div class="sender">temp sender</div>
+<!-- 								DB 에서 출력 후 보낸 사람을 출력하자  -->
+<!-- 								<div class="sender">temp sender</div> -->
 
-								<div class="received_withd_msg">
-									<p>Lorem Ipsum is simply dummy text</p>
-									<span class="time_date"> 11:01 AM | June 9</span>
-								</div>
-							</div>
-						</div>
+<!-- 								<div class="received_withd_msg"> -->
+<!-- 									<p>Lorem Ipsum is simply dummy text</p> -->
+<!-- 									<span class="time_date"> 11:01 AM | June 9</span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 						<!--내가 보내는 메세지-->
-						<div class="outgoing_msg">
-							<div class="sent_msg">
-								<p>Lorem Ipsum is simply dummy text</p>
-								<span class="time_date"> 11:01 AM | June 9</span>
-							</div>
-						</div>
+<!-- 						<div class="outgoing_msg"> -->
+<!-- 							<div class="sent_msg"> -->
+<!-- 								<p>Lorem Ipsum is simply dummy text</p> -->
+<!-- 								<span class="time_date"> 11:01 AM | June 9</span> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 
 
@@ -172,29 +172,38 @@
 
 
 			<script>
+			$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
+
+			
 			 let ws = new WebSocket("ws://localhost/chat");
 			 
 		     ws.onmessage = function(e){
 				//웹 소켓에 보낸 문자 그대로를 변수로 지정
-		      	let eData = e.data;
-		    	 let myMsg = eData.substring(3);
-				
+		      	let msgData = e.data;
+		
+		    	let sender = "";
+		    	 
+		    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
+		    	 $.ajax({
+		    		 url : "/chat/whoIsLastChat"
+		    	 }).done(function(resp){
+		    		 sender = resp;
+		    		 console.log("resp 값 :" +sender);
+		    	 })
+		    	 
+		    	 
 		         if($('#mem_writer').val() == $('#session_user_name').val()){
-					sendMsg(myMsg);
+					sendMsg(msgData);
 					$('#chat_contents').append(htmlData);
 		       		htmlData="";
-
+		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
 				
 				}else{
-					// 메세지 부분 
-					let liveMsg = eData.substring(3);
-				
-					// 메세지 작성자 이름 부분
-					let senderName = eData.substring(0,3);
-				
-					receiveMsg(liveMsg, senderName);
+
+					receiveMsg(msgData, sender);
 		       	    $('#chat_contents').append(htmlData);
 		       		htmlData="";
+		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
 		       		
 					}
 		     	}
@@ -226,26 +235,26 @@
 		 let htmlData ="";
 		
 		// 메세지 송신 
-  		function sendMsg(liveMsg){	 
+  		function sendMsg(msgData){	 
 
 			//이모티콘 있을 때 
-         if(liveMsg.indexOf("emoji") == 0){
-            let emojiData = liveMsg;
+         if(msgData.indexOf("emoji") == 0){
+            let emojiData = msgData;
             
             htmlData += "<div class='outgoing_msg'>";
   		    htmlData +=   	"<div class='sent_msg'>";
-            htmlData +=			"<img src='/images/chatImg/"+emojiData+".gif"+"'>";
+            htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
       		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
 
       		//이모티콘 없을 때
-         }else if(liveMsg.indexOf("emoji") != 0){
+         }else if(msgData.indexOf("emoji") != 0){
       		console.log("내가 보내는 메세지 ");
       		
       		htmlData += "<div class='outgoing_msg'>";
   			htmlData +=   	"<div class='sent_msg'>";
-      		htmlData +=			"<p>"+liveMsg+"</p>";
+      		htmlData +=			"<p>"+msgData+"</p>";
       		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
@@ -256,32 +265,32 @@
          
 
 			//메세지 수신 
-  		function receiveMsg(liveMsg, senderName){
+  		function receiveMsg(msgData, senderName){
 
 				
 			//이모티콘 있을 때
-         if(liveMsg.indexOf("emoji") == 0){
+         if(msgData.indexOf("emoji") == 0){
         	 
-        	 let emojiData = liveMsg;
+        	 let emojiData = msgData;
         	  
         	 htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
-              htmlData +=			"<img src='/images/chatImg/"+emojiData+".gif"+"'>";
+              htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";
               htmlData += "</div>"
 
               //이모티콘 없을 때 
-         }else if(liveMsg.indexOf("emoji") != 0){
+         }else if(msgData.indexOf("emoji") != 0){
 
       		  htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
-              htmlData += "			<p>"+liveMsg+"</p>";
+              htmlData += "			<p>"+mgsData+"</p>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";

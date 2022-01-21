@@ -108,7 +108,7 @@
   			{
   				clientId: "lBYZ6xYGSN3wiVHC2ZK4",
   				callbackUrl: "http://localhost/member/sign_in",
-  				loginButton: {color: "green", type: 3, height: 30}
+  				loginButton: {color: "green", type: 1, height: 30}
   			}
   		);
       naverLogin.init();

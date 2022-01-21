@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,10 @@ public class MemberController {
 	public String sign_in() {
 		return "member/sign_in";
 	}
-
+    
 	@RequestMapping("logind")
     public String logind(String mem_id, String mem_pass) {
+		
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
 			//사용자 이름 session 저장

@@ -206,7 +206,7 @@
       <div class="header_inner">
         <div class="header_inner_top">
           <div class="logo">
-            <a href="home"><img src="/images/LOGO.png"></a>
+            <a href="/"><img src="/images/LOGO.png"></a>
           </div>
           <ul class="login_list">
             <c:choose>
@@ -444,65 +444,6 @@
 
   </div>
 <!-- sign_in -->
-  <div class="loginForm">
-    <div class="login_wrap">
-    <div class="login_box_wrap">
-      <span id="close_btn"><i class="far fa-times"></i></span>
-      <div class="login_box">
-        <div class="login_box_img_wrap">
-          <div class="login_box_img">
-            <img src="images/LOGO.png">
-          </div>
-        </div>
-        <div class="intro_text">Hobby1st와 함께 당신의 취미를 공유해 보세요!</div>
-        <div class="login_input_wrap">
-          <div class="login_input">
-            <div class="login_input_contents_wrap">
-              <form action="/member/login" method="post">
-              <div class="login_input_contents_input_id">
-                <div class="login_input_contents_title">
-                  ID
-                </div>
-                <div class="login_input_contents_input_box">
-                  <input type="text" id="mem_id" maxlength="20">
-                </div>
-              </div>
-              <div class="login_input_contents_input_pw">
-                <div class="login_input_contents_title">
-                  PASSWORD
-                </div>
-                <div class="login_input_contents_input_box">
-                  <input type="password" id="mem_pass" maxlength="20">
-                </div>
-              </div>
-              <div class="input_btn1">
-                <div class="sign_up">ID가 없으신가요? 
-                  <a href="/member/sign_up"><span id="sign_up">회원가입</span></a>
-                </div>
-                <div class="findItem">
-                  <a class="a_login" href="/member/send_email"><span id="findEmail">EMAIL 찾기</span></a>
-                </div>
-              </div>
-              <div class="input_btn2">
-                <button type='button' id="logind">LOGIN</button>
-              </div>
-              <div class="divide_line">
-                <div class="divide_line_item"></div>
-                <div class="divide_line_item text">Or Continue with</div>
-                <div class="divide_line_item"></div>
-              </div>
-              <div id="naver">
-                 <a id="naverIdLogin_loginButton" href="#">
-                 <button type="button" id="naverIdLogin"> Naver LOGIN </button></a>             
-              </div>
-                <div id="naver_message" style="display: none;"></div>
-   			  </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+<jsp:include page="login.jsp"></jsp:include>
 </body>
 </html>

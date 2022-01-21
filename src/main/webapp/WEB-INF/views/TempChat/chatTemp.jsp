@@ -43,6 +43,9 @@
 
 					<!-- 메세지 컨텐츠 시작 -->
 					<div id="chat_contents">
+					
+					<div><span class="club_openDate">${clubInfo.formDate }</span></div>
+					
 						<div class="emojiBox">
 							<div class="emojies">
 								<img src="/images/chatImg/emoji1.gif" id="emoji1"> <img
@@ -172,13 +175,11 @@
 			 let ws = new WebSocket("ws://localhost/chat");
 			 
 		     ws.onmessage = function(e){
-		      	let eData = e.data;
-		    	 
+		    	 let myMsg = eData.substring(3);
 				//웹 소켓에 보낸 문자 그대로를 변수로 지정
-				
+		      	let eData = e.data;
 				
 		         if($('#mem_writer').val() == $('#session_user_name').val()){
-		      		let myMsg = eData.substring(3);
 					sendMsg(myMsg);
 					$('#chat_contents').append(htmlData);
 		       		htmlData="";
@@ -305,7 +306,7 @@
    			 	})
    			}
 			
-			//데이터 베이스에 이모티콘 메세지 저장
+			//데이터 베이스에 이모티콘 메세지 저장 
             function insertEmojiIntoDB(emojiVal){
                
                ws.send(emojiVal);

@@ -94,10 +94,6 @@ public class HomeController {
 	// club 
 	@RequestMapping("club")
 	public String club(Model model) {
-		if((String)session.getAttribute("mem_id") == null) {
-			return "redirect:/";
-		}
-		
 		List<ClubListDTO> clubList = clService.selectAll();
 		
 		model.addAttribute("clubList", clubList);

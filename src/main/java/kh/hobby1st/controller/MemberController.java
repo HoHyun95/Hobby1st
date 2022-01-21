@@ -45,6 +45,7 @@ public class MemberController {
 			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
 			String naver_birthday, String naver_gender) {
 		
+		
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
 			//사용자 이름 session 저장
@@ -72,10 +73,9 @@ public class MemberController {
 				String mem_birthday = naver_birthyear + "-" + naver_birthday;
 				String mem_lastlogin = "default";
 			
-				session.setAttribute("naver_id", naver_id);
 				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
 				int naver_Rinsert = mem_service.naver_insert(dto);
-				return "member/sign_in";
+				session.setAttribute("mem_id", naver_id);
 			}
 		}
 		return "redirect: /";

@@ -243,10 +243,9 @@
         <div class="main_bg_inner_wrap">
           <div class="main_bg_inner_top">
             <ul class="main_bg_inner_top_list">
-              <li class="main_bg_inner_top_list_item">#Theme1</li>
-              <li class="main_bg_inner_top_list_item">#Theme2</li>
-              <li class="main_bg_inner_top_list_item">#Theme3</li>
-              <li class="main_bg_inner_top_list_item">#Theme4</li>
+              <c:forEach var="clubCategory" items="${ clubCategory}">
+                <li class="main_bg_inner_top_list_item">#${clubCategory.cc_category_name}</li>
+		      </c:forEach>
             </ul>
           </div>
           <div class="main_bg_inner_bottom">

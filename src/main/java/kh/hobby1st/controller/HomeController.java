@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import kh.hobby1st.dto.ClubBoardDTO;
+import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
+import kh.hobby1st.service.ClubCategoryService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
 import kh.hobby1st.service.MemberService;
@@ -39,7 +40,11 @@ public class HomeController {
 	private MyPageService myService;
 	
 	@Autowired
+	private ClubCategoryService ccService;
+	
+	@Autowired
 	private HttpSession session;
+	
 	
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
@@ -47,11 +52,14 @@ public class HomeController {
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
 		List<ClubListDTO> map = clService.selectAll();
-
+		List<ClubCategoryDTO> categoryList = ccService.selectCategoryList();
+		
+		
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("clmemCount", clmemCount);
 		model.addAttribute("clCount", clCount);
+		model.addAttribute("clubCategory",categoryList);
 		return "home";
 	}
 	
@@ -120,11 +128,13 @@ public class HomeController {
 		return result;
 	}
 	
-	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		System.out.println("예외 처리 코드가 실행되었습니다.");
 		return "error";
 	}
+	
+	
+	
 }

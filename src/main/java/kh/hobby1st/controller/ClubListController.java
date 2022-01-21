@@ -69,7 +69,7 @@ public class ClubListController {
 		System.out.println(dto.getCl_local());
 		System.out.println(dto.getCl_desc());
 
-		String realPath = session.getServletContext().getRealPath("clubPic");
+		String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/club";
 
 		File realPathFile = new File(realPath);
 
@@ -84,7 +84,7 @@ public class ClubListController {
 
 			file.transferTo(new File(realPath+"/"+photoName));
 //			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
-			dto.setCl_photo(realPath+"/"+photoName);
+			dto.setCl_photo("/upload/club/" + photoName);
 			int result = clService.createClub(dto);
 		}
 		return "redirect:/";

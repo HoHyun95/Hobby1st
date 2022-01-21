@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -25,9 +24,10 @@ import com.google.gson.JsonObject;
 import kh.hobby1st.dao.ClubBoardDAO;
 import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubBoardReplyDTO;
+import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.service.ClubBoardReplyService;
 import kh.hobby1st.service.ClubBoardService;
-import kh.hobby1st.service.MemberService;
+import kh.hobby1st.service.ClubListService;
 
 @Controller
 @RequestMapping("/clubBoard/")
@@ -44,6 +44,9 @@ public class ClubBoardController {
 
 	@Autowired
 	private ClubBoardReplyService club_board_reply_service;
+	
+	@Autowired
+	private ClubListService club_list_service;
 	
 	
 	Gson g = new Gson();
@@ -105,6 +108,9 @@ public class ClubBoardController {
 		
 		System.out.println(writerProfile);
 		
+		ClubListDTO list = club_list_service.selectClub("54");
+		
+		System.out.println("리스트" + list.getCl_photo());
 		
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 		club_board_service.increaseView(cb_seq);
@@ -114,6 +120,7 @@ public class ClubBoardController {
 		
 		System.out.println(reply_profile.size());
 
+		model.addAttribute("list", list);
 		model.addAttribute("writerProfile", writerProfile);
 		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);

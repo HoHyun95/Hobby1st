@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	
-
-	
 <title>user_email</title>
 </head>
 <body>
@@ -38,6 +35,10 @@
 				<td><input type="text" id="email_num">
 				<td><button type="button" id="emailNum_btn">제출</button>
 			</tr>
+			<tr style="display:none" id="member_lo">
+				<td>사용자의 정보는? 
+				<td>~~~회원아이디는 ~~~ 회원비밀번호는 입니다
+			</tr>
 		</table>
 	</form>
 	
@@ -46,7 +47,7 @@
  $("#emailNum_btn").on("click",function(){
 	 if($("#dum").val() === $("#email_num").val()){
 		 alert("이메일 인증성공!");
-		 location.href = "/member/emailOk";
+		 $("#member_lo").show()
 	 } else {
 			 alert("인증번호가 다릅니다");
 	 }

@@ -232,15 +232,17 @@
                 }
                 
                 function file_check(e) {
-                	pathpoint = e.value.lastindexOf('.');
-                	filepoint = e.value.substring(pathpoint+1,e.length);
-                	filetype = filepoint.toLowerCase();
+                	 var fileName = document.getElementById("photo_file").value;
+                     var idxDot = fileName.lastIndexOf(".") + 1;
+                     var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
+                	                	
                 	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp"){
                 		alert("프로필 등록이 성공했습니다!");
                 	} else {
                 	    alert("이미지를 선택해주세요");
                         parent = e.parentNode
                         node = parent.replaceChild(e.cloneNode(true),e);
+                        $("#photo").attr("src", "/images/6.jpg");
                         return false;
                 	}	
                 }

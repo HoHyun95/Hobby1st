@@ -5,23 +5,39 @@
 
 <mapper namespace="Chat">
 	<insert id="insertChatIntoDB">
-		insert into chat values(chat_seq.nextval, #{chat_cl_id}, #{chat_cl_name},
-		#{chat_contents}, #{chat_writer}, sysdate)
+		insert into chat values(chat_seq.nextval,
+		#{chat_cl_id}, #{chat_cl_name},
+		#{chat_contents}, #{chat_writer},
+		#{chat_writer_id}, sysdate)
 	</insert>
 
 	<select id="chatSelectAll" resultType="kh.hobby1st.dto.ChatDTO">
-		select * from chat order by chat_seq asc
+		select * from chat order
+		by chat_seq asc
+	</select>
+
+	<select id="whoIsLastChat" resultType="kh.hobby1st.dto.ChatDTO">
+		SELECT * FROM
+		(SELECT *FROM
+		chat ORDER BY chat_seq DESC)
+		WHERE ROWNUM= 1
+	</select>
+
+	<select id="getUserProfile" resultType="String">
+		select mem_photo from
+		member where mem_id = #{value};
+	</select>
+
+	<select id="selectAll" resultType="map">
+		select c.*, m.mem_photo from
+		(select * from chat where chat_cl_id = #{cl_id}) c, member m where
+		c.chat_writer_id = #{user_id}
 	</select>
 
 	<select id="isThisMyChat" resultType="int">
-		select max(chat_seq) from chat where #{value} =
+		select max(chat_seq) from
+		chat where #{value} =
 		(select chat_writer from chat where chat_seq =
 		(select max(chat_seq) from chat))
-	</select>
-
-	<select id="whoIsLastChat" resultType="String">
-		SELECT chat_writer FROM
-		(SELECT *FROM chat ORDER BY chat_seq DESC)
-		WHERE ROWNUM= 1
 	</select>
 </mapper>

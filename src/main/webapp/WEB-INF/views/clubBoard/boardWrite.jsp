@@ -111,9 +111,13 @@
 				processData : false,
 				success : function(sysName) {
 					console.log(sysName);
-					setTimeout(function() {
+					let ext =  sysName.url.split('.').pop().toLowerCase();
+					 if($.inArray(ext, ['png','jpg', 'jpeg', 'tiff', 'bmp', 'gif', 'svg', 'webp', 'tif']) == -1) {
+
+					      alert(ext+'파일은 업로드 하실 수 없습니다.');
+					      $('#input-image').val("");
+					 }
 						$(editor).summernote('insertImage', sysName.url)
-					}, 500);
 				}
 			});
 		}

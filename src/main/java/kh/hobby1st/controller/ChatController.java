@@ -78,14 +78,14 @@ public class ChatController {
 
 	}
 
-	@RequestMapping("whoIsLastChat")
+
+	@RequestMapping(value= "whoIsLastChat", produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public String whoIsLastChat() {
 		String result = chatService.whoIsLastChat();
-		System.out.println("이클리스 기준 resp 값 : "+result);
 		return result;
 	}
-	
+
 	@RequestMapping("isThisMyChat")
 	@ResponseBody
 	public int isThisMyChat(String chat_writer) {

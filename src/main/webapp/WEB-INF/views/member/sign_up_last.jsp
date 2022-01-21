@@ -236,7 +236,7 @@
                      var idxDot = fileName.lastIndexOf(".") + 1;
                      var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
                 	                	             
-                	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp"){
+                	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp" || filetype="tiff" || filetype="svg" || filetype="webp" || filetype="tif"){
                 		alert("프로필 사진등록이 성공했습니다!");
                 	} else {
                 	    alert("이미지를 선택해주세요");

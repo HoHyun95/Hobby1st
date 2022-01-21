@@ -188,30 +188,7 @@
 
     </div>
     <!-- sign_in -->
-    <div class="loginForm">
-      <div class="logininput_wrap">
-        <span id="close_btn"><i class="far fa-times"></i></span>
-        <div class="logininput">
-          <form action="/member/login" method="post">
-            <table border=1 align="center">
-              <tr>
-                <th>Login Page
-              </tr>
-              <tr>
-                <td><input type="text" name="mem_id" placeholder="id">
-              </tr>
-              <tr>
-                <td><input type="password" name="mem_pass" placeholder="pass">
-              </tr>
-              <tr>
-                <th><input type="submit" value="login">
-                  <button type="button" id="sign_up">Sign Up</button>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
-    </div>
+    <jsp:include page="login.jsp"></jsp:include>
 </body>
 
 </html>

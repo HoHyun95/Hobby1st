@@ -39,32 +39,35 @@ public class MemberController {
 		return "member/sign_in";
 	}
 
-	//login_click
-	@RequestMapping("login")
-	public String login(String mem_id, String mem_pass, String naver_id, String naver_mobile,
-			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
-			String naver_birthday, String naver_gender) {
-		
-		
+	@RequestMapping("logind")
+    public String logind(String mem_id, String mem_pass) {
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
 			//사용자 이름 session 저장
 			MemberDTO mem_dto = mem_service.selectOne(mem_id);
-			String user_name = mem_dto.getMem_name();
-			String user_nickName = mem_dto.getMem_nickname();
-			
-			System.out.println(user_name+user_nickName);
+				String user_name = mem_dto.getMem_name();
+				String user_nickName = mem_dto.getMem_nickname();
 
-			session.setAttribute("mem_id", mem_id);
-			session.setAttribute("user_name", user_name);
-			session.setAttribute("user_nickName", user_nickName);
-		} else if(naver_id != null) {
+				session.setAttribute("mem_id", mem_id);
+				session.setAttribute("user_name", user_name);
+				session.setAttribute("user_nickName", user_nickName);
+		}
+		return "redirect: /";
+	}
+	
+	//login_click
+	@RequestMapping("login")
+	public String login(String naver_id, String naver_mobile,
+			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
+			String naver_birthday, String naver_gender) {
+
+		if(naver_id != null) {
 			int naver_result = mem_service.naver_idCheck(naver_id);
 
 			if(0<naver_result) {
 				MemberDTO mem_dto = new MemberDTO();		
 				String user_name = mem_dto.getMem_name();
-				
+
 				session.setAttribute("user_name", user_name);
 				session.setAttribute("mem_id", naver_id);
 			}else if(0 == naver_result) {
@@ -72,7 +75,7 @@ public class MemberController {
 				String naver_login = "naver_login";
 				String mem_birthday = naver_birthyear + "-" + naver_birthday;
 				String mem_lastlogin = "default";
-			
+
 				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
 				int naver_Rinsert = mem_service.naver_insert(dto);
 				session.setAttribute("mem_id", naver_id);
@@ -137,7 +140,7 @@ public class MemberController {
 		String mem_lastlogin = "default";
 		for(MultipartFile mf : mem_photo) {
 			try{
-//				String realPath = session.getServletContext().getRealPath("upload");
+				//				String realPath = session.getServletContext().getRealPath("upload");
 				String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
 				File realPathFile = new File(realPath);
 				if(!realPathFile.exists()) {realPathFile.mkdir();}

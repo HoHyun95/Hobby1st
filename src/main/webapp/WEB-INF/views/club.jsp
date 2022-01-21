@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +27,11 @@
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
-      let club_list_box = document.querySelectorAll(".club_list_box");
-
+      let likeBtn = document.querySelectorAll("#likeBtn");
+      let h3 = document.querySelectorAll("h3");
+	  let hidden = document.querySelectorAll("input[type='hidden']");
+	  let club_list_box = document.querySelectorAll(".club_list_box");
+      
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -36,6 +40,7 @@
         loginForm.style.zIndex = 11;
         loginForm.style.display = "flex";
       }
+      
       close_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -49,13 +54,81 @@
         location.href = "/member/sign_up";
       }
 
-      for (let i = 0; i < club_list_box.length; i++) {
-        club_list_box[i].onclick = () => {
-          let clickedList = club_list_box[i].children[5].value;
-          location.href = "/clublist/showList?name=club&value=" + clickedList;
+      document.addEventListener('click', (e) => {
+        if(e.target && e.target.id== 'likeBtn'){
+          e.target.classList.toggle("fas");
         }
-      }
-    }
+      });
+      
+      
+      // 무한 스크롤
+      let totalList = ${fn:length(clubList)}
+      let count = 10;
+      let start = 11;
+      let end = 20;
+      
+      window.onscroll = function (e) {
+    	 
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        
+       	$.ajax({
+       	    url: "/splitList?start=" + (start) + "&end=" + (end), 
+       	    type: "get",
+       	    dataType: "json" 
+       	}).done((res) => {
+          if(res.length > 0) {
+          start += count;
+          end += count;  
+          for(let k = 1; k < res.length; k++) {
+        	setTimeout(() => {
+            let div1 = document.createElement("div");
+            let div2 = document.createElement("div");
+            let div3 = document.createElement("div");
+            let div4 = document.createElement("div");
+
+            let a = document.createElement("a");
+            let h3 = document.createElement("h3");
+            let h5_1 = document.createElement("h5");
+            let h5_2 = document.createElement("h5");
+            let h5_3 = document.createElement("h5");
+            let i = document.createElement("i");
+            let input = document.createElement("input");
+
+            div1.classList.add("club_list_box_wrap");
+            div2.classList.add("club_list_box");
+            div3.classList.add("badge");
+            div3.id = "theme1";
+            div3.innerHTML = res[k].cl_category_id;
+            div4.classList.add("like");
+                  
+            i.classList.add("far");
+            i.classList.add("fa-heart");
+            i.id = "likeBtn";
+            
+            a.href = "/clubHouse?cl_id="+res[k].cl_id;
+            h3.innerHTML = res[k].cl_name;
+            h5_1.innerHTML = res[k].cl_boss_name;
+            h5_2.innerHTML = res[k].cl_local;
+            h5_3.innerHTML = res[k].cl_desc;
+     
+            div4.appendChild(i);
+            div2.appendChild(div3);
+            div2.appendChild(div4);
+            a.appendChild(h3);
+            div2.appendChild(a);
+            div2.appendChild(h5_1);
+            div2.appendChild(h5_2);
+            div2.appendChild(h5_3);
+            div1.appendChild(div2);
+
+            document.querySelector('.club_list').appendChild(div1);
+          }, 1000)
+          }
+          }
+       }); 	  
+     }
+   }
+  }
   </script>
 </head>
 
@@ -157,7 +230,7 @@
     <!-- club_list_title -->
     <div class="club_list_title">
       <div class="club_list_title_contents"> 
-        <!-- <div class="club_list_title_text"> 20 개 / 총 동호회 수 456개 </div> -->
+        <div class="club_list_title_text"> 총 ${fn:length(clubList)}개의 동호회가 있습니다.</div>
     </div>
     <!-- club_list_title end-->
 
@@ -168,145 +241,25 @@
           <div class="no_search_result_text"> 검색 결과가 없습니다.</div>
         </div> -->
         <div class="club_list">
+          <c:forEach var="cl" items="${clubList }" begin="0" end="9" step="1">
           <div class="club_list_box_wrap">
             <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club1">
+              <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
+              <div class="like"><i class="far fa-heart" id="likeBtn"></i></div>
+              <a href="/clubHouse?cl_id=${cl.CL_ID }"><h3>${cl.CL_NAME }</h3></a>
+              <h5>${cl.CL_BOSS_NAME }</h5>
+              <h5>${cl.CL_LOCAL }</h5>
+              <c:choose>
+			    <c:when test="${fn:length(cl.cl_desc) gt 15}">
+			      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
+			    </c:when>
+			    <c:otherwise>
+			      <h5><c:out value="${cl.CL_DESC}" /></h5>
+			    </c:otherwise>
+			  </c:choose>
             </div>
           </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club2">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club3">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">THEME1</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-              <input type="hidden" name="club" value="club4">
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme2">THEME2</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme3">THEME3</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme4">THEME4</div>
-              <h3>Title</h3>
-              <h5>OWNER</h5>
-              <h5>LOC</h5>
-              <h5>DESC</h5>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </div>

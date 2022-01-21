@@ -117,7 +117,7 @@
                   <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
               	</c:if>
               <!-- <button type="button" id="likeClub"><i class="far fa-heart"></i> LIKE</button>
-              <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button>  -->
+              <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button> -->
             </div>
           </div>
         </div>

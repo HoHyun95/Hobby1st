@@ -40,7 +40,7 @@ public class ChatEndPoint {
 			for(Session client : clients) {
 				try {
 
-					client.getBasicRemote().sendText(incomingMsgID+msg);
+					client.getBasicRemote().sendText(msg);
 
 				}catch (IOException e) {
 					e.printStackTrace();

@@ -28,4 +28,8 @@ public class ChatService {
 		return chatDao.isThisMyChat(chat_writer);
 	}
 	
+	public String whoIsLastChat() {
+		return chatDao.whoIsLastChat();
+	}
+	
 }

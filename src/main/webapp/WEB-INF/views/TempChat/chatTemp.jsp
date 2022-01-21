@@ -185,14 +185,15 @@
 		    	 
 		    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
 		    	 $.ajax({
-		    		 url : "/chat/whoIsLastChat"
+		    		 url : "/chat/whoIsLastChat",
+		    		 async: false,
 		    	 }).done(function(resp){
 		    		 sender = resp;
-		    		 console.log("resp 값 :" +sender);
+		    		
 		    	 })
 		    	 
-		    	 
-		         if($('#mem_writer').val() == $('#session_user_name').val()){
+		    	 console.log(sender);
+		         if(sender == $('#session_user_name').val()){
 					sendMsg(msgData);
 					$('#chat_contents').append(htmlData);
 		       		htmlData="";
@@ -278,6 +279,7 @@
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
               htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
+              htmlData += 			"<span class='time_date'>"+si+":"+bun+"</span>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";
@@ -290,7 +292,8 @@
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
-              htmlData += "			<p>"+mgsData+"</p>";
+              htmlData += "			<p>"+msgData+"</p>";
+              htmlData += 			"<span class='time_date'>"+si+":"+bun+"</span>";
               htmlData += " 		</div>";
               htmlData += " 	</div>";
               htmlData += "</div>";

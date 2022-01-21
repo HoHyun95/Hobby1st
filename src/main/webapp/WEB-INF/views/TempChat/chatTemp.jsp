@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="com.google.gson.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,28 +63,6 @@
 							</div>
 						</div>
 
-						<!-- 						<div class="incoming_msg"> -->
-						<!-- 							<div class="received_msg"> -->
-
-						<!-- 								DB 에서 출력 후 보낸 사람을 출력하자  -->
-						<!-- 								<div class="sender">temp sender</div> -->
-
-						<!-- 								<div class="received_withd_msg"> -->
-						<!-- 									<p>Lorem Ipsum is simply dummy text</p> -->
-						<!-- 									<span class="time_date"> 11:01 AM | June 9</span> -->
-						<!-- 								</div> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
-
-						<!--내가 보내는 메세지-->
-						<!-- 						<div class="outgoing_msg"> -->
-						<!-- 							<div class="sent_msg"> -->
-						<!-- 								<p>Lorem Ipsum is simply dummy text</p> -->
-						<!-- 								<span class="time_date"> 11:01 AM | June 9</span> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
-
-
 
 						<!-- 채팅 작성자와 session 아이디 일치한 경우 자신이 보낸 메세지로 취급 -->
 						<!-- DB에 이모티콘이 저장되어있다면 이모티콘을 img 로 출력 -->
@@ -107,7 +86,7 @@
 									<c:if test="${chatList.chat_writer != user_name }">
 
 										<div class="sender">${chatList.chat_writer }</div>
-
+										
 										<div class="received_withd_msg">
 											<img src="/images/chatImg/${chatList.chat_contents }.gif">
 											<span class="time_date">${chatList.formDate }</span>
@@ -156,9 +135,8 @@
 
 						<!--  멤버 리스트 가져와서 멤버 이름 넣는다 .  -->
 
-
 						<input type="hidden" id="mem_writer" value="${member.mem_name }">
-
+						<input type="hidden" id="user_id" value="${user_id }">
 
 						<!-- session 의 멤버 이름 -->
 						<input type="hidden" id="session_user_name" value="${user_name }">
@@ -195,17 +173,19 @@
 			   
 				// 메세지 송신 시간
 				function pullTime(){
-				let date = new Date();
-				si = date.getHours();			
-				bun = date.getMinutes();
+					
+					let date = new Date();
+					si = date.getHours();			
+					bun = date.getMinutes();
 	
-				if(si < 10){
-					si = "0"+si;
-					}		
-				if(bun < 10){
-					bun = "0"+bun;
-					}
-					}
+					if(si < 10){
+						si = "0"+si;
+						}
+					
+					if(bun < 10){
+						bun = "0"+bun;
+						}
+				}
 			   
 			 
 		     ws.onmessage = function(e){
@@ -213,26 +193,41 @@
 		      	let msgData = e.data;
 		
 		    	let sender = "";
-		    	 
+		    	let sender_ID ="";
+		    	
+		    	
 		    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
 		    	 $.ajax({
 		    		 url : "/chat/whoIsLastChat",
 		    		 async: false,
-		    	 }).done(function(resp){
-		    		 sender = resp;
-		    		
+		    	 }).done(function(member){
+		    		 
+		    		 sender = member[0].chat_writer;
+		    		sender_ID = member[0].chat_writer_id;
+
 		    	 })
 		    	 
-		    	 console.log(sender);
-		         if(sender == $('#session_user_name').val()){
+
+		    		// 최신 메세지 작성자 ID 와 현재 로그인 한 session 의 아이디와 같을 때
+		         if(sender_ID == $('#user_id').val()){
+		        	 
 					sendMsg(msgData);
 					$('#chat_contents').append(htmlData);
 		       		htmlData="";
 		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
-				
+					
 				}else{
+					let sender_profile ="";
+			    	 
+			    	 $.ajax({
+			    		 url : "/chat/getUserProfile",
+			    		 data : {mem_id : sender_ID}
+			    		 async: false,
+			    	 }).done(function(userProfile){
+			    		 sender_profile = userProfile;
+			    	 })
 
-					receiveMsg(msgData, sender);
+					receiveMsg(msgData, sender, sender_profile);
 		       	    $('#chat_contents').append(htmlData);
 		       		htmlData="";
 		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
@@ -254,6 +249,7 @@
             let emojiData = msgData;
             
             pullTime();
+            
             htmlData += "<div class='outgoing_msg'>";
   		    htmlData +=   	"<div class='sent_msg'>";
             htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
@@ -261,10 +257,11 @@
       		htmlData += 	"</div>"
       		htmlData +=	"</div>"
 
-      		//이모티콘 없을 때
+      		//이모티콘 없을 때 (이모티콘을 클릭하면 emoji 라는 값이 웹소켓으로 보내지기에 emoji 있는지 검사)
          }else if(msgData.indexOf("emoji") != 0){
       		
       		pullTime();
+      		
       		htmlData += "<div class='outgoing_msg'>";
   			htmlData +=   	"<div class='sent_msg'>";
       		htmlData +=			"<p>"+msgData+"</p>";
@@ -288,7 +285,7 @@
         	  
        	  	  pullTime();
        	  	  
-        	  htmlData +="<div class='sender'>"+senderName;
+        	  htmlData +="<div class='sender'>"+sender;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
@@ -329,7 +326,8 @@
    					chat_cl_id : "${clubInfo.cl_id}",
    					chat_cl_name : "${clubInfo.cl_name}",
    					chat_contents :  $('#sendText').val(),
-   					chat_writer : "${member.mem_name}"
+   					chat_writer : "${member.mem_name}",
+   					chat_writer_id : "${user_id}"
    					}
    			 	})
    			}
@@ -346,7 +344,8 @@
    					chat_cl_id : "${clubInfo.cl_id}",
    					chat_cl_name : "${clubInfo.cl_name}",
    					chat_contents :  emojiVal,
-   					chat_writer : "${member.mem_name}"
+   					chat_writer : "${member.mem_name}",
+   					chat_writer_id : "${user_id}"
    					}
    			 	})
 

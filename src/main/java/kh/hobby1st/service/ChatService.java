@@ -1,8 +1,7 @@
 package kh.hobby1st.service;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,20 @@ public class ChatService {
 		return chatDao.chatSelectAll();
 	}
 	
+	public List<ChatDTO> whoIsLastChat() {
+		return chatDao.whoIsLastChat();
+	}
+	public String getUserProfile(String mem_id) {
+		return chatDao.getUserProfile(mem_id);
+	}
+	
+	
 	public int isThisMyChat(String chat_writer) {
 		return chatDao.isThisMyChat(chat_writer);
 	}
 	
-	public String whoIsLastChat() {
-		return chatDao.whoIsLastChat();
+	public 	List<Map<String, Object>> selectAll(String cl_id, String user_id){
+		return chatDao.selectAll(cl_id,user_id);
 	}
 	
 }

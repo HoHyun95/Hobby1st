@@ -11,10 +11,11 @@ public class ChatDTO {
 	private String chat_cl_name;
 	private String chat_contents;
 	private String chat_writer;
+	private String chat_writer_id;
 	private Timestamp chat_write_date;
 
 	public ChatDTO() {}
-	public ChatDTO(int chat_seq, int chat_cl_id, String chat_cl_name, String chat_contents, String chat_writer,
+	public ChatDTO(int chat_seq, int chat_cl_id, String chat_cl_name, String chat_contents, String chat_writer, String chat_writer_id, 
 			Timestamp chat_write_date) {
 		super();
 		this.chat_seq = chat_seq;
@@ -24,6 +25,13 @@ public class ChatDTO {
 		this.chat_writer = chat_writer;
 		this.chat_write_date = chat_write_date;
 	}
+	public String getChat_writer_id() {
+		return chat_writer_id;
+	}
+	public void setChat_writer_id(String chat_writer_id) {
+		this.chat_writer_id = chat_writer_id;
+	}
+
 	public int getChat_seq() {
 		return chat_seq;
 	}
@@ -60,10 +68,10 @@ public class ChatDTO {
 	public void setChat_write_date(Timestamp chat_write_date) {
 		this.chat_write_date = chat_write_date;
 	}
-	
+
 	public String getFormDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		return sdf.format(this.getChat_write_date());
-		}
+	}
 
 }

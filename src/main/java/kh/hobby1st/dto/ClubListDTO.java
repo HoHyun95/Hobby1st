@@ -1,6 +1,7 @@
 package kh.hobby1st.dto;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class ClubListDTO {
 	private int cl_id;
@@ -35,254 +36,114 @@ public class ClubListDTO {
 		this.cl_rec_count = cl_rec_count;
 		this.cl_photo = cl_photo;
 	}
-
-
-
-
-
-
 	public int getCl_id() {
 		return cl_id;
 	}
-
-
-
-
-
 
 	public void setCl_id(int cl_id) {
 		this.cl_id = cl_id;
 	}
 
-
-
-
-
-
 	public String getCl_name() {
 		return cl_name;
 	}
-
-
-
-
-
 
 	public void setCl_name(String cl_name) {
 		this.cl_name = cl_name;
 	}
 
-
-
-
-
-
 	public String getCl_desc() {
 		return cl_desc;
 	}
-
-
-
-
-
 
 	public void setCl_desc(String cl_desc) {
 		this.cl_desc = cl_desc;
 	}
 
-
-
-
-
-
 	public String getCl_boss_id() {
 		return cl_boss_id;
 	}
-
-
-
-
-
-
 	public void setCl_boss_id(String cl_boss_id) {
 		this.cl_boss_id = cl_boss_id;
 	}
-
-
-
-
-
 
 	public String getCl_boss_name() {
 		return cl_boss_name;
 	}
 
-
-
-
-
-
 	public void setCl_boss_name(String cl_boss_name) {
 		this.cl_boss_name = cl_boss_name;
 	}
-
-
-
-
-
-
 	public int getCl_maxMem() {
 		return cl_maxMem;
 	}
-
-
-
-
-
 
 	public void setCl_maxMem(int cl_maxMem) {
 		this.cl_maxMem = cl_maxMem;
 	}
 
-
-
-
-
-
 	public String getCl_local() {
 		return cl_local;
 	}
-
-
-
-
-
 
 	public void setCl_local(String cl_local) {
 		this.cl_local = cl_local;
 	}
 
-
-
-
-
-
 	public Date getCl_openDate() {
 		return cl_openDate;
 	}
-
-
-
-
-
 
 	public void setCl_openDate(Date cl_openDate) {
 		this.cl_openDate = cl_openDate;
 	}
 
-
-
-
-
-
 	public int getCl_memCount() {
 		return cl_memCount;
 	}
-
-
-
-
-
 
 	public void setCl_memCount(int cl_memCount) {
 		this.cl_memCount = cl_memCount;
 	}
 
-
-
-
-
-
 	public String getCl_category_id() {
 		return cl_category_id;
 	}
-
-
-
-
-
 
 	public void setCl_category_id(String cl_category_id) {
 		this.cl_category_id = cl_category_id;
 	}
 
-
-
-
-
-
 	public String getCl_dCategory_id() {
 		return cl_dCategory_id;
 	}
-
-
-
-
-
 
 	public void setCl_dCategory_id(String cl_dCategory_id) {
 		this.cl_dCategory_id = cl_dCategory_id;
 	}
 
-
-
-
-
-
 	public int getCl_rec_count() {
 		return cl_rec_count;
 	}
-
-
-
-
-
 
 	public void setCl_rec_count(int cl_rec_count) {
 		this.cl_rec_count = cl_rec_count;
 	}
 
-
-
-
-
-
 	public String getCl_photo() {
 		return cl_photo;
 	}
-
-
-
-
-
 
 	public void setCl_photo(String cl_photo) {
 		this.cl_photo = cl_photo;
 	}
 
-
-
-
-
-
-	
-	
-	
-
-	
-	
-	
 	public ClubListDTO() {}
+
+	public String getFormDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+		return sdf.format(this.getCl_openDate());
+		}
 
 
 }

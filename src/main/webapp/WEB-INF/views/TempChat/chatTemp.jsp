@@ -175,9 +175,9 @@
 			 let ws = new WebSocket("ws://localhost/chat");
 			 
 		     ws.onmessage = function(e){
-		    	 let myMsg = eData.substring(3);
 				//웹 소켓에 보낸 문자 그대로를 변수로 지정
 		      	let eData = e.data;
+		    	 let myMsg = eData.substring(3);
 				
 		         if($('#mem_writer').val() == $('#session_user_name').val()){
 					sendMsg(myMsg);

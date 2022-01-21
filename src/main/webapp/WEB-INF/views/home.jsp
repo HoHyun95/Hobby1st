@@ -124,7 +124,6 @@
     			{
     				clientId: "lBYZ6xYGSN3wiVHC2ZK4",
     				callbackUrl: "http://localhost/",
-    				loginButton: {color: "green", type: 3, height: 30}
     			}
     		);
         naverLogin.init();
@@ -188,7 +187,15 @@
             logout.addEventListener('click',(e)=>{
                 naverLogin.logout();
             });   
-        }  
+        }
+        document.getElementById('logind').onclick = () => {
+            var mem_id = document.getElementById('mem_id').value
+            var mem_pass = document.getElementById('mem_pass').value
+            console.log(mem_id);
+            console.log(mem_pass)
+            
+            location.href = "/member/logind?mem_id="+(mem_id)+"&mem_pass="+(mem_pass);
+        }
     }
   </script>
 </head>
@@ -458,7 +465,7 @@
                   ID
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="text" name="mem_id" maxlength="20">
+                  <input type="text" id="mem_id" maxlength="20">
                 </div>
               </div>
               <div class="login_input_contents_input_pw">
@@ -466,7 +473,7 @@
                   PASSWORD
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="password" name="mem_pass" maxlength="20">
+                  <input type="password" id="mem_pass" maxlength="20">
                 </div>
               </div>
               <div class="input_btn1">
@@ -478,7 +485,7 @@
                 </div>
               </div>
               <div class="input_btn2">
-                <button>LOGIN</button>
+                <button type='button' id="logind">LOGIN</button>
               </div>
               <div class="divide_line">
                 <div class="divide_line_item"></div>
@@ -486,7 +493,8 @@
                 <div class="divide_line_item"></div>
               </div>
               <div id="naver">
-                 <button type="button" id="naverIdLogin">Naver LOGIN</button>             
+                 <a id="naverIdLogin_loginButton" href="#">
+                 <button type="button" id="naverIdLogin"> Naver LOGIN </button></a>             
               </div>
                 <div id="naver_message" style="display: none;"></div>
    			  </form>

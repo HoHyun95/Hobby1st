@@ -51,6 +51,7 @@ public class ClubListService {
 		return cldao.searchClub(searchField, modifiedText);
 	}
 
+	
 	// 해당 동호회 가입 여부 확인
 	public int checkMember(int cl_id, String mem_id) {
 		int checkMember = 0;

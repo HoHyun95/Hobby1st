@@ -371,7 +371,6 @@
            </div>
         </form>
         </div>
-           <a href="/member/sign_in">수정된로그인창 들어가기(삭제예정 테스트용)</a>
     </div>
 	<script>
 	   $("#pass_2").blur(function() {

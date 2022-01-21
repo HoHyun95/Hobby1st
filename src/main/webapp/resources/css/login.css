@@ -209,12 +209,12 @@ button:hover {
   padding: 20px 0px;
 }
 
-#naver_login {
+#naverIdLogin {
   border: 1px solid green;
   color: green;
 }
 
-#naver_login:hover {
+#naverIdLogin:hover {
   border: 1px solid green;
   background-color: green;
   color: var(--color2);

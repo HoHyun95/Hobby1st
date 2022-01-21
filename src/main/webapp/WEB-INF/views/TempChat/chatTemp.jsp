@@ -43,9 +43,12 @@
 
 					<!-- 메세지 컨텐츠 시작 -->
 					<div id="chat_contents">
-					
-					<div><div class="club_openDate">${clubInfo.formDate } 동호회가 개설 되었습니다</div></div>
-					
+
+						<div>
+							<div class="club_openDate">${clubInfo.formDate }동호회가 개설
+								되었습니다</div>
+						</div>
+
 						<div class="emojiBox">
 							<div class="emojies">
 								<img src="/images/chatImg/emoji1.gif" id="emoji1"> <img
@@ -59,26 +62,26 @@
 							</div>
 						</div>
 
-<!-- 						<div class="incoming_msg"> -->
-<!-- 							<div class="received_msg"> -->
+						<!-- 						<div class="incoming_msg"> -->
+						<!-- 							<div class="received_msg"> -->
 
-<!-- 								DB 에서 출력 후 보낸 사람을 출력하자  -->
-<!-- 								<div class="sender">temp sender</div> -->
+						<!-- 								DB 에서 출력 후 보낸 사람을 출력하자  -->
+						<!-- 								<div class="sender">temp sender</div> -->
 
-<!-- 								<div class="received_withd_msg"> -->
-<!-- 									<p>Lorem Ipsum is simply dummy text</p> -->
-<!-- 									<span class="time_date"> 11:01 AM | June 9</span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+						<!-- 								<div class="received_withd_msg"> -->
+						<!-- 									<p>Lorem Ipsum is simply dummy text</p> -->
+						<!-- 									<span class="time_date"> 11:01 AM | June 9</span> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
 
 						<!--내가 보내는 메세지-->
-<!-- 						<div class="outgoing_msg"> -->
-<!-- 							<div class="sent_msg"> -->
-<!-- 								<p>Lorem Ipsum is simply dummy text</p> -->
-<!-- 								<span class="time_date"> 11:01 AM | June 9</span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+						<!-- 						<div class="outgoing_msg"> -->
+						<!-- 							<div class="sent_msg"> -->
+						<!-- 								<p>Lorem Ipsum is simply dummy text</p> -->
+						<!-- 								<span class="time_date"> 11:01 AM | June 9</span> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
 
 
 
@@ -174,8 +177,36 @@
 			<script>
 			$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
 
-			
 			 let ws = new WebSocket("ws://localhost/chat");
+			 
+				
+			   let emojiVal ="";
+			   const emoji1 = $('#emoji1'); 
+			   const emoji2 = $('#emoji2');
+			   const emoji3 = $('#emoji3');
+			   const emoji4 = $('#emoji4');
+			   const emoji5 = $('#emoji5');
+			   const emoji6 = $('#emoji6');
+			   const emoji7 = $('#emoji7');
+			   const emoji8 = $('#emoji8');
+			   
+				let si ="";
+				let bun ="";
+			   
+				// 메세지 송신 시간
+				function pullTime(){
+				let date = new Date();
+				si = date.getHours();			
+				bun = date.getMinutes();
+	
+				if(si < 10){
+					si = "0"+si;
+					}		
+				if(bun < 10){
+					bun = "0"+bun;
+					}
+					}
+			   
 			 
 		     ws.onmessage = function(e){
 				//웹 소켓에 보낸 문자 그대로를 변수로 지정
@@ -209,30 +240,9 @@
 					}
 		     	}
 
-			
-   let emojiVal ="";
-   const emoji1 = $('#emoji1'); 
-   const emoji2 = $('#emoji2');
-   const emoji3 = $('#emoji3');
-   const emoji4 = $('#emoji4');
-   const emoji5 = $('#emoji5');
-   const emoji6 = $('#emoji6');
-   const emoji7 = $('#emoji7');
-   const emoji8 = $('#emoji8');
 
-   				// 메세지 송신 시간
-			let date = new Date();
-			let si = date.getHours();			
-			let bun = date.getMinutes();
-			
-			if(si < 10){
-				si = "0"+si;
-				}		
-			if(bun < 10){
-				bun = "0"+bun;
-			}
 
-		 
+
 		 let htmlData ="";
 		
 		// 메세지 송신 
@@ -240,8 +250,10 @@
 
 			//이모티콘 있을 때 
          if(msgData.indexOf("emoji") == 0){
+        	 
             let emojiData = msgData;
             
+            pullTime();
             htmlData += "<div class='outgoing_msg'>";
   		    htmlData +=   	"<div class='sent_msg'>";
             htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
@@ -251,8 +263,8 @@
 
       		//이모티콘 없을 때
          }else if(msgData.indexOf("emoji") != 0){
-      		console.log("내가 보내는 메세지 ");
       		
+      		pullTime();
       		htmlData += "<div class='outgoing_msg'>";
   			htmlData +=   	"<div class='sent_msg'>";
       		htmlData +=			"<p>"+msgData+"</p>";
@@ -272,9 +284,11 @@
 			//이모티콘 있을 때
          if(msgData.indexOf("emoji") == 0){
         	 
-        	 let emojiData = msgData;
+        	  let emojiData = msgData;
         	  
-        	 htmlData +="<div class='sender'>"+senderName;
+       	  	  pullTime();
+       	  	  
+        	  htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";
               htmlData += "	<div class='received_msg'>";
               htmlData += "		<div class='received_withd_msg'>";
@@ -287,6 +301,8 @@
 
               //이모티콘 없을 때 
          }else if(msgData.indexOf("emoji") != 0){
+        	 
+       	      pullTime();
 
       		  htmlData +="<div class='sender'>"+senderName;
               htmlData += "<div class='incoming-msg'>";

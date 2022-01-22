@@ -12,7 +12,7 @@
 	</insert>
 
 	<select id="chatSelectAll" resultType="kh.hobby1st.dto.ChatDTO">
-		select * from chat order
+		select * from chat where chat_cl_id = #{value} order
 		by chat_seq asc
 	</select>
 
@@ -20,12 +20,12 @@
 		SELECT * FROM
 		(SELECT *FROM
 		chat ORDER BY chat_seq DESC)
-		WHERE ROWNUM= 1
+		WHERE ROWNUM= 1 AND CHAT_CL_ID = #{value}
 	</select>
 
 	<select id="getUserProfile" resultType="String">
 		select mem_photo from
-		member where mem_id = #{value};
+		member where mem_id = #{mem_id}
 	</select>
 
 	<select id="selectAll" resultType="map">

@@ -23,6 +23,7 @@
 	<resources mapping="/chat/**" location="/chat/"/> <!-- chat CSS -->
 	
 	<resources mapping="/js/**" location="/resources/js/"/><!-- fullpage.js -->
+	<resources mapping="/chatJs/**" location="/resources/js/chat/"/> <!-- chat JS -->
 	
 	<resources mapping="/upload/**" location="/upload/"/><!-- SummerNote -->
 	

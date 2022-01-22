@@ -20,12 +20,12 @@ public class ChatDAO {
 		return mybatis.insert("Chat.insertChatIntoDB", dto);
 	}
 
-	public List<ChatDTO> chatSelectAll(){
-		return mybatis.selectList("Chat.chatSelectAll");
+	public List<ChatDTO> chatSelectAll(String cl_id){
+		return mybatis.selectList("Chat.chatSelectAll", cl_id);
 	}
 
-	public List<ChatDTO> whoIsLastChat() {
-		return mybatis.selectList("Chat.whoIsLastChat");
+	public List<ChatDTO> whoIsLastChat(String chat_cl_id) {
+		return mybatis.selectList("Chat.whoIsLastChat", chat_cl_id);
 	}
 	
 	public String getUserProfile(String mem_id) {

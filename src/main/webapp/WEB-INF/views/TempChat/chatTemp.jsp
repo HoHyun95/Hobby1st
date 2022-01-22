@@ -16,11 +16,10 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-
 <link rel="stylesheet" href="/css/chat/chat.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-</head>
 
+</head>
 
 <body>
 	<div class="container">
@@ -46,7 +45,7 @@
 					<div id="chat_contents">
 
 						<div>
-							<div class="club_openDate">${clubInfo.formDate }동호회가 개설
+							<div class="club_openDate">${clubInfo.formDate }동호회가개설
 								되었습니다</div>
 						</div>
 
@@ -86,7 +85,7 @@
 									<c:if test="${chatList.chat_writer != user_name }">
 
 										<div class="sender">${chatList.chat_writer }</div>
-										
+
 										<div class="received_withd_msg">
 											<img src="/images/chatImg/${chatList.chat_contents }.gif">
 											<span class="time_date">${chatList.formDate }</span>
@@ -151,338 +150,343 @@
 				</div>
 			</div>
 
-
 			<script>
-			$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
-
-			 let ws = new WebSocket("ws://localhost/chat");
-			 
+				$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
 				
-			   let emojiVal ="";
-			   const emoji1 = $('#emoji1'); 
-			   const emoji2 = $('#emoji2');
-			   const emoji3 = $('#emoji3');
-			   const emoji4 = $('#emoji4');
-			   const emoji5 = $('#emoji5');
-			   const emoji6 = $('#emoji6');
-			   const emoji7 = $('#emoji7');
-			   const emoji8 = $('#emoji8');
-			   
-				let si ="";
-				let bun ="";
-			   
-				// 메세지 송신 시간
-				function pullTime(){
+
+				 let ws = new WebSocket("ws://localhost/chat");
+				 
 					
-					let date = new Date();
-					si = date.getHours();			
-					bun = date.getMinutes();
-	
-					if(si < 10){
-						si = "0"+si;
-						}
-					
-					if(bun < 10){
-						bun = "0"+bun;
-						}
-				}
-			   
-			 
-		     ws.onmessage = function(e){
-				//웹 소켓에 보낸 문자 그대로를 변수로 지정
-		      	let msgData = e.data;
+				   let emojiVal ="";
+				   const emoji1 = $('#emoji1'); 
+				   const emoji2 = $('#emoji2');
+				   const emoji3 = $('#emoji3');
+				   const emoji4 = $('#emoji4');
+				   const emoji5 = $('#emoji5');
+				   const emoji6 = $('#emoji6');
+				   const emoji7 = $('#emoji7');
+				   const emoji8 = $('#emoji8');
+				   
+					let si ="";
+					let bun ="";
+				   
+					// 메세지 송신 시간
+					function pullTime(){
+						
+						let date = new Date();
+						si = date.getHours();			
+						bun = date.getMinutes();
 		
-		    	let sender = "";
-		    	let sender_ID ="";
-		    	
-		    	
-		    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
-		    	 $.ajax({
-		    		 url : "/chat/whoIsLastChat",
-		    		 async: false,
-		    	 }).done(function(member){
-		    		 
-		    		 sender = member[0].chat_writer;
-		    		sender_ID = member[0].chat_writer_id;
-
-		    	 })
-		    	 
-
-		    		// 최신 메세지 작성자 ID 와 현재 로그인 한 session 의 아이디와 같을 때
-		         if(sender_ID == $('#user_id').val()){
-		        	 
-					sendMsg(msgData);
-					$('#chat_contents').append(htmlData);
-		       		htmlData="";
-		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
-					
-				}else{
-					let sender_profile ="";
-			    	 
-			    	 $.ajax({
-			    		 url : "/chat/getUserProfile",
-			    		 data : {mem_id : sender_ID}
-			    		 async: false,
-			    	 }).done(function(userProfile){
-			    		 sender_profile = userProfile;
-			    	 })
-
-					receiveMsg(msgData, sender, sender_profile);
-		       	    $('#chat_contents').append(htmlData);
-		       		htmlData="";
-		    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
-		       		
+						if(si < 10){
+							si = "0"+si;
+							}
+						
+						if(bun < 10){
+							bun = "0"+bun;
+							}
 					}
-		     	}
-
-
-
-
-		 let htmlData ="";
-		
-		// 메세지 송신 
-  		function sendMsg(msgData){	 
-
-			//이모티콘 있을 때 
-         if(msgData.indexOf("emoji") == 0){
-        	 
-            let emojiData = msgData;
-            
-            pullTime();
-            
-            htmlData += "<div class='outgoing_msg'>";
-  		    htmlData +=   	"<div class='sent_msg'>";
-            htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
-      		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
-      		htmlData += 	"</div>"
-      		htmlData +=	"</div>"
-
-      		//이모티콘 없을 때 (이모티콘을 클릭하면 emoji 라는 값이 웹소켓으로 보내지기에 emoji 있는지 검사)
-         }else if(msgData.indexOf("emoji") != 0){
-      		
-      		pullTime();
-      		
-      		htmlData += "<div class='outgoing_msg'>";
-  			htmlData +=   	"<div class='sent_msg'>";
-      		htmlData +=			"<p>"+msgData+"</p>";
-      		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
-      		htmlData += 	"</div>"
-      		htmlData +=	"</div>"
-              }else{
-            	  return;
-              }
-  			}
-         
-
-			//메세지 수신 
-  		function receiveMsg(msgData, senderName){
-
-				
-			//이모티콘 있을 때
-         if(msgData.indexOf("emoji") == 0){
-        	 
-        	  let emojiData = msgData;
-        	  
-       	  	  pullTime();
-       	  	  
-        	  htmlData +="<div class='sender'>"+sender;
-              htmlData += "<div class='incoming-msg'>";
-              htmlData += "	<div class='received_msg'>";
-              htmlData += "		<div class='received_withd_msg'>";
-              htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
-              htmlData += 			"<span class='time_date'>"+si+":"+bun+"</span>";
-              htmlData += " 		</div>";
-              htmlData += " 	</div>";
-              htmlData += "</div>";
-              htmlData += "</div>"
-
-              //이모티콘 없을 때 
-         }else if(msgData.indexOf("emoji") != 0){
-        	 
-       	      pullTime();
-
-      		  htmlData +="<div class='sender'>"+senderName;
-              htmlData += "<div class='incoming-msg'>";
-              htmlData += "	<div class='received_msg'>";
-              htmlData += "		<div class='received_withd_msg'>";
-              htmlData += "			<p>"+msgData+"</p>";
-              htmlData += 			"<span class='time_date'>"+si+":"+bun+"</span>";
-              htmlData += " 		</div>";
-              htmlData += " 	</div>";
-              htmlData += "</div>";
-              htmlData += "</div>";
-              
-         	}else{
-         		return;
-         	}		
-         }
-  		
-			// 데이터베이스에 메세지 저장
-   		 function insertIntoDB(){ 
-    	 	$.ajax({
-   				url : "/chat/insertChatIntoDB",
-   				method : "post",
-   				data : {
-   					chat_cl_id : "${clubInfo.cl_id}",
-   					chat_cl_name : "${clubInfo.cl_name}",
-   					chat_contents :  $('#sendText').val(),
-   					chat_writer : "${member.mem_name}",
-   					chat_writer_id : "${user_id}"
-   					}
-   			 	})
-   			}
+				   
+				 
+			     ws.onmessage = function(e){
+					//웹 소켓에 보낸 문자 그대로를 변수로 지정
+			      	let msgData = e.data;
 			
-			//데이터 베이스에 이모티콘 메세지 저장 
-            function insertEmojiIntoDB(emojiVal){
-               
-               ws.send(emojiVal);
+			    	let sender = "";
+			    	let sender_ID ="";
+			    	
+			    	
+			    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
+			    	 $.ajax({
+			    		 url : "/chat/whoIsLastChat",
+			    		 data : { chat_cl_id : "${clubInfo.cl_id}"},
+			    		 async: false,
+			    	 }).done(function(member){
+			    		 
+			    		 sender = member[0].chat_writer;
+			    		sender_ID = member[0].chat_writer_id;
 
-               $.ajax({
-   				url : "/chat/insertChatIntoDB",
-   				method : "post",
-   				data : {
-   					chat_cl_id : "${clubInfo.cl_id}",
-   					chat_cl_name : "${clubInfo.cl_name}",
-   					chat_contents :  emojiVal,
-   					chat_writer : "${member.mem_name}",
-   					chat_writer_id : "${user_id}"
-   					}
-   			 	})
+			    	 })
+			    	 
 
-            emojiVal ="";
-            $('#sendText').focus();
-            }
-		
-    
-   		$('#sendText').on('keyup', () => {
-   			
-   			let textValue = $('#sendText').val();
-   		
-   			if(
-   				textValue.length > 198
-   			){
-				alert("200자 이상 전송할 수 없습니다");
-				return false;
+			    		// 최신 메세지 작성자 ID 와 현재 로그인 한 session 의 아이디와 같을 때
+			         if(sender_ID == $('#user_id').val()){
+			        	 
+						sendMsg(msgData);
+						$('#chat_contents').append(htmlData);
+			       		htmlData="";
+			    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
+						
+					}else{
+						let sender_profile ="";
+				    	 
+				    	 $.ajax({
+				    		 url : "/chat/getUserProfile",
+				    		 data : {mem_id : sender_ID}
+				    	 }).done(function(userProfile){
+				    		 sender_profile = userProfile;
+				    		 console.log("유저 프로필 : "+ sender_profile);
+				    	 })
+
+				    	 
+				    	 
+				    	 
+						receiveMsg(msgData, sender);
+			       	    $('#chat_contents').append(htmlData);
+			       		htmlData="";
+			    		$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
+			       		
+						}
+			     	}
+
+
+			 let htmlData ="";
+			
+			// 메세지 송신 
+	  		function sendMsg(msgData){	 
+
+				//이모티콘 있을 때 
+	         if(msgData.indexOf("emoji") == 0){
+	        	 
+	            let emojiData = msgData;
+	            
+	            pullTime();
+	            
+	            htmlData += "<div class='outgoing_msg'>";
+	  		    htmlData +=   	"<div class='sent_msg'>";
+	            htmlData +=			"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
+	      		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
+	      		htmlData += 	"</div>"
+	      		htmlData +=	"</div>"
+
+	      		//이모티콘 없을 때 (이모티콘을 클릭하면 emoji 라는 값이 웹소켓으로 보내지기에 emoji 있는지 검사)
+	         }else if(msgData.indexOf("emoji") != 0){
+	      		
+	      		pullTime();
+	      		
+	      		htmlData += "<div class='outgoing_msg'>";
+	  			htmlData +=   	"<div class='sent_msg'>";
+	      		htmlData +=			"<p>"+msgData+"</p>";
+	      		htmlData += 		"<span class='time_date'>"+si+":"+bun+"</span>";
+	      		htmlData += 	"</div>"
+	      		htmlData +=	"</div>"
+	              }else{
+	            	  return;
+	              }
+	  			}
+	         
+
+				//메세지 수신 
+	  		function receiveMsg(msgData, senderName){
+
+					
+				//이모티콘 있을 때
+	         if(msgData.indexOf("emoji") == 0){
+	        	 
+	        	  let emojiData = msgData;
+	        	  
+	       	  	  pullTime();
+	       	  	  
+	       	  	  
+	    		  htmlData +="<div class='sender'><img class='sender_profile' src='sender_profile'>";
+	           	  htmlData += "	<sapn>"+senderName+"</span>";
+	              htmlData += "		<div class='incoming-msg'>";
+	              htmlData += "			<div class='received_msg'>";
+	              htmlData += "				<div class='received_withd_msg'>";
+	              htmlData +=					"<img class='msg_img' src='/images/chatImg/"+emojiData+".gif"+"'>";
+	              htmlData += 					"<span class='time_date'>"+si+":"+bun+"</span>";
+	              htmlData += " 			</div>";
+	              htmlData += " 		</div>";
+	              htmlData += "	</div>";
+	              htmlData += "</div>"
+
+	              //이모티콘 없을 때 
+	         }else if(msgData.indexOf("emoji") != 0){
+	        	 
+	       	      pullTime();
+
+	      		  htmlData +="<div class='sender'><img class='sender_profile' src='sender_profile'>";
+	           	  htmlData += "	<sapn>"+senderName+"</span>";
+	              htmlData += "		<div class='incoming-msg'>";
+	              htmlData += "			<div class='received_msg'>";
+	              htmlData += "				<div class='received_withd_msg'>";
+	              htmlData += "					<p>"+msgData+"</p>";
+	              htmlData += 					"<span class='time_date'>"+si+":"+bun+"</span>";
+	              htmlData += " 			</div>";
+	              htmlData += " 		</div>";
+	              htmlData += "	</div>";
+	              htmlData += "</div>";
+	              
+	         	}else{
+	         		return;
+	         	}		
+	         }
+	  		
+				// 데이터베이스에 메세지 저장
+	   		 function insertIntoDB(){ 
+	    	 	$.ajax({
+	   				url : "/chat/insertChatIntoDB",
+	   				method : "post",
+	   				data : {
+	   					chat_cl_id : "${clubInfo.cl_id}",
+	   					chat_cl_name : "${clubInfo.cl_name}",
+	   					chat_contents :  $('#sendText').val(),
+	   					chat_writer : "${member.mem_name}",
+	   					chat_writer_id : "${user_id}"
+	   					}
+	   			 	})
+	   			}
 				
-   			}else{
-   				return true;
-   			}
-   		})
-     
-     $('#sendText').on("keypress",function(e){
-    	 
-			let textValue = $('#sendText').val();
-   			let trimedValue = $.trim(textValue);
-    	 
-    	 
-         if(e.keyCode==13 && e.shiftKey==false){
+				//데이터 베이스에 이모티콘 메세지 저장 
+	            function insertEmojiIntoDB(emojiVal){
+	               
+	               ws.send(emojiVal);
 
-           if($('#sendText').val() == ""){
-        	   alert("공백은 전송할 수 없습니다");
-        	   return false;
-           
-           }else if(trimedValue == "" ){
-				alert("공백은 전송할 수 없습니다");
-				return false;
-           }else{
-        	   true;
-           }
-           
-           
-			let text = textValue;
-	
-     	    ws.send(text);
-            	 
-     	    insertIntoDB();
-  	 
- 	    $('#sendText').val("");
-  	    $('#sendText').focus();   
+	               $.ajax({
+	   				url : "/chat/insertChatIntoDB",
+	   				method : "post",
+	   				data : {
+	   					chat_cl_id : "${clubInfo.cl_id}",
+	   					chat_cl_name : "${clubInfo.cl_name}",
+	   					chat_contents :  emojiVal,
+	   					chat_writer : "${member.mem_name}",
+	   					chat_writer_id : "${user_id}"
+	   					}
+	   			 	})
 
-     		}
-         })
+	            emojiVal ="";
+	            $('#sendText').focus();
+	            }
+			
+	    
+	   		$('#sendText').on('keyup', () => {
+	   			
+	   			let textValue = $('#sendText').val();
+	   		
+	   			if(
+	   				textValue.length > 100
+	   			){
+					alert("전송 가능한 최대 범위를 초과하여 전송할 수 없습니다");
+					return false;
+					
+	   			}else{
+	   				return true;
+	   			}
+	   		})
+	     
+	     $('#sendText').on("keypress",function(e){
+	    	 
+				let textValue = $('#sendText').val();
+	   			let trimedValue = $.trim(textValue);
+	    	 
+	    	 
+	         if(e.keyCode==13 && e.shiftKey==false){
 
-         
-     $('#chatSendBtn').on('click', () => {
+	           if($('#sendText').val() == ""){
+	        	   alert("공백은 전송할 수 없습니다");
+	        	   return false;
+	           
+	           }else if(trimedValue == "" ){
+					alert("공백은 전송할 수 없습니다");
+					return false;
+	           }else{
+	        	   true;
+	           }
+	           
+	           
+				let text = textValue;
+		
+	     	    ws.send(text);
+	            	 
+	     	    insertIntoDB();
+	  	 
+	 	    $('#sendText').val("");
+	  	    $('#sendText').focus();   
 
-    		let text = $('#sendText').val();
-    		let trimedValue = $.trim(text);
-    		
-    		if(text == ""){
-    			alert("공백은 전송할 수 없습니다");
-    		}else if(trimedValue == ""){
-    			alert("공백은 전송할 수 없습니다");
-    		}else{
+	     		}
+	         })
 
-    	    ws.send(text);
-    		
-			insertIntoDB();
-    	    	
-	   		 $('#sendText').val("");
- 	   		 $('#sendText').focus();
-    		}}
-     )
-    		
-     
-    		
-	$('#emojiBtn').on('click', () => {
-		$('.emojiBox').slideToggle(100);
+	         
+	     $('#chatSendBtn').on('click', () => {
 
-      $('#chat_contents').on('click', () => {
-         $('.emojiBox').css("display", "none");
-      })
+	    		let text = $('#sendText').val();
+	    		let trimedValue = $.trim(text);
+	    		
+	    		if(text == ""){
+	    			alert("공백은 전송할 수 없습니다");
+	    		}else if(trimedValue == ""){
+	    			alert("공백은 전송할 수 없습니다");
+	    		}else{
+
+	    	    ws.send(text);
+	    		
+				insertIntoDB();
+	    	    	
+		   		 $('#sendText').val("");
+	 	   		 $('#sendText').focus();
+	    		}}
+	     )
+	    		
+	     
+	    		
+		$('#emojiBtn').on('click', () => {
+			$('.emojiBox').slideToggle(100);
+
+	      $('#chat_contents').on('click', () => {
+	         $('.emojiBox').css("display", "none");
+	      })
+		})
+
+		
+		$('.emojiBox').on('wheel', () => {
+			$('.emojiBox').css("display", "none");
+		})
+
+
+
+	emoji1.on('click', () => {
+	   console.log(1);
+	   emojiVal = "emoji1";
+	   insertEmojiIntoDB(emojiVal);
 	})
 
-	
-	$('.emojiBox').on('wheel', () => {
-		$('.emojiBox').css("display", "none");
+	   emoji2.on('click', () => {
+	      console.log(2);
+	   emojiVal = "emoji2";
+	   insertEmojiIntoDB(emojiVal);
 	})
 
+	emoji3.on('click', () => {
+	   console.log(3);
+	   emojiVal = "emoji3";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
+	emoji4.on('click', () => {
+	   console.log(4);
+	   emojiVal = "emoji4";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
-emoji1.on('click', () => {
-   console.log(1);
-   emojiVal = "emoji1";
-   insertEmojiIntoDB(emojiVal);
-})
+	emoji5.on('click', () => {
+	   emojiVal = "emoji5";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
-   emoji2.on('click', () => {
-      console.log(2);
-   emojiVal = "emoji2";
-   insertEmojiIntoDB(emojiVal);
-})
+	emoji6.on('click', () => {
+	   emojiVal = "emoji6";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
-emoji3.on('click', () => {
-   console.log(3);
-   emojiVal = "emoji3";
-   insertEmojiIntoDB(emojiVal);
-})
+	emoji7.on('click', () => {
+	   emojiVal = "emoji7";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
-emoji4.on('click', () => {
-   console.log(4);
-   emojiVal = "emoji4";
-   insertEmojiIntoDB(emojiVal);
-})
+	emoji8.on('click', () => {
+	   emojiVal = "emoji8";
+	   insertEmojiIntoDB(emojiVal);
+	})
 
-emoji5.on('click', () => {
-   emojiVal = "emoji5";
-   insertEmojiIntoDB(emojiVal);
-})
-
-emoji6.on('click', () => {
-   emojiVal = "emoji6";
-   insertEmojiIntoDB(emojiVal);
-})
-
-emoji7.on('click', () => {
-   emojiVal = "emoji7";
-   insertEmojiIntoDB(emojiVal);
-})
-
-emoji8.on('click', () => {
-   emojiVal = "emoji8";
-   insertEmojiIntoDB(emojiVal);
-})
-
-   </script>
+			</script>
 </body>
 </html>

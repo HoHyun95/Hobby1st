@@ -11,9 +11,20 @@
 		#{chat_writer_id}, sysdate)
 	</insert>
 
+	<!-- 유저 사진을 포함하지 않은 채팅 테이블 전체 출력 -->
 	<select id="chatSelectAll" resultType="kh.hobby1st.dto.ChatDTO">
-		select * from chat where chat_cl_id = #{value} order
+		select * from chat where
+		chat_cl_id = #{value} order
 		by chat_seq asc
+	</select>
+
+	<!-- 유저 사진을 포함한 채팅 테이블 전체 출력 -->
+	<select id="selectAll"
+		resultType="kh.hobby1st.dto.ChatPlusUserPhotoDTO">
+		select c.*, m.mem_photo chat_user_photo from
+		(select * from chat where chat_cl_id = #{value})
+		c, member m where
+		c.chat_writer_id = m.mem_id
 	</select>
 
 	<select id="whoIsLastChat" resultType="kh.hobby1st.dto.ChatDTO">
@@ -26,12 +37,6 @@
 	<select id="getUserProfile" resultType="String">
 		select mem_photo from
 		member where mem_id = #{mem_id}
-	</select>
-
-	<select id="selectAll" resultType="map">
-		select c.*, m.mem_photo from
-		(select * from chat where chat_cl_id = #{cl_id}) c, member m where
-		c.chat_writer_id = #{user_id}
 	</select>
 
 	<select id="isThisMyChat" resultType="int">

@@ -1,7 +1,6 @@
 package kh.hobby1st.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kh.hobby1st.dto.ChatDTO;
+import kh.hobby1st.dto.ChatPlusUserPhotoDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.ChatService;
@@ -59,16 +59,18 @@ public class ChatController {
 		List<ChatDTO> chatList = chatService.chatSelectAll(cl_id);
 		
 		// 동호회 멤버의 프로필 사진이 포함 된 채팅 전체
-//		List<Map<String, Object>> clubChatList = chatService.selectAll(cl_id, user_id);
-//		model.addAttribute("chatIncludedUserPhoto", clubChatList);
-//		System.out.println(clubChatList);
+		
+		List<ChatPlusUserPhotoDTO> clubChatList = chatService.selectAll(cl_id);
+		model.addAttribute("chatList", clubChatList);
+		System.out.println(clubChatList.size());
+		
 		
 		
 	
 	
 		model.addAttribute("member", memberInfo);
 		model.addAttribute("clubInfo", map);
-		model.addAttribute("chatList", chatList);
+//		model.addAttribute("chatList", chatList);
 	}
 
 	@RequestMapping("/clubChat")

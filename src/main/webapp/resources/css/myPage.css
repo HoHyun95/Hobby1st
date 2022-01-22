@@ -288,7 +288,7 @@ button {
   box-shadow: 1px 1px 1px 1px dimgrey;
 }
 
-.myclub_lis_title_text {
+.myclub_list_title_text {
   font-size: 1.1rem;
   padding: 10px 0px 0px 10px;
   font-weight: 600;
@@ -308,6 +308,19 @@ button {
   justify-content: flex-start;
   flex-wrap: wrap;
   
+}
+
+.no_join_club {
+  width: 100%;
+  height: 300px;
+  padding: 0px 0px 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;	
+}
+
+.no_join_club_text {
+  font-size: 0.9rem;
 }
 
 .myclub_list_box_wrap {

@@ -64,72 +64,87 @@
       
       // 무한 스크롤
       let totalList = ${fn:length(clubList)}
+      console.log(totalList);
       let count = 10;
       let start = 11;
       let end = 20;
       
-      window.onscroll = function (e) {
-    	 
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        
-       	$.ajax({
-       	    url: "/splitList?start=" + (start) + "&end=" + (end), 
-       	    type: "get",
-       	    dataType: "json" 
-       	}).done((res) => {
+      function throttle(fn, delay) { 
+        let timer; return function() { 
+    	  if(!timer) { 
+    	    timer = setTimeout(()=> { 
+    		  timer = null; 
+    		  fn.apply(this,arguments);
+    	    }, delay) 
+    	  } 
+        } 
+      }
+
+      
+      
+      window.addEventListener("scroll", throttle(() => {
+    	if(start < totalList) {
+		if ((window.innerHeight + window.scrollY + 150) >= document.body.offsetHeight) {
+		  $.ajax({
+              url: "/splitList?start=" + (start) + "&end=" + (end), 
+              type: "get",
+              dataType: "json" 
+          }).done((res) => {
+          
           if(res.length > 0) {
-          start += count;
-          end += count;  
-          for(let k = 1; k < res.length; k++) {
-        	setTimeout(() => {
-            let div1 = document.createElement("div");
-            let div2 = document.createElement("div");
-            let div3 = document.createElement("div");
-            let div4 = document.createElement("div");
+       		start += res.length;
+            end += res.length; 
+              
+            for(let k = 1; k < res.length; k++) {
+              let div1 = document.createElement("div");
+              let div2 = document.createElement("div");
+              let div3 = document.createElement("div");
+              let div4 = document.createElement("div");
 
-            let a = document.createElement("a");
-            let h3 = document.createElement("h3");
-            let h5_1 = document.createElement("h5");
-            let h5_2 = document.createElement("h5");
-            let h5_3 = document.createElement("h5");
-            let i = document.createElement("i");
-            let input = document.createElement("input");
+              let a = document.createElement("a");
+              let h3 = document.createElement("h3");
+              let h5_1 = document.createElement("h5");
+              let h5_2 = document.createElement("h5");
+              let h5_3 = document.createElement("h5");
+              let i = document.createElement("i");
+              let input = document.createElement("input");
 
-            div1.classList.add("club_list_box_wrap");
-            div2.classList.add("club_list_box");
-            div3.classList.add("badge");
-            div3.id = "theme1";
-            div3.innerHTML = res[k].cl_category_id;
-            div4.classList.add("like");
+              div1.classList.add("club_list_box_wrap");
+              div2.classList.add("club_list_box");
+              div3.classList.add("badge");
+              div3.id = "theme1";
+              div3.innerHTML = res[k].cl_category_id;
+              div4.classList.add("like");
                   
-            i.classList.add("far");
-            i.classList.add("fa-heart");
-            i.id = "likeBtn";
+              i.classList.add("far");
+              i.classList.add("fa-heart");
+              i.id = "likeBtn";
             
-            a.href = "/clubHouse?cl_id="+res[k].cl_id;
-            h3.innerHTML = res[k].cl_name;
-            h5_1.innerHTML = res[k].cl_boss_name;
-            h5_2.innerHTML = res[k].cl_local;
-            h5_3.innerHTML = res[k].cl_desc;
+              a.href = "/clubHouse?cl_id="+res[k].cl_id;
+              h3.innerHTML = res[k].cl_name;
+              h5_1.innerHTML = res[k].cl_boss_name;
+              h5_2.innerHTML = res[k].cl_local;
+              h5_3.innerHTML = res[k].cl_desc;
      
-            div4.appendChild(i);
-            div2.appendChild(div3);
-            div2.appendChild(div4);
-            a.appendChild(h3);
-            div2.appendChild(a);
-            div2.appendChild(h5_1);
-            div2.appendChild(h5_2);
-            div2.appendChild(h5_3);
-            div1.appendChild(div2);
+              div4.appendChild(i);
+              div2.appendChild(div3);
+              div2.appendChild(div4);
+              a.appendChild(h3);
+              div2.appendChild(a);
+              div2.appendChild(h5_1);
+              div2.appendChild(h5_2);
+              div2.appendChild(h5_3);
+              div1.appendChild(div2);
 
-            document.querySelector('.club_list').appendChild(div1);
-          }, 1000)
+              document.querySelector('.club_list').appendChild(div1);
+          
+            }
           }
-          }
-       }); 	  
-     }
-   }
-  }
+        }); 	
+	  }
+      }
+	}, 500));
+  
     
     $(document).on("click",".club_list_box_wrap", function() {
     	console.log("a");
@@ -217,6 +232,7 @@
             
             location.href = "/member/logind?mem_id="+(mem_id)+"&mem_pass="+(mem_pass);
         }
+    }
   </script>
 </head>
 

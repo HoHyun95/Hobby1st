@@ -248,9 +248,14 @@
 
     <!-- container -->
     <div class="container">
-      <div class="myclub_lis_title_text">MY CLUB LIST</div>
+      <div class="myclub_list_title_text">MY CLUB LIST</div>
       <div class="myclub_list_wrap">
         <div class="myclub_list">
+          <c:if test="${fn:length(clubList_make) eq 0 && fn:length(clubList_join) eq 0 && fn:length(clubList_interest) eq 0}">
+          	<div class="no_join_club">
+          	  <div class="no_join_club_text">가입하신 동호회가 없습니다.</div>
+          	</div>
+          </c:if>
           <c:forEach var="my" items="${clubList_make }">
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
@@ -310,6 +315,7 @@
             </div>
           </div>
           </c:forEach>
+          
         </div>
       </div>
     </div>

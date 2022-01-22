@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.hobby1st.dto.ChatDTO;
+import kh.hobby1st.dto.ChatPlusUserPhotoDTO;
 
 @Repository
 public class ChatDAO {
@@ -32,13 +33,8 @@ public class ChatDAO {
 		return mybatis.selectOne("Chat.getUserProfile", mem_id);
 	}
 	
-	public 	List<Map<String, Object>> selectAll(String cl_id, String user_id){
-		Map<String, String> map = new HashMap<>();
-		
-		map.put("cl_id", cl_id);
-		map.put("user_id", user_id);
-		
-		return mybatis.selectList("Chat.selectAll", map);
+	public 	List<ChatPlusUserPhotoDTO> selectAll(String cl_id){		
+		return mybatis.selectList("Chat.selectAll", cl_id);
 	}
 	
 	public int isThisMyChat(String chat_writer) {

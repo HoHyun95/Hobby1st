@@ -70,10 +70,9 @@
 						<c:forEach var="chatList" items="${chatList }">
 							<c:choose>
 
-
 								<c:when test="${fn:contains(chatList.chat_contents, 'emoji' )}">
 
-									<c:if test="${chatList.chat_writer eq user_name }">
+									<c:if test="${chatList.chat_writer_id eq mem_id }">
 										<div class="outgoing_msg">
 											<div class="sent_msg">
 												<img src="/images/chatImg/${chatList.chat_contents }.gif">
@@ -82,21 +81,23 @@
 										</div>
 									</c:if>
 
-									<c:if test="${chatList.chat_writer != user_name }">
+									<c:if test="${chatList.chat_writer_id != mem_id }">
 
-										<div class="sender">${chatList.chat_writer }</div>
+										<div class="sender">
+											<img class="sender_profile" src=${chatList_chat_user_photo }>
+											<sapn>${chatList.chat_writer }</sapn>
 
-										<div class="received_withd_msg">
-											<img src="/images/chatImg/${chatList.chat_contents }.gif">
-											<span class="time_date">${chatList.formDate }</span>
+											<div class="received_withd_msg">
+												<img src="/images/chatImg/${chatList.chat_contents }.gif">
+												<span class="time_date">${chatList.formDate }</span>
+											</div>
 										</div>
 									</c:if>
-
 								</c:when>
 
-								<c:otherwise>
 
-									<c:if test="${chatList.chat_writer eq user_name }">
+								<c:otherwise>
+									<c:if test="${chatList.chat_writer_id eq mem_id }">
 
 										<div class="outgoing_msg">
 											<div class="sent_msg">
@@ -106,17 +107,18 @@
 										</div>
 									</c:if>
 
-									<c:if test="${chatList.chat_writer != user_name }">
+									<c:if test="${chatList.chat_writer_id != mem_id }">
 
-										<div class="sender">${chatList.chat_writer }</div>
+										<div class="sender">
+											<img class="sender_profile" src=${chatList_chat_user_photo }>
+											<sapn>${chatList.chat_writer }</sapn>
 
-										<div class="received_withd_msg">
-											<p>${chatList.chat_contents }</p>
-											<span class="time_date">${chatList.formDate }</span>
+											<div class="received_withd_msg">
+												<p>${chatList.chat_contents }</p>
+												<span class="time_date">${chatList.formDate }</span>
+											</div>
 										</div>
 									</c:if>
-
-
 
 								</c:otherwise>
 							</c:choose>
@@ -207,7 +209,6 @@
 
 			    	 })
 			    	 
-
 			    		// 최신 메세지 작성자 ID 와 현재 로그인 한 session 의 아이디와 같을 때
 			         if(sender_ID == $('#user_id').val()){
 			        	 

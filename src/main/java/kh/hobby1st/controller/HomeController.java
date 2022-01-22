@@ -63,10 +63,16 @@ public class HomeController {
 		return "home";
 	}
 	
-	// 메인페이지 이동
+	// Fullpage 이동
 	@RequestMapping("fullpage")
 	public String main() {
 		return "fullpage/fullpage";
+	}
+	
+	// admin
+	@RequestMapping("admin")
+	public String admin() {
+		return "admin/admin";
 	}
 	
 	// myPage

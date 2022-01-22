@@ -76,7 +76,7 @@
         	<div>
                 <a href="/" style="color: white;"> <h1> 메인으로</h1></a> 
             </div>
-            <h1 style="color: white; text-align: center; font-size: 3.5rem; line-height: 20ch; "  >바쁜 일상속에서 하나의 취미</h1>
+            <h1 style="color: white; text-align: center; font-size: 3.5rem; line-height: 20ch; "  >바쁜 일상 속 하나의 취미</h1>
         </div> <!-- section01 -->
         <div class="section" id="section02">
             <div class="slide" id="slide01">
@@ -105,7 +105,7 @@
             <h1 style="color: white; text-align: center; font-size: 60px;">저희 사이트는 주식정보도 제공해드려요!</h1>
         </div> <!-- section03 -->
         <div class="section" id="section04">
-            <h1>바쁜 일상 <br>
+            	<h1>바쁜 일상 <br>
                 자신이 좋아하는 취미를 여러사람과 함께 공유하며 <br>
                 일상에 여유를 찾는것은 어떨까요?</h1>
                 <div>

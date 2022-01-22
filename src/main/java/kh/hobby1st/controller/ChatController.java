@@ -56,13 +56,16 @@ public class ChatController {
 		MemberDTO memberInfo = mem_service.selectOne(user_id);
 		// Login ID 를 통해 로그인한 멤버의 정보를 가져온다.
 
-		List<ChatDTO> chatList = chatService.chatSelectAll();
+		List<ChatDTO> chatList = chatService.chatSelectAll(cl_id);
 		
 		// 동호회 멤버의 프로필 사진이 포함 된 채팅 전체
-		List<Map<String, Object>> clubChatList = chatService.selectAll(cl_id, user_id);
-		model.addAttribute("chatIncludedUserPhoto", clubChatList);
-		System.out.println(clubChatList);
-
+//		List<Map<String, Object>> clubChatList = chatService.selectAll(cl_id, user_id);
+//		model.addAttribute("chatIncludedUserPhoto", clubChatList);
+//		System.out.println(clubChatList);
+		
+		
+	
+	
 		model.addAttribute("member", memberInfo);
 		model.addAttribute("clubInfo", map);
 		model.addAttribute("chatList", chatList);
@@ -88,11 +91,11 @@ public class ChatController {
 
 	}
 
-
+	// 메세지 전송시 DB에 저장 -> DB 제일 최근에 글 쓴 사람 누구인지 
 	@RequestMapping("whoIsLastChat")
 	@ResponseBody
-	public List<ChatDTO> whoIsLastChat() {
-		List<ChatDTO> result = chatService.whoIsLastChat();
+	public List<ChatDTO> whoIsLastChat(String chat_cl_id) {
+		List<ChatDTO> result = chatService.whoIsLastChat(chat_cl_id);
 		return result;
 	}
 	

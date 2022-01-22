@@ -19,12 +19,12 @@ public class ChatService {
 		return chatDao.insertChatIntoDB(dto);
 	}
 	
-	public List<ChatDTO> chatSelectAll(){
-		return chatDao.chatSelectAll();
+	public List<ChatDTO> chatSelectAll(String cl_id){
+		return chatDao.chatSelectAll(cl_id);
 	}
 	
-	public List<ChatDTO> whoIsLastChat() {
-		return chatDao.whoIsLastChat();
+	public List<ChatDTO> whoIsLastChat(String chat_cl_id) {
+		return chatDao.whoIsLastChat(chat_cl_id);
 	}
 	public String getUserProfile(String mem_id) {
 		return chatDao.getUserProfile(mem_id);

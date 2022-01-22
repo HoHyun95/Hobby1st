@@ -153,8 +153,13 @@ span.chat-time {
 	width: 57%;
 }
 
-.sender {
-	font-size: 13px;
+.sender_profile {
+	padding : 3px;
+	margin : 0px 3px;
+	width : 30px;
+	height : 30px;
+	border : 1px solid red;
+	border-radius : 50%;
 }
 
 .received_withd_msg p {
@@ -190,6 +195,8 @@ span.chat-time {
 	float: right;
 	width: 46%;
 }
+
+
 
 .sent_msg p {
 	background: #ddd;

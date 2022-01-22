@@ -92,10 +92,10 @@
           }).done((res) => {
           
           if(res.length > 0) {
-       		start += res.length;
+       		start += count;
             end += res.length; 
               
-            for(let k = 1; k < res.length; k++) {
+            for(let k = 0; k < res.length; k++) {
               let div1 = document.createElement("div");
               let div2 = document.createElement("div");
               let div3 = document.createElement("div");
@@ -143,7 +143,7 @@
         }); 	
 	  }
       }
-	}, 500));
+	}, 1000));
   
     
     $(document).on("click",".club_list_box_wrap", function() {

@@ -126,7 +126,7 @@
       </div>
       <div class="club_profile_photo">
         <div class="club_profile_photo_box">
-          <img src="images/back.jpg">
+          <img src="${club.cl_photo }">
         </div>
       </div>
     </div>

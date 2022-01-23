@@ -18,6 +18,7 @@ import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.ClubCategoryService;
+import kh.hobby1st.service.ClubJoinStateService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
 import kh.hobby1st.service.MemberService;
@@ -41,6 +42,9 @@ public class HomeController {
 	
 	@Autowired
 	private ClubCategoryService ccService;
+	
+	@Autowired
+	private ClubJoinStateService csService;
 	
 	@Autowired
 	private HttpSession session;
@@ -87,7 +91,14 @@ public class HomeController {
 		List<ClubListDTO> clubList_join = myService.clubList_join(my_id);	// 내가 가입한 동호회 리스트
 		List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	// 내가 관심있는 동호회 리스트
 		List<ClubBoardDTO> clubBoardList = myService.clubBoardList(my_id);
+		
+		List<MemberDTO> joinMemberInfo = csService.joinMemberInfo(my_id);
+		List<ClubListDTO> joinClubInfo = csService.joinClubInfo(my_id);
+		
+		
 
+		model.addAttribute("joinMemberInfo", joinMemberInfo);
+		model.addAttribute("joinClubInfo", joinClubInfo);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("clubList_make", clubList_make); 
 		model.addAttribute("clubList_join", clubList_join);

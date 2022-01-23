@@ -320,6 +320,27 @@
       </div>
     </div>
     <!-- container end -->
+    joinClubInfo
+    joinMemberInfo
+    <!-- test start -->
+    <div>
+    	<table border=1>
+    		<c:forEach var="mem" items="${joinMemberInfo }" varStatus="status">
+    			<tr>
+    				<td> 동호회 명 : 
+    				<td> 가입자 성함 : ${mem.mem_name }
+    				<td> 생년 월일 : ${mem.mem_birthday }
+    				<td> 성별 : ${mem.mem_gender }
+    				<td> 거주지 : ${mem.mem_address }
+    				<td> 관심 1 : ${mem.mem_category_1 }
+    				<td> 관심 2 : ${mem.mem_category_2 }
+    				<td> <button>수락</button> <button>거절</button>
+    			</tr>
+    		</c:forEach>
+    	</table>
+    </div>
+    
+    <!-- test end -->
 
     <div class="links">
       <div class="links_inner">

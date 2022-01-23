@@ -320,14 +320,12 @@
       </div>
     </div>
     <!-- container end -->
-    joinClubInfo
-    joinMemberInfo
     <!-- test start -->
     <div>
     	<table border=1>
     		<c:forEach var="mem" items="${joinMemberInfo }" varStatus="status">
     			<tr>
-    				<td> 동호회 명 : 
+    				<td> 동호회 명 : ${joinClubInfo[status.index].cl_name }
     				<td> 가입자 성함 : ${mem.mem_name }
     				<td> 생년 월일 : ${mem.mem_birthday }
     				<td> 성별 : ${mem.mem_gender }

@@ -41,7 +41,7 @@ public class ChatController {
 	private void renewalChat(ChatDTO dto, Model model) {
 
 		// 어느 동호회의 채팅인지 알기위해 동호회 번호 가져온다. 
-		String cl_id = "35";
+		String cl_id = "47";
 		// 상세 동호회의 채팅이므로, 동호회 ID 가져와서 해당 동호회의 채팅인 것을 알려야한다.
 
 

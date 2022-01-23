@@ -200,7 +200,7 @@
 			    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
 			    	 $.ajax({
 			    		 url : "/chat/whoIsLastChat",
-			    		 data : { chat_cl_id : "${clubInfo.cl_id}"},
+			    		 data : { chat_cl_id : "${clubInfo.cl_id}" },
 			    		 async: false,
 			    	 }).done(function(member){
 			    		 

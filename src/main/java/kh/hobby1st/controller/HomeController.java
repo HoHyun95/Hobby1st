@@ -123,11 +123,11 @@ public class HomeController {
 		ClubListDTO club = clService.selectClub(cl_id);
 		String mem_id = (String)session.getAttribute("mem_id");
 		int checkMember = clService.checkMember(Integer.parseInt(cl_id), mem_id);
-		int checkClubJoin = csService.checkClubJoin(Integer.parseInt(cl_id), mem_id);
+//		int checkClubJoin = csService.checkClubJoin(Integer.parseInt(cl_id), mem_id);
 		
 		
 		model.addAttribute("club", club);
-		model.addAttribute("checkClubJoin", checkClubJoin);
+//		model.addAttribute("checkClubJoin", checkClubJoin);
 		model.addAttribute("checkMember", checkMember);
 		return "clubHouse";
 	}

@@ -118,6 +118,9 @@
               	  <button type="button" id="controlClub"><i class="fas fa-address-book"></i> 동호회 관리</button>
                   <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
               	</c:if>
+              	<c:if test="${checkMember eq 3}">
+              	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 동호회 랄랄랄라라라랄</button>
+              	</c:if>
               <!-- <button type="button" id="likeClub"><i class="far fa-heart"></i> LIKE</button>
               <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button> -->
             </div>

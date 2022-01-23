@@ -22,12 +22,12 @@
   	
   	<!-- 동호회 가입 승인 -->
   	<update id="joinApprove">
-  		update club_join_state set cs_state = 2 and cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
+  		update club_join_state set cs_state = 2, cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
   	</update>
   	
   	<!-- 동호회 가입 거절 -->
   	<update id="joinRefuse">
-  		update club_join_state set cs_state = 3 and cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id} and cs_date = sysdate
+  		update club_join_state set cs_state = 3, cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
   	</update>
   	
   	<!-- 승인한 회원 동호회 회원목록에 넣기 -->

@@ -25,7 +25,7 @@ public class ClubController {
 
 		int result = csService.requestJoin(dto);
 
-		return "a";
+		return "redirect:/clubHouse?cl_id=" + dto.getCs_board_seq();
 	}
 
 	// 동호회 가입 요청 승인

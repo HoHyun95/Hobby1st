@@ -1,12 +1,11 @@
 package kh.hobby1st.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.hobby1st.dao.ClubJoinStateDAO;
 import kh.hobby1st.dao.ClubListDAO;
 import kh.hobby1st.dto.ClubListDTO;
 
@@ -15,6 +14,9 @@ public class ClubListService {
 
 	@Autowired
 	public ClubListDAO cldao;
+	
+	@Autowired
+	public ClubJoinStateDAO csdao;
 
 //	동호회 수
 	public int countClub() {
@@ -60,6 +62,8 @@ public class ClubListService {
 		int clubBoss = cldao.checkClubBoss(cl_id, mem_id);
 		// 일반회원 여부
 		int clubMember = cldao.checkMember(cl_id, mem_id);
+		// 동호회 요청 여부
+		int checkClubJoin = csdao.checkClubJoin(cl_id, mem_id);
 
 		if (clubMember == 0) {
 			checkMember = 0;
@@ -69,6 +73,10 @@ public class ClubListService {
 
 		if (clubBoss == 1) {
 			checkMember = 2;
+		}
+		
+		if (checkClubJoin == 1) {
+			checkMember = 3;
 		}
 
 		return checkMember;

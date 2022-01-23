@@ -47,10 +47,10 @@ public class ClubJoinStateService {
 		return csDao.joinRefuse(cs_board_seq, cs_join_id);
 	}
 
-	// 해당 동호회에 요청했는지
-	public int checkClubJoin(int cs_board_seq, String cs_join_id) {
-
-		return csDao.checkClubJoin(cs_board_seq, cs_join_id);
-	}
+//	// 해당 동호회에 요청했는지
+//	public int checkClubJoin(int cs_board_seq, String cs_join_id) {
+//
+//		return csDao.checkClubJoin(cs_board_seq, cs_join_id);
+//	}
 
 }

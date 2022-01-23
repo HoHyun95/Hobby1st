@@ -332,8 +332,14 @@
     				<td> 거주지 : ${mem.mem_address }
     				<td> 관심 1 : ${mem.mem_category_1 }
     				<td> 관심 2 : ${mem.mem_category_2 }
-    				<td> <button>수락</button> <button>거절</button>
+    				<td class="arbtn"> 
+    					<button class="approve">수락 </button>
+    					<button class="refuse">거절 </button>
+    					<input type="hidden" class="cl_id" value="${joinClubInfo[status.index].cl_id }">
+    					<input type="hidden" class="mem_id" value="${mem.mem_id }">
     			</tr>
+    			
+    			
     		</c:forEach>
     	</table>
     </div>
@@ -375,6 +381,30 @@
   </div>
   <!-- sign_in -->
   <jsp:include page="/WEB-INF/views/login.jsp"></jsp:include>
+  <script>
+  // 동호회 가입 승인
+ 	 $(".approve").on("click", function() {
+ 		let cl_id = $(this).siblings(".cl_id").val();
+ 		let mem_id = $(this).siblings(".mem_id").val();
+ 		
+ 		 alert("가입요청을 수락하였습니다.");
+ 		 
+		location.href = "/club/joinApprove?cs_board_seq=" + cl_id + "&cs_join_id=" + mem_id;
+	 })
+
+  // 동호회 가입 거절
+	 $(".refuse").on("click", function() {
+		 let cl_id = $(this).siblings(".cl_id").val();
+	 	 let mem_id = $(this).siblings(".mem_id").val();
+	 	 
+		 alert("가입요청을 거절하였습니다.");
+		 
+		location.href = "/club/joinRefuse?cs_board_seq=" + cl_id + "&cs_join_id=" + mem_id;
+	 })
+	 
+  	
+  </script>
 </body>
+
 
 </html>

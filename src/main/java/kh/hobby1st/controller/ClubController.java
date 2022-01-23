@@ -19,13 +19,30 @@ public class ClubController {
 	@Autowired
 	private ClubJoinStateService csService;
 
-	
 	// 동호회 가입 요청
 	@RequestMapping("requestJoin")
 	public String requestJoin(ClubJoinStateDTO dto) throws Exception {
-		
+
 		int result = csService.requestJoin(dto);
-		
+
+		return "a";
+	}
+
+	// 동호회 가입 요청 승인
+	@RequestMapping("joinApprove")
+	public String joinApprove(ClubJoinStateDTO dto) throws Exception {
+
+		System.out.println("승인");
+
+		return "a";
+	}
+
+	// 동호회 가입 요청 거절
+	@RequestMapping("joinRefuse")
+	public String joinRefuse(ClubJoinStateDTO dto) throws Exception {
+
+		System.out.println("거절");
+
 		return "a";
 	}
 

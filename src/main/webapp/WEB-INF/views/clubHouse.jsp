@@ -191,6 +191,18 @@
     </div>
     <!-- sign_in -->
     <jsp:include page="login.jsp"></jsp:include>
+    
+    <script>
+    // 가입하기 클릭시 가입 요청
+    	$("#joinClub").on("click", function() {
+    		location.href = "/club/requestJoin?cs_board_seq=${club.cl_id}";
+    	})
+    	
+    </script>
+    
+    
+    
+    
 </body>
 
 </html>

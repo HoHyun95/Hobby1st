@@ -5,7 +5,6 @@ public class ClubJoinStateDTO {
 	private int cs_seq;
 	private int cs_board_seq;
 	private String cs_club_name;
-	private String cs_boss_name;
 	private String cs_join_name;
 	private int cs_state;
 	
@@ -18,7 +17,6 @@ public class ClubJoinStateDTO {
 		this.cs_seq = cs_seq;
 		this.cs_board_seq = cs_board_seq;
 		this.cs_club_name = cs_club_name;
-		this.cs_boss_name = cs_boss_name;
 		this.cs_join_name = cs_join_name;
 		this.cs_state = cs_state;
 	}
@@ -39,12 +37,6 @@ public class ClubJoinStateDTO {
 	}
 	public void setCs_club_name(String cs_club_name) {
 		this.cs_club_name = cs_club_name;
-	}
-	public String getCs_boss_name() {
-		return cs_boss_name;
-	}
-	public void setCs_boss_name(String cs_boss_name) {
-		this.cs_boss_name = cs_boss_name;
 	}
 	public String getCs_join_name() {
 		return cs_join_name;

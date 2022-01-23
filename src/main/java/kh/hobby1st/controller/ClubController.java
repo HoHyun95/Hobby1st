@@ -30,7 +30,9 @@ public class ClubController {
 
 	// 동호회 가입 요청 승인
 	@RequestMapping("joinApprove")
-	public String joinApprove(ClubJoinStateDTO dto) throws Exception {
+	public String joinApprove(int cs_board_seq, String cs_join_id) throws Exception {
+		
+		System.out.println(cs_board_seq + cs_join_id);
 
 		System.out.println("승인");
 

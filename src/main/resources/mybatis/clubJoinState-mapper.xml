@@ -19,4 +19,21 @@
   	<select id="joinClubInfo" resultType="kh.hobby1st.dto.ClubListDTO">
   		select c.* from (select * from club_join_state where cs_boss_id = #{value} and cs_state=1) s join club_list c on (s.cs_board_seq  = c.cl_id)
   	</select>
+  	
+  	<!-- 동호회 가입 승인 -->
+  	<update id="joinApprove">
+  		update club_join_state set cs_state = 2 where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
+  	</update>
+  	
+  	<!-- 동호회 가입 거절 -->
+  	<update id="joinRefuse">
+  		update club_join_state set cs_state = 3 where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
+  	</update>
+  	
+  	<!-- 승인한 회원 동호회 회원목록에 넣기 -->
+  	<insert id="insertClubMember">
+  		insert into club_member values(club_member_seq.nextval, #{cm_mem_id}, #{cm_par_seq}, sysdate);
+  	</insert>
+  	
+  	
   </mapper>

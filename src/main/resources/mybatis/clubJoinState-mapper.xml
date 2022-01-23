@@ -7,7 +7,7 @@
   
   	<!-- 가입요청하기 -->
   	<insert id="requestJoin">
-  		insert into club_join_state values(club_join_state_seq.nextval, #{cs_board_seq}, #{cs_boss_id}, #{cs_join_id}, 1)
+  		insert into club_join_state values(club_join_state_seq.nextval, #{cs_board_seq}, #{cs_boss_id}, #{cs_join_id}, 1, sysdate)
   	</insert>
   
   	<!-- 가입신청한 회원 정보 리스트 -->
@@ -22,18 +22,22 @@
   	
   	<!-- 동호회 가입 승인 -->
   	<update id="joinApprove">
-  		update club_join_state set cs_state = 2 where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
+  		update club_join_state set cs_state = 2 and cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
   	</update>
   	
   	<!-- 동호회 가입 거절 -->
   	<update id="joinRefuse">
-  		update club_join_state set cs_state = 3 where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id}
+  		update club_join_state set cs_state = 3 and cs_date = sysdate where cs_board_seq = #{cs_board_seq} and cs_join_id = #{cs_join_id} and cs_date = sysdate
   	</update>
   	
   	<!-- 승인한 회원 동호회 회원목록에 넣기 -->
   	<insert id="insertClubMember">
-  		insert into club_member values(club_member_seq.nextval, #{cm_mem_id}, #{cm_par_seq}, sysdate);
+  		insert into club_member values(club_member_seq.nextval, #{cm_mem_id}, #{cm_par_seq}, sysdate)
   	</insert>
   	
+  	<!-- 해당 동호회에 요청했는지 -->
+  	<select id="checkClubJoin" resultType="int">
+  		select count(*) from club_join_state where cs_join_id = #{cs_join_id} and cs_state=1 and cs_board_seq = #{cs_board_seq}
+  	</select>
   	
   </mapper>

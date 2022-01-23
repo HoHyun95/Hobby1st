@@ -54,20 +54,27 @@ public class ClubJoinStateDAO {
 
 		return mybatis.update("JoinState.joinRefuse", map);
 	}
-	
-	//승인한 회원 동호회 회원목록에 넣기
+
+	// 승인한 회원 동호회 회원목록에 넣기
 	public int insertClubMember(int cm_par_seq, String cm_mem_id) {
-		
+
 		Map<String, String> map = new HashMap<>();
 
 		map.put("cm_par_seq", String.valueOf(cm_par_seq));
 		map.put("cm_mem_id", cm_mem_id);
-		
+
 		return mybatis.insert("JoinState.insertClubMember", map);
 	}
-	
-	
-	
-	
+
+	// 해당 동호회에 요청했는지
+	public int checkClubJoin(int cs_board_seq, String cs_join_id) {
+		
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cs_board_seq", String.valueOf(cs_board_seq));
+		map.put("cs_join_id", cs_join_id);
+
+		return mybatis.selectOne("JoinState.checkClubJoin", map);
+	}
 
 }

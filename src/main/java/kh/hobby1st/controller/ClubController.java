@@ -32,20 +32,23 @@ public class ClubController {
 	@RequestMapping("joinApprove")
 	public String joinApprove(int cs_board_seq, String cs_join_id) throws Exception {
 		
-		System.out.println(cs_board_seq + cs_join_id);
+		csService.joinApprove(cs_board_seq, cs_join_id);
 
 		System.out.println("승인");
 
-		return "a";
+		return "redirect:/myPage";
 	}
 
 	// 동호회 가입 요청 거절
 	@RequestMapping("joinRefuse")
-	public String joinRefuse(ClubJoinStateDTO dto) throws Exception {
+	public String joinRefuse(int cs_board_seq, String cs_join_id) throws Exception {
 
 		System.out.println("거절");
+		csService.joinRefuse(cs_board_seq, cs_join_id);
 
-		return "a";
+		return "redirect:/myPage";
 	}
+	
+	
 
 }

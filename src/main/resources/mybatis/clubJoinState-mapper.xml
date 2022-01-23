@@ -5,7 +5,7 @@
   
   <mapper namespace="JoinState">
   	<insert id="requestJoin">
-  		insert into club_join_state values(club_join_state_seq.nextval, #{cs_board_seq}, #{cs_boss_name}, #{cs_join_name}, 1)
+  		insert into club_join_state values(club_join_state_seq.nextval, #{cs_board_seq}, #{cs_boss_id}, #{cs_join_id}, 1)
   	</insert>
   
   

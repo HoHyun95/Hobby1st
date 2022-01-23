@@ -195,7 +195,7 @@
     <script>
     // 가입하기 클릭시 가입 요청
     	$("#joinClub").on("click", function() {
-    		location.href = "/club/requestJoin?cs_board_seq=${club.cl_id}";
+    		location.href = "/club/requestJoin?cs_board_seq=${club.cl_id}&cs_boss_id=${club.cl_boss_id}&cs_join_id=${mem_id}";
     	})
     	
     </script>

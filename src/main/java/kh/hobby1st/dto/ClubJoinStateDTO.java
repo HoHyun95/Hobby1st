@@ -1,6 +1,7 @@
 package kh.hobby1st.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ClubJoinStateDTO {
 
@@ -59,6 +60,31 @@ public class ClubJoinStateDTO {
 	public void setCs_date(Timestamp cs_date) {
 		this.cs_date = cs_date;
 	}
+	
+	// 날자 형식 변환
+		public String getFormdDate() {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+			return sdf.format(this.cs_date.getTime());
+		}
+
+		public String getDetailDate() {
+			long current_time = System.currentTimeMillis(); // 현재의 타임 스탬
+			long write_time = this.cs_date.getTime(); // 글이 작성된 시청의 Timestamp
+
+			long time_gap = current_time - write_time;
+
+			if (time_gap < 6000) {
+				return "1분 이내";
+			} else if (time_gap < 300000) {
+				return "5분 이내";
+			} else if (time_gap < 3600000) {
+				return "1시간 이내";
+			} else if (time_gap < 7200000) {
+				return "2시간 이내";
+			} else {
+				return getFormdDate();
+			}
+		}
 	
 	
 

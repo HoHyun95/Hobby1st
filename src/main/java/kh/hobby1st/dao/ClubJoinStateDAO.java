@@ -68,7 +68,7 @@ public class ClubJoinStateDAO {
 
 	// 해당 동호회에 요청했는지
 	public int checkClubJoin(int cs_board_seq, String cs_join_id) {
-		
+
 		Map<String, String> map = new HashMap<>();
 
 		map.put("cs_board_seq", String.valueOf(cs_board_seq));
@@ -76,15 +76,25 @@ public class ClubJoinStateDAO {
 
 		return mybatis.selectOne("JoinState.checkClubJoin", map);
 	}
-	
+
 	// 나의 동호회 활동 정보 날짜순 (동호회정보)
-  	
-  	// 나의 동호회 활동 정보 날짜순 (상태 정보)
-  	
+	public List<ClubListDTO> orderDateClubInfo(String cs_join_id) {
+		return mybatis.selectList("JoinState.orderDateClubInfo", cs_join_id);
+	}
+
+	// 나의 동호회 활동 정보 날짜순 (상태 정보)
+	public List<ClubJoinStateDTO> orderDateStateInfo(String cs_join_id) {
+		return mybatis.selectList("JoinState.orderDateStateInfo", cs_join_id);
+	}
+
 	// 나의 동호회 활동 정보 상태순 (동호회정보)
-  	
+	public List<ClubListDTO> orderStateClubInfo(String cs_join_id) {
+		return mybatis.selectList("JoinState.orderStateClubInfo", cs_join_id);
+	}
+
 	// 나의 동호회 활동 정보 상태순 (상태 정보)
-	
-	
+	public List<ClubJoinStateDTO> orderStateStateInfo(String cs_join_id) {
+		return mybatis.selectList("JoinState.orderStateStateInfo", cs_join_id);
+	}
 
 }

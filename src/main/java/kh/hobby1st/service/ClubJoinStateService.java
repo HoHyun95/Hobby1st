@@ -1,8 +1,7 @@
 package kh.hobby1st.service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +51,33 @@ public class ClubJoinStateService {
 //
 //		return csDao.checkClubJoin(cs_board_seq, cs_join_id);
 //	}
+
+	// 나의 동호회 활동 정보 (동호회정보)
+	public List<ClubListDTO> recentlyClubInfo(String cs_join_id, int check) {
+
+		List<ClubListDTO> list = new ArrayList<>();
+
+		if (check == 1) { // 날짜순
+			list = csDao.orderDateClubInfo(cs_join_id);
+		} else if (check == 2) { // 상태순
+			list = csDao.orderStateClubInfo(cs_join_id);
+		}
+
+		return list;
+	}
+
+	// 나의 동호회 활동 정보 (상태정보)
+	public List<ClubJoinStateDTO> recentlyStateInfo(String cs_join_id, int check) {
+
+		List<ClubJoinStateDTO> list = new ArrayList<>();
+
+		if (check == 1) { // 날짜순
+			list = csDao.orderDateStateInfo(cs_join_id);
+		} else if (check == 2) { // 상태순
+			list = csDao.orderStateStateInfo(cs_join_id);
+		}
+
+		return list;
+	}
 
 }

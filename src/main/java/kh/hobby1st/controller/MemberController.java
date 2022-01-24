@@ -158,7 +158,7 @@ public class MemberController {
 				e.printStackTrace();
 			}	
 		}
-		return "redirect: sign_in";
+		return "redirect: /";
 	}
 
 

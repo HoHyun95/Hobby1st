@@ -28,7 +28,7 @@
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
-      let likeBtn = document.querySelectorAll("#likeBtn");
+      let likeBtn = document.querySelectorAll(".likeBtn");
       let h3 = document.querySelectorAll("h3");
 	  let hidden = document.querySelectorAll("input[type='hidden']");
 	  let club_list_box = document.querySelectorAll(".club_list_box");
@@ -55,20 +55,48 @@
         location.href = "/member/sign_up";
       }
 
-      document.addEventListener('click', (e) => {
-        if(e.target && e.target.id== 'likeBtn'){
-          e.target.classList.toggle("fas");
-        }
+      // 찜하기
+      document.addEventListener("click", (event) => {
+        const classListArray = event.target.classList.value.split(' ');
+    	const isHeartButton = classListArray.find((classItem) => classItem === 'fa-heart');
+    	if (event.target && isHeartButton) {
+    	  event.target.classList.toggle("fas");
+    	  console.log(event.target.id);
+    	  console.log(event);
+    	  $.ajax({
+              url: "/clubList/clubBoardRec?cl_id=" + event.target.id,
+              type: "get",
+              dataType: "json" 
+          }).done((res) => {
+        	  console.log(res);
+          });
+    	}
       });
       
-      
       // 무한 스크롤
-      let totalList = ${fn:length(clubList)}
+      let id = '<%=(String)session.getAttribute("mem_id")%>';
+      let totalList;
+      let likedList;
+      let start;
+      let end;
+      if(id != 'null') {
+    	likedList = ${fn:length(clubList)};
+    	start = 1;
+    	end = 10;
+    	console.log(start);
+    	console.log(end);
+        totalList = ${fn:length(listCount)} - likedList;
+      } else {
+    	start = 11;
+    	end = 20;
+    	console.log(start);
+    	console.log(end);
+        totalList = ${fn:length(listCount)};
+      }
+  
       console.log(totalList);
       let count = 10;
-      let start = 11;
-      let end = 20;
-      
+     
       function throttle(fn, delay) { 
         let timer; return function() { 
     	  if(!timer) { 
@@ -80,8 +108,7 @@
         } 
       }
 
-      
-      
+      let lcount = likedList;
       window.addEventListener("scroll", throttle(() => {
     	if(start < totalList) {
 		if ((window.innerHeight + window.scrollY + 150) >= document.body.offsetHeight) {
@@ -92,9 +119,11 @@
           }).done((res) => {
           
           if(res.length > 0) {
+        	lcount += res.length;
+            console.log(lcount);
        		start += count;
             end += res.length; 
-              
+           
             for(let k = 0; k < res.length; k++) {
               let div1 = document.createElement("div");
               let div2 = document.createElement("div");
@@ -114,11 +143,12 @@
               div3.classList.add("badge");
               div3.id = "theme1";
               div3.innerHTML = res[k].cl_category_id;
-              div4.classList.add("like");
-                  
-              i.classList.add("far");
-              i.classList.add("fa-heart");
-              i.id = "likeBtn";
+              div4.classList.add("likeBtn");
+              if(id != 'null') {
+                i.classList.add("far");
+                i.classList.add("fa-heart");
+              }
+              i.id = res[k].cl_id;
             
               a.href = "/clubHouse?cl_id="+res[k].cl_id;
               h3.innerHTML = res[k].cl_name;
@@ -141,16 +171,11 @@
             }
           }
         }); 	
-	  }
+		
       }
-	}, 1000));
+    	
+	}}, 1000));
   
-    
-    $(document).on("click",".club_list_box_wrap", function() {
-    	console.log("a");
-    	alert("아아앙아아아아아!!!!!!");
-    })
-    
     /* 네이버 로그인 */ 
       const naverLogin = new naver.LoginWithNaverId(
     			{
@@ -336,7 +361,7 @@
     <!-- club_list_title -->
     <div class="club_list_title">
       <div class="club_list_title_contents"> 
-        <div class="club_list_title_text"> 총 ${fn:length(clubList)}개의 동호회가 있습니다.</div>
+        <div class="club_list_title_text"> 총 ${fn:length(listCount)}개의 동호회가 있습니다.</div>
     </div>
     <!-- club_list_title end-->
 
@@ -347,25 +372,49 @@
           <div class="no_search_result_text"> 검색 결과가 없습니다.</div>
         </div> -->
         <div class="club_list">
-          <c:forEach var="cl" items="${clubList }" begin="0" end="9" step="1">
-          <div class="club_list_box_wrap">
-            <div class="club_list_box">
-              <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
-              <div class="like"><i class="far fa-heart" id="likeBtn"></i></div>
-              <a href="/clubHouse?cl_id=${cl.CL_ID }"><h3>${cl.CL_NAME }</h3></a>
-              <h5>${cl.CL_BOSS_NAME }</h5>
-              <h5>${cl.CL_LOCAL }</h5>
-              <c:choose>
-			    <c:when test="${fn:length(cl.cl_desc) gt 15}">
-			      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
-			    </c:when>
-			    <c:otherwise>
-			      <h5><c:out value="${cl.CL_DESC}" /></h5>
-			    </c:otherwise>
-			  </c:choose>
-            </div>
-          </div>
-          </c:forEach>
+          <c:choose>
+    		<c:when test="${sessionScope.mem_id eq null}">
+			  <c:forEach var="cl" items="${clubList }">
+              <div class="club_list_box_wrap">
+                <div class="club_list_box">
+                  <div class="badge" id="theme1">${cl.cl_category_id }</div>
+                  <a href="/clubHouse?cl_id=${cl.cl_id }"><h3>${cl.cl_name}</h3></a>
+                  <h5>${cl.cl_boss_name }</h5>
+                  <h5>${cl.cl_local}</h5>
+                  <c:choose>
+			        <c:when test="${fn:length(cl.cl_desc) gt 15}">
+			          <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
+			        </c:when>
+			        <c:otherwise>
+			          <h5><c:out value="${cl.cl_desc}" /></h5>
+			        </c:otherwise>
+			      </c:choose>
+                </div>
+              </div>
+              </c:forEach>	
+    		</c:when>
+    		<c:otherwise>
+	          <c:forEach var="cl" items="${clubList }">
+	          <div class="club_list_box_wrap">
+	            <div class="club_list_box">
+	              <div class="badge" id="theme1">${cl.cl_category_id }</div>
+	              <div class="likeBtn"><i class="fas fa-heart" id=${cl.cl_id }></i></div>
+	              <a href="/clubHouse?cl_id=${cl.cl_id }"><h3>${cl.cl_name}</h3></a>
+	              <h5>${cl.cl_boss_name }</h5>
+	              <h5>${cl.cl_local }</h5>
+	              <c:choose>
+				    <c:when test="${fn:length(cl.cl_desc) gt 15}">
+				      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
+				    </c:when>
+				    <c:otherwise>
+				      <h5><c:out value="${cl.cl_desc}" /></h5>
+				    </c:otherwise>
+				  </c:choose>
+	            </div>
+	          </div>
+	          </c:forEach>
+    		</c:otherwise>
+		  </c:choose>
         </div>
       </div>
     </div>
@@ -400,11 +449,7 @@
       </div>
     </div>
   </div>
-  <!-- modal background -->
-  <div class="modal_bg">
-
   </div>
-  
 </body>
 
 </html>

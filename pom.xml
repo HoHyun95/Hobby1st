@@ -28,7 +28,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<!-- mail -->
 		<dependency>
 			<groupId>org.springframework</groupId>

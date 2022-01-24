@@ -124,9 +124,18 @@ public class HomeController {
 	// club 
 	@RequestMapping("club")
 	public String club(Model model) {
-		List<ClubListDTO> clubList = clService.selectAll();
+		String mem_id = (String)session.getAttribute("mem_id");
+		List<ClubListDTO> listCount = clService.selectAll();
 		
-		model.addAttribute("clubList", clubList);
+		if(mem_id != null) {
+			List<ClubListDTO> interestClubList = clService.interestClubList(mem_id);
+			model.addAttribute("clubList", interestClubList);
+			model.addAttribute("listCount", listCount);
+		} else {	
+			List<ClubListDTO> clubList = clService.selectSplit(1, 10);
+			model.addAttribute("clubList", clubList);
+			model.addAttribute("listCount", listCount);
+		}
 		return "club";
 	}
 	
@@ -148,12 +157,18 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value = "splitList", produces = "application/json; charset=UTF-8")
 	public String loadSplitList(int start, int end) {
+		String mem_id = (String)session.getAttribute("mem_id");
 		Gson g = new Gson();
 		System.out.println(start);
 		System.out.println(end);
-		List<ClubListDTO> selectSplit = clService.selectSplit(start, end);
-		String result = g.toJson(selectSplit);
-		
+		String result;
+		if(mem_id != null) {
+			List<ClubListDTO> notInterestClubList = clService.notInterestClubList(mem_id, start, end);
+			result = g.toJson(notInterestClubList);
+		} else {
+			List<ClubListDTO> selectSplit = clService.selectSplit(start, end);
+			result = g.toJson(selectSplit);
+		}
 		return result;
 	}
 	

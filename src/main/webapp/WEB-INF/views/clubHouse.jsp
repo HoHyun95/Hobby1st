@@ -153,7 +153,7 @@
       <div class="clubHouse_contents">
         <div class="clubHouse_contents_box_wrap">
           <div class="clubHouse_contents_box">
-
+               <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
           </div>
         </div>
       </div>

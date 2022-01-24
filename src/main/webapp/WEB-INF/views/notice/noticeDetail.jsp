@@ -91,7 +91,7 @@
 			<!-- 오른쪽 하단에 추천과 댓글수 조회 -->
 			<div class="content_b text-right text-base">
 				<br>
-</div>
+
 
 			
 

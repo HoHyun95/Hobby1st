@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubCategoryDTO;
+import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.service.ClubCategoryService;
@@ -92,11 +93,25 @@ public class HomeController {
 		List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	// 내가 관심있는 동호회 리스트
 		List<ClubBoardDTO> clubBoardList = myService.clubBoardList(my_id);
 		
-		List<MemberDTO> joinMemberInfo = csService.joinMemberInfo(my_id);
-		List<ClubListDTO> joinClubInfo = csService.joinClubInfo(my_id);
+		List<MemberDTO> joinMemberInfo = csService.joinMemberInfo(my_id); // 요청한 회원 정보
+		List<ClubListDTO> joinClubInfo = csService.joinClubInfo(my_id); // 요청된 동호회 정보
 		
+		// 1 = 날짜순
+		// 2 = 상태순
+		int check = 1;
+		
+		List<ClubListDTO> recentlyClubInfo = csService.recentlyClubInfo(my_id, check);	// 최근 활동한 동호회 정보
+		List<ClubJoinStateDTO> recentlyStateInfo = csService.recentlyStateInfo(my_id, check); // 최근 활동한 상태 정보
+		
+		System.out.println(recentlyClubInfo.get(0).getCl_name() + " : " + recentlyStateInfo.get(0).getCs_state());
+		System.out.println(recentlyClubInfo.get(1).getCl_name() + " : " + recentlyStateInfo.get(1).getCs_state());
+		System.out.println(recentlyClubInfo.get(2).getCl_name() + " : " + recentlyStateInfo.get(2).getCs_state());
+		System.out.println(recentlyClubInfo.get(3).getCl_name() + " : " + recentlyStateInfo.get(3).getCs_state());
+		System.out.println(recentlyClubInfo.get(4).getCl_name() + " : " + recentlyStateInfo.get(4).getCs_state());
 		
 
+		model.addAttribute("recentlyStateInfo", recentlyStateInfo);
+		model.addAttribute("recentlyClubInfo", recentlyClubInfo);
 		model.addAttribute("joinMemberInfo", joinMemberInfo);
 		model.addAttribute("joinClubInfo", joinClubInfo);
 		model.addAttribute("memberInfo", memberInfo);
@@ -111,9 +126,18 @@ public class HomeController {
 	// club 
 	@RequestMapping("club")
 	public String club(Model model) {
-		List<ClubListDTO> clubList = clService.selectAll();
+		String mem_id = (String)session.getAttribute("mem_id");
+		List<ClubListDTO> listCount = clService.selectAll();
 		
-		model.addAttribute("clubList", clubList);
+		if(mem_id != null) {
+			List<ClubListDTO> interestClubList = clService.interestClubList(mem_id);
+			model.addAttribute("clubList", interestClubList);
+			model.addAttribute("listCount", listCount);
+		} else {	
+			List<ClubListDTO> clubList = clService.selectSplit(1, 10);
+			model.addAttribute("clubList", clubList);
+			model.addAttribute("listCount", listCount);
+		}
 		return "club";
 	}
 	
@@ -135,12 +159,18 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value = "splitList", produces = "application/json; charset=UTF-8")
 	public String loadSplitList(int start, int end) {
+		String mem_id = (String)session.getAttribute("mem_id");
 		Gson g = new Gson();
 		System.out.println(start);
 		System.out.println(end);
-		List<ClubListDTO> selectSplit = clService.selectSplit(start, end);
-		String result = g.toJson(selectSplit);
-		
+		String result;
+		if(mem_id != null) {
+			List<ClubListDTO> notInterestClubList = clService.notInterestClubList(mem_id, start, end);
+			result = g.toJson(notInterestClubList);
+		} else {
+			List<ClubListDTO> selectSplit = clService.selectSplit(start, end);
+			result = g.toJson(selectSplit);
+		}
 		return result;
 	}
 	

@@ -40,4 +40,25 @@
   		select count(*) from club_join_state where cs_join_id = #{cs_join_id} and cs_state=1 and cs_board_seq = #{cs_board_seq}
   	</select>
   	
+  	<!-- 나의 동호회 활동 정보 날짜순 (동호회정보)  -->
+  	<select id="orderDateClubInfo" resultType="kh.hobby1st.dto.ClubListDTO">
+  		select l.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_date desc) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
+  	</select>
+  	
+  	<!-- 나의 동호회 활동 정보 날짜순 (상태 정보)  -->
+  	<select id="orderDateStateInfo" resultType="kh.hobby1st.dto.ClubJoinStateDTO">
+  		select j.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_date desc) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
+  	</select>
+  	
+  	<!-- 나의 동호회 활동 정보 상태순 (동호회정보)  -->
+  	<select id="orderStateClubInfo" resultType="kh.hobby1st.dto.ClubListDTO">
+  		select l.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_state) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
+  	</select>
+  	
+  	<!-- 나의 동호회 활동 정보 상태순 (상태 정보)  -->
+  	<select id="orderStateStateInfo" resultType="kh.hobby1st.dto.ClubJoinStateDTO">
+  		select j.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_state) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
+  	</select>
+  	
+  	
   </mapper>

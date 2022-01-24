@@ -62,7 +62,7 @@ public class MemberController {
 	public String login(String naver_id, String naver_mobile,
 			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
 			String naver_birthday, String naver_gender) {
-
+    		
 		if(naver_id != null) {
 			int naver_result = mem_service.naver_idCheck(naver_id);
 

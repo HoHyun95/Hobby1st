@@ -68,6 +68,18 @@ public class ClubController {
 		return "clubHouse";
 	}
 	
+	// 동호회 해체 시키기
+	@RequestMapping("breakClub")
+	public String breakClub(int board_seq, Model model) throws Exception {
+
+		int break_result = csService.breakClub(board_seq);
+		
+		model.addAttribute("break_result", break_result);
+		return "clubList/clubList";
+	}
+	
+	
+	
 	
 
 }

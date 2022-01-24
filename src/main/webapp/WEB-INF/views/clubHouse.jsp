@@ -116,7 +116,7 @@
               	</c:if>
               	<c:if test="${checkMember eq 2}">
               	  <button type="button" id="controlClub"><i class="fas fa-address-book"></i> 동호회 관리</button>
-                  <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
+                  <button type="button" id="breakClub"><i class="fas fa-door-open"></i> 동호회 해체하기</button>
               	</c:if>
               	<c:if test="${checkMember eq 3}">
               	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 동호회 랄랄랄라라라랄</button>
@@ -211,6 +211,16 @@
     	// 해당 동호회 탈퇴하기
     	$("#leaveClub").on("click", function() {
     		location.href = "/club/leaveClub?cs_board_seq=${club.cl_id}&cs_join_id=${mem_id}";
+    	})
+    	
+    	// 해당 동호회 해체시키기
+    	$("#breakClub").on("click", function() {
+    		let breakClub = confirm("정말로 해당 동호회를 해체시키겠습니까 ?");
+    		if(breakClub){
+    			location.href = "/club/breakClub?board_seq=${club.cl_id}";
+    		}else{
+    			alert("휴,,");
+    		}
     	})
     	
     </script>

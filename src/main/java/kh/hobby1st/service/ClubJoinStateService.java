@@ -97,6 +97,15 @@ public class ClubJoinStateService {
 	// 동호회 해체하기
 	public int breakClub(int board_seq) {
 		int result = 0;
+		
+		int breakClubList = csDao.breakClubList(board_seq);
+		int breakClubMember = csDao.breakClubMember(board_seq);
+		int breakClubState = csDao.breakClubState(board_seq);
+		
+		if(breakClubList == 1 && breakClubMember == 1 && breakClubState == 1) {
+			result = 1;
+		}
+		return result;
 	}
 
 }

@@ -103,11 +103,9 @@ public class HomeController {
 		List<ClubListDTO> recentlyClubInfo = csService.recentlyClubInfo(my_id, check);	// 최근 활동한 동호회 정보
 		List<ClubJoinStateDTO> recentlyStateInfo = csService.recentlyStateInfo(my_id, check); // 최근 활동한 상태 정보
 		
-		System.out.println(recentlyClubInfo.get(0).getCl_name() + " : " + recentlyStateInfo.get(0).getCs_state());
-		System.out.println(recentlyClubInfo.get(1).getCl_name() + " : " + recentlyStateInfo.get(1).getCs_state());
-		System.out.println(recentlyClubInfo.get(2).getCl_name() + " : " + recentlyStateInfo.get(2).getCs_state());
-		System.out.println(recentlyClubInfo.get(3).getCl_name() + " : " + recentlyStateInfo.get(3).getCs_state());
-		System.out.println(recentlyClubInfo.get(4).getCl_name() + " : " + recentlyStateInfo.get(4).getCs_state());
+//		System.out.println(recentlyClubInfo.get(0).getCl_name() + " : " + recentlyStateInfo.get(0).getCs_state());
+//		System.out.println(recentlyClubInfo.get(1).getCl_name() + " : " + recentlyStateInfo.get(1).getCs_state());
+//		System.out.println(recentlyClubInfo.get(2).getCl_name() + " : " + recentlyStateInfo.get(2).getCs_state());
 		
 
 		model.addAttribute("recentlyStateInfo", recentlyStateInfo);

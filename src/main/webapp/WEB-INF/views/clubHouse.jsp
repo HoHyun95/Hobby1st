@@ -153,7 +153,7 @@
       <div class="clubHouse_contents">
         <div class="clubHouse_contents_box_wrap">
           <div class="clubHouse_contents_box">
-
+               <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
           </div>
         </div>
       </div>
@@ -195,10 +195,22 @@
     <!-- sign_in -->
     <jsp:include page="login.jsp"></jsp:include>
     
+    <c:if test="${result eq '1' }">
+		<script>
+			alert("성공적으로 탈퇴되었습니다.");
+		    location.href = "/clubHouse?cl_id=${cs_board_seq }";
+		</script>
+	</c:if>
+  
     <script>
-    // 가입하기 클릭시 가입 요청
+   	    // 가입하기 클릭시 가입 요청	
     	$("#joinClub").on("click", function() {
     		location.href = "/club/requestJoin?cs_board_seq=${club.cl_id}&cs_boss_id=${club.cl_boss_id}&cs_join_id=${mem_id}";
+    	})
+    	
+    	// 해당 동호회 탈퇴하기
+    	$("#leaveClub").on("click", function() {
+    		location.href = "/club/leaveClub?cs_board_seq=${club.cl_id}&cs_join_id=${mem_id}";
     	})
     	
     </script>

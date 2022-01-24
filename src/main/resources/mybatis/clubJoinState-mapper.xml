@@ -60,5 +60,16 @@
   		select j.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_state) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
   	</select>
   	
+  	<!-- 클럽 탈퇴하기 (club_join_state Table에서 삭제) -->
+  	<delete id="deleteJoinState">
+  		delete from club_join_state where cs_join_id = #{cs_join_id} and cs_board_seq = #{cs_board_seq}
+  	</delete>
+  	
+  	<!-- 클럽 탈퇴하기 (club_member Table에서 삭제) -->
+  	<delete id="deleteClubmember">
+  		delete from club_member where cm_mem_id = #{cm_mem_id} and cm_par_seq = #{cm_par_seq}
+  	</delete>
+  	
+  	
   	
   </mapper>

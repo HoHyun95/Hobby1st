@@ -117,5 +117,7 @@ public class ClubListService {
 
 		return cldao.notInterestClubList(rec_id, start, end);
 	}
+	
+	
 
 }

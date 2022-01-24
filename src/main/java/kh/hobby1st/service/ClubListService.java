@@ -1,6 +1,8 @@
 package kh.hobby1st.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ public class ClubListService {
 
 	@Autowired
 	public ClubListDAO cldao;
-	
+
 	@Autowired
 	public ClubJoinStateDAO csdao;
 
@@ -53,7 +55,6 @@ public class ClubListService {
 		return cldao.searchClub(searchField, modifiedText);
 	}
 
-	
 	// 해당 동호회 가입 여부 확인
 	public int checkMember(int cl_id, String mem_id) {
 		int checkMember = 0;
@@ -74,7 +75,7 @@ public class ClubListService {
 		if (clubBoss == 1) {
 			checkMember = 2;
 		}
-		
+
 		if (checkClubJoin == 1) {
 			checkMember = 3;
 		}
@@ -104,6 +105,17 @@ public class ClubListService {
 	// 추천수
 	public int recCount(int cl_id) {
 		return cldao.recCount(cl_id);
+	}
+
+	// 관심있는 동호회 목록 출력
+	public List<ClubListDTO> interestClubList(String rec_id) {
+		return cldao.interestClubList(rec_id);
+	}
+
+	// 관심없는 동호회 목록 출력
+	public List<ClubListDTO> notInterestClubList(String rec_id, int start, int end) {
+
+		return cldao.notInterestClubList(rec_id, start, end);
 	}
 
 }

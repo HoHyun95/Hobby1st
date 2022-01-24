@@ -62,15 +62,11 @@ public class ChatController {
 		
 		List<ChatPlusUserPhotoDTO> clubChatList = chatService.selectAll(cl_id);
 		model.addAttribute("chatList", clubChatList);
-		System.out.println(clubChatList.size());
 		
-		
-		
-	
 	
 		model.addAttribute("member", memberInfo);
 		model.addAttribute("clubInfo", map);
-//		model.addAttribute("chatList", chatList);
+		model.addAttribute("chatList", chatList);
 	}
 
 	@RequestMapping("/clubChat")

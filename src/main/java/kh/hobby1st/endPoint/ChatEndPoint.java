@@ -15,7 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import kh.hobby1st.configurator.WSConfig;
 
-@ServerEndpoint(value="/chat", configurator = WSConfig.class)
+@ServerEndpoint(value="/chat/", configurator = WSConfig.class)
 public class ChatEndPoint {
 
 	private HttpSession session;

@@ -156,7 +156,7 @@
 				$("#chat_contents").scrollTop($("#chat_contents")[0].scrollHeight);
 				
 
-				 let ws = new WebSocket("ws://localhost/chat");
+				 let ws = new WebSocket("ws://localhost/chat/${clubInfo.cl_id}");
 				 
 					
 				   let emojiVal ="";

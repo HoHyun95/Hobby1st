@@ -197,6 +197,7 @@
 			    	let sender_ID ="";
 			    	
 			    	
+			    	
 			    	// 메세지 Seq 중에서 가장 최근의 값을 찾아 누가 보낸 것인지 불러온다.
 			    	 $.ajax({
 			    		 url : "/chat/whoIsLastChat",
@@ -204,9 +205,15 @@
 			    		 async: false,
 			    	 }).done(function(member){
 			    		 
+
+				    		if(member.length == 0){
+				    			alert("채팅 로딩중입니다. 잠시만 기다려주세요");
+				    			 location.reload();
+				    		}else{
+			    		 
 			    		 sender = member[0].chat_writer;
 			    		sender_ID = member[0].chat_writer_id;
-
+				    		}return;
 			    	 })
 			    	 
 			    		// 최신 메세지 작성자 ID 와 현재 로그인 한 session 의 아이디와 같을 때

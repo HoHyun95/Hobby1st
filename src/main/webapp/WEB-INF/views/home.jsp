@@ -245,8 +245,8 @@
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
             <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-instagram"></i></li></a>
             <a href="/clubBoard/boardList?cpage=1"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
-            <a href="/clubList/clubListPage"><li class="icon_list_item"><i class="fab fa-github"></i></li></a>
-            <a href="/chat/clubChat"><li class="icon_list_item"><i class="fab fa-google"></i></li></a>
+            <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-github"></i></li></a>
+            <a href="/notice/noticeList?cpage=1"><li class="icon_list_item"><i class="fab fa-google"></i></li></a>
           </ul>
         </div>
       </div>

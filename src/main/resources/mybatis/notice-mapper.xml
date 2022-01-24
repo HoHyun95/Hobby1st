@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Notice">
+  <insert id="insertNotice">
+  	insert into notice values(notice_seq.nextval, #{notice_writer}, #{notice_title}, #{notice_contents}, sysdate, 0) 
+  </insert>
+  
+  <!-- 공 -->
+  	<select id="RecordCount" resultType="int">
+ 		select count(*) from (select notice.*, row_number() over(order by notice_seq desc) rn from notice)
+ 	</select>
+  
+  <select id="selectNoticeAll" resultType="kh.hobby1st.dto.NoticeDTO">
+  select * from (select notice.*, row_number() over(order by notice_seq desc) rn from notice) where rn between #{start} and #{end}
+  </select>
+  
+  	<select id="noticeDetail" resultType="kh.hobby1st.dto.NoticeDTO">
+ 		select * from notice where notice_seq = #{value}
+ 	</select>
+ 	
+ 	 	<!-- 조회수 증가 -->
+ 	<update id="increaseView">
+ 		update notice set notice_view_count = notice_view_count + 1 where notice_seq = #{value}
+ 	</update>
+  	
+  	<!-- 게시판 삭제 -->
+  	<delete id="deleteNotice">
+  		delete from notice where notice_seq = #{value}
+  	</delete>
+  	
+  	<!-- 게시판 수정 -->
+  	<update id="modifyNotice">
+  		update notice set notice_title = #{notice_title},  notice_contents = #{notice_contents}, notice_write_date = sysdate where notice_seq = #{notice_seq}
+  	</update>
+ 	
+  </mapper>

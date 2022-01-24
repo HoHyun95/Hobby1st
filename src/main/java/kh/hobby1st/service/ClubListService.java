@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.hobby1st.dao.ClubJoinStateDAO;
 import kh.hobby1st.dao.ClubListDAO;
 import kh.hobby1st.dto.ClubListDTO;
 
@@ -15,6 +16,9 @@ public class ClubListService {
 
 	@Autowired
 	public ClubListDAO cldao;
+
+	@Autowired
+	public ClubJoinStateDAO csdao;
 
 //	동호회 수
 	public int countClub() {
@@ -51,7 +55,6 @@ public class ClubListService {
 		return cldao.searchClub(searchField, modifiedText);
 	}
 
-	
 	// 해당 동호회 가입 여부 확인
 	public int checkMember(int cl_id, String mem_id) {
 		int checkMember = 0;
@@ -60,6 +63,8 @@ public class ClubListService {
 		int clubBoss = cldao.checkClubBoss(cl_id, mem_id);
 		// 일반회원 여부
 		int clubMember = cldao.checkMember(cl_id, mem_id);
+		// 동호회 요청 여부
+		int checkClubJoin = csdao.checkClubJoin(cl_id, mem_id);
 
 		if (clubMember == 0) {
 			checkMember = 0;
@@ -69,6 +74,10 @@ public class ClubListService {
 
 		if (clubBoss == 1) {
 			checkMember = 2;
+		}
+
+		if (checkClubJoin == 1) {
+			checkMember = 3;
 		}
 
 		return checkMember;
@@ -96,6 +105,17 @@ public class ClubListService {
 	// 추천수
 	public int recCount(int cl_id) {
 		return cldao.recCount(cl_id);
+	}
+
+	// 관심있는 동호회 목록 출력
+	public List<ClubListDTO> interestClubList(String rec_id) {
+		return cldao.interestClubList(rec_id);
+	}
+
+	// 관심없는 동호회 목록 출력
+	public List<ClubListDTO> notInterestClubList(String rec_id, int start, int end) {
+
+		return cldao.notInterestClubList(rec_id, start, end);
 	}
 
 }

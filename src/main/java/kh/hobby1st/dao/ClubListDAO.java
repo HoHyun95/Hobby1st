@@ -121,5 +121,23 @@ public class ClubListDAO {
 	public int recCount(int cl_id) {
 		return mybatis.selectOne("ClubList.recCount", cl_id);
 	}
+	
+	// 관심있는 동호회 목록 출력
+	public List<ClubListDTO> interestClubList(String rec_id) {
+		return mybatis.selectList("ClubList.interestClubList", rec_id);
+	}
+	
+	
+	// 관심없는 동호회 목록 출력
+	public List<ClubListDTO> notInterestClubList(String rec_id, int start, int end) {
+		
+		Map<String, String> map = new HashMap<>();
+
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+		map.put("rec_id", rec_id);
+		
+		return mybatis.selectList("ClubList.notInterestClubList", map);
+	}
 
 }

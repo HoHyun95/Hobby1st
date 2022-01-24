@@ -57,7 +57,7 @@
                 </div>
               </div>
               <div class="input_btn2">
-                <button id="loginid">LOGIN</button>
+                <button id="loginid" type="button">LOGIN</button>
               </div>
               <div class="divide_line">
                 <div class="divide_line_item"></div>

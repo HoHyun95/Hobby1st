@@ -118,6 +118,9 @@
               	  <button type="button" id="controlClub"><i class="fas fa-address-book"></i> 동호회 관리</button>
                   <button type="button" id="leaveClub"><i class="fas fa-door-open"></i> 동호회 탈퇴</button>
               	</c:if>
+              	<c:if test="${checkMember eq 3}">
+              	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 동호회 랄랄랄라라라랄</button>
+              	</c:if>
               <!-- <button type="button" id="likeClub"><i class="far fa-heart"></i> LIKE</button>
               <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button> -->
             </div>
@@ -191,6 +194,18 @@
     </div>
     <!-- sign_in -->
     <jsp:include page="login.jsp"></jsp:include>
+    
+    <script>
+    // 가입하기 클릭시 가입 요청
+    	$("#joinClub").on("click", function() {
+    		location.href = "/club/requestJoin?cs_board_seq=${club.cl_id}&cs_boss_id=${club.cl_boss_id}&cs_join_id=${mem_id}";
+    	})
+    	
+    </script>
+    
+    
+    
+    
 </body>
 
 </html>

@@ -42,7 +42,7 @@
 	</select>
 
 	<select id="selectClub" resultType="kh.hobby1st.dto.ClubListDTO">
-	select * from club_list where cl_id = ${value}
+		select * from club_list where cl_id = ${value}
 	</select>
 
 	<select id="searchClub" resultType="kh.hobby1st.dto.ClubListDTO">
@@ -52,7 +52,7 @@
 	
 	<!-- 해당 동호회 가입 여부 확인 -->
 	<select id="checkMember" resultType="int">
-		select count(*) from club_list l join club_member m on (l.cl_id = m.cm_seq) where m.cm_mem_id = #{mem_id} and l.cl_id = #{cl_id}
+		select count(*) from club_list l join club_member m on (l.cl_id = m.cm_par_seq) where m.cm_mem_id = #{mem_id} and l.cl_id = #{cl_id}
 	</select>
 	
 	<!-- 해당 동호회 클럽장인지 여부 -->
@@ -86,7 +86,19 @@
 	<select id="recCount" resultType="int">
   		select cl_rec_count from club_list where cl_id = #{value}
   	</select>
-	
+  	
+  	<!-- 관심있는 동호회 목록 출력  -->
+  	<select id="interestClubList" resultType="kh.hobby1st.dto.ClubListDTO">
+		select c.* from club_list c, club_list_rec l where c.cl_id = l.cl_seq and l.rec_id = #{value} order by cl_id
+	</select>
+  	
+  	<!-- 관심있는 동호회 없는 출력  -->
+	<select id="notInterestClubList" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from (select distinct c.*, row_number() over (order by cl_id) rn
+		from club_list c 
+		where c.cl_id not in (select cl_id from club_list c, club_list_rec l where c.cl_id = l.cl_seq and l.rec_id = #{rec_id}) order by 1) 
+		where rn between #{start} and #{end}
+	</select>
 	
 
 </mapper>

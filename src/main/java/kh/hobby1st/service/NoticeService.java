@@ -26,8 +26,8 @@ public class NoticeService {
 	}
 	
 	// 공지사항 상세보기
-	public NoticeDTO noticeDetail(int seq) {
-		return notDao.noticeDetail(seq);
+	public NoticeDTO noticeDetail(int not_seq) {
+		return notDao.noticeDetail(not_seq);
 	}
 	
 	// 공지사항 조회수 증가
@@ -35,30 +35,22 @@ public class NoticeService {
 		return notDao.increaseView(seq);
 	}
 	
+	// 공지사항 삭제
+		public int deleteNotice(int notice_seq) {
+			return notDao.deleteNotice(notice_seq);
+		}
+	
+	// 공지사항 수정
+		public int modifyNotice(NoticeDTO dto) {
+			return notDao.modifyNotice(dto);
+		}
+	
 	// 공지사항 프로필 가져오기
 //	public String writerProfile(int not_seq) {
 //		return notDao.writerProfile(not_seq);
 //	}
 	
-	// -------------------------- 추천 기능 --------------------------
-
-//		public int clubRecommend( String rec_id) {
-//
-//			int check = notDao.checkRec( rec_id);
-//
-//			int checkRec = 0;
-//			if (check == 1) {
-//				notDao.deleteRec(rec_id);
-//				checkRec = 0;
-//			} else if (check == 0) {
-//				notDao.insertRec( rec_id);
-//				checkRec = 1;
-//			}
-//
-//			notDao.updateRec();
-//			return checkRec;
-//		}
-	
+		// 공지사항 리스트 페이징
 	public List<NoticeDTO> selectNoticeAll (int cpage) throws Exception{
 		int currentPage = cpage;
 

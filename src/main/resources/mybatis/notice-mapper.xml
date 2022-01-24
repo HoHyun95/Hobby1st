@@ -5,16 +5,16 @@
   
   <mapper namespace="Notice">
   <insert id="insertNotice">
-  	insert into notice values(notice_seq.nextval, #{not_writer}, #{not_title}, #{not_contents}, sysdate, 0) 
+  	insert into notice values(notice_seq.nextval, #{notice_writer}, #{notice_title}, #{notice_contents}, sysdate, 0) 
   </insert>
   
   <!-- 공 -->
   	<select id="RecordCount" resultType="int">
- 		select count(*) from (select notice.*, row_number() over(order by not_seq desc) rn from notice)
+ 		select count(*) from (select notice.*, row_number() over(order by notice_seq desc) rn from notice)
  	</select>
   
   <select id="selectNoticeAll" resultType="kh.hobby1st.dto.NoticeDTO">
-  select * from (select notice.*, row_number() over(order by not_seq desc) rn from notice) where rn between #{start} and #{end}
+  select * from (select notice.*, row_number() over(order by notice_seq desc) rn from notice) where rn between #{start} and #{end}
   </select>
   
   	<select id="noticeDetail" resultType="kh.hobby1st.dto.NoticeDTO">
@@ -23,7 +23,7 @@
  	
  	 	<!-- 조회수 증가 -->
  	<update id="increaseView">
- 		update notice set notice_view_count = notice_view_count + 1 where _seq = #{value}
+ 		update notice set notice_view_count = notice_view_count + 1 where notice_seq = #{value}
  	</update>
   	
   	<!-- 게시판 삭제 -->
@@ -33,7 +33,7 @@
   	
   	<!-- 게시판 수정 -->
   	<update id="modifyNotice">
-  		update notice set not_title = #{not_title},  not_contents = #{not_contents}, not_write_date = sysdate where not_seq = #{not_seq}
+  		update notice set notice_title = #{notice_title},  notice_contents = #{notice_contents}, notice_write_date = sysdate where notice_seq = #{notice_seq}
   	</update>
  	
   </mapper>

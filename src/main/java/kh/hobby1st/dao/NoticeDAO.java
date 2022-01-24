@@ -30,6 +30,36 @@ public class NoticeDAO {
 	public int increaseView(int not_seq) {
 		return mybatis.update("Notice.increaseView", not_seq);
 	}
+
+	public int getRecordCount() {
+		return mybatis.selectOne("Notice.RecordCount");
+	}
+	
+	// 공지사항 삭제
+	public int deleteNotice(int notice_seq) {
+		return mybatis.delete("Notice.deleteNotice", notice_seq);
+	}
+
+	// 공지사항 수정
+	public int modifyNotice(NoticeDTO dto) {
+		return mybatis.update("Notice.modifyNotice", dto);
+	}
+
+	
+	// 공지사항 페이징 적용 출력
+	public List<NoticeDTO> selectNoticeAll(int start, int end){
+		Map<String, String> map = new HashMap<>();
+
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+		
+		return mybatis.selectList("Notice.selectNoticeAll", map);
+	}
+	
+	
+	
+	
+	
 	
 //	// ------------ 추천 기능 -------------------
 //
@@ -76,20 +106,4 @@ public class NoticeDAO {
 //			return mybatis.selectOne("ClubBoardRec.recCount", cb_seq);
 //		}
 //	
-	public int getRecordCount() {
-		return mybatis.selectOne("Notice.RecordCount");
-	}
-	
-
-	
-	
-	// 공지사항 페이징 적용 출력
-	public List<NoticeDTO> selectNoticeAll(int start, int end){
-		Map<String, String> map = new HashMap<>();
-
-		map.put("start", String.valueOf(start));
-		map.put("end", String.valueOf(end));
-		
-		return mybatis.selectList("Notice.selectNoticeAll", map);
-	}
 }

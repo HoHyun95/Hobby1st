@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.dto.ClubJoinStateDTO;
@@ -47,6 +48,19 @@ public class ClubController {
 		csService.joinRefuse(cs_board_seq, cs_join_id);
 
 		return "redirect:/myPage";
+	}
+	
+	// 동호회 탈퇴 하기
+	@RequestMapping("leaveClub")
+	public String leaveClub(int cs_board_seq, String cs_join_id, Model model) throws Exception {
+
+		int result = csService.leaveClub(cs_join_id, cs_board_seq);
+		
+		System.out.println("결과 : " + result);
+		
+		model.addAttribute("cs_board_seq", cs_board_seq);
+		model.addAttribute("result", result);
+		return "clubHouse";
 	}
 	
 	

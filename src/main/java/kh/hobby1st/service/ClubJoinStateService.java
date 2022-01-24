@@ -79,5 +79,25 @@ public class ClubJoinStateService {
 
 		return list;
 	}
+	
+	// 클럽 탈퇴하기
+	public int leaveClub(String mem_id, int cb_seq) {
+		
+		int result = 0;
+		
+		int deleteClubmember = csDao.deleteClubmember(mem_id, cb_seq);
+		int deleteJoinState = csDao.deleteJoinState(mem_id, cb_seq);
+		
+		System.out.println("1" + deleteClubmember);
+		System.out.println("2" + deleteJoinState);
+		
+		if(deleteClubmember == 1 && deleteJoinState == 1) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	
 
 }

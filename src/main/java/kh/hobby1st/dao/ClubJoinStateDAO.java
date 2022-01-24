@@ -97,4 +97,26 @@ public class ClubJoinStateDAO {
 		return mybatis.selectList("JoinState.orderStateStateInfo", cs_join_id);
 	}
 
+	// 클럽 탈퇴하기 (club_join_state Table에서 삭제)
+	public int deleteJoinState(String cs_join_id, int cs_board_seq) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cs_board_seq", String.valueOf(cs_board_seq));
+		map.put("cs_join_id", cs_join_id);
+
+		return mybatis.delete("JoinState.deleteJoinState", map);
+	}
+
+	// 클럽 탈퇴하기 (club_member Table에서 삭제)
+	public int deleteClubmember(String cm_mem_id, int cm_par_seq) {
+
+		Map<String, String> map = new HashMap<>();
+
+		map.put("cm_par_seq", String.valueOf(cm_par_seq));
+		map.put("cm_mem_id", cm_mem_id);
+
+		return mybatis.delete("JoinState.deleteClubmember", map);
+	}
+
 }

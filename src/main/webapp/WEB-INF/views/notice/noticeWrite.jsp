@@ -35,7 +35,7 @@
 
 				<!-- 제목 입력 -->
 				<div>
-					<input name="not_title" id="title"
+					<input name="notice_title" id="title"
 						style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 						type="text" placeholder="제목을 입력해 주세요."
 						class="
@@ -55,7 +55,7 @@
 
 					<!-- textarea 태그에 작성 -->
 					<div>
-						<textarea name="not_contents" id="summernote"></textarea>
+						<textarea name="notice_contents" id="summernote"></textarea>
 					</div>
 
 

@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.hobby1st.dto.ClubJoinStateDTO;
+import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.service.ClubJoinStateService;
+import kh.hobby1st.service.ClubListService;
 
 @Controller
 @RequestMapping("/club/")
@@ -19,6 +21,9 @@ public class ClubController {
 
 	@Autowired
 	private ClubJoinStateService csService;
+	
+	@Autowired
+	private ClubListService clService;
 
 	// 동호회 가입 요청
 	@RequestMapping("requestJoin")
@@ -55,9 +60,9 @@ public class ClubController {
 	public String leaveClub(int cs_board_seq, String cs_join_id, Model model) throws Exception {
 
 		int result = csService.leaveClub(cs_join_id, cs_board_seq);
+		ClubListDTO club = clService.selectClub(String.valueOf(cs_board_seq));
 		
-		System.out.println("결과 : " + result);
-		
+		model.addAttribute("club", club);
 		model.addAttribute("cs_board_seq", cs_board_seq);
 		model.addAttribute("result", result);
 		return "clubHouse";

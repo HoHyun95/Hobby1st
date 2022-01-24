@@ -198,7 +198,7 @@
     <c:if test="${result eq '1' }">
 		<script>
 			alert("성공적으로 탈퇴되었습니다.");
-		    location.href = "/clubHouse?cl_id=${cs_board_seq };
+		    location.href = "/clubHouse?cl_id=${cs_board_seq }";
 		</script>
 	</c:if>
   

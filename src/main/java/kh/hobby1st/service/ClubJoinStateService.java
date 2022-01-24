@@ -88,16 +88,15 @@ public class ClubJoinStateService {
 		int deleteClubmember = csDao.deleteClubmember(mem_id, cb_seq);
 		int deleteJoinState = csDao.deleteJoinState(mem_id, cb_seq);
 		
-		System.out.println("1" + deleteClubmember);
-		System.out.println("2" + deleteJoinState);
-		
 		if(deleteClubmember == 1 && deleteJoinState == 1) {
 			result = 1;
 		}
-		
 		return result;
 	}
 	
-	
+	// 동호회 해체하기
+	public int breakClub(int board_seq) {
+		int result = 0;
+	}
 
 }

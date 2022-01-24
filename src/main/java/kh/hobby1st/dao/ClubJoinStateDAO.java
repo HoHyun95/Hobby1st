@@ -118,5 +118,28 @@ public class ClubJoinStateDAO {
 
 		return mybatis.delete("JoinState.deleteClubmember", map);
 	}
+	
+	//	동호회 해체시 club_list 에서 제외
+	public int breakClubList(int club_seq) {
+		return mybatis.delete("JoinState.breakClubList", club_seq);
+	}
+	
+  	
+	// 	동호회 해체시 각 동호회원들 club_member 에서 제외
+	public int breakClubMember(int club_seq) {
+		return mybatis.delete("JoinState.breakClubMember", club_seq);
+	}
+  	
+	//  동회회원들 해당 동호회 해체 상태로 변경
+	public int breakClubState(int club_seq) {
+		return mybatis.update("JoinState.breakClubState", club_seq);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

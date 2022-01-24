@@ -135,29 +135,6 @@ public class NoticeController {
 				+ "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
 	
-	// 게시판 검색 기능
-	@RequestMapping("/searchNotice")
-	public String searchNotice(int cpage, String keyword, String searchWord, Model model) throws Exception {
-		int check_num = 2;
-		System.out.println(keyword + searchWord);
-		List<NoticeDTO> noticeList = notService.selectNoticeSearchByPaging(cpage, 5, keyword, searchWord);
-		List<NoticeDTO> list = dao.selectBoardSearchByPaging(1, 10, 5, keyword, searchWord);
-
-		String navi = notService.getSearchPageNavi(cpage, 5, keyword, searchWord);
-
-		int totalBoardCount = notService.getRecordSearchCount(5, keyword, searchWord);
-
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("totalBoardCount", totalBoardCount);
-		model.addAttribute("check_num", check_num);
-		model.addAttribute("cpage", cpage);
-		model.addAttribute("navi", navi);
-		model.addAttribute("clubBoardList",	noticeList);
-
-		return "clubBoard/boardList";
-	}
-
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

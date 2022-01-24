@@ -76,5 +76,15 @@ public class ClubJoinStateDAO {
 
 		return mybatis.selectOne("JoinState.checkClubJoin", map);
 	}
+	
+	// 나의 동호회 활동 정보 날짜순 (동호회정보)
+  	
+  	// 나의 동호회 활동 정보 날짜순 (상태 정보)
+  	
+	// 나의 동호회 활동 정보 상태순 (동호회정보)
+  	
+	// 나의 동호회 활동 정보 상태순 (상태 정보)
+	
+	
 
 }

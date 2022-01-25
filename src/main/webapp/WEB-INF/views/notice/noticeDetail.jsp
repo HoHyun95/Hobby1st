@@ -58,9 +58,9 @@
 					<!-- 임시 주석-->
 					
 					
-<!-- 					<img id="profile" -->
-<!-- 									style="border-radius: 70%; height: 60px; width: 55px;" -->
-<%-- 									src="${writerProfile}" alt=""> --%>
+					<img id="profile"
+									style="border-radius: 70%; height: 60px; width: 55px;"
+									src="${writerProfile}" alt="">
 
 									<!-- 임시 주석-->
 				</div>

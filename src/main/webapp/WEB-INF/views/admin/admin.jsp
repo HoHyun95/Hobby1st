@@ -486,18 +486,32 @@ $(document).on("click","#dash", function() {
       <div class="clubAdmin">
       	  <div class="clubAdmin1">
 
+		<c:forEach var="allClub" items="${allClub}">
+			<div>${allClub.CL_NAME} </div>
+			</c:forEach>
+
           </div>
       </div> <!-- clubAdmin -->
       
       <div class="boardAdmin">
       	  <div class="boardAdmin1">
-
+      	  
+		<c:forEach var="allBoard" items="${allBoard}">
+			<div>${allBoard.cb_title } </div>
+			</c:forEach>
+			
           </div>
       </div>
       
       <div class="memberAdmin">
       	  <div class="memberAdmin1">
 
+
+			<c:forEach var="allMember" items="${allMember}">
+			<div>${allMember.mem_id }</div>
+			</c:forEach>
+			
+			
           </div>
       </div>
       
@@ -516,6 +530,11 @@ $(document).on("click","#dash", function() {
       <div class="notice">
       	  <div class="notice1">
 
+
+		<c:forEach var="allNotice" items="${allNotice}">
+			<div>${allNotice.notice_title }</div>
+			</c:forEach>
+			
           </div>
       </div>
       

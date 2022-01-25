@@ -152,5 +152,10 @@ public class ClubBoardDAO {
 		return mybatis.selectOne("ClubBoard.writerProfile", cb_seq);
 	}
 	
+	// 게시판 게시물 전체 출력 ( 페이징 적용 X)
+	public List<ClubBoardDTO> selectAll(){
+		return mybatis.selectList("ClubBoard.selectAll");
+	}
+	
 
 }

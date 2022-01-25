@@ -67,4 +67,12 @@ public class CalendarController {
 		model.addAttribute("club_cl_name", club_cl_name);
 		return "calendar";
 	}
+	
+	@RequestMapping("input_calendar")
+	public String inputDay(String date, String year, String month, String value, String schedule, String schedule_detail) {
+		System.out.println(year+":"+ month +":"+ date +":"+ value +":"+ schedule +":"+ schedule_detail);
+		return "redirect: /";
+	}
+
+	
 }

@@ -39,6 +39,11 @@ public class NoticeDAO {
 	public NoticeDTO noticeDetail(int not_seq) {
 		return mybatis.selectOne("Notice.noticeDetail", not_seq);
 	}
+	
+	// 공지사항 전체 출력 (페이징 적용 X)
+	public List<NoticeDTO> selectAll(){
+		return mybatis.selectList("Notice.selectAll");
+	}
 
 	// 작성자 프로필 가져오기
 	public String writerProfile(int notice_seq) {

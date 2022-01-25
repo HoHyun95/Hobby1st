@@ -78,8 +78,14 @@ public class ClubController {
 		return "clubList/clubList";
 	}
 	
-	
-	
+	// 동호회 가입 요청 취소하기
+	@RequestMapping("joinCencel")
+	public String joinCencel(int cs_board_seq, String cs_join_id) throws Exception {
+
+		int cencelResult = csService.joinCencel(cs_join_id, cs_board_seq);
+		
+		return "redirect:/clubHouse?cl_id=" + cs_board_seq;
+	}
 	
 
 }

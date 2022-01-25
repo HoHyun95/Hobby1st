@@ -1,6 +1,7 @@
 package kh.hobby1st.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,5 +54,9 @@ public class MemberDAO {
 		return mybatis.selectOne("member.selectOne", mem_ID);
 	}
 	
+	// 회원가입 된 멤버들 전체 출력
+	public List<MemberDTO> selectAll(){
+		return mybatis.selectList("member.selectAll");
+	}
 
 }

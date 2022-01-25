@@ -23,7 +23,7 @@
 
 
 <body>
-<body>
+
 	<!-- 글쓰기 버튼 -->
 	<div class="btn">
 		<div style="text-align: right; width: 85%;">
@@ -151,6 +151,6 @@
 
 </body>
 
-</body>
+
 
 </html>

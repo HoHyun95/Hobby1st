@@ -291,5 +291,10 @@ public class ClubBoardService {
 		}
 		return pageNavi;
 	}
+	
+	// 게시판 게시글 전체 출력 (페이징 적용X)
+	public List<ClubBoardDTO> selectAll(){
+		return cbdao.selectAll();
+	}
 
 }

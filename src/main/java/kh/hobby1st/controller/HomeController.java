@@ -18,12 +18,15 @@ import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
+import kh.hobby1st.dto.NoticeDTO;
+import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubCategoryService;
 import kh.hobby1st.service.ClubJoinStateService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
 import kh.hobby1st.service.MemberService;
 import kh.hobby1st.service.MyPageService;
+import kh.hobby1st.service.NoticeService;
 
 
 @Controller
@@ -46,6 +49,12 @@ public class HomeController {
 	
 	@Autowired
 	private ClubJoinStateService csService;
+	
+	@Autowired
+	private ClubBoardService cbService;
+	
+	@Autowired
+	private NoticeService ntService;
 	
 	@Autowired
 	private HttpSession session;
@@ -79,7 +88,19 @@ public class HomeController {
 	
 	// admin
 	@RequestMapping("admin")
-	public String admin() {
+	public String admin(Model model) {
+		
+		
+		List<ClubListDTO> clubList = clService.selectAll();
+		List<ClubBoardDTO> boardList = cbService.selectAll();
+		List<MemberDTO> memberList = mService.selectAll();
+		List<NoticeDTO> noticeList = ntService.selectAll();
+		
+		model.addAttribute("allClub", clubList);
+		model.addAttribute("allBoard", boardList);
+		model.addAttribute("allMember", memberList);
+		model.addAttribute("allNotice", noticeList);
+		
 		return "admin/admin";
 	}
 	

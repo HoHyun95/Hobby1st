@@ -36,4 +36,8 @@
 	    select count(*) from member where mem_email = #{email}
 	</select>
 	
+	<!--  회원가입 된 모든 멤버 출력 -->
+	<select id="selectAll" resultType="kh.hobby1st.dto.MemberDTO">
+		select * from member
+	</select>
 </mapper>

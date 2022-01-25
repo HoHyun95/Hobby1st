@@ -23,7 +23,7 @@
 
 
 <body>
-<body>
+
 	<!-- 글쓰기 버튼 -->
 	<div class="btn">
 		<div style="text-align: right; width: 85%;">
@@ -101,46 +101,41 @@
 
 
 	<!-- 검색 기능 -->
-<!-- 	<form method="post" -->
-<%-- 		action="/notice/searchNotice?cpage=${cpage }&check_num=2"> --%>
-<!-- 		<div> -->
-<!-- 			<div class="" -->
-<!-- 				style="text-align: center; height: 70px; margin-bottom: 100px;"> -->
+	<form method="post"
+		action="/notice/searchNotice?cpage=${cpage }&check_num=2">
+		<div>
+			<div class=""
+				style="text-align: center; height: 70px; margin-bottom: 100px;">
 
-<!-- 				검색 조건 -->
-<!-- 				<select name="keyword" -->
-<!-- 					class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto"> -->
-<!-- 					<option>제목</option> -->
-<!-- 					<option>작성자</option> -->
-<%-- 				</select> <input type="hidden" name="cpage" value="${cpage }"> --%>
+				 <select name="keyword"
+					class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto">
+					<option>제목</option>
+				</select> <input type="hidden" name="cpage" value="${cpage }">
+				<input id="searchWord" name="searchWord" type="text"
+					placeholder="Search"
+					class="
+           px-2
+                py-1
+                placeholder-gray-400
+                text-gray-600 
+                relative
+                bg-white bg-white
+                rounded
+                text-sm
+                border border-gray-400
+                outline-none
+                focus:outline-none focus:ring
+                w-5/12
+                h-10
+              " />
 
-<!-- 				검색 하기 -->
-<!-- 				<input id="searchWord" name="searchWord" type="text" -->
-<!-- 					placeholder="Search" -->
-<!-- 					class=" -->
-<!--                 px-2 -->
-<!--                 py-1 -->
-<!--                 placeholder-gray-400 -->
-<!--                 text-gray-600  -->
-<!--                 relative -->
-<!--                 bg-white bg-white -->
-<!--                 rounded -->
-<!--                 text-sm -->
-<!--                 border border-gray-400 -->
-<!--                 outline-none -->
-<!--                 focus:outline-none focus:ring -->
-<!--                 w-5/12 -->
-<!--                 h-10 -->
-<!--               " /> -->
+				<button id="search"
+					class="border border-gray-500 text-black-500 bg-Gray-400 bg-gray-200 rounded px-4 py-1.5"
+					style="margin-top: 15px;">검색</button>
+			</div>
+		</div>
+	</form>
 
-<!-- 				검색 버튼 -->
-<!-- 				<button id="search" -->
-<!-- 					class="border border-gray-500 text-black-500 bg-Gray-400 bg-gray-200 rounded px-4 py-1.5" -->
-<!-- 					style="margin-top: 15px;">검색</button> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</form> -->
-<!-- 	</div> -->
 
 	<!----------------------------------- 메인 스크립트 ------------------------------------->
 
@@ -156,6 +151,6 @@
 
 </body>
 
-</body>
+
 
 </html>

@@ -61,6 +61,7 @@
     	const isHeartButton = classListArray.find((classItem) => classItem === 'fa-heart');
     	if (event.target && isHeartButton) {
     	  event.target.classList.toggle("fas");
+    	  event.target.classList.toggle("far");
     	  console.log(event.target.id);
     	  console.log(event);
     	  $.ajax({
@@ -110,8 +111,8 @@
 
       let lcount = likedList;
       window.addEventListener("scroll", throttle(() => {
-    	if(start < totalList) {
-		if ((window.innerHeight + window.scrollY + 150) >= document.body.offsetHeight) {
+    	if(start <= totalList) {
+		if ((window.innerHeight + window.scrollY + 600) >= document.body.offsetHeight) {
 		  $.ajax({
               url: "/splitList?start=" + (start) + "&end=" + (end), 
               type: "get",
@@ -362,6 +363,7 @@
     <div class="club_list_title">
       <div class="club_list_title_contents"> 
         <div class="club_list_title_text"> 총 ${fn:length(listCount)}개의 동호회가 있습니다.</div>
+      </div>
     </div>
     <!-- club_list_title end-->
 
@@ -394,25 +396,54 @@
               </c:forEach>	
     		</c:when>
     		<c:otherwise>
-	          <c:forEach var="cl" items="${clubList }">
-	          <div class="club_list_box_wrap">
-	            <div class="club_list_box">
-	              <div class="badge" id="theme1">${cl.cl_category_id }</div>
-	              <div class="likeBtn"><i class="fas fa-heart" id=${cl.cl_id }></i></div>
-	              <a href="/clubHouse?cl_id=${cl.cl_id }"><h3>${cl.cl_name}</h3></a>
-	              <h5>${cl.cl_boss_name }</h5>
-	              <h5>${cl.cl_local }</h5>
-	              <c:choose>
-				    <c:when test="${fn:length(cl.cl_desc) gt 15}">
-				      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
-				    </c:when>
-				    <c:otherwise>
-				      <h5><c:out value="${cl.cl_desc}" /></h5>
-				    </c:otherwise>
-				  </c:choose>
-	            </div>
-	          </div>
-	          </c:forEach>
+    		  <c:choose>
+    		    <c:when test="${fn:length(clubList) eq 0}">
+    		      <c:forEach var="cl" items="${listCount }" begin="0" end="9">
+		          <div class="club_list_box_wrap">
+		            <div class="club_list_box">
+		              <div class="badge" id="theme1">${cl.CL_CATEGORY_ID }</div>
+		              <div class="likeBtn"><i class="far fa-heart" id=${cl.CL_ID }></i></div>
+		              <a href="/clubHouse?cl_id=${cl.CL_ID }"><h3>${cl.CL_NAME}</h3></a>
+		              <h5>${cl.CL_BOSS_NAME }</h5>
+		              <h5>${cl.CL_LOCAL }</h5>
+		              <c:choose>
+					    <c:when test="${fn:length(cl.CL_DESC) gt 15}">
+					      <c:out value="${fn:substring(cl.CL_DESC, 0, 15)}" />
+					    </c:when>
+					    <c:otherwise>
+					      <h5><c:out value="${cl.CL_DESC}" /></h5>
+					    </c:otherwise>
+					  </c:choose>
+		            </div>
+		          </div>
+		          </c:forEach>
+    		    </c:when>
+    		    <c:otherwise>
+    		      <c:forEach var="cl" items="${clubList }">
+		          <div class="club_list_box_wrap">
+		            <div class="club_list_box">
+		              <div class="badge" id="theme1">${cl.cl_category_id }</div>
+		              <div class="likeBtn"><i class="fas fa-heart" id=${cl.cl_id }></i></div>
+		              <a href="/clubHouse?cl_id=${cl.cl_id }"><h3>${cl.cl_name}</h3></a>
+		              <h5>${cl.cl_boss_name }</h5>
+		              <h5>${cl.cl_local }</h5>
+		              <c:choose>
+					    <c:when test="${fn:length(cl.cl_desc) gt 15}">
+					      <c:out value="${fn:substring(cl.cl_desc, 0, 15)}" />
+					    </c:when>
+					    <c:otherwise>
+					      <h5><c:out value="${cl.cl_desc}" /></h5>
+					    </c:otherwise>
+					  </c:choose>
+		            </div>
+		          </div>
+		          </c:forEach>
+    		    </c:otherwise>
+    		  </c:choose>
+    		
+    		
+    		
+	          
     		</c:otherwise>
 		  </c:choose>
         </div>
@@ -449,7 +480,7 @@
       </div>
     </div>
   </div>
-  </div>
+  
 </body>
 
 </html>

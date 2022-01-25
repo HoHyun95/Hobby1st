@@ -61,8 +61,9 @@ td {
 	font-weight: bold;
 }
 button{
-    width: 50pt;
+    width: 20pt;
 	height: 20pt;
+	color: pink;
 }
 .sun:hover{
     cursor: pointer;
@@ -74,7 +75,7 @@ input[type="text"]{
 </style>
 </head>
 <body>
-	<form id="calendarFrm" action="/calendar/input_calendar" method="get">
+<!--<form id="calendarFrm" action="/calendar/input_calendar" method="get"> -->
 		<div class="calendar">
 			<!-- 클럽이름 -->
 			<div class="club_name">
@@ -100,9 +101,7 @@ input[type="text"]{
 					href="/calendar/do?year=${today_info.search_year+1}&month=${today_info.search_month-1}&club_cl_name=${club_cl_name}">
 					<!-- 다음해 --> &gt;&gt;
 				</a>
-				<input type=text name='year' value=${today_info.search_year} hidden>
-				<input type=text name='month' value=${today_info.search_month} hidden>
-				<input type=text name='value' value=${club_cl_name } hidden>
+	
 			</div>
 			<table class="calendar_body" border=1>
 				<tr class="calendar_wrap_top">
@@ -148,27 +147,38 @@ input[type="text"]{
 					</c:forEach>
 			</table>
             <div class="low_box">
-               <button type="submit" id="test_btn">저장</button>
+               <!--  <button type="submit">저장</button> -->
             </div>
 		</div>
-	</form>
+<!-- </form> -->
 	<script>
-	/*인풋에 테두리 없애고 보이게 하고싶습니다 기훈님! (디자인 설계시 요청..) */
+	/*ddkdkdkd으아아아아아아앙아 짜증나 hard */
 	function number_click(a) {
 		const message_area=document.getElementById('num_message_' + a);
 
-        message_area.innerHTML=`
-        <input type="text" name=date value=`+a+` hidden>
-        타이틀<br><input type=text name='schedule'><br>
-        내용<br><input type=text name='schedule_detail'>
+        message_area.innerHTML=`        
+        
+        <form action="/calendar/input_calendar" method="get">
+        <div id="message_box">
+        <input type=text name='year' value=${today_info.search_year} hidden>
+		<input type=text name='month' value=${today_info.search_month} hidden>
+		<input type=text name='value' value='${club_cl_name }' hidden>
+        <input type="text" name='date' value=`+a+` hidden>
+        타이틀
+        <br>
+        <input type=text name='schedule' placeholder="null-NO!"><br>
+        내용
+        <br>
+        <input type=text name='schedule_detail'>
+        <button type="submit" id='test_btn'>V</button> 
+        <div>
+        </form>
         `
 	}
-	
 	const test_btn = document.getElementById('test_btn');
 	test_btn.onclick = () => {
-        var test1 = document.getElementById('test1').value
-        var test2 = document.getElementById('test2').value		
-		location.href = "/calendar/test?test1="+(test1)+"&test2="+(test2);
+		const test_btn = document.getElementById('message_box');
+		location.href = "location.reload();";
 	}
 
 	</script>

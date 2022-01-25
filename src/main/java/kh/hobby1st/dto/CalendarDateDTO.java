@@ -8,6 +8,33 @@ import java.util.Map;
 
 public class CalendarDateDTO {
 
+//	public String[] getDate_list() {
+//		return date_list;
+//	}
+//
+//	public void setDate_list(String[] date_list) {
+//		this.date_list = date_list;
+//	}
+//
+//	public String[] getSchedules_list() {
+//		return schedules_list;
+//	}
+//
+//	public void setSchedules_list(String[] schedules_list) {
+//		this.schedules_list = schedules_list;
+//	}
+//
+//	public String[] getSchedules_details_list() {
+//		return schedules_details_list;
+//	}
+//
+//	public void setSchedules_details_list(String[] schedules_details_list) {
+//		this.schedules_details_list = schedules_details_list;
+//	}
+//	private String[] date_list;
+//	private String[] schedules_list;
+//	private String[] schedules_details_list;
+	
 	private String year = "";
 	private String month = "";
 	private String date = "";
@@ -95,7 +122,7 @@ public class CalendarDateDTO {
 		Map<String, Integer> before_after_calendar = before_after_calendar(search_year,search_month);
 		
 		//날짜 관련
-		System.out.println("search_month : " + search_month);
+        //System.out.println("search_month : " + search_month);
 		// 캘린더 함수 end
 		today_Data.put("start", start);
 		today_Data.put("startDay", startDay);

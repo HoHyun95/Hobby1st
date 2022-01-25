@@ -24,6 +24,11 @@ public class NoticeService {
 	public int insert(NoticeDTO dto) {
 		return notDao.insert(dto);
 	}
+	
+	// 공지사항 전체 출력 (페이징 적용 X)
+	public List<NoticeDTO> selectAll(){
+		return notDao.selectAll();
+	}
 
 	// 공지사항 상세보기
 	public NoticeDTO noticeDetail(int not_seq) {

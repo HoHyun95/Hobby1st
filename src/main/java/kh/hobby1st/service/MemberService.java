@@ -58,5 +58,9 @@ public class MemberService {
 	public MemberDTO selectOne(String mem_ID){
 		return mem_dao.selectOne(mem_ID);
 	}
+	
+	public List<MemberDTO> selectAll(){
+		return mem_dao.selectAll();
+	}
 
 }

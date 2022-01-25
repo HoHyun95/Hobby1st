@@ -56,7 +56,10 @@ public class HomeController {
 		int memberCount = mService.totalMember();
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
-		List<ClubListDTO> map = clService.selectAll();
+//		List<ClubListDTO> map = clService.selectAll();
+		System.out.println("여기");
+		List<ClubListDTO> map = clService.ClubListByCategory("개발");
+		System.out.println(map.get(0).getCl_id());
 		List<ClubCategoryDTO> categoryList = ccService.selectCategoryList();
 		
 		

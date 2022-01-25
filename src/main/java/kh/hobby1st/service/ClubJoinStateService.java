@@ -117,5 +117,10 @@ public class ClubJoinStateService {
 		
 		return result;
 	}
+	
+	// 가입요청 취소하기
+	public int joinCencel(String mem_id, int cb_seq) {
+		return csDao.deleteJoinState(mem_id, cb_seq);
+	}
 
 }

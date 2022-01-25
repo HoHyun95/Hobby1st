@@ -223,6 +223,15 @@
     		}
     	})
     	
+    	$("#requestClub").on("click", function() {
+    		let requestClub = confirm("가입요청을 취소하시겠습니까?");
+    		if(requestClub){
+    			location.href = "/club/joinCencel?cs_board_seq=${club.cl_id}&cs_join_id=${mem_id}";
+    		}else{
+    			return false;
+    		}
+    	})
+    	
     </script>
     
     

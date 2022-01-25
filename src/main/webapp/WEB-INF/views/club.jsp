@@ -22,8 +22,10 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/club.css">
+  <link rel="stylesheet" href="/css/createClub.css">
   <script>
     window.onload = () => {
+      let id = '<%=(String)session.getAttribute("mem_id")%>';
       let loginform_btn = document.getElementById("loginform_btn");
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
@@ -32,6 +34,8 @@
       let h3 = document.querySelectorAll("h3");
 	  let hidden = document.querySelectorAll("input[type='hidden']");
 	  let club_list_box = document.querySelectorAll(".club_list_box");
+      let createMyClub = document.getElementById("createMyClub");
+	  let createClub_close_btn = document.getElementById("createClub_close_btn");
       
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
@@ -49,6 +53,28 @@
         modal_bg.style.display = "none";
         loginForm.style.zIndex = -1;
         loginForm.style.display = "none";
+      }
+      
+      createMyClub.onclick = () => {
+    	if(id == 'null') {
+    		alert("로그인 후 이용 가능합니다.");
+    		return false;
+    	}
+    	let modal_bg = document.querySelector(".modal_bg");  
+    	let createClub_wrap = document.querySelector(".createClub_wrap");
+    	modal_bg.style.zIndex = 10;
+        modal_bg.style.display = "flex";
+        createClub_wrap.style.zIndex = 12;
+        createClub_wrap.style.display = "flex";
+      }
+      
+ 	  createClub_close_btn.onclick = () => {
+ 		let modal_bg = document.querySelector(".modal_bg");  
+     	let createClub_wrap = document.querySelector(".createClub_wrap");
+     	modal_bg.style.zIndex = -1;
+        modal_bg.style.display = "none";
+        createClub_wrap.style.zIndex = -1;
+        createClub_wrap.style.display = "none";	  
       }
 
       sign_up.onclick = () => {
@@ -75,7 +101,6 @@
       });
       
       // 무한 스크롤
-      let id = '<%=(String)session.getAttribute("mem_id")%>';
       let totalList;
       let likedList;
       let start;
@@ -176,7 +201,60 @@
       }
     	
 	}}, 1000));
-  
+    
+    /* 동호회 생성 */
+    let createClubBtn = document.getElementById("createClubBtn");
+    let slideLeft = document.getElementById("slideLeft");
+    let slideRight = document.getElementById("slideRight");
+    let createClub_container = document.querySelector(".createClub_container");
+    let MOVE_WIDTH = 528;
+    let position = 0;
+
+    let current_point = 0;
+
+    let end_point = MOVE_WIDTH * 3;
+
+    if (current_point == 0) {
+      slideLeft.style.display = "none";
+    }
+
+    if (current_point == end_point) {
+      slideRight.style.display = "none";
+    }
+
+    slideRight.onclick = () => {
+      current_point += MOVE_WIDTH;
+      if (current_point == end_point) {
+        slideRight.style.display = "none";
+        createClubBtn.style.display ="inline";
+        slideLeft.style.display = "inline";
+      } else if(current_point > 0) {
+        slideLeft.style.display = "inline";
+        createClubBtn.style.display ="none";
+      }
+      position -= MOVE_WIDTH;
+      createClub_container.style.transform = "translateX(" + (position) + "px)";
+      console.log(position);
+
+    }
+
+    slideLeft.onclick = () => {
+      current_point -= MOVE_WIDTH;
+      if (current_point == 0) {
+        slideLeft.style.display = "none";
+        slideRight.style.display = "inline";
+        createClubBtn.style.display ="none";
+      } else if(current_point < end_point) {
+        slideRight.style.display = "inline";
+        createClubBtn.style.display ="none";
+      }
+      position += MOVE_WIDTH;
+      createClub_container.style.transform = "translateX(" + (position) + "px)";
+      console.log(position);
+    }    
+    
+    
+      
     /* 네이버 로그인 */ 
       const naverLogin = new naver.LoginWithNaverId(
     			{
@@ -263,6 +341,9 @@
 </head>
 
 <body>
+  <div class="modal_bg">
+
+  </div>
   <!-- sign_in -->
   <jsp:include page="login.jsp"></jsp:include>
   <div class="wrap">
@@ -354,7 +435,7 @@
     <div class="create_hobby1st_club">
       <div class="create_hobby1st_club_inner">
         <div class="create_hobby1st_club_inner_text">찾으시는 동호회가 없으신가요? </div>
-        <input type="button" value="나만의 동호회를 만드세요!">
+        <input type="button" value="나만의 동호회를 만드세요!" id="createMyClub">
       </div>
     </div>
     <!-- create club end -->
@@ -440,10 +521,6 @@
 		          </c:forEach>
     		    </c:otherwise>
     		  </c:choose>
-    		
-    		
-    		
-	          
     		</c:otherwise>
 		  </c:choose>
         </div>
@@ -480,7 +557,165 @@
       </div>
     </div>
   </div>
-  
+  <div class="createClub_wrap">
+  	<span id="createClub_close_btn"><i class="far fa-times"></i></span>
+    <span id="slideLeft"><i class="far fa-arrow-alt-circle-left"></i></span>
+    <span id="slideRight"><i class="far fa-arrow-alt-circle-right"></i></span>
+    <span id="createClub"><button id="createClubBtn">동호회 생성</button></span>
+    <div class="createClub_container">
+      <div class="steps_wrap">
+        <div class="steps_item_wrap">
+          <div class="steps_item_line">
+            <hr class="active_bg">
+          </div>
+          <div class="steps_item_title"><span class="active_text">STEP 1</span></div>
+          <div class="steps_item_detail">동호회 기본 정보 등록</div>
+        </div>
+        <div class="steps_item_wrap">
+          <div class="steps_item_line">
+            <hr class="active_bg">
+          </div>
+          <div class="steps_item_title"><span class="active_text">STEP 2</span></div>
+          <div class="steps_item_detail">동호회 사진 등록</div>
+        </div>
+        <div class="steps_item_wrap">
+          <div class="steps_item_line">
+            <hr class="active_bg">
+          </div>
+          <div class="steps_item_title"><span class="active_text">STEP 3</span></div>
+          <div class="steps_item_detail">동호회 지역 선택</div>
+        </div>
+        <div class="steps_item_wrap">
+          <div class="steps_item_line">
+            <hr class="active_bg">
+          </div>
+          <div class="steps_item_title"><span class="active_text">STEP 4</span></div>
+          <div class="steps_item_detail">동호회 카테고리 선택</div>
+        </div>
+      </div>
+      <div class="contents_wrap">
+        <div class="contents_item_wrap">
+          <div class="contents_item">
+            <div class="desc">
+              <h3>동호회의 기본 정보를 입력해 주세요!</h3>
+              <h5>특별한 동호회명으로 회원들의 시선을 사로잡아 보세요!</h5>
+            </div>
+            <div class="title">
+              <i class="fas fa-users"> 동호회명</i>
+            </div>
+            <div class="input">
+              <input type="text" id="cl_name" maxlength="30" name="cl_name" placeholder="동호회명을 입력해주세요">
+            </div>
+            <div class="title">
+              <i class="fas fa-users"> 동호회장 ID</i>
+            </div>
+            <div class="input">
+              <input type="text" id="cl_boss_id" maxlength="30" name="cl_boss_id" value="${sessionScope.mem_id}" readonly>
+            </div>
+            <div class="title">
+              <i class="fas fa-users-cog"> 동호회 정원</i>
+            </div>
+            <div class="input">
+              <input type="text" id="cl_maxMem" maxlength="3" name="cl_maxMem" placeholder="최대정원을 정해주세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+            </div>
+            <div class="title">
+              <i class="far fa-file-alt"> 동호회 소개</i>
+            </div>
+            <textarea id="cl_desc" name="cl_desc" cols="68" rows="10" style="resize: none;"></textarea>
+          </div>
+          <div class="contents_item">
+            <div class="desc">
+              <h3>동호회의 사진을 등록해 주세요!</h3>
+              <h5>사진을 등록하지 않으시면 기본 이미지가 제공됩니다!</h5>
+            </div>
+            <div class="title">
+              동호회 사진
+            </div>
+            <div class="img_box">
+              
+            </div>
+            <div class="input">
+              <input name="file" type="file" id="input-image">
+            </div>
+          </div>
+          <div class="contents_item">
+            <div class="desc">
+              <h3>동호회 주요 활동 지역을 입력해 주세요!</h3>
+              <h5>지역 네트워크를 통해 활발하게 동호회 활동을 즐겨보세요!</h5>
+            </div>
+            <div class="title">
+              <i class="fas fa-city"> 활동 지역</i>
+            </div>
+            <div class="input">
+              <select name="cl_local" id="cl_local">
+                <option value="서울">서울</option>
+                <option value="경기">경기</option>
+                <option value="인천">인천</option>
+                <option value="강원">강원</option>
+                <option value="충북">충북</option>
+                <option value="충남">충남</option>
+                <option value="대전">대전</option>
+                <option value="세종">세종</option>
+                <option value="전북">전북</option>
+                <option value="전남">전남</option>
+                <option value="광주">광주</option>
+                <option value="경북">경북</option>
+                <option value="대구">대구</option>
+                <option value="경남">경남</option>
+                <option value="부산">부산</option>
+                <option value="울산">울산</option>
+                <option value="제주">제주</option>
+              </select>
+            </div>
+          </div>
+          <div class="contents_item">
+            <div class="desc">
+              <h3>동호회 카테고리를 입력해 주세요!</h3>
+              <h5>Hobby1st에서 관심사가 같은 사람들과 동호회 활동을 즐겨보세요!</h5>
+            </div>
+            <div class="title">
+              <i class="fas fa-archive"> 대분류</i>
+            </div>
+            <div class="input">
+              <select name="cl_category" id="cl_category">
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+              </select>
+            </div>
+            <div class="title">
+              <i class="fas fa-asterisk"> 소분류</i>
+            </div>
+            <div class="input">
+              <select name="cl_category" id="cl_category">
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+                <option value="ITEM1">ITEM 1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

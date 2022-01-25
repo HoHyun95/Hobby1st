@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.hobby1st.dao.ClubJoinStateDAO;
+import kh.hobby1st.dao.ClubListDAO;
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
@@ -16,6 +17,9 @@ public class ClubJoinStateService {
 
 	@Autowired
 	private ClubJoinStateDAO csDao;
+	
+	@Autowired
+	private ClubListDAO clDao;
 
 	// 동호회 가입 요청
 	public int requestJoin(ClubJoinStateDTO dto) {
@@ -34,6 +38,10 @@ public class ClubJoinStateService {
 
 	// 동호회 가입 승인
 	public int joinApprove(int cs_board_seq, String cs_join_id) {
+		
+		// 동호회 회원 수 증가
+		clDao.plusMemCount(cs_board_seq);
+		
 
 		int insertClubMember = csDao.insertClubMember(cs_board_seq, cs_join_id);
 
@@ -84,6 +92,9 @@ public class ClubJoinStateService {
 	public int leaveClub(String mem_id, int cb_seq) {
 		
 		int result = 0;
+		
+		// 회원 수 감소
+		clDao.minusMemCount(cb_seq);
 		
 		int deleteClubmember = csDao.deleteClubmember(mem_id, cb_seq);
 		int deleteJoinState = csDao.deleteJoinState(mem_id, cb_seq);

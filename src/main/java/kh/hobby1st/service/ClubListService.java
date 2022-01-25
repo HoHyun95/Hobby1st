@@ -117,7 +117,10 @@ public class ClubListService {
 
 		return cldao.notInterestClubList(rec_id, start, end);
 	}
-	
-	
+
+	// 대분류 클릭시 해당 동호회 리스트 불러오기 (인원수 기준 정렬)
+	public List<ClubListDTO> ClubListByCategory(String cl_category_id) {
+		return cldao.ClubListByCategory(cl_category_id);
+	}
 
 }

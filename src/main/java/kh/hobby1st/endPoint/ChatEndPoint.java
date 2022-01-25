@@ -3,6 +3,7 @@ package kh.hobby1st.endPoint;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,19 +16,18 @@ import javax.websocket.server.ServerEndpoint;
 
 import kh.hobby1st.configurator.WSConfig;
 
-@ServerEndpoint(value="/chat/", configurator = WSConfig.class)
+@ServerEndpoint(value="/chat/{cl_id}", configurator = WSConfig.class)
 public class ChatEndPoint {
 
 	private HttpSession session;
 	private static List<Session> clients = Collections.synchronizedList(new ArrayList<>());
 
+	static HashMap<String, Session> messageUserList = new HashMap<String, Session>();
+
 	@OnOpen
 	public void onConnect(Session session, EndpointConfig config) {
 		clients.add(session);
 		this.session = (HttpSession)config.getUserProperties().get("user_name");
-
-		System.out.println("연결 확인");
-
 	}
 
 	@OnMessage
@@ -39,7 +39,6 @@ public class ChatEndPoint {
 		synchronized(clients) {
 			for(Session client : clients) {
 				try {
-
 					client.getBasicRemote().sendText(msg);
 
 				}catch (IOException e) {

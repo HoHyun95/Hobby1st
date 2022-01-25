@@ -83,6 +83,14 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 동호회 해체 알림 -->
+	<c:if test="${break_result eq '1' }">
+		<script>
+			alert("해당 동호회가 해체되었습니다...");
+		    location.href = "/club";
+		</script>
+	</c:if>
 
 </body>
 </html>

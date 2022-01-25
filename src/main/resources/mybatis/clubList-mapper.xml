@@ -100,5 +100,14 @@
 		where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 동호회 가입 시 인원 수 증가 -->
+	<update id="plusMemCount">
+		update club_list set cl_memcount = cl_memcount + 1 where cl_id = #{value}
+	</update>
+	
+	<!-- 동호회 가입 시 인원 수 감소 -->
+	<update id="minusMemCount">
+		update club_list set cl_memcount = cl_memcount - 1 where cl_id = #{value}
+	</update>
 
 </mapper>

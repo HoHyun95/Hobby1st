@@ -17,6 +17,11 @@ a {
 	text-decoration-line: none;
 	color: black;
 }
+td {
+    height: 100px;
+    width: 100px;
+    style: word-break:break-all;
+}
 
 .navigation {
 	font-size: 15pt;
@@ -62,10 +67,14 @@ button{
 .sun:hover{
     cursor: pointer;
 }
+input[type="text"]{
+    width: 80%;
+	height: 100%;
+}
 </style>
 </head>
 <body>
-	<form id="calendarFrm" action="/calendar/do" method="get">
+	<form id="calendarFrm" action="/calendar/input_calendar" method="get">
 		<div class="calendar">
 			<!-- 클럽이름 -->
 			<div class="club_name">
@@ -91,6 +100,9 @@ button{
 					href="/calendar/do?year=${today_info.search_year+1}&month=${today_info.search_month-1}&club_cl_name=${club_cl_name}">
 					<!-- 다음해 --> &gt;&gt;
 				</a>
+				<input type=text name='year' value=${today_info.search_year} hidden>
+				<input type=text name='month' value=${today_info.search_month} hidden>
+				<input type=text name='value' value=${club_cl_name } hidden>
 			</div>
 			<table class="calendar_body" border=1>
 				<tr class="calendar_wrap_top">
@@ -108,42 +120,57 @@ button{
 						<c:choose>
 							<c:when test="${dateList.value=='today'}">
 								<td class="today">
-									<div class="date">${dateList.date}</div>
-									<div></div>
+									<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						            <div id="num_message_${dateList.date}"></div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==6}">
 								<td class="sat_day">
-									<div class="sat">${dateList.date}</div>
-									<div></div>
+									<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						            <div id="num_message_${dateList.date}"></div>
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==0}">
 				</tr>
 				<tr>
 					<td class="sun_day">
-						<div class="sun" onclick="sun_click()">${dateList.date}</div>
-						<div></div>
+						<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						<div id="num_message_${dateList.date}"></div>
 					</td>
 					</c:when>
 					<c:otherwise>
 						<td class="normal_day">
-							<div class="date">${dateList.date}</div>
-							<div></div>
+							<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+					    	<div id="num_message_${dateList.date}"></div>
 						</td>
 					</c:otherwise>
 					</c:choose>
 					</c:forEach>
 			</table>
             <div class="low_box">
-               <button type="button">저장</button>
+               <button type="submit" id="test_btn">저장</button>
             </div>
 		</div>
 	</form>
 	<script>
-	function sun_click() {
-		alert("일요일을 눌렀군요~ 곳 스케줄적는 란이 생길겁니다")
+	/*인풋에 테두리 없애고 보이게 하고싶습니다 기훈님! (디자인 설계시 요청..) */
+	function number_click(a) {
+		const message_area=document.getElementById('num_message_' + a);
+
+        message_area.innerHTML=`
+        <input type="text" name=date value=`+a+` hidden>
+        타이틀<br><input type=text name='schedule'><br>
+        내용<br><input type=text name='schedule_detail'>
+        `
 	}
+	
+	const test_btn = document.getElementById('test_btn');
+	test_btn.onclick = () => {
+        var test1 = document.getElementById('test1').value
+        var test2 = document.getElementById('test2').value		
+		location.href = "/calendar/test?test1="+(test1)+"&test2="+(test2);
+	}
+
 	</script>
 </body>
 </html>

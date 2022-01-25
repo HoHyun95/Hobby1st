@@ -35,13 +35,13 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService notService;
-	
+
 	@Autowired
 	private NoticeDAO dao;
 
-	
 
-	
+
+
 	// 공지사항 리스트로 이동
 	@RequestMapping("/noticeList")
 	public String noticeList(int cpage, Model model)throws Exception {
@@ -89,7 +89,7 @@ public class NoticeController {
 		}
 		String rec_id = (String) session.getAttribute("mem_id");
 
-					String writerProfile = notService.writerProfile(notice_seq);
+		String writerProfile = notService.writerProfile(notice_seq);
 
 		NoticeDTO detail = notService.noticeDetail(notice_seq);
 		notService.increaseView(notice_seq);
@@ -109,10 +109,12 @@ public class NoticeController {
 
 	// 공지사항 삭제
 	@RequestMapping("/deleteNotice")
-	public String deleteBoard(int cpage, int notice_seq) {
+	public String deleteNotice(int cpage, int notice_seq) {
 
 		int result = notService.deleteNotice(notice_seq);
-
+		if(cpage< 0) {
+			return "1";
+		}
 		return "redirect:/notice/noticeList?cpage=" + cpage;
 	}
 
@@ -148,73 +150,73 @@ public class NoticeController {
 		return "redirect:/notice/noticeDetail?cpage=" + cpage + "&notice_seq=" + dto.getNotice_seq() + "&keyword=" + keyword
 				+ "&searchWord=" + searchWord + "&check_num=" + check_num;
 	}
-	
+
 	// 공지사항 검색 기능
-		@RequestMapping("/searchNotice")
-		public String searchNotice(int cpage, String keyword, String searchWord, Model model) throws Exception {
-			int check_num = 2;
-			System.out.println(keyword + searchWord);
-			List<NoticeDTO> noticeList = notService.selectNoticeSearchByPaging(cpage, keyword, searchWord);
-			
-			
-			List<NoticeDTO> list = dao.selectNoticeSearchByPaging(1, 10, keyword, searchWord);
-			
+	@RequestMapping("/searchNotice")
+	public String searchNotice(int cpage, String keyword, String searchWord, Model model) throws Exception {
+		int check_num = 2;
+		System.out.println(keyword + searchWord);
+		List<NoticeDTO> noticeList = notService.selectNoticeSearchByPaging(cpage, keyword, searchWord);
 
-			String navi = notService.getSearchPageNavi(cpage, keyword, searchWord);
 
-			int totalBoardCount = notService.getRecordSearchCount(keyword, searchWord);
+		List<NoticeDTO> list = dao.selectNoticeSearchByPaging(1, 10, keyword, searchWord);
 
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("searchWord", searchWord);
-			model.addAttribute("totalBoardCount", totalBoardCount);
-			model.addAttribute("check_num", check_num);
-			model.addAttribute("cpage", cpage);
-			model.addAttribute("navi", navi);
-			model.addAttribute("noticeList", noticeList);
 
-			return "notice/noticeList";
+		String navi = notService.getSearchPageNavi(cpage, keyword, searchWord);
+
+		int totalBoardCount = notService.getRecordSearchCount(keyword, searchWord);
+
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("totalBoardCount", totalBoardCount);
+		model.addAttribute("check_num", check_num);
+		model.addAttribute("cpage", cpage);
+		model.addAttribute("navi", navi);
+		model.addAttribute("noticeList", noticeList);
+
+		return "notice/noticeList";
+	}
+
+	// 썸머노트 이미지 업로드
+	@ResponseBody
+	@RequestMapping(value = "/imageUpload", produces = "application/json; charset=UTF-8")
+	public String imageUpload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
+		System.out.println("성공");
+		JsonObject jsonObject = new JsonObject();
+
+		/*
+		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+		 */
+
+		// 내부경로로 저장
+		//					String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
+		System.out.println(contextRoot);
+		//					String fileRoot = contextRoot + "resources/images/";
+		String fileRoot = contextRoot + "/summernote/";
+
+		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
+
+		File targetFile = new File(fileRoot + savedFileName);
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
+			//						jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "/upload/summernote/" + savedFileName);
+			jsonObject.addProperty("responseCode", "success");
+
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
 		}
-		
-		// 썸머노트 이미지 업로드
-				@ResponseBody
-				@RequestMapping(value = "/imageUpload", produces = "application/json; charset=UTF-8")
-				public String imageUpload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
-					System.out.println("성공");
-					JsonObject jsonObject = new JsonObject();
+		String a = jsonObject.toString();
+		return a;
 
-					/*
-					 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-					 */
+	}
 
-					// 내부경로로 저장
-//					String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-					String contextRoot = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload";
-					System.out.println(contextRoot);
-//					String fileRoot = contextRoot + "resources/images/";
-					String fileRoot = contextRoot + "/summernote/";
-
-					String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
-					String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
-					String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-
-					File targetFile = new File(fileRoot + savedFileName);
-					try {
-						InputStream fileStream = multipartFile.getInputStream();
-						FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-//						jsonObject.addProperty("url", "/resources/images/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
-						jsonObject.addProperty("url", "/upload/summernote/" + savedFileName);
-						jsonObject.addProperty("responseCode", "success");
-
-					} catch (IOException e) {
-						FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
-						jsonObject.addProperty("responseCode", "error");
-						e.printStackTrace();
-					}
-					String a = jsonObject.toString();
-					return a;
-
-				}
-	
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

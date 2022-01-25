@@ -8,6 +8,7 @@
 <title>admin</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/footer.css">
 <style>
     *{box-sizing: border-box;}
@@ -485,33 +486,108 @@ $(document).on("click","#dash", function() {
       
       <div class="clubAdmin">
       	  <div class="clubAdmin1">
+      	  
+	<table class="table table-hover" id="table" border="1" align="center">
+		<td colspan=11 align=center>동호회 목록</td>
+		<tr>
+			<td width=50>동호회 ID</td>
+			<td width=70>동호회명</td>
+			<td width=100>소개</td>
+			<td width=50>동호회장</td>
+			<td width=50>정원</td>
+			<td width=50>지역</td>
+			<td width=50>개설일</td>
+			<td width=50>회원수</td>
+			<td width=70>카테고리 대</td>
+			<td width=70>카테고리 소</td>
+			<td width=50>추천수</td>
+		</tr>
 
-		<c:forEach var="allClub" items="${allClub}">
-			<div>${allClub.CL_NAME} </div>
+
+		<c:forEach var="dto" items="${allClub}">
+			<tr>
+				<td>${dto.CL_ID}</td>
+				<td>${dto.CL_NAME }</td>
+				<td>${dto.CL_DESC }</td>
+				<td>${dto.CL_BOSS_ID }</td>
+				<td>${dto.CL_MAXMEM }</td>
+				<td>${dto.CL_LOCAL }</td>
+				<td>${ }</td>
+				<td>${dto.CL_MEMCOUNT }</td>
+				<td>${dto.CL_CATEGORY_ID }</td>
+				<td>${dto.CL_DCATEGORY_ID }</td>
+				<td>${dto.CL_REC_COUNT }</td>
+			</tr>			
 			</c:forEach>
+      	</table>
+      
 
           </div>
       </div> <!-- clubAdmin -->
       
+      		
       <div class="boardAdmin">
       	  <div class="boardAdmin1">
       	  
-		<c:forEach var="allBoard" items="${allBoard}">
-			<div>${allBoard.cb_title } </div>
-			</c:forEach>
+	<table class="table table-hover" id="table" border="1" align="center">
+		<td colspan=5 align=center>게시판</td>
+		<tr>
+			<td width=50>글 번호</td>
+			<td width=320>게시물</td>
+			<td width=100>작성자</td>
+			<td width=100>작성날짜</td>
+			<td width=70></td>
+		</tr>
+
+		<c:forEach var="dto" items="${allBoard}">
+
+			<tr>
+				<td>${dto.cb_seq}</td>
+				<td>${dto.cb_title}</td>
+				<td>${dto.cb_writer }</td>
+				<td>${dto.detailDate }</td>
+				<td></td>
+			</tr>					
+		</c:forEach>
+		</table>
 			
           </div>
       </div>
       
       <div class="memberAdmin">
       	  <div class="memberAdmin1">
+		
+		
+		<table class="table table-hover" id="table" border="1" align="center">
+		<td colspan=9 align=center>회원 목록</td>
+		<tr>
+			<td width=50>아이디</td>
+			<td width=60>이름</td>
+			<td width=100>연락처</td>
+			<td width=100>이메일</td>
+			<td width=70>생년월일</td>
+			<td width=70>성별</td>
+			<td width=100>주소</td>
+			<td width=70>카테고리 대</td>
+			<td width=70>카테고리 소</td>
+		</tr>
 
 
-			<c:forEach var="allMember" items="${allMember}">
-			<div>${allMember.mem_id }</div>
+		<c:forEach var="dto" items="${allMember}">
+			<tr>
+				<td>${dto.mem_id}</td>
+				<td>${dto.mem_nickname }</td>
+				<td>${dto.mem_phone }</td>
+				<td>${dto.mem_email }</td>
+				<td>${dto.mem_birthday }</td>
+				<td>${dto.mem_gender }</td>
+				<td>${dto.mem_address }</td>
+				<td>${dto.mem_category_1 }</td>
+				<td>${dto.mem_category_2 }</td>
+			</tr>			
 			</c:forEach>
-			
-			
+			</table>
+		
           </div>
       </div>
       
@@ -530,10 +606,28 @@ $(document).on("click","#dash", function() {
       <div class="notice">
       	  <div class="notice1">
 
+	<table class="table table-hover" id="table" border="1" align="center">
+		<td colspan=5 align=center>공지사항</td>
+		<tr>
+			<td width=50>글 번호</td>
+			<td width=320>공지사항</td>
+			<td width=100>작성자</td>
+			<td width=100>작성날짜</td>
+			<td width=70></td>
+		</tr>
 
-		<c:forEach var="allNotice" items="${allNotice}">
-			<div>${allNotice.notice_title }</div>
+
+		<c:forEach var="dto" items="${allNotice}">
+			<tr>
+				<td>${dto.notice_seq }</td>
+				<td><a href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+									${dto.notice_title }</a></td>
+				<td>${dto.notice_writer }</td>
+				<td>${dto.formDate }</td>
+				<td><button type="button" class="noticeDelBtn">삭제</button></td>
+			</tr>			
 			</c:forEach>
+		</table>
 			
           </div>
       </div>

@@ -150,6 +150,8 @@ public class ClubListDAO {
 		return mybatis.update("ClubList.minusMemCount", cl_id);
 	}
 	
+	// 대분류 클릭시 해당 동호회 리스트 불러오기 (인원수 기준 정렬)
+	
 	
 	
 

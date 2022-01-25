@@ -4,5 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="calendar">
-
+   <insert id="insert">
+   insert into calendar values(#{year},#{month},
+   #{date},#{value}, #{schedule}, #{schedule_detail})
+   </insert>
+   
+   	<select id="selectAll" resultType="kh.hobby1st.dto.CalendarDateDTO">
+		select*from calendar where value='${club_cl_name}'
+	</select>
 </mapper>

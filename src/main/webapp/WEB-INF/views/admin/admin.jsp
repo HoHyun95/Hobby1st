@@ -512,7 +512,7 @@ $(document).on("click","#dash", function() {
 				<td>${dto.CL_BOSS_ID }</td>
 				<td>${dto.CL_MAXMEM }</td>
 				<td>${dto.CL_LOCAL }</td>
-				<td>${ }</td>
+<%-- 				<td>${ }</td> --%>
 				<td>${dto.CL_MEMCOUNT }</td>
 				<td>${dto.CL_CATEGORY_ID }</td>
 				<td>${dto.CL_DCATEGORY_ID }</td>

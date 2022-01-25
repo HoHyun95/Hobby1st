@@ -139,5 +139,22 @@ public class ClubListDAO {
 		
 		return mybatis.selectList("ClubList.notInterestClubList", map);
 	}
+	
+	// 동호회 가입 시 인원 수 증가
+	public int plusMemCount(int cl_id) {
+		return mybatis.update("ClubList.plusMemCount", cl_id);
+	}
+	
+	// 동호회 가입 시 인원 수 감소
+	public int minusMemCount(int cl_id) {
+		return mybatis.update("ClubList.minusMemCount", cl_id);
+	}
+	
+	// 대분류 클릭시 해당 동호회 리스트 불러오기 (인원수 기준 정렬)
+	public List<ClubListDTO> ClubListByCategory(String cl_category_id) {
+		return mybatis.selectList("ClubList.ClubListByCategory", cl_category_id);
+	}
+	
+	
 
 }

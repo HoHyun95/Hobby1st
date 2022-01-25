@@ -148,7 +148,14 @@
 	</div>
 
 	<!----------------------------------- 메인 스크립트 ------------------------------------->
-
+	
+	<%-- <c:if test="${break_result eq '1' }">
+		<script>
+			alert("해당 동호회가 해체되었습니다...");
+		    location.href = "/club";
+		</script>
+	</c:if> --%>
+	
 	<script>
 	// 페이징 스타일
 	$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");

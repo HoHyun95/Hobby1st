@@ -30,7 +30,7 @@
 
 #close_btn i {
   font-size: 1.5rem;
-  color: red;
+  color: var(--color1);
   position: absolute;
   top: 10px;
   right: 20px;

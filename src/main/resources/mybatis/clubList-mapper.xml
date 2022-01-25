@@ -100,5 +100,19 @@
 		where rn between #{start} and #{end}
 	</select>
 	
-
+	<!-- 동호회 가입 시 인원 수 증가 -->
+	<update id="plusMemCount">
+		update club_list set cl_memcount = cl_memcount + 1 where cl_id = #{value}
+	</update>
+	
+	<!-- 동호회 가입 시 인원 수 감소 -->
+	<update id="minusMemCount">
+		update club_list set cl_memcount = cl_memcount - 1 where cl_id = #{value}
+	</update>
+	
+	<!-- 대분류 클릭시 해당 동호회 리스트 불러오기 (인원수 기준 정렬) -->
+	<select id="ClubListByCategory" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from club_list where cl_category_id = #{value} order by cl_memcount desc
+	</select>
+	
 </mapper>

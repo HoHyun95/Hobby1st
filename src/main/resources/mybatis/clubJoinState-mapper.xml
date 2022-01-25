@@ -70,6 +70,19 @@
   		delete from club_member where cm_mem_id = #{cm_mem_id} and cm_par_seq = #{cm_par_seq}
   	</delete>
   	
+  	<!-- 동호회 해체시 club_list 에서 제외 -->
+  	<delete id="breakClubList">
+  		delete from club_list where cl_id = #{value}
+  	</delete>
   	
+  	<!-- 동호회 해체시 각 동호회원들 club_member 에서 제외 -->
+  	<delete id="breakClubMember">
+  		delete from club_member where cm_par_seq = #{value}
+  	</delete>
+  	
+  	<!-- 동회회원들 해당 동호회 해체 상태로 변경 -->
+  	<update id="breakClubState">
+  		update club_join_state set cs_state = 4 where cs_board_seq = #{value}
+  	</update>
   	
   </mapper>

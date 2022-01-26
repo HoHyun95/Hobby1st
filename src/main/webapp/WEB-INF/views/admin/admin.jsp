@@ -507,7 +507,7 @@ $(document).on("click","#dash", function() {
 		<c:forEach var="dto" items="${allClub}">
 			<tr>
 				<td>${dto.CL_ID}</td>
-				<td>${dto.CL_NAME }</td>
+				<td><a href="/clubHouse?cl_id=${dto.CL_ID }">${dto.CL_NAME }</a></td>
 				<td>${dto.CL_DESC }</td>
 				<td>${dto.CL_BOSS_ID }</td>
 				<td>${dto.CL_MAXMEM }</td>
@@ -543,7 +543,8 @@ $(document).on("click","#dash", function() {
 
 			<tr>
 				<td>${dto.cb_seq}</td>
-				<td>${dto.cb_title}</td>
+				<td><a href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=1&cpage=1&keyword=&searchWord=">
+									${dto.cb_title }</a></td>
 				<td>${dto.cb_writer }</td>
 				<td>${dto.detailDate }</td>
 				<td><button type="button" class="boardDelBtn${dto.cb_seq }">삭제</button></td>
@@ -634,7 +635,7 @@ $(document).on("click","#dash", function() {
 		<c:forEach var="dto" items="${allNotice}">
 			<tr>
 				<td>${dto.notice_seq }</td>
-				<td><a href="notice/noticeDetail?notice_seq=${dto.notice_seq } }&check_num=1&cpage=1&keyword=0&searchWord=0">
+				<td><a href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=1&cpage=1&keyword=&searchWord=">
 									${dto.notice_title }</a></td>
 				<td>${dto.notice_writer }</td>
 				<td>${dto.formDate }</td>

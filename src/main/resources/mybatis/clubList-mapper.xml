@@ -115,4 +115,12 @@
 		select * from (select club_list.*, row_number() over (order by cl_memcount desc) rn from club_list where cl_category_id = #{value}) where rn between 1 and 10
 	</select>
 	
+	
+	<!-- 동호회 정보 수정  -->
+	<update id="modifyClub">
+		update club_list set cl_name = #{cl_name}, cl_desc = #{cl_desc}, cl_photo = ${cl_photo} where cl_id = #{cl_id}
+	</update>
+	
+	
+	
 </mapper>

@@ -516,7 +516,7 @@ $(document).on("click","#dash", function() {
 									<td>${dto.CL_BOSS_ID }</td>
 									<td>${dto.CL_MAXMEM }</td>
 									<td>${dto.CL_LOCAL }</td>
-									<%-- 				<td>${ }</td> --%>
+									<td>${dto.CL_OPENDATE }</td>
 									<td>${dto.CL_MEMCOUNT }</td>
 									<td>${dto.CL_CATEGORY_ID }</td>
 									<td>${dto.CL_DCATEGORY_ID }</td>
@@ -641,12 +641,26 @@ $(document).on("click","#dash", function() {
 									<td><button class="asignMem${dto.mem_id }">탈퇴</button></td>
 
 									<script>
-				$('.asignMem').on('click', () => {
-					// 회원 탈퇴 RequestMapping 구현
+									
+				$('.asignMem${dto.mem_id}').on('click', () => {
+					if(confirm("회원을 탈퇴시키겠습니까?")){
+						$.ajax({
+							url : "/member/asignAdmin",
+							data : {mem_id : "${dto.mem_id}"}
+						}).done(function(result){
+							if(result == 1){
+								alert("성공적으로 삭제되었습니다");
+							}else{
+								alert("회원을 탈퇴시키는 과정에서 문제가 발생하였습니다");
+								location.reload();
+							}
+						})
+						
+					}
 				})
+				
 				</script>
-
-
+				
 								</tr>
 							</c:forEach>
 						</table>

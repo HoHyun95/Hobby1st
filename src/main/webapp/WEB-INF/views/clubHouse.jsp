@@ -46,6 +46,25 @@
       sign_up.onclick = () => {
         location.href = "/member/sign_up";
       }
+      
+   // 찜하기
+      document.addEventListener("click", (event) => {
+        const classListArray = event.target.classList.value.split(' ');
+    	const isHeartButton = classListArray.find((classItem) => classItem === 'fa-heart');
+    	if (event.target && isHeartButton) {
+    	  event.target.classList.toggle("fas");
+    	  event.target.classList.toggle("far");
+    	  console.log(event.target.id);
+    	  console.log(event);
+    	  $.ajax({
+              url: "/clubList/clubBoardRec?cl_id=" + event.target.id,
+              type: "get",
+              dataType: "json" 
+          }).done((res) => {
+        	  console.log(res);
+          });
+    	}
+      });
     }
   </script>
 </head>
@@ -108,6 +127,7 @@
           </div>
           <div class="club_profile_btns">
             <div class="club_profile_btns_item">
+                <div class="likeBtn"><i class="far fa-heart" id="${club.cl_id }"></i></div>
              	<c:if test="${checkMember eq 0}">
               	  <button type="button" id="joinClub"><i class="fas fa-user-check"></i> 가입하기</button>
               	</c:if>
@@ -121,8 +141,6 @@
               	<c:if test="${checkMember eq 3}">
               	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 동호회 랄랄랄라라라랄</button>
               	</c:if>
-              <!-- <button type="button" id="likeClub"><i class="far fa-heart"></i> LIKE</button>
-              <button type="button" id="likeClubCancel"><i class="far fa-heart"></i> LIKE</button> -->
             </div>
           </div>
         </div>

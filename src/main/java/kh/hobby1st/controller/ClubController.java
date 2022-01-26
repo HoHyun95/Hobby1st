@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
@@ -77,6 +78,15 @@ public class ClubController {
 		model.addAttribute("break_result", break_result);
 		return "clubList/clubList";
 	}
+	
+	 //동호회 해체 시키기 (관리자)
+	@RequestMapping("breakClubAdmin")
+	@ResponseBody
+	public int breakClub(int board_seq) throws Exception{
+		int break_result = csService.breakClub(board_seq);
+	
+		return break_result;
+	 }
 	
 	// 동호회 가입 요청 취소하기
 	@RequestMapping("joinCencel")

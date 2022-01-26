@@ -33,7 +33,7 @@
 	</select>
 
 	<select id="selectAll" resultType="map">
-		select * from club_list
+		select * from club_list order by cl_id asc
 	</select>
 	
 	<select id="selectSplit" resultType="kh.hobby1st.dto.ClubListDTO">

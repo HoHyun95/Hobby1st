@@ -1,3 +1,13 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* transition: background-color 5000s ease-in-out 0s; */
+  transition: background-color 9999s ease-out;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
 .modal_bg {
   width: 100vw;
   height: 100vh;
@@ -22,7 +32,7 @@
   border-radius: 5px;
   position: fixed;
   top: 200px;
-  left: 37%;
+  left: 40%;
   z-index: 12;
   background-color: white;
   overflow: hidden;
@@ -164,14 +174,14 @@ hr {
   display: flex;
   align-items: center;
   padding: 10px 0px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-#cl_name, #cl_boss_id, #cl_maxMem, #cl_desc {
+#cl_name, #cl_boss_id, #cl_boss_name, #cl_maxMem {
   width: 500px;
   height: 30px;
   transition: 1s all ease;
-  padding: 0px 0px;
+  padding: 0px 0px 0px 5px;
 }
 
 #input-image {
@@ -187,6 +197,11 @@ input:focus {
   width: 100%;
   height: 40%;
   border: 1px solid dimgray;
+}
+
+.img_box img {
+  width: 100%;
+  height: 100%;
 }
 
 select {

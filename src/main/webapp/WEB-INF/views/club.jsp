@@ -558,6 +558,7 @@
     </div>
   </div>
   <div class="createClub_wrap">
+    <form action="/clubList/createClubProc" method="post" id="clubCreateForm" enctype="multipart/form-data">
   	<span id="createClub_close_btn"><i class="far fa-times"></i></span>
     <span id="slideLeft"><i class="far fa-arrow-alt-circle-left"></i></span>
     <span id="slideRight"><i class="far fa-arrow-alt-circle-right"></i></span>
@@ -606,11 +607,18 @@
             <div class="input">
               <input type="text" id="cl_name" maxlength="30" name="cl_name" placeholder="동호회명을 입력해주세요">
             </div>
+            <span class="resultSpan" id="cl_name_valid"></span>
             <div class="title">
-              <i class="fas fa-users"> 동호회장 ID</i>
+              <i class="fas fa-user"> 동호회장 ID</i>
             </div>
             <div class="input">
-              <input type="text" id="cl_boss_id" maxlength="30" name="cl_boss_id" value="${sessionScope.mem_id}" readonly>
+              <input type="text" id="cl_boss_id" maxlength="30" name="cl_boss_id" value="${mem_id}" readonly>
+            </div>
+            <div class="title">
+              <i class="fas fa-user"> 동호회장 이름</i>
+            </div>
+            <div class="input">
+              <input type="text" id="cl_boss_name" maxlength="30" name="cl_boss_name" value="${user_name}" readonly>
             </div>
             <div class="title">
               <i class="fas fa-users-cog"> 동호회 정원</i>
@@ -632,10 +640,10 @@
               동호회 사진
             </div>
             <div class="img_box">
-              
+              <img src="" alt="이미지를 선택해 주세요" id="preview_img">
             </div>
             <div class="input">
-              <input name="file" type="file" id="input-image">
+              <input name="file" type="file" id="input-image" accept="image/*">
             </div>
           </div>
           <div class="contents_item">
@@ -677,7 +685,7 @@
               <i class="fas fa-archive"> 대분류</i>
             </div>
             <div class="input">
-              <select name="cl_category" id="cl_category">
+              <select name="cl_category_id" id="cl_category_id">
                 <option value="ITEM1">ITEM 1</option>
                 <option value="ITEM1">ITEM 1</option>
                 <option value="ITEM1">ITEM 1</option>
@@ -696,7 +704,7 @@
               <i class="fas fa-asterisk"> 소분류</i>
             </div>
             <div class="input">
-              <select name="cl_category" id="cl_category">
+              <select name="cl_dCategory_id" id="cl_dCategory_id">
                 <option value="ITEM1">ITEM 1</option>
                 <option value="ITEM1">ITEM 1</option>
                 <option value="ITEM1">ITEM 1</option>
@@ -715,6 +723,45 @@
         </div>
       </div>
     </div>
+	</form>
+	<script>
+	  function readImage(input) {
+	    if (input.files && input.files[0]) {
+	      const reader = new FileReader()
+	      reader.onload = e => {
+	        const previewImage = document.getElementById("preview_img");
+	        previewImage.src = e.target.result
+	      }
+	      reader.readAsDataURL(input.files[0])
+	    }
+	  }
+	  
+	  const inputImage = document.getElementById("input-image");
+	  inputImage.addEventListener("change", e => {
+	    readImage(e.target)
+	  });
+      
+	  $("#cl_name").on("blur", () => {
+	    $.ajax({
+		  url : "/clubList/nameCheck",
+		  data : { cl_name : $("#cl_name").val() }
+		}).done((resp) => {
+
+		  if ($("#cl_name").val() !== "") {
+			if (resp > 0) {
+			  $('.resultSpan').text("이미 사용중인 동호회명입니다.");
+			  $('#cl_name').val('');
+			  $('#cl_name').focus();
+			} else {
+			  $('.resultSpan').text("");
+			}
+		  } else {
+			$('.resultSpan').text("동호회명을 입력해주세요");
+		  }
+	    });
+      });
+	  	  
+	</script>
   </div>
 </body>
 

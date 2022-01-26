@@ -118,7 +118,7 @@
 				location.href = "/notice/noticeList?cpage=${cpage}";
 			}else if(${check_num} == 2){
 					// 임시 주석 //
-// 				 location.href = "/notice/searchBoard?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }";
+				 location.href = "/notice/searchBoard?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }";
 				 	// 임시 주석 //
 			}
 		})

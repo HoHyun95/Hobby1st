@@ -546,7 +546,21 @@ $(document).on("click","#dash", function() {
 				<td>${dto.cb_title}</td>
 				<td>${dto.cb_writer }</td>
 				<td>${dto.detailDate }</td>
-				<td></td>
+				<td><button type="button" class="boardDelBtn${dto.cb_seq }">삭제</button></td>
+				
+				<script>
+				
+				$('.boardDelBtn${dto.cb_seq}').on('click', () => {
+					if(confirm("정말로 삭제하시겠습니까?")){
+					location.href ="/clubBoard/deleteBoard?cpage=0&cb_seq=${dto.cb_seq}";
+					}else{
+						return;
+					}
+				})
+				
+				</script>
+				
+				
 			</tr>					
 		</c:forEach>
 		</table>
@@ -620,11 +634,24 @@ $(document).on("click","#dash", function() {
 		<c:forEach var="dto" items="${allNotice}">
 			<tr>
 				<td>${dto.notice_seq }</td>
-				<td><a href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+				<td><a href="notice/noticeDetail?notice_seq=${dto.notice_seq } }&check_num=1&cpage=1&keyword=0&searchWord=0">
 									${dto.notice_title }</a></td>
 				<td>${dto.notice_writer }</td>
 				<td>${dto.formDate }</td>
-				<td><button type="button" class="noticeDelBtn">삭제</button></td>
+				<td><button type="button" class="noticeDelBtn${dto.notice_seq }">삭제</button></td>
+				
+				<script>
+				
+				$('.noticeDelBtn${dto.notice_seq}').on('click', () => {
+					if(confirm("정말로 삭제하시겠습니까?")){
+					location.href ="/notice/deleteNotice?cpage=0&notice_seq=${dto.notice_seq}";
+					}else{
+						return;
+					}
+				})
+				
+				</script>
+				
 			</tr>			
 			</c:forEach>
 		</table>

@@ -226,12 +226,19 @@ public class ClubBoardController {
 
 		int result = club_board_service.deleteBoard(cb_seq);
 		
-		if(cpage == 0) {
-			return "redirect:/admin";
-		}else {
 		return "redirect:/clubBoard/boardList?cpage=" + cpage;
-		}
 	}
+	
+	// 게시글 삭제 관리자 페이지에서 삭제 
+	@RequestMapping("/deleteBoardAdmin")
+	@ResponseBody
+	public int deleteBoard(int cb_seq) {
+		
+	int result = club_board_service.deleteBoard(cb_seq);
+		
+		return result;
+	}
+	
 
 	// 게시판 수정페이지 이동
 	@RequestMapping("/modifyBoard")

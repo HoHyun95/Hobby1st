@@ -211,6 +211,14 @@ public class MemberController {
 		System.out.println("제대로 된 값이 넘어왔을까?" + naver_id);
 		return "redirect: /";
 	}
+	
+	// 관리자 페이지 회원 추방
+	@RequestMapping("asignAdmin")
+	@ResponseBody
+	public int signOut(String mem_id) {
+		int result = mem_service.signOut(mem_id);
+		return result;
+	}
 }
 
 

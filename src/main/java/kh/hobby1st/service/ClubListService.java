@@ -1,8 +1,6 @@
 package kh.hobby1st.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,6 +119,11 @@ public class ClubListService {
 	// 대분류 클릭시 해당 동호회 리스트 불러오기 (인원수 기준 정렬)
 	public List<ClubListDTO> ClubListByCategory(String cl_category_id) {
 		return cldao.ClubListByCategory(cl_category_id);
+	}
+
+	// 동호회 정보 수정
+	public int modifyClub(ClubListDTO dto) {
+		return cldao.modifyClub(dto);
 	}
 
 }

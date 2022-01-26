@@ -58,5 +58,10 @@ public class MemberDAO {
 	public List<MemberDTO> selectAll(){
 		return mybatis.selectList("member.selectAll");
 	}
+	
+	// 관리자 페이지 회원 추방 
+	public int signOut(String mem_id) {
+		return mybatis.delete("member.signOut", mem_id);
+	}
 
 }

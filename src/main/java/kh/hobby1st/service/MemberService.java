@@ -62,5 +62,11 @@ public class MemberService {
 	public List<MemberDTO> selectAll(){
 		return mem_dao.selectAll();
 	}
+	
+	// 관리자 페이지 회원 추방
+	public int signOut(String mem_id) {
+		int result = mem_dao.signOut(mem_id);
+		return result;
+	}
 
 }

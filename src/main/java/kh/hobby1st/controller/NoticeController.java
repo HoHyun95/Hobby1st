@@ -80,7 +80,7 @@ public class NoticeController {
 
 	// 공지사항 상세페이지 이동
 	@RequestMapping("/noticeDetail")
-	public String boardDetail(int notice_seq, int cpage, Model model, int check_num, String keyword, String searchWord) {
+	public String noticeDetail(int notice_seq, int cpage, Model model, int check_num, String keyword, String searchWord) {
 
 		if (keyword.equals("title")) {
 			keyword = "제목";
@@ -112,10 +112,11 @@ public class NoticeController {
 	public String deleteNotice(int cpage, int notice_seq) {
 
 		int result = notService.deleteNotice(notice_seq);
-		if(cpage< 0) {
-			return "1";
-		}
+		if(cpage == 0) {
+			return "redirect:/admin";
+		}else {
 		return "redirect:/notice/noticeList?cpage=" + cpage;
+		}
 	}
 
 

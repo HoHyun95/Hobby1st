@@ -225,8 +225,12 @@ public class ClubBoardController {
 	public String deleteBoard(int cpage, int cb_seq) {
 
 		int result = club_board_service.deleteBoard(cb_seq);
-
+		
+		if(cpage == 0) {
+			return "redirect:/admin";
+		}else {
 		return "redirect:/clubBoard/boardList?cpage=" + cpage;
+		}
 	}
 
 	// 게시판 수정페이지 이동

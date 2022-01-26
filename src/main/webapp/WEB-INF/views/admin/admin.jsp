@@ -507,7 +507,7 @@ $(document).on("click","#dash", function() {
 		<c:forEach var="dto" items="${allClub}">
 			<tr>
 				<td>${dto.CL_ID}</td>
-				<td>${dto.CL_NAME }</td>
+				<td><a href="/clubHouse?cl_id=${dto.CL_ID }">${dto.CL_NAME }</a></td>
 				<td>${dto.CL_DESC }</td>
 				<td>${dto.CL_BOSS_ID }</td>
 				<td>${dto.CL_MAXMEM }</td>
@@ -543,10 +543,25 @@ $(document).on("click","#dash", function() {
 
 			<tr>
 				<td>${dto.cb_seq}</td>
-				<td>${dto.cb_title}</td>
+				<td><a href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=1&cpage=1&keyword=&searchWord=">
+									${dto.cb_title }</a></td>
 				<td>${dto.cb_writer }</td>
 				<td>${dto.detailDate }</td>
-				<td></td>
+				<td><button type="button" class="boardDelBtn${dto.cb_seq }">삭제</button></td>
+				
+				<script>
+				
+				$('.boardDelBtn${dto.cb_seq}').on('click', () => {
+					if(confirm("정말로 삭제하시겠습니까?")){
+					location.href ="/clubBoard/deleteBoard?cpage=0&cb_seq=${dto.cb_seq}";
+					}else{
+						return;
+					}
+				})
+				
+				</script>
+				
+				
 			</tr>					
 		</c:forEach>
 		</table>
@@ -620,11 +635,24 @@ $(document).on("click","#dash", function() {
 		<c:forEach var="dto" items="${allNotice}">
 			<tr>
 				<td>${dto.notice_seq }</td>
-				<td><a href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+				<td><a href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=1&cpage=1&keyword=&searchWord=">
 									${dto.notice_title }</a></td>
 				<td>${dto.notice_writer }</td>
 				<td>${dto.formDate }</td>
-				<td><button type="button" class="noticeDelBtn">삭제</button></td>
+				<td><button type="button" class="noticeDelBtn${dto.notice_seq }">삭제</button></td>
+				
+				<script>
+				
+				$('.noticeDelBtn${dto.notice_seq}').on('click', () => {
+					if(confirm("정말로 삭제하시겠습니까?")){
+					location.href ="/notice/deleteNotice?cpage=0&notice_seq=${dto.notice_seq}";
+					}else{
+						return;
+					}
+				})
+				
+				</script>
+				
 			</tr>			
 			</c:forEach>
 		</table>

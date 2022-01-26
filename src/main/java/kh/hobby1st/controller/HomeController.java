@@ -62,6 +62,7 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
+		String my_id = (String) session.getAttribute("mem_id");
 		int memberCount = mService.totalMember();
 		int clmemCount = cService.totalClubMember();
 		int clCount = clService.countClub();
@@ -70,7 +71,11 @@ public class HomeController {
 		List<ClubListDTO> map = clService.ClubListByCategory("개발");
 		System.out.println(map.get(0).getCl_id());
 		List<ClubCategoryDTO> categoryList = ccService.selectCategoryList();
-		
+		// 로그인 시 관심 동호회 리스트 가져오기
+		if((String)session.getAttribute("mem_id") != null) {
+			List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	
+			model.addAttribute("interestList", clubList_interest);
+		}
 		
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);
@@ -89,8 +94,6 @@ public class HomeController {
 	// admin
 	@RequestMapping("admin")
 	public String admin(Model model) {
-		
-		
 		List<ClubListDTO> clubList = clService.selectAll();
 		List<ClubBoardDTO> boardList = cbService.selectAll();
 		List<MemberDTO> memberList = mService.selectAll();

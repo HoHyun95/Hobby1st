@@ -50,24 +50,29 @@
       }
       
       const MOVE_WIDTH = 240;
+      let current_point = 0;
+      let last_point = MOVE_WIDTH * 5;
       let position = 0;
-      let offsetWidth = main_bg_inner_bottom_list.offsetWidth;
-      let endpoint = offsetWidth - (MOVE_WIDTH * 6);
       let leftBtn = document.getElementById("leftBtn");
       let rightBtn = document.getElementById("rightBtn");
-      
+      console.log(position);
       leftBtn.onclick = () => {
-        if (position !== 0) {
+        if (current_point > 0) {
+    	  current_point -= MOVE_WIDTH;
           position += MOVE_WIDTH;
-          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
-        }
+    	  console.log(position);
+          main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";        	
+        } 
       }
 
       rightBtn.onclick = () => {
-        if (Math.abs(position) < endpoint) {
+        if (current_point < last_point) {
+    	  current_point += MOVE_WIDTH;
           position -= MOVE_WIDTH;
+    	  console.log(position);
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
+        
       }
 
       let maxCount = 30;
@@ -157,7 +162,7 @@
       	      main_bg_inner_bottom_list.removeChild(main_bg_inner_bottom_list.firstChild);
       		}
       	    
-      	    
+
       	  	if(res.length > 0) {
       	    for(let i = 0; i < res.length; i++) {
       	      let div1 = document.createElement("div");
@@ -168,9 +173,17 @@
       	      
       	      let div3 = document.createElement("div");
       	      div3.classList.add("likeBtn");
-      	      div3.classList.add("fa-heart");
-      	      div3.classList.add("far");
-      	      div3.id = res[i].cl_id;
+      	      let icon = document.createElement("i");
+      	      icon.classList.add("fa-heart");
+      	      icon.classList.add("far");
+      	      <c:forEach var="iList" items="${interestList}">
+      	        if(res[i].cl_id == ${iList.cl_id}) {
+      	          icon.classList.remove("far");	
+      	          icon.classList.add("fas");	
+      	        }
+      	      
+      	      </c:forEach>
+      	      icon.id = res[i].cl_id;
       	      
       	      let div4 = document.createElement("div");
       	      div4.classList.add("badge");
@@ -193,6 +206,7 @@
       	      h5_3.innerHTML = res[i].cl_desc;
       	      
       	      h3.appendChild(a);
+      	      div3.appendChild(icon);
       	      div2.appendChild(div3);
       	      div2.appendChild(div4);
       	      div2.appendChild(h3);
@@ -203,8 +217,10 @@
       	      main_bg_inner_bottom_list.appendChild(div1);
       	    }
       	  	}
+      	    main_bg_inner_bottom_list.style.transform = "translateX(" + (current_point + position) + "px)";
+      	    current_point = 0;
+      	    position = 0;
           });
-   		  
    		}
    	  }
    	  
@@ -364,8 +380,8 @@
                         <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
     				  </c:otherwise>
     				</c:choose>
-                    <div class="badge" id="theme1">전체 ${status.count }위</div>
-                    <h3><a href="/clubHouse?cl_id=${cl.cl_id }">${clubList.cl_name }</a></h3>
+                    <div class="badge" id="theme1">개발 ${status.count }위</div>
+                    <h3><a href="/clubHouse?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h3>
                     <h5>${clubList.cl_boss_name}</h5> 
                     <h5>${clubList.cl_local }</h5>
                     <h5>${clubList.cl_desc }</h5>

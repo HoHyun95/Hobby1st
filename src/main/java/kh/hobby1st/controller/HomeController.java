@@ -196,6 +196,16 @@ public class HomeController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "selectByCategory", produces = "application/json; charset=UTF-8")
+	public String ClubListByCategory(String cl_category_id) {
+		Gson g = new Gson();
+		List<ClubListDTO> selectByCategory = clService.ClubListByCategory(cl_category_id);
+		String result = g.toJson(selectByCategory);
+		return result;
+	}
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

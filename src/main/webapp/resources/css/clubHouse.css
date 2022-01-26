@@ -43,13 +43,17 @@
 }
 
 .club_profile_btns {
-  width: fit-content;
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .club_profile_btns_item {
-  width: 100%;
+  width: fit-content;
   height: 100%;
-  line-height: 120px;
+  display: flex;
+  align-items: center;
 }
 
 #joinClub {
@@ -59,7 +63,7 @@
   border: 1px solid var(--color1);
   background-color: var(--color2);
   color: var(--color1);
-  
+  margin: 0px 5px;
 }
 
 #joinClub:hover {
@@ -69,6 +73,14 @@
   cursor: pointer;
 }
 
+.likeBtn {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: tomato;	
+}
+
 #likeClub {
   width: 100px;
   height: 35px;
@@ -76,6 +88,7 @@
   border: 1px solid var(--bg-color);
   background-color: var(--color2);
   color: var(--bg-color);
+  margin: 0px 5px;
 }
 
 #likeClub:hover {
@@ -93,6 +106,7 @@
   border: 1px solid var(--bg-color);
   background-color: var(--bg-color);
   color: var(--color2);
+  margin: 0px 5px;
 }
 
 #likeClubCancel:hover {
@@ -109,6 +123,7 @@
   border: 1px solid mediumaquamarine;
   background-color: var(--color2);
   color: mediumaquamarine;
+  margin: 0px 5px;
 }
 
 #controlClub:hover {
@@ -118,16 +133,17 @@
   cursor: pointer;
 }
 
-#leaveClub {
-  width: 120px;
+#leaveClub, #breakClub {
+  width: 150px;
   height: 35px;
   font-size: 0.8rem;
   border: 1px solid tomato;
   background-color: var(--color2);
   color: tomato;
+  margin: 0px 5px;
 }
 
-#leaveClub:hover {
+#leaveClub:hover, #breakClub:hover {
   border: 1px solid tomato;
   background-color: tomato;
   color: var(--color2);

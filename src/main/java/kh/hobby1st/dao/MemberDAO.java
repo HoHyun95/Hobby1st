@@ -63,5 +63,10 @@ public class MemberDAO {
 	public int signOut(String mem_id) {
 		return mybatis.delete("member.signOut", mem_id);
 	}
+	
+	// 회원 정보 수정
+	public int modifyMember(MemberDTO dto) {
+		return mybatis.update("member.modifyMember", dto);
+	}
 
 }

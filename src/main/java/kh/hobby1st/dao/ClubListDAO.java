@@ -155,6 +155,11 @@ public class ClubListDAO {
 		return mybatis.selectList("ClubList.ClubListByCategory", cl_category_id);
 	}
 	
+	// 동호회 정보 수정
+	public int modifyClub(ClubListDTO dto) {
+		return  mybatis.update("ClubList.modifyClub", dto);
+	}
+	
 	
 
 }

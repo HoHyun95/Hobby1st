@@ -213,7 +213,7 @@ public class MemberController {
 	}
 	
 	// 관리자 페이지 회원 추방
-	@RequestMapping("asignAdmin")
+	@RequestMapping("signOutAdmin")
 	@ResponseBody
 	public int signOut(String mem_id) {
 		int result = mem_service.signOut(mem_id);

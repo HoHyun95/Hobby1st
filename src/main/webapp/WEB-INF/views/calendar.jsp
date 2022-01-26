@@ -8,6 +8,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>calendar</title>
 <style TYPE="text/css">
+/*  보기 쉽게 무늬만 한거니 없애셔도 상관 없읍니다! */
 * {
 	text-align: center;
 	margin: auto;
@@ -61,10 +62,15 @@ td {
 	font-weight: bold;
 }
 button{
+    border:none;
+	background-color: white;
     width: 20pt;
 	height: 20pt;
-	color: pink;
+	color: blue;
 }
+ button{
+    cursor: pointer;
+ }
 .sun:hover{
     cursor: pointer;
 }
@@ -112,23 +118,89 @@ input[type="text"]{
 					<td class="day sat">토</td>
 				</tr>
 				<tr>
-				  <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
-					<c:choose>
-					 <c:when test="${dateList.value=='today'}">
-							<td class="today">
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}"> </div>
+				<!-- 더미데이터를 안쪽에서 쓰기 위해 바깥에서 반복문 돌렸음  -->
+	 <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
+				            <!--    <c:set var="i" value="${i+1 }"/>
+				  				<input type="Text" id="dummy_date_${i }" value="${result[date_status.index].date}" hidden>
+						        <input type="text" id="dummy_${i }" value="${result[date_status.index].schedule}" hidden>
+						        <input type="text" id="dummy_${i }" value="${result[date_status.index].schedule_detail}" hidden> -->
+		<c:choose>
+			<c:when test="${dateList.value=='today'}">
+					 
+					   <c:set var="result" value="${result }"/>
+					      <c:if test="${empty result }">
+					 		 <td class="today">
+							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}">	
+						     </div>
 							</td>
-					</c:when>
-					<c:when test="${date_status.index%7==6}">
+						  </c:if>
+
+					   <c:forEach var="result" items="${result }" varStatus="status" end="0">
+					      <c:choose>
+					        <c:when test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year}">
+						  	 <td class="today">
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}"> 
+						        ${result.schedule }<br>
+						        ${result.schedule_detail }						        
+						        </div>
+							 </td>
+							 </c:when>
+							
+							 <c:otherwise>
+						  	 <td class="today">
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}">	어떤 이유에서인지 애러 이충재에게 문의하세요  </div>
+							 </td>
+							 </c:otherwise>
+						  </c:choose>
+					    </c:forEach>	 
+					 </c:when>					
+					 					 					 
+			<c:when test="${date_status.index%7==6}">
+					
+						<c:set var="result" value="${result }"/>
+					      <c:if test="${empty result}">
 							<td class="sat_day">
 								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
 						        <div id="num_message_${dateList.date}"></div>
 							</td>
-						</c:when>
+						  </c:if>
+							
+
+							
+                   <c:forEach var="result" items="${result }" varStatus="status">
+					
+					      <c:choose>
+					        <c:when test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year}">
+\						  	 <td class="sat_day">
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}"> 
+						        ${result.schedule }<br>
+						        ${result.schedule_detail }						        
+						        </div>
+							 </td>
+							</c:when>
+							
+							 <c:otherwise>
+						  	 <td class="sat_day">
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}"></div>
+							 </td>
+							 </c:otherwise>
+						  </c:choose>
+				      </c:forEach>
+					    
+					    
+				</c:when>	
+		
+		
+		
+		
 					<c:when test="${date_status.index%7==0}">
 				</tr>
-				<tr>
+				 <tr>
 					<td class="sun_day">
 						<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
 						<div id="num_message_${dateList.date}"></div>
@@ -159,10 +231,10 @@ input[type="text"]{
 		<input type=text name='month' value=${today_info.search_month} hidden>
 		<input type=text name='value' value='${club_cl_name }' hidden>
         <input type="text" name='date' value=`+a+` hidden>
-        타이틀
+        title
         <br>
         <input type=text name='schedule' placeholder="null입력"><br>
-        내용
+        message
         <br>
         <input type=text name='schedule_detail' placeholder="시 애러납니다">
         <button type="submit" id='test_btn'>V</button> 
@@ -175,6 +247,7 @@ input[type="text"]{
 		const test_btn = document.getElementById('message_box');
 		location.href = "location.reload();";
 	}
+	
 
 	</script>
 </body>

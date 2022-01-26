@@ -45,4 +45,9 @@
 	<delete id="signOut">
 		delete from member where mem_id = #{value}
 	</delete>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="modifyMember">
+		update member set mem_pass = #{mem_pass}, mem_phone = #{mem_phone}, mem_email = #{mem_email}, mem_nickname = #{mem_nickname}, mem_address = #{mem_address}, mem_category_1 = #{mem_category_1}, mem_category_2 = #{mem_category_2}, mem_photo = #{mem_photo} where mem_id = #{mem_id}
+	</update>
 </mapper>

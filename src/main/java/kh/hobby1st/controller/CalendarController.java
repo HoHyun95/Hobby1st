@@ -71,6 +71,8 @@ public class CalendarController {
 		}
 		List<CalendarDateDTO> result = cal_service.selectAll(club_cl_name);
 
+		System.out.println("여기야 이거야 이거 정보값 확인해봐 " +result);
+		
 		model.addAttribute("result", result);
 		model.addAttribute("dateList", dateList);		
 		model.addAttribute("today_info", today_info);
@@ -78,8 +80,10 @@ public class CalendarController {
 		return "calendar";
 	}
 	@RequestMapping("input_calendar")
-    public String inputDay(String year, String month, String value, String date, String schedule, String schedule_detail) {
+    public String inputDay(Model model, String year, String month, String value, String date, String schedule, String schedule_detail) {
+		//리다이렉트 된 곳에 아이디값을 쏴서 리스트를 다시 출력해서 봄
 		session.setAttribute("club_cl_name", value);
+		model.addAttribute("club_cl_name", value);
 		int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));
 		return "redirect: /calendar/do";
 	}

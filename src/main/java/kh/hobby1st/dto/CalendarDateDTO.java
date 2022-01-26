@@ -163,7 +163,7 @@ public class CalendarDateDTO {
 		return before_after_data;
 	}
 	
-	// 스케줄 사용시 사용될 생성자
+//	 스케줄 사용시 사용될 생성자
 	public CalendarDateDTO(String year, String month, String date, String value, String schedule, String schedule_detail) {
 		this.year = year;
 		this.month = month;
@@ -187,7 +187,7 @@ public class CalendarDateDTO {
 
 	@Override
 	public String toString() {
-		return "DateData [year=" + year + ", month=" + month + ", date=" + date + ", value=" + value + "]";
+		return "[year=" + year + ", month=" + month + ", date=" + date + ", value=" + value + ", schedule="+schedule+", schedule_detail="+schedule_detail+"]";
 	}
 
 }

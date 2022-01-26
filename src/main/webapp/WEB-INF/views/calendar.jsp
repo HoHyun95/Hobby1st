@@ -83,7 +83,6 @@ input[type="text"]{
 					어서오세요!<br> ${club_cl_name }동호회의 캘린더 입니다!
 				</h2>
 			</div>
-
 			<!--날짜 네비게이션  -->
 			<div class="navigation">
 				<a class="before_after_year"
@@ -101,7 +100,6 @@ input[type="text"]{
 					href="/calendar/do?year=${today_info.search_year+1}&month=${today_info.search_month-1}&club_cl_name=${club_cl_name}">
 					<!-- 다음해 --> &gt;&gt;
 				</a>
-	
 			</div>
 			<table class="calendar_body" border=1>
 				<tr class="calendar_wrap_top">
@@ -114,22 +112,21 @@ input[type="text"]{
 					<td class="day sat">토</td>
 				</tr>
 				<tr>
-					<c:forEach var="dateList" items="${dateList}"
-						varStatus="date_status">
-						<c:choose>
-							<c:when test="${dateList.value=='today'}">
-								<td class="today">
-									<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						            <div id="num_message_${dateList.date}"></div>
-								</td>
-							</c:when>
-							<c:when test="${date_status.index%7==6}">
-								<td class="sat_day">
-									<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						            <div id="num_message_${dateList.date}"></div>
-								</td>
-							</c:when>
-							<c:when test="${date_status.index%7==0}">
+				  <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
+					<c:choose>
+					 <c:when test="${dateList.value=='today'}">
+							<td class="today">
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}"> </div>
+							</td>
+					</c:when>
+					<c:when test="${date_status.index%7==6}">
+							<td class="sat_day">
+								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}"></div>
+							</td>
+						</c:when>
+					<c:when test="${date_status.index%7==0}">
 				</tr>
 				<tr>
 					<td class="sun_day">
@@ -155,9 +152,7 @@ input[type="text"]{
 	/*ddkdkdkd으아아아아아아앙아 짜증나 hard */
 	function number_click(a) {
 		const message_area=document.getElementById('num_message_' + a);
-
         message_area.innerHTML=`        
-        
         <form action="/calendar/input_calendar" method="get">
         <div id="message_box">
         <input type=text name='year' value=${today_info.search_year} hidden>
@@ -166,10 +161,10 @@ input[type="text"]{
         <input type="text" name='date' value=`+a+` hidden>
         타이틀
         <br>
-        <input type=text name='schedule' placeholder="null-NO!"><br>
+        <input type=text name='schedule' placeholder="null입력"><br>
         내용
         <br>
-        <input type=text name='schedule_detail'>
+        <input type=text name='schedule_detail' placeholder="시 애러납니다">
         <button type="submit" id='test_btn'>V</button> 
         <div>
         </form>

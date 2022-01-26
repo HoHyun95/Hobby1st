@@ -501,6 +501,7 @@ $(document).on("click","#dash", function() {
 			<td width=70>카테고리 대</td>
 			<td width=70>카테고리 소</td>
 			<td width=50>추천수</td>
+			<td width=50>해체</td>
 		</tr>
 
 
@@ -517,6 +518,19 @@ $(document).on("click","#dash", function() {
 				<td>${dto.CL_CATEGORY_ID }</td>
 				<td>${dto.CL_DCATEGORY_ID }</td>
 				<td>${dto.CL_REC_COUNT }</td>
+				<td><button class="breakClub${dto.CL_ID }">해체</button></td>
+				
+				<script>
+				$('breakClub${dto.CL_ID}').on('click', () => {
+					if(confirm("동호회를 해체 시키겠습니까?")){
+					location.href = "/club/breakClub?board_seq=${dto.CL_ID}";
+					// admin 페이지로 돌아올 수 있게 method return 값에 if 추가 
+					}else{
+						alert("동호회 해체를 취소하였습니다");
+					}
+				})
+				</script>
+				
 			</tr>			
 			</c:forEach>
       	</table>
@@ -585,6 +599,7 @@ $(document).on("click","#dash", function() {
 			<td width=100>주소</td>
 			<td width=70>카테고리 대</td>
 			<td width=70>카테고리 소</td>
+			<td width=50> 탈퇴</td>
 		</tr>
 
 
@@ -599,6 +614,15 @@ $(document).on("click","#dash", function() {
 				<td>${dto.mem_address }</td>
 				<td>${dto.mem_category_1 }</td>
 				<td>${dto.mem_category_2 }</td>
+				<td><button class="asignMem${dto.mem_id }">탈퇴</button></td>
+				
+				<script>
+				$('.asignMem').on('click', () => {
+					// 회원 탈퇴 RequestMapping 구현
+				})
+				</script>
+				
+				
 			</tr>			
 			</c:forEach>
 			</table>

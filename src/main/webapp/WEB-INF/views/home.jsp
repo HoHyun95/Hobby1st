@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/login.css">
   <script>
     window.onload = () => {
-      let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
+      const main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
       let loginform_btn = document.getElementById("loginform_btn");
       let close_btn = document.getElementById("close_btn");
@@ -140,6 +140,74 @@
     	}
       });
       
+   	  // 카테고리 클릭 시 슬라이더 리스트 가져오기
+   	  const main_bg_inner_top_list_item = document.querySelectorAll(".main_bg_inner_top_list_item");
+   	  for(let i = 0; i < main_bg_inner_top_list_item.length; i++) {
+   		main_bg_inner_top_list_item[i].onclick = () => {
+   		  let cl_category_id = main_bg_inner_top_list_item[i].id;
+   		  
+   		  $.ajax({
+            url: "/selectByCategory?cl_category_id=" + cl_category_id,
+            type: "get",
+            dataType: "json" 
+          }).done((res) => {
+      	    console.log(res);
+      	    
+      	    while (main_bg_inner_bottom_list.hasChildNodes()) {	
+      	      main_bg_inner_bottom_list.removeChild(main_bg_inner_bottom_list.firstChild);
+      		}
+      	    
+      	    
+      	  	if(res.length > 0) {
+      	    for(let i = 0; i < res.length; i++) {
+      	      let div1 = document.createElement("div");
+      	      div1.classList.add("main_bg_inner_bottom_list_item_wrap");
+      	      
+      	      let div2 = document.createElement("div");
+      	      div2.classList.add("main_bg_inner_bottom_list_item");
+      	      
+      	      let div3 = document.createElement("div");
+      	      div3.classList.add("likeBtn");
+      	      div3.classList.add("fa-heart");
+      	      div3.classList.add("far");
+      	      div3.id = res[i].cl_id;
+      	      
+      	      let div4 = document.createElement("div");
+      	      div4.classList.add("badge");
+      	      div4.id = "theme1";
+      	      div4.innerHTML = res[i].cl_category_id + " " + (i + 1) +"위";
+      	   
+      	      let h3 = document.createElement("h3");
+      	      
+      	      let a = document.createElement("a");
+      	      a.href = "/clubHouse?cl_id=" + (res[i].cl_id);
+      	      a.innerHTML = res[i].cl_name;
+      	      
+      	      let h5_1 = document.createElement("h5");
+      	      h5_1.innerHTML = res[i].cl_boss_name;
+      	      
+      	      let h5_2 = document.createElement("h5");
+      	      h5_2.innerHTML = res[i].cl_local;
+      	      
+      	      let h5_3 = document.createElement("h5");
+      	      h5_3.innerHTML = res[i].cl_desc;
+      	      
+      	      h3.appendChild(a);
+      	      div2.appendChild(div3);
+      	      div2.appendChild(div4);
+      	      div2.appendChild(h3);
+      	      div2.appendChild(h5_1);
+      	      div2.appendChild(h5_2);
+      	      div2.appendChild(h5_3);
+      	      div1.appendChild(div2);
+      	      main_bg_inner_bottom_list.appendChild(div1);
+      	    }
+      	  	}
+          });
+   		  
+   		}
+   	  }
+   	  
       
       /* 네이버 로그인 */ 
       const naverLogin = new naver.LoginWithNaverId(
@@ -278,7 +346,7 @@
           <div class="main_bg_inner_top">
             <ul class="main_bg_inner_top_list">
               <c:forEach var="clubCategory" items="${ clubCategory}">
-                <li class="main_bg_inner_top_list_item">#${clubCategory.cc_category_name}</li>
+                <li class="main_bg_inner_top_list_item" id="${clubCategory.cc_category_name}">#${clubCategory.cc_category_name}</li>
 		      </c:forEach>
             </ul>
           </div>
@@ -286,12 +354,18 @@
             <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
             <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
             <div class="main_bg_inner_bottom_list">
-              <c:forEach var="clubList" items="${list }">
+              <c:forEach var="clubList" items="${list }" begin="0" end="9" varStatus="status">
                 <div class="main_bg_inner_bottom_list_item_wrap">
                   <div class="main_bg_inner_bottom_list_item">
-                    <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
-                    <div class="badge" id="theme1">${clubList.cl_category_id }</div>
-                    <h3><a href="/clubMainIntro/clubIntro?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h3>
+                    <c:choose>
+    				  <c:when test="${sessionScope.mem_id eq null}">
+    				  </c:when>
+    				  <c:otherwise>
+                        <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
+    				  </c:otherwise>
+    				</c:choose>
+                    <div class="badge" id="theme1">전체 ${status.count }위</div>
+                    <h3><a href="/clubHouse?cl_id=${cl.cl_id }">${clubList.cl_name }</a></h3>
                     <h5>${clubList.cl_boss_name}</h5> 
                     <h5>${clubList.cl_local }</h5>
                     <h5>${clubList.cl_desc }</h5>

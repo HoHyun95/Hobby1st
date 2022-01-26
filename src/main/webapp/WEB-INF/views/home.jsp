@@ -121,6 +121,26 @@
         }
       }
       
+   	  // 찜하기
+      document.addEventListener("click", (event) => {
+        const classListArray = event.target.classList.value.split(' ');
+    	const isHeartButton = classListArray.find((classItem) => classItem === 'fa-heart');
+    	if (event.target && isHeartButton) {
+    	  event.target.classList.toggle("fas");
+    	  event.target.classList.toggle("far");
+    	  console.log(event.target.id);
+    	  console.log(event);
+    	  $.ajax({
+              url: "/clubList/clubBoardRec?cl_id=" + event.target.id,
+              type: "get",
+              dataType: "json" 
+          }).done((res) => {
+        	  console.log(res);
+          });
+    	}
+      });
+      
+      
       /* 네이버 로그인 */ 
       const naverLogin = new naver.LoginWithNaverId(
     			{
@@ -265,18 +285,20 @@
           <div class="main_bg_inner_bottom">
             <div class="arrow" id="right"><i class="fas fa-chevron-right" id="rightBtn"></i></div>
             <div class="arrow" id="left"><i class="fas fa-chevron-left" id="leftBtn"></i></div>
-            <ul class="main_bg_inner_bottom_list">
+            <div class="main_bg_inner_bottom_list">
               <c:forEach var="clubList" items="${list }">
-                <li class="main_bg_inner_bottom_list_item_wrap">
+                <div class="main_bg_inner_bottom_list_item_wrap">
                   <div class="main_bg_inner_bottom_list_item">
-                    <h2><a href="/clubMainIntro/clubIntro?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h2>
-                    <b>${clubList.cl_boss_name}</b> 
-                    <span>${clubList.cl_local }</span>
-                    <span>${clubList.cl_desc }</span>
+                    <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
+                    <div class="badge" id="theme1">${clubList.cl_category_id }</div>
+                    <h3><a href="/clubMainIntro/clubIntro?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h3>
+                    <h5>${clubList.cl_boss_name}</h5> 
+                    <h5>${clubList.cl_local }</h5>
+                    <h5>${clubList.cl_desc }</h5>
                   </div>
-                </li>
+                </div>
               </c:forEach>
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -291,72 +313,6 @@
         <div class="hobby1st_dashboard_inner_text">
           <span id="dashboard2">현재 ${clCount }개의 동호회에서 ${clmemCount }명이 함께 하고 있습니다!!</span>
         </div>
-      </div>
-    </div>
-    <div class="create_hobby1st_club">
-      <div class="create_hobby1st_club_inner">
-        <input type="button" value="동호회 만들어보기">
-      </div>
-    </div>
-
-    <div class="search_area">
-      <div class="search_area_inner">
-        <div class="search_input_area">
-          <div class="search_input_area_text">
-            <input type="text" class="search_club" placeholder="찾고 싶은 동호회를 검색해 보세요!">
-          </div>
-          <div class="search_input_area_btn">
-            <i class="fas fa-search"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="search_result">
-      <div class="search_result_inner">
-        <!-- <div class="fav_club_list_row">
-          <ul class="fav_club_list">
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-          </ul>
-        </div> -->
       </div>
     </div>
 

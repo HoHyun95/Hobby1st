@@ -110,13 +110,22 @@ public class NoticeController {
 	// 공지사항 삭제
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(int cpage, int notice_seq) {
-
+		
 		int result = notService.deleteNotice(notice_seq);
-		if(cpage == 0) {
-			return "redirect:/admin";
-		}else {
+		
 		return "redirect:/notice/noticeList?cpage=" + cpage;
-		}
+		
+	}
+	
+	// 공지사항 삭제 (관리자 페이지) 
+	@RequestMapping("/deleteNoticeAdmin")
+	@ResponseBody
+	public int deleteNotice(int notice_seq) {
+		
+		int result = notService.deleteNotice(notice_seq);
+		
+		return result; 
+		
 	}
 
 

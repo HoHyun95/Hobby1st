@@ -126,91 +126,105 @@ input[type="text"]{
 						        <input type="text" id="dummy_${i }" value="${result[date_status.index].schedule_detail}" hidden> -->
 		<c:choose>
 			<c:when test="${dateList.value=='today'}">
-					 
-					   <c:set var="result" value="${result }"/>
-					      <c:if test="${empty result }">
 					 		 <td class="today">
 							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
 						        <div id="num_message_${dateList.date}">	
-						     </div>
-							</td>
-						  </c:if>
-
-					   <c:forEach var="result" items="${result }" varStatus="status" end="0">
-					      <c:choose>
-					        <c:when test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year}">
-						  	 <td class="today">
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}"> 
-						        ${result.schedule }<br>
-						        ${result.schedule_detail }						        
+						        <c:forEach var="result" items="${result }" varStatus="status">
+						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+						                <div id="num_message_${dateList.date}">
+						 		 	 	        ${result.schedule }<br>
+						 		 		        ${result.schedule_detail }		
+						                </div>
+						             </c:if>
+						        </c:forEach>
 						        </div>
-							 </td>
-							 </c:when>
-							
-							 <c:otherwise>
-						  	 <td class="today">
+					 		 </td>
+					 		 
+                   <c:forEach var="result" items="${result }" varStatus="status">
+					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+					         <td class="today" hidden>
 								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">	어떤 이유에서인지 애러 이충재에게 문의하세요  </div>
-							 </td>
-							 </c:otherwise>
-						  </c:choose>
-					    </c:forEach>	 
-					 </c:when>					
+						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
+					        </td>
+					     </c:if>					
+				   </c:forEach>					   					    
+				</c:when>	
+		
 					 					 					 
 			<c:when test="${date_status.index%7==6}">
-					
-						<c:set var="result" value="${result }"/>
-					      <c:if test="${empty result}">
 							<td class="sat_day">
 								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}"></div>
-							</td>
-						  </c:if>
-							
-
-							
-                   <c:forEach var="result" items="${result }" varStatus="status">
-					
-					      <c:choose>
-					        <c:when test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year}">
-\						  	 <td class="sat_day">
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}"> 
-						        ${result.schedule }<br>
-						        ${result.schedule_detail }						        
+						        <div id="num_message_${dateList.date}">
+						         <c:forEach var="result" items="${result }" varStatus="status">
+						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+						                <div id="num_message_${dateList.date}">
+						 		 	 	        ${result.schedule }<br>
+						 		 		        ${result.schedule_detail }		
+						                </div>
+						             </c:if>
+						        </c:forEach>					        
 						        </div>
-							 </td>
-							</c:when>
-							
-							 <c:otherwise>
-						  	 <td class="sat_day">
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}"></div>
-							 </td>
-							 </c:otherwise>
-						  </c:choose>
-				      </c:forEach>
-					    
-					    
+							</td>
+						
+                   <c:forEach var="result" items="${result }" varStatus="status">
+					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+					         <td class="sat_day" hidden>
+								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
+					        </td>
+					     </c:if>					
+				   </c:forEach>					   					    
 				</c:when>	
 		
 		
-		
-		
-					<c:when test="${date_status.index%7==0}">
+			<c:when test="${date_status.index%7==0}">
 				</tr>
 				 <tr>
 					<td class="sun_day">
 						<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						<div id="num_message_${dateList.date}"></div>
+						<div id="num_message_${dateList.date}">
+							<c:forEach var="result" items="${result }" varStatus="status">
+						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+						                <div id="num_message_${dateList.date}">
+						 		 	 	        ${result.schedule }<br>
+						 		 		        ${result.schedule_detail }		
+						                </div>
+						             </c:if>
+						        </c:forEach>	
+						</div>
+				    <c:forEach var="result" items="${result }" varStatus="status">
+					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+					         <td class="sun_day" hidden>
+								<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
+					        </td>
+					     </c:if>					
+				   </c:forEach>		
 					</td>
 					</c:when>
 					<c:otherwise>
 						<td class="normal_day">
 							<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-					    	<div id="num_message_${dateList.date}"></div>
+					    	<div id="num_message_${dateList.date}">
+							<c:forEach var="result" items="${result }" varStatus="status">
+						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+						                <div id="num_message_${dateList.date}">
+						 		 	 	        ${result.schedule }<br>
+						 		 		        ${result.schedule_detail }		
+						                </div>
+						             </c:if>
+						    </c:forEach>						    	
+					    	</div>
 						</td>
+						
+						<c:forEach var="result" items="${result }" varStatus="status">
+					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
+					         <td class="normal_day" hidden>
+								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
+						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
+					        </td>
+					     </c:if>					
+				   </c:forEach>		
 					</c:otherwise>
 					</c:choose>
 					</c:forEach>
@@ -247,7 +261,18 @@ input[type="text"]{
 		const test_btn = document.getElementById('message_box');
 		location.href = "location.reload();";
 	}
-	
+
+	$(window).load(function () {
+		$(".sat_day").each(function () {
+			var rows = $(".sat_day:contains('" + $(this).text() + "')");
+
+			if (rows.length > 1) {
+				rows.eq(0).attr("rowspan", rows.length);
+				rows.not(":eq(0)").remove(); 
+			} 
+		});
+	    
+	});
 
 	</script>
 </body>

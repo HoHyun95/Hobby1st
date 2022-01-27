@@ -139,7 +139,7 @@
                   <button type="button" id="breakClub"><i class="fas fa-door-open"></i> 동호회 해체하기</button>
               	</c:if>
               	<c:if test="${checkMember eq 3}">
-              	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 동호회 랄랄랄라라라랄</button>
+              	  <button type="button" id="requestClub"><i class="fas fa-address-book"></i> 승인 대기 중</button>
               	</c:if>
             </div>
           </div>

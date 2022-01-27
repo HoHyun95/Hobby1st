@@ -71,6 +71,8 @@ public class CalendarController {
 		}
 		List<CalendarDateDTO> result = cal_service.selectAll(club_cl_name);
 
+		System.out.println("여기야 이거야 이거 정보값 확인해봐 " +result);
+		
 		model.addAttribute("result", result);
 		model.addAttribute("dateList", dateList);		
 		model.addAttribute("today_info", today_info);
@@ -78,12 +80,49 @@ public class CalendarController {
 		return "calendar";
 	}
 	@RequestMapping("input_calendar")
-    public String inputDay(String year, String month, String value, String date, String schedule, String schedule_detail) {
-		session.setAttribute("club_cl_name", value);
-		int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));
+    public String inputDay(Model model, String year, String month, String value, String date, String schedule, String schedule_detail) {
+
+        String value_ej = value;
+		int search_delete = cal_service.search(month, value, date);
+
+		if(0==search_delete) {
+			int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));					
+		} else {
+			String delete = cal_service.delete(month, value, date);
+			int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));					
+
+		}
+		session.setAttribute("club_cl_name", value_ej);
+		model.addAttribute("club_cl_name", value_ej);
 		return "redirect: /calendar/do";
 	}
-}
+	@RequestMapping("test")
+	public String test(Model model, String year, String month, String value, String date) {
+        String value_ej = value;
+
+//		int delete = cal_service.delete(month, value, date);
+		session.setAttribute("club_cl_name", value_ej);
+		model.addAttribute("club_cl_name", value_ej);
+		return "redirect: /calendar/do";
+	}
+}	
+//		if(search_delete > 0) {
+//			//스케줄이 중복되어있을 경우 기존값을 삭제후 신규등록 
+//			System.out.println("오 이미 중복되어있네요!");
+//			int delete = cal_service.delete(month, value, date);	
+//		} else if(search_delete == 0) {
+//			//없을 시 신규 스케줄 등록
+//			System.out.println("여기까지 잘들어왔는데?");
+//			int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));
+//		}
+//		//중복행 삭제 후 실행
+//		int result = cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule, schedule_detail));
+//		//리다이렉트 된 곳에 아이디값을 쏴서 리스트를 다시 출력해서 봄
+//		session.setAttribute("club_cl_name", value);
+//		model.addAttribute("club_cl_name", value);
+//		return "redirect: /calendar/do";
+	
+
 
 //          좋은코드가 생각이 안납니다 보시는분 있으시면 코드 분석하시고 살려주십쇼 제발 사람살려주세요여ㅕㅕ
 //	@RequestMapping("input_calendar")

@@ -22,4 +22,12 @@ public class CalendarDateService {
 	 public List<CalendarDateDTO> selectAll(String club_cl_name) {
 		 return dao.selectAll(club_cl_name);
 	 }
+	 
+	 public int search(String month, String value, String date) {
+		 return dao.search(month, value, date);
+	 }
+	 
+	 public String delete(String month, String value, String date) {
+		 return dao.delete(month, value, date);
+	 }
 }

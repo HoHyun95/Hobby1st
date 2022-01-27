@@ -1,6 +1,8 @@
 package kh.hobby1st.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,21 @@ public class CalendarDateDAO {
 	
 	public List<CalendarDateDTO> selectAll(String club_cl_name) {
 		return mybatis.selectList("calendar.selectAll", club_cl_name);
+	}
+	
+	public int search(String month, String value, String date) {
+		Map<String, String> map = new HashMap<>();
+		map.put("month", month);
+		map.put("date", date);
+		map.put("value", value);
+		return mybatis.selectOne("calendar.search", map);
+	}
+	public String delete(String month, String value, String date) {
+		Map<String, String> map = new HashMap<>();
+		map.put("month", month);
+		map.put("date", date);
+		map.put("value", value);
+		return mybatis.selectOne("calendar.delete", map);
 	}
 }
 

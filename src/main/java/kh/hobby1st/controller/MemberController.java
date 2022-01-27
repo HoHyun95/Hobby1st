@@ -39,7 +39,7 @@ public class MemberController {
 	public String sign_in() {
 		return "member/sign_in";
 	}
-    
+    //그냥 로그인만!(네이버는 따로 호출) 
 	@RequestMapping("logind")
     public String logind(String mem_id, String mem_pass) {
 		
@@ -57,7 +57,7 @@ public class MemberController {
 		return "redirect: /";
 	}
 	
-	//login_click
+	//naver_login_click
 	@RequestMapping("login")
 	public String login(String naver_id, String naver_mobile,
 			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
@@ -203,13 +203,6 @@ public class MemberController {
 	public String email_test() {
 		System.out.println("이메일 인증 성공!");
 		return "member/sign_email";
-	}
-
-	//naver_login
-	@RequestMapping("naver_login")
-	public String naverLogin(String naver_id) {
-		System.out.println("제대로 된 값이 넘어왔을까?" + naver_id);
-		return "redirect: /";
 	}
 	
 	// 관리자 페이지 회원 추방

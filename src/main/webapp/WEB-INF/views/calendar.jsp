@@ -119,7 +119,6 @@ input[type="text"]{
 				<tr>
 	 <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
 		<c:choose>
-		    <!-- 시스템상 "오늘" 날짜 -->
 			<c:when test="${dateList.value=='today'}">
 					 		 <td class="today">
 							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
@@ -146,7 +145,6 @@ input[type="text"]{
 				   </c:forEach>					   					    
 				</c:when>	
 		
-			<!-- 시스템상 "토요일" 날짜 -->
 			<c:when test="${date_status.index%7==6}">
 							<td class="sat_day">
 								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
@@ -171,8 +169,6 @@ input[type="text"]{
 					     </c:if>					
 				   </c:forEach>					   					    
 				</c:when>	
-		
-			<!-- 시스템상 "일요일" 날짜 -->
 			<c:when test="${date_status.index%7==0}">
 				</tr>
 				 <tr>
@@ -198,7 +194,6 @@ input[type="text"]{
 				   </c:forEach>		
 					</td>
 					</c:when>
-		   <!-- 시스템상 "평일" 날짜 -->
 					<c:otherwise>
 						<td class="normal_day">
 							<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>

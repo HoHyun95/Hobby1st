@@ -133,7 +133,7 @@ input[type="text"]{
 						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
 						                <div id="num_message_${dateList.date}">
 						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }		
+						 		 		        ${result.schedule_detail }<br>	
 						                </div>
 						             </c:if>
 						        </c:forEach>
@@ -159,7 +159,8 @@ input[type="text"]{
 						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
 						                <div id="num_message_${dateList.date}">
 						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }		
+						 		 		        ${result.schedule_detail }
+						 		 		        		
 						                </div>
 						             </c:if>
 						        </c:forEach>					        

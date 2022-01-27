@@ -81,7 +81,6 @@ input[type="text"]{
 </style>
 </head>
 <body>
-<!--<form id="calendarFrm" action="/calendar/input_calendar" method="get"> -->
 		<div class="calendar">
 			<!-- 클럽이름 -->
 			<div class="club_name">
@@ -118,17 +117,13 @@ input[type="text"]{
 					<td class="day sat">토</td>
 				</tr>
 				<tr>
-				<!-- 더미데이터를 안쪽에서 쓰기 위해 바깥에서 반복문 돌렸음  -->
 	 <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
-				            <!--    <c:set var="i" value="${i+1 }"/>
-				  				<input type="Text" id="dummy_date_${i }" value="${result[date_status.index].date}" hidden>
-						        <input type="text" id="dummy_${i }" value="${result[date_status.index].schedule}" hidden>
-						        <input type="text" id="dummy_${i }" value="${result[date_status.index].schedule_detail}" hidden> -->
 		<c:choose>
 			<c:when test="${dateList.value=='today'}">
 					 		 <td class="today">
 							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
 						        <div id="num_message_${dateList.date}">	
+						        <!-- 만약에 "오늘"에 데이터가 담겨있으면 출력됨 -->
 						        <c:forEach var="result" items="${result }" varStatus="status">
 						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
 						                <div id="num_message_${dateList.date}">
@@ -139,7 +134,7 @@ input[type="text"]{
 						        </c:forEach>
 						        </div>
 					 		 </td>
-					 		 
+			 <!-- 값을 담기 위한 더미데이터 -->	 		 
                    <c:forEach var="result" items="${result }" varStatus="status">
 					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
 					         <td class="today" hidden>
@@ -150,7 +145,6 @@ input[type="text"]{
 				   </c:forEach>					   					    
 				</c:when>	
 		
-					 					 					 
 			<c:when test="${date_status.index%7==6}">
 							<td class="sat_day">
 								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
@@ -160,7 +154,6 @@ input[type="text"]{
 						                <div id="num_message_${dateList.date}">
 						 		 	 	        ${result.schedule }<br>
 						 		 		        ${result.schedule_detail }
-						 		 		        		
 						                </div>
 						             </c:if>
 						        </c:forEach>					        
@@ -176,8 +169,6 @@ input[type="text"]{
 					     </c:if>					
 				   </c:forEach>					   					    
 				</c:when>	
-		
-		
 			<c:when test="${date_status.index%7==0}">
 				</tr>
 				 <tr>
@@ -217,7 +208,6 @@ input[type="text"]{
 						    </c:forEach>						    	
 					    	</div>
 						</td>
-						
 						<c:forEach var="result" items="${result }" varStatus="status">
 					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
 					         <td class="normal_day" hidden>
@@ -225,18 +215,14 @@ input[type="text"]{
 						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
 					        </td>
 					     </c:if>					
-				   </c:forEach>		
-					</c:otherwise>
+				       </c:forEach>		
+					  </c:otherwise>
 					</c:choose>
-					</c:forEach>
+				</c:forEach>
 			</table>
-            <div class="low_box">
-               <!--  <button type="submit">저장</button> -->
-            </div>
 		</div>
-<!-- </form> -->
 	<script>
-	/*ddkdkdkd으아아아아아아앙아 짜증나 hard */
+	/*캘린더 내에서 날짜를 클릭하면 "input - submit" 자동생성 */
 	function number_click(a) {
 		const message_area=document.getElementById('num_message_' + a);
         message_area.innerHTML=`        
@@ -257,12 +243,17 @@ input[type="text"]{
         </form>
         `
 	}
+	/*서브밋에 이벤트효과(사실무의미 한것 같은데 지우면 코드가 작동이 안됩니다.) */
 	const test_btn = document.getElementById('test_btn');
 	test_btn.onclick = () => {
-		const test_btn = document.getElementById('message_box');
-		location.href = "location.reload();";
+		alert("정상작동")
+		if($("#schedule").val() == "" || $("#schedule_detail").val() == ""){
+			alert("인풋박스 채워주세요")
+		} else{
+			location.href = "/calendar/input_calendar";
+		}
 	}
-
+	/*중복되는 행을 합침 */
 	$(window).load(function () {
 		$(".sat_day").each(function () {
 			var rows = $(".sat_day:contains('" + $(this).text() + "')");

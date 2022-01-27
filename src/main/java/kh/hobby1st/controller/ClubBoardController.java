@@ -213,12 +213,6 @@ public class ClubBoardController {
 		}
 	
 	
-	
-	
-	
-	
-	
-	
 
 	// 게시판 삭제
 	@RequestMapping("/deleteBoard")

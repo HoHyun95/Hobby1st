@@ -31,7 +31,7 @@
         <div class="login_input_wrap">
           <div class="login_input">
             <div class="login_input_contents_wrap">
-              <form action="/member/login" method="post">
+              <form action="/member/logind" method="post">
               <div class="login_input_contents_input_id">
                 <div class="login_input_contents_title">
                   ID
@@ -57,8 +57,9 @@
                 </div>
               </div>
               <div class="input_btn2">
-                <button id="loginid" type="button">LOGIN</button>
+                <button id="loginid">LOGIN</button>
               </div>
+   			  </form>
               <div class="divide_line">
                 <div class="divide_line_item"></div>
                 <div class="divide_line_item text">Or Continue with</div>
@@ -69,7 +70,6 @@
                  <button type="button" id="naverIdLogin"> Naver SignUp </button></a>             
               </div>
                 <div id="naver_message" style="display: none;"></div>
-   			  </form>
             </div>
           </div>
         </div>

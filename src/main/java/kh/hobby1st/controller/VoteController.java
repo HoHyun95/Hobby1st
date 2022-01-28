@@ -37,7 +37,11 @@ public class VoteController {
 		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
 		listDto.setVl_end_date(edate);
 		
-		System.out.println("항목 : " + option.length);
+		for(int i =0; i < option.length; i++) {
+			System.out.println("항목 : " + option[i]);
+			
+		}
+		
 		
 		System.out.println(listDto.getVl_end_date());
 		System.out.println(listDto.getVl_type());

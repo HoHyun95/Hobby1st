@@ -103,31 +103,31 @@
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
     
@@ -193,7 +193,7 @@
             index = index + 1;
             $(".items").children(".answers").eq(index).css('display','block');
             $(".items").children(".answers").eq(index).children("input").val("")
-            
+            $(".items").children(".answers").eq(index).children("input").attr('name','option')
         })
 
         $(".minus_aw").on("click", function() {
@@ -204,6 +204,7 @@
             }
 
             $(".items").children(".answers").eq(index).css('display','none');
+            $(".items").children(".answers").eq(index).children("input").attr('name','')
             index = index - 1;
         })
     </script>

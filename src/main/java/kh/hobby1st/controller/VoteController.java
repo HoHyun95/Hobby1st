@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kh.hobby1st.service.VoteService;
 
 @Controller
-@RequestMapping("/vote")
+@RequestMapping("/vote/")
 public class VoteController {
 	
 	@Autowired
@@ -17,5 +17,11 @@ public class VoteController {
 
 	@Autowired
 	private VoteService voteService;
-
+	
+	
+	// 투표 작성 페이지 이동
+	@RequestMapping("voteWrite")
+	public String voteWrite() {
+		return "vote/voteWrite";
+	}
 }

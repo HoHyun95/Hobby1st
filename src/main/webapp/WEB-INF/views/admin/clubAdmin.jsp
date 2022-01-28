@@ -53,7 +53,7 @@
 
     .contents {
       width: 75%;
-      height: 600px;
+      /* height: 600px; */
       
       /* padding: 30px 20px 30px 20px; */
     }
@@ -153,8 +153,8 @@
     
     .clubAdmin1 {
     	width: 80%;
-    	border: 1px solid dimgray;
-        height: 50%;
+    	/* border: 1px solid dimgray; */
+        height: 50%; 
     }
     
     .list_item {
@@ -164,9 +164,9 @@
     
     
     .footer {
-      /* height: 100px;
-      background-color: gray; */
-      /* clear: both; */
+     /*  height: 100px;
+      background-color: gray; 
+       clear: both;  */
     }
 
   </style>
@@ -346,14 +346,17 @@
 						</table>
 
 
+					</div><!-- clubAdmin1 -->
+					
+					<div class="navi" style="text-align : center; line-height: 60px">
+						${navi }
 					</div>
+					
 				</div>
 				<!-- clubAdmin -->
       
      
-			<div class="navi" style="text-align : center; line-height: 60px">
-				${navi }
-			</div>
+			
       
      
       

@@ -11,7 +11,7 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.NoticeDTO;
-import kh.hobby1st.service.AdminService;
+import kh.hobby1st.service.ClubAdminService;
 import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.MemberService;
@@ -34,7 +34,7 @@ public class AdminController {
 	private ClubListService clService;
 	
 	@Autowired
-	private AdminService aService;
+	private ClubAdminService aService;
 	
 	
 	@RequestMapping("/admin/clubAdmin")
@@ -42,7 +42,7 @@ public class AdminController {
 		
 //		List<ClubListDTO> clubList = clService.selectAll();
 		List<ClubListDTO> adminClubList = aService.selectBoardByPaging(cpage);
-		int navi = aService.getRecordCount();
+		String navi = aService.getPageNavi(cpage);
 		int totalListCount = aService.getRecordCount();
 		
 //		model.addAttribute("allClub", clubList);

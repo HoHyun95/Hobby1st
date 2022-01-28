@@ -65,11 +65,75 @@
           });
     	}
       });
+   
+      let clubIntro = document.getElementById("clubIntro");
+   	  let club_member_list = document.getElementById("club_member_list");
+   	  let club_board = document.getElementById("club_board");
+   	  let club_chat = document.getElementById("club_chat");
+   	  
+   	  let clIntro_wrap = document.querySelector(".clIntro_wrap");
+   	  let cm_list_wrap = document.querySelector(".cm_list_wrap");
+   	  let club_board_wrap = document.querySelector(".club_board_wrap");
+      let club_chat_wrap = document.querySelector(".club_chat_wrap"); 
+   	  
+   	  clubIntro.onclick = () => {
+   		clubIntro.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "none"; 
+   		club_chat.style.borderBottom = "none"; 
+   		
+   		clIntro_wrap.style.display = "flex";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "none";
+   	  }   
+   	  
+   	  club_member_list.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_board.style.borderBottom = "none"; 
+   		club_chat.style.borderBottom = "none"; 
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "flex";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "none";
+   	  }
+   
+   	  club_board.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_chat.style.borderBottom = "none";   
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "flex";
+   		club_chat_wrap.style.display = "none";
+   	  }
+   	  
+   	  club_chat.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "none";    
+   		club_chat.style.borderBottom = "3px solid var(--bg-color3)";
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "flex";
+   	  }
     }
   </script>
 </head>
 
 <body>
+  <!-- modal background -->
+  <div class="modal_bg">
+
+  </div>
+  <!-- sign_in -->
+  <jsp:include page="login.jsp"></jsp:include>
   <div class="wrap">
     <div class="header">
       <div class="header_inner">
@@ -169,13 +233,55 @@
         </div>
       </div>
       <div class="clubHouse_contents">
-        <div class="clubHouse_contents_box_wrap">
-          <div class="clubHouse_contents_box">
+        <!-- 동호회 소개 -->
+        <div class="clIntro_wrap">
+          <div class="clIntro_box">
                <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
           </div>
+        </div> 
+        
+        <!-- 동호회 회원 리스트 -->
+	    <div class="cm_list_wrap">
+	      <div class="cm_list_title">
+	        <div class="cm_list_title_text">ㅇㅇㅇ 동호회 회원 목록</div>
+	      </div>
+	      <div class="cm_list_item_wrap">
+	        <div class="cm_list_item">
+	          <div class="cm_list_item_photo_area">
+	            <div class="cm_list_item_photo">
+	              <img src="images/man1.png">
+	            </div>
+	          </div>
+	          <div class="cm_list_item_profile_area">
+	            <span id="cm_list_admin_badge">ADMIN</span>
+	            <div class="cm_list_item_profile_title">이름</div>
+	            <div class="cm_list_item_profile_item">닉네임</div>
+	            <div class="cm_list_item_profile_item">생년월일</div>
+	            <div class="cm_list_item_profile_item">지역</div>
+	            <div class="cm_list_item_profile_item">카테고리</div>
+	            <div class="cm_list_item_profile_item">가입일</div>
+	          </div>
+	          <div class="cm_list_item_btns_area">
+	            <div class="cm_list_item_btn1">
+	              <i class="far fa-envelope"> Email</i>
+	            </div>
+	            <div class="cm_list_item_btn2">
+	              <i class="fas fa-mobile-alt"> Phone</i>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
         </div>
+        <!-- 동호회 게시판 -->
+        <div class="club_board_wrap">
+            동호회 게시판
+        </div>
+        <!-- 동호회 채팅 -->
+        <div class="club_chat_wrap">
+             동호회 채팅
+        </div>  
       </div>
-    </div>
+      </div>
       <!-- clubHouse end -->
       <div class="links">
         <div class="links_inner">
@@ -206,12 +312,7 @@
         </div>
       </div>
     </div>
-    <!-- modal background -->
-    <div class="modal_bg">
-
-    </div>
-    <!-- sign_in -->
-    <jsp:include page="login.jsp"></jsp:include>
+   </div>
     
     <c:if test="${result eq '1' }">
 		<script>
@@ -251,7 +352,7 @@
     	})
     	
     </script>
-    
+    <jsp:include page="signUp.jsp"></jsp:include>
     
     
     

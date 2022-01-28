@@ -243,9 +243,10 @@
         <!-- 동호회 회원 리스트 -->
 	    <div class="cm_list_wrap">
 	      <div class="cm_list_title">
-	        <div class="cm_list_title_text">ㅇㅇㅇ 동호회 회원 목록</div>
+	        <div class="cm_list_title_text">${club.cl_name } 동호회 회원 목록</div>
 	      </div>
 	      <div class="cm_list_item_wrap">
+	        <c:forEach var="cm" items="${clubMemberInfo }">
 	        <div class="cm_list_item">
 	          <div class="cm_list_item_photo_area">
 	            <div class="cm_list_item_photo">
@@ -253,23 +254,26 @@
 	            </div>
 	          </div>
 	          <div class="cm_list_item_profile_area">
-	            <span id="cm_list_admin_badge">ADMIN</span>
-	            <div class="cm_list_item_profile_title">이름</div>
-	            <div class="cm_list_item_profile_item">닉네임</div>
-	            <div class="cm_list_item_profile_item">생년월일</div>
-	            <div class="cm_list_item_profile_item">지역</div>
-	            <div class="cm_list_item_profile_item">카테고리</div>
+	            <c:if test="${cm.mem_id eq club.cl_boss_id}">
+	              <span id="cm_list_admin_badge">ADMIN</span>
+	            </c:if>
+	            <div class="cm_list_item_profile_title">${cm.mem_name }(${cm.mem_id })</div>
+	            <div class="cm_list_item_profile_item">${cm.mem_nickname }</div>
+	            <div class="cm_list_item_profile_item">${cm.mem_birthday }</div>
+	            <div class="cm_list_item_profile_item">${cm.mem_address }</div>
+	            <div class="cm_list_item_profile_item">${cm.mem_category_1 } / ${cm.mem_category_2 }</div>
 	            <div class="cm_list_item_profile_item">가입일</div>
 	          </div>
 	          <div class="cm_list_item_btns_area">
 	            <div class="cm_list_item_btn1">
-	              <i class="far fa-envelope"> Email</i>
+	              <i class="far fa-envelope"> EMAIL</i>
 	            </div>
 	            <div class="cm_list_item_btn2">
-	              <i class="fas fa-mobile-alt"> Phone</i>
+	              <i class="fas fa-mobile-alt"> PHONE</i>
 	            </div>
 	          </div>
 	        </div>
+	        </c:forEach>
 	      </div>
         </div>
         <!-- 동호회 게시판 -->

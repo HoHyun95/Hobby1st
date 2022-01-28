@@ -17,6 +17,7 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
+import kh.hobby1st.dto.ClubMemberDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.NoticeDTO;
 import kh.hobby1st.service.ClubBoardService;
@@ -36,7 +37,7 @@ public class HomeController {
 	private MemberService mService;
 	
 	@Autowired
-	private ClubMemberService cService;
+	private ClubMemberService cmService;
 	
 	@Autowired
 	private ClubListService clService;
@@ -64,7 +65,7 @@ public class HomeController {
 	public String home(Model model) throws Exception {
 		String my_id = (String) session.getAttribute("mem_id");
 		int memberCount = mService.totalMember();
-		int clmemCount = cService.totalClubMember();
+		int clmemCount = cmService.totalClubMember();
 		int clCount = clService.countClub();
 //		List<ClubListDTO> map = clService.selectAll();
 		System.out.println("여기");
@@ -174,10 +175,12 @@ public class HomeController {
 		int checkMember = clService.checkMember(Integer.parseInt(cl_id), mem_id);
 //		int checkClubJoin = csService.checkClubJoin(Integer.parseInt(cl_id), mem_id);
 		
+		List<MemberDTO> clubMemberInfo = cmService.clubMemberInfo(Integer.parseInt(cl_id));
 		
 		model.addAttribute("club", club);
 //		model.addAttribute("checkClubJoin", checkClubJoin);
 		model.addAttribute("checkMember", checkMember);
+		model.addAttribute("clubMemberInfo", clubMemberInfo);
 		return "clubHouse";
 	}
 	

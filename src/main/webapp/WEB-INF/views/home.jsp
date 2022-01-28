@@ -19,11 +19,14 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/signUp.css">
   <script>
     window.onload = () => {
+      let id = '<%=(String)session.getAttribute("mem_id")%>';
       const main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
       let loginform_btn = document.getElementById("loginform_btn");
+      let signupform_btn = document.getElementById("signupform_btn");
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
 
@@ -174,15 +177,16 @@
       	      let div3 = document.createElement("div");
       	      div3.classList.add("likeBtn");
       	      let icon = document.createElement("i");
-      	      icon.classList.add("fa-heart");
-      	      icon.classList.add("far");
-      	      <c:forEach var="iList" items="${interestList}">
-      	        if(res[i].cl_id == ${iList.cl_id}) {
-      	          icon.classList.remove("far");	
-      	          icon.classList.add("fas");	
-      	        }
-      	      
-      	      </c:forEach>
+      	      if(id != 'null') {
+                icon.classList.add("far");
+                icon.classList.add("fa-heart");
+      	      	<c:forEach var="iList" items="${interestList}">
+      	          if(res[i].cl_id == ${iList.cl_id}) {
+      	            icon.classList.remove("far");	
+      	            icon.classList.add("fas");	
+      	          }
+      	        </c:forEach>
+              }
       	      icon.id = res[i].cl_id;
       	      
       	      let div4 = document.createElement("div");
@@ -226,7 +230,7 @@
    	  
       
       /* 네이버 로그인 */ 
-      const naverLogin = new naver.LoginWithNaverId(
+      /* const naverLogin = new naver.LoginWithNaverId(
     			{
     				clientId: "lBYZ6xYGSN3wiVHC2ZK4",
     				callbackUrl: "http://localhost/",
@@ -305,12 +309,141 @@
             console.log(mem_pass)
             
             location.href = "/member/logind?mem_id="+(mem_id)+"&mem_pass="+(mem_pass);
+        } */
+        
+        /* 회원가입 */
+        let signUp_close_btn = document.getElementById("signUp_close_btn");
+        let signUpBtn = document.getElementById("signUpBtn");
+        let signUp_slideLeft = document.getElementById("signUp_slideLeft");
+        let signUp_slideRight = document.getElementById("signUp_slideRight");
+        let signUp_container = document.querySelector(".signUp_container");
+        let signUp_MOVE_WIDTH = 528;
+        let signUp_position = 0;
+        
+        signupform_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = 10;
+          modal_bg.style.display = "flex";
+          signUp_wrap.style.zIndex = 11;
+          signUp_wrap.style.display = "flex";
+        }
+        
+        signUp_close_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = -1;
+          modal_bg.style.display = "none";
+          signUp_wrap.style.zIndex = -1;
+          signUp_wrap.style.display = "none";
+        }
+        
+
+        let signUp_current_point = 0;
+
+        let signUp_end_point = signUp_MOVE_WIDTH * 3;
+
+        if (signUp_current_point == 0) {
+          signUp_slideLeft.style.display = "none";
+        }
+
+        if (signUp_current_point == signUp_end_point) {
+          signUp_slideRight.style.display = "none";
+        }
+
+        signUp_slideRight.onclick = () => {
+          signUp_current_point += signUp_MOVE_WIDTH;
+          if (signUp_current_point == signUp_end_point) {
+            signUp_slideRight.style.display = "none";
+            signUpBtn.style.display = "inline";
+            signUp_slideLeft.style.display = "inline";
+          } else if (signUp_current_point > 0) {
+            signUp_slideLeft.style.display = "inline";
+            signUpBtn.style.display = "none";
+          }
+          signUp_position -= signUp_MOVE_WIDTH;
+          signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+        }
+
+        signUp_slideLeft.onclick = () => {
+          signUp_current_point -= signUp_MOVE_WIDTH;
+          if (signUp_current_point == 0) {
+            signUp_slideLeft.style.display = "none";
+            signUp_slideRight.style.display = "inline";
+            signUpBtn.style.display = "none";
+          } else if (signUp_current_point < signUp_end_point) {
+            signUp_slideRight.style.display = "inline";
+            signUpBtn.style.display = "none";
+          }
+          signUp_position += signUp_MOVE_WIDTH;
+          signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+        }
+
+        let city = document.querySelectorAll(".city");
+        const cities = [...city];
+
+        let option = document.querySelectorAll("#cl_local option");
+        const options = [...option];
+
+        document.addEventListener("change", (e) => {
+          for (let i = 0; i < cities.length; i++) {
+            if (e.target.value == cities[i].id) {
+              cities[i].classList.add("active");
+            } else {
+              cities[i].classList.remove("active");
+            }
+          }
+        })
+
+        let getRandomNum = (min, max) => {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min; 
+        }
+
+        let select_gender = document.getElementById("select_gender");
+        const previewImage = document.getElementById("preview_img");
+        select_gender.addEventListener("change", (e) => {
+          if(e.target.id == "select_gender" && e.target.value == "M") {
+            previewImage.src = "/images/man" + (getRandomNum(1, 3)) +".png";
+          } else if(e.target.id == "select_gender" && e.target.value == "F") {
+            previewImage.src = "/images/woman" + (getRandomNum(1, 3)) +".png";
+          }
+        })
+
+        function readImage(input) {
+          if (input.files && input.files[0]) {
+            const reader = new FileReader()
+            reader.onload = e => {
+              previewImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+        }
+
+        const inputImage = document.getElementById("input-image");
+        inputImage.addEventListener("change", e => {
+          readImage(e.target)
+        });
+
+        signUp_close_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = -1;
+          modal_bg.style.display = "none";
+          signUp_wrap.style.zIndex = -1;
+          signUp_wrap.style.display = "none";
         }
     }
   </script>
 </head>
 
 <body>
+  <div class="modal_bg">
+
+  </div>
+  <!-- sign_in -->
+  <jsp:include page="login.jsp"></jsp:include>
   <div class="wrap">
     <div class="header">
       <div class="header_inner">
@@ -326,11 +459,11 @@
                   <li class="login_list_item">로그아웃</li>
                 </a>
                 <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
-                <li class="login_list_item" id="signup_btn" style="display:none">회원가입</li>
+                <li class="login_list_item" id="signupform_btn" style="display:none">회원가입</li>
               </c:when>
               <c:otherwise>
                 <li class="login_list_item" id="loginform_btn">로그인</li>
-                <li class="login_list_item" id="signup_btn">회원가입</li>
+                <li class="login_list_item" id="signupform_btn">회원가입</li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -409,9 +542,8 @@
     <div class="container">
       <div class="fav_club_list_title">
         <div class="fav_club_list_title_text">
-          <h4>인기 동호회</h4>
+          <h4>추천 동호회</h4>
         </div>
-        <hr>
       </div>
       <div class="fav_club_list_wrap">
         <div class="fav_club_list_row">
@@ -493,10 +625,6 @@
       </div>
     </div>
   </div>
-  <div class="modal_bg">
-
-  </div>
-<!-- sign_in -->
-<jsp:include page="login.jsp"></jsp:include>
+  <jsp:include page="signUp.jsp"></jsp:include>
 </body>
 </html>

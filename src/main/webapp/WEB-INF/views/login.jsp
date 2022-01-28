@@ -16,7 +16,7 @@
   <div class="modal_bg">
 
   </div>
-<!-- sign_in -->
+  <!-- sign_in -->
   <div class="loginForm">
     <div class="login_wrap">
     <div class="login_box_wrap">
@@ -31,13 +31,13 @@
         <div class="login_input_wrap">
           <div class="login_input">
             <div class="login_input_contents_wrap">
-              <form action="/member/login" method="post">
+              <form action="/member/logind" method="post">
               <div class="login_input_contents_input_id">
                 <div class="login_input_contents_title">
                   ID
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="text" id="mem_id" maxlength="20">
+                  <input type="text" name="mem_id" maxlength="20">
                 </div>
               </div>
               <div class="login_input_contents_input_pw">
@@ -45,7 +45,7 @@
                   PASSWORD
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="password" id="mem_pass" maxlength="20" autocomplete="off">
+                  <input type="password" name="mem_pass" maxlength="20" autocomplete="off">
                 </div>
               </div>
               <div class="input_btn1">
@@ -57,8 +57,9 @@
                 </div>
               </div>
               <div class="input_btn2">
-                <button id="loginid" type="button">LOGIN</button>
+                <button id="loginid">LOGIN</button>
               </div>
+   			  </form>
               <div class="divide_line">
                 <div class="divide_line_item"></div>
                 <div class="divide_line_item text">Or Continue with</div>
@@ -69,7 +70,6 @@
                  <button type="button" id="naverIdLogin"> Naver SignUp </button></a>             
               </div>
                 <div id="naver_message" style="display: none;"></div>
-   			  </form>
             </div>
           </div>
         </div>

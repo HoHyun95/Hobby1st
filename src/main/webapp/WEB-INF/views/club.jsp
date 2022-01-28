@@ -13,7 +13,7 @@
   <!-- 네이버 로그인스크립트  -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>ㅊ
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -623,6 +623,7 @@
             <div class="title">
               <i class="fas fa-users-cog"> 동호회 정원</i>
             </div>
+              <span id="cl_maxMem_valid"></span>
             <div class="input">
               <input type="text" id="cl_maxMem" maxlength="3" name="cl_maxMem" placeholder="최대정원을 정해주세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
             </div>
@@ -741,26 +742,52 @@
 	    readImage(e.target)
 	  });
       
-	  $("#cl_name").on("blur", () => {
-	    $.ajax({
-		  url : "/clubList/nameCheck",
-		  data : { cl_name : $("#cl_name").val() }
-		}).done((resp) => {
 
-		  if ($("#cl_name").val() !== "") {
-			if (resp > 0) {
-			  $('.resultSpan').text("이미 사용중인 동호회명입니다.");
-			  $('#cl_name').val('');
-			  $('#cl_name').focus();
-			} else {
-			  $('.resultSpan').text("");
-			}
-		  } else {
-			$('.resultSpan').text("동호회명을 입력해주세요");
-		  }
-	    });
-      });
 	  	  
+	  let cl_name = document.querySelector('#cl_name');
+	  let cl_name_valid = document.querySelector('#cl_name_valid');
+	  
+	  cl_name.addEventListener('blur', () => {
+		  if(cl_name.value.length < 3){
+			  cl_name_valid.innerHTML = "동호회명은 3자 이상으로 작성해주세요";
+		  }else if(cl_name.value.length > 29){
+			  cl_name_valid.innerHTML = "30자 이내로 작성해주세요";
+		  }else{
+			  cl_name_valid.innerHTML ="";
+			  
+			   $.ajax({
+					  url : "/clubList/nameCheck",
+					  data : { cl_name : cl_name.value }
+					}).done((resp) => {
+
+					  if (cl_name.value !== "") {
+						if (resp > 0) {
+						  cl_name_valid.innerHTML ="이미 사용중인 동호회명입니다";
+						  cl_name.value="";
+						  cl_name.focus();
+						} else {
+						  cl_name_valid.innerHTML="";
+						}
+					  } else {
+						cl_name_valid.innerHTML="동호회명을 입력해주세요";
+					  }
+				    }); 
+		  }
+	  })
+		  
+		let cl_maxMem = document.querySelector('#cl_maxMem');
+	  	cl_maxMem.addEventListener('blur', () => {
+	  		if (cl_maxMem.value > 100){
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="정원은 100명을 초과할 수 없습니다";
+	  			cl_maxMem.focus();
+	  		}else{
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="";
+	  		}
+	  })
+	  
+	  //다음 버튼 클릭시 innerHTML 들어가 있다면 다음 페이지로 넘어가는 것 막고, 빈 곳이 있어도 막기 구현 (예정)
+		  	  
+
 	</script>
   </div>
 </body>

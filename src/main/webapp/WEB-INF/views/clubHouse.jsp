@@ -65,6 +65,64 @@
           });
     	}
       });
+   
+      let clubIntro = document.getElementById("clubIntro");
+   	  let club_member_list = document.getElementById("club_member_list");
+   	  let club_board = document.getElementById("club_board");
+   	  let club_chat = document.getElementById("club_chat");
+   	  
+   	  let clIntro_wrap = document.querySelector(".clIntro_wrap");
+   	  let cm_list_wrap = document.querySelector(".cm_list_wrap");
+   	  let club_board_wrap = document.querySelector(".club_board_wrap");
+      let club_chat_wrap = document.querySelector(".club_chat_wrap"); 
+   	  
+   	  clubIntro.onclick = () => {
+   		clubIntro.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "none"; 
+   		club_chat.style.borderBottom = "none"; 
+   		
+   		clIntro_wrap.style.display = "flex";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "none";
+   	  }   
+   	  
+   	  club_member_list.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_board.style.borderBottom = "none"; 
+   		club_chat.style.borderBottom = "none"; 
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "flex";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "none";
+   	  }
+   
+   	  club_board.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "3px solid var(--bg-color3)";
+   		club_chat.style.borderBottom = "none";   
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "flex";
+   		club_chat_wrap.style.display = "none";
+   	  }
+   	  
+   	  club_chat.onclick = () => {
+   		clubIntro.style.borderBottom = "none";
+   		club_member_list.style.borderBottom = "none"; 
+   		club_board.style.borderBottom = "none";    
+   		club_chat.style.borderBottom = "3px solid var(--bg-color3)";
+   		
+   		clIntro_wrap.style.display = "none";
+   		cm_list_wrap.style.display = "none";
+   		club_board_wrap.style.display = "none";
+   		club_chat_wrap.style.display = "flex";
+   	  }
     }
   </script>
 </head>
@@ -175,14 +233,13 @@
         </div>
       </div>
       <div class="clubHouse_contents">
-        <%-- <div class="clubHouse_contents_box_wrap">
-          <!-- 동호회 소개 -->
-          <div class="clubHouse_contents_box">
+        <!-- 동호회 소개 -->
+        <div class="clIntro_wrap">
+          <div class="clIntro_box">
                <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
           </div>
-          
-          
-        </div> --%>
+        </div> 
+        
         <!-- 동호회 회원 리스트 -->
 	    <div class="cm_list_wrap">
 	      <div class="cm_list_title">
@@ -215,6 +272,14 @@
 	        </div>
 	      </div>
         </div>
+        <!-- 동호회 게시판 -->
+        <div class="club_board_wrap">
+            동호회 게시판
+        </div>
+        <!-- 동호회 채팅 -->
+        <div class="club_chat_wrap">
+             동호회 채팅
+        </div>  
       </div>
       </div>
       <!-- clubHouse end -->

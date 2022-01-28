@@ -139,4 +139,9 @@ public class ClubMemberService {
 
 	}
 
+	// 해당 동호회 회원 정보 가져오기
+	public List<ClubMemberDTO> clubMemberInfo(int cb_seq) {
+		return dao.clubMemberInfo(cb_seq);
+	}
+
 }

@@ -20,8 +20,13 @@ public class VoteController {
 	
 	
 	// 투표 작성 페이지 이동
-	@RequestMapping("voteWrite")
+	@RequestMapping("writePage")
 	public String voteWrite() {
 		return "vote/voteWrite";
 	}
+	
+	// 투표 작성 하기
+	
+	
+	
 }

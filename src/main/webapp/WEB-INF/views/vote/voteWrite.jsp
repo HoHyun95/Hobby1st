@@ -73,7 +73,7 @@
 
 <body>
 
-    <form action="">
+    <form action="voteWrite">
 
     
     <div class="container">
@@ -83,10 +83,10 @@
 
         <div class="items">
             <div class="pick_type">
-                <input type="radio" name="pick" id="pick1" checked>
+                <input type="radio" name="pick" id="pick1" value="0" checked>
                 <label  class="pick1_label" for="pick1">단일선택</label>
     
-                <input type="radio" name="pick" id="pick2">
+                <input type="radio" name="pick" id="pick2" value="1">
                 <label class="pick1_labe2" for="pick2">중복선택</label>
             </div>
     

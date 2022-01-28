@@ -26,7 +26,7 @@
 
 <body>
 
-	<a href="/vote/voteWrite">투표</a><br>
+	<a href="/vote/writePage">투표</a><br>
 	<a href="/vote/">투표 리스트</a>
 
 	<div style="margin: auto;" class="main-content w-full md:w-4/5 grid">

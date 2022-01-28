@@ -221,7 +221,7 @@
 }
 
 .clubHouse_contents {
-  height: 300px;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -235,3 +235,127 @@
 }
 
 /* clubHouse end */
+
+/* clubMemberList */
+.cm_list_wrap {
+  margin: 0 auto;
+  width: 1200px;
+  height: fit-content;
+  background-color: rgba(212, 212, 212, 0.3);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cm_list_title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  width: 100%;
+  padding: 30px 0px 10px 20px;
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cm_list_title_text {
+  height: 100%;
+}
+
+.cm_list_item_wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+
+.cm_list_item {
+  width: 23%;
+  height: 350px;
+  margin: 20px 10px 30px 10px;
+  box-shadow: 1px 1px 1px 1px rgba(212, 212, 212, 0.3);
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
+}
+
+.cm_list_item_photo_area {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cm_list_item_photo {
+  width: 125px;
+  height: 125px;
+  border: 1px solid dimgrey;
+  border-radius: 125px;
+  overflow: hidden;
+}
+
+.cm_list_item_photo img {
+  width: 100%;
+  height: 100%;
+}
+
+.cm_list_item_profile_area {
+  height: 37%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cm_list_admin_badge {
+  font-size: 0.5rem;
+  padding: 2px 2px;
+  border: 1px solid tomato;
+  color: tomato;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.cm_list_item_profile_title {
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 0px 0px 5px 0px;
+}
+
+.cm_list_item_profile_item {
+  font-size: 0.75rem;
+  padding: 1px 0px;
+}
+
+.cm_list_item_btns_area {
+  height: 13%;
+  display: flex;
+}
+
+.cm_list_item_btn1 {
+  width: 50%;
+  border: none;
+  border-top: 1px solid dimgrey;
+  padding: 3px 3px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cm_list_item_btn2 {
+  width: 50%;
+  border: none;
+  border-left: 1px solid dimgrey;
+  border-top: 1px solid dimgrey;
+  padding: 3px 3px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* clubMemberList end */

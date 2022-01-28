@@ -11,6 +11,7 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.NoticeDTO;
+import kh.hobby1st.service.AdminService;
 import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.MemberService;
@@ -32,14 +33,23 @@ public class AdminController {
 	@Autowired
 	private ClubListService clService;
 	
+	@Autowired
+	private AdminService aService;
 	
 	
 	@RequestMapping("/admin/clubAdmin")
-	public String clubAdmin(Model model) {
+	public String clubAdmin(int cpage, Model model) throws Exception{
 		
-		List<ClubListDTO> clubList = clService.selectAll();
+//		List<ClubListDTO> clubList = clService.selectAll();
+		List<ClubListDTO> adminClubList = aService.selectBoardByPaging(cpage);
+		int navi = aService.getRecordCount();
+		int totalListCount = aService.getRecordCount();
 		
-		model.addAttribute("allClub", clubList);
+//		model.addAttribute("allClub", clubList);
+		model.addAttribute("cpage",cpage);
+		model.addAttribute("navi",navi);
+		model.addAttribute("totalListCount", totalListCount);
+		model.addAttribute("adminClubList",adminClubList);
 		
 		return "admin/clubAdmin";
 	}

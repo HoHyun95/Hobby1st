@@ -161,5 +161,27 @@ public class ClubListDAO {
 	}
 	
 	
+	
+	// 관리자 페이지에서 동호회 리스트 페이징
+	public List<ClubListDTO> ClubListByPaging(int start, int end ){
+		
+		Map<String,String> map = new HashMap<>();
+		
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+		
+		return mybatis.selectList("ClubList.ClubListByPaging",map);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

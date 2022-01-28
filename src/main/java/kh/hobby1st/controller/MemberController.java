@@ -34,19 +34,18 @@ public class MemberController {
 	@Autowired
 	private MemberService mem_service;
 
-	//login_page
-	@RequestMapping("sign_in")
-	public String sign_in() {
-		return "member/sign_in";
-	}
-    //그냥 로그인만!(네이버는 따로 호출) 
+
+//  로그인부터 회원가입까지	
+// -------------------------------------------------------------------------------------------
+
+    //로그인창에서 일반로그인시 발동됩니다.
 	@RequestMapping("logind")
     public String logind(String mem_id, String mem_pass) {
-		
+		//회원정보 존재여부 체크
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
-			//사용자 이름 session 저장
-			MemberDTO mem_dto = mem_service.selectOne(mem_id);
+			   //사용자 로그인 정보 session 저장
+			    MemberDTO mem_dto = mem_service.selectOne(mem_id);
 				String user_name = mem_dto.getMem_name();
 				String user_nickName = mem_dto.getMem_nickname();
 
@@ -57,92 +56,33 @@ public class MemberController {
 		return "redirect: /";
 	}
 	
-	//naver_login_click
-	@RequestMapping("login")
-	public String login(String naver_id, String naver_mobile,
-			String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
-			String naver_birthday, String naver_gender) {
-    		
-		if(naver_id != null) {
-			int naver_result = mem_service.naver_idCheck(naver_id);
-
-			if(0<naver_result) {
-				MemberDTO mem_dto = new MemberDTO();		
-				String user_name = mem_dto.getMem_name();
-
-				session.setAttribute("user_name", user_name);
-				session.setAttribute("mem_id", naver_id);
-			}else if(0 == naver_result) {
-				String modf_mobile = naver_mobile.replaceAll("[-]", "");		
-				String naver_login = "naver_login";
-				String mem_birthday = naver_birthyear + "-" + naver_birthday;
-				String mem_lastlogin = "default";
-
-				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
-				int naver_Rinsert = mem_service.naver_insert(dto);
-				session.setAttribute("mem_id", naver_id);
-			}
-		}
-		return "redirect: /";
-	}
-
-	//logout_click
+	//로그아웃 버튼 누를시 실행됩니다. 
 	@RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
 		return "redirect: /";
 	}	
 
-	//signUp_page
-	@RequestMapping("sign_up")
-	public String sign_up() {
-		return "member/sign_up";
-	}
-
-	//auto id_check
+	//회원가입시 아이디중복 체크를 자동으로 진행합니다.(에이작스)
+	//signUp에 mem_id 값을 가져와서 mem_id_Result에 중복여부 전달
 	@ResponseBody
-	@RequestMapping(value="id_check")
+	@RequestMapping(value="idCheck")
 	public String id_check(String id) {
 		int result = (Integer)mem_service.id_check(id);
 		return String.valueOf(result);
 	}
 
-
-	//signUp_lastPage
-	@RequestMapping("sign_up_last")
-	public String sign_up_last(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
-			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email) {
-		//값을 가져오기 위한 것 
-		session.setAttribute("mem_id", mem_id);
-		session.setAttribute("mem_pass", mem_pass);
-		session.setAttribute("mem_name", mem_name);
-		session.setAttribute("mem_phone", mem_phone);
-
-		String add_email = mem_email.replaceAll("[,]", "");
-		session.setAttribute("mem_email", add_email);
-
-		session.setAttribute("mem_address", mem_address);
-		session.setAttribute("mem_birthday", mem_birthday);
-		session.setAttribute("mem_gender", mem_gender);
-		session.setAttribute("mem_category_1", mem_category_1);
-		session.setAttribute("mem_category_2", mem_category_2);
-		if(mem_category_2 == null) {
-			mem_category_2 = "no_category_2";
-			session.setAttribute("mem_category_2", mem_category_2);
-			return "member/sign_up_last";
-		}
-		return "member/sign_up_last";
-	}
-
-	//member_add_click
-	@RequestMapping("member_add")
-	public String memberAdd(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
+	//회원가입 성공
+	//SignUp Jsp에 form 형식 만 추가하면 됨
+	@RequestMapping("signUp")
+	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
 			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
-
-		String mem_lastlogin = "default";
+        
+		// DB에 디폴트 값을 전달하기 위해 임의 설정		
+		String mem_lastlogin = "default";       
 		for(MultipartFile mf : mem_photo) {
 			try{
-				//				String realPath = session.getServletContext().getRealPath("upload");
+				//서버 저장주소
 				String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
 				File realPathFile = new File(realPath);
 				if(!realPathFile.exists()) {realPathFile.mkdir();}
@@ -152,26 +92,35 @@ public class MemberController {
 
 				mf.transferTo(new File(realPath+"/"+sysName));
 				String profile = "/upload/profile/"+sysName;
-				MemberDTO dto = new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email); 
-				int result = mem_service.insert(dto);
+				
+				int result = mem_service.insert(new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email)); 
 			} catch (Exception e) {
 				e.printStackTrace();
+				return "error";
 			}	
 		}
 		return "redirect: /";
 	}
 
+// 이메일찾기 기능	
+// -------------------------------------------------------------------------------------------
+	// 이메일 찾기 페이지로 이동
+	@RequestMapping("send_email")
+	public String send_email() {
+		return "member/sign_email";
+	}
 
-
-	//find-email!!
+	//사용자에게 이메일로 인증번호를 보냅니다!
 	@RequestMapping(value="find_email")
 	public String find_email(String email, Model model) {
+		//회원정보에 사용자가 입력한 이메일이 존재하는지 확인
 		int result = mem_service.email_check(email);
-
 		if(result != 0) {
+			//인증번호 랜덤으로 뽑기
 			int random_num = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 			String num = "";		
 			try {
+				//사용자에게 보여질 글
 				MimeMessage mail = mailSender.createMimeMessage();
 				MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");	        
 				mailHelper.setFrom("nocoolboy@naver.com"); // 보내는이 
@@ -183,6 +132,7 @@ public class MemberController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+			//리턴값은 추후 디자인 정해지면 수정
 			model.addAttribute("random_num", random_num);
 			return "member/sign_email";
 		}else if(result == 0) {
@@ -192,19 +142,18 @@ public class MemberController {
 		return "member/sign_email";
 	}
 
-	// email page
-	@RequestMapping("send_email")
-	public String send_email() {
-		return "member/sign_email";
-	}
-
-	// email Ok
+	// 이메일 인증 성공시 반응할 컨트롤러
+	// 디자인 결정 여부에 따라 삭제될 수도있음
 	@RequestMapping("emailOk")
 	public String email_test() {
 		System.out.println("이메일 인증 성공!");
 		return "member/sign_email";
 	}
 	
+	
+// 관리자 페이지	
+// -------------------------------------------------------------------------------------------
+
 	// 관리자 페이지 회원 추방
 	@RequestMapping("signOutAdmin")
 	@ResponseBody
@@ -212,6 +161,40 @@ public class MemberController {
 		int result = mem_service.signOut(mem_id);
 		return result;
 	}
+
+// 자료보존	
+// -------------------------------------------------------------------------------------------
+		
+//  네이버 로그인기능
+//	@RequestMapping("Naver_login")
+//	public String login(String naver_id, String naver_mobile, String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
+//			            String naver_birthday, String naver_gender) {
+//    	// 네이버 아이디 정보가 없을 시에만 발동	
+//		if(naver_id != null) {
+//			// 네이버 아이디가 디비에 저장되어 있는지 확인
+//			int naver_result = mem_service.naver_idCheck(naver_id);
+//			if(0<naver_result) {
+//				// 만약에 네이버 아이디가 디비에 존재한다면 아이디정보를 홈에 세션으로 넘겨줌
+//				MemberDTO mem_dto = new MemberDTO();		
+//				String user_name = mem_dto.getMem_name();
+//				session.setAttribute("user_name", user_name);
+//				session.setAttribute("mem_id", naver_id);
+//			}else if(0 == naver_result) {
+//				// 만약에 네이버 아이디가 디비에 존재하지 않는다면 사용자 네이버 정보를 디비에 신규저장하고 로그인 시켜줌 
+//                // 네이버에서 넘겨주지 않는 정보는 임의지정값으로 설정
+//				String modf_mobile = naver_mobile.replaceAll("[-]", "");		
+//				String naver_login = "naver_login";
+//				String mem_birthday = naver_birthyear + "-" + naver_birthday;
+//				String mem_lastlogin = "default";
+//
+//				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
+//				int naver_Rinsert = mem_service.naver_insert(dto);
+//				session.setAttribute("mem_id", naver_id);
+//			}
+//		}
+//		return "redirect: /";
+//	}	
+	
 }
 
 

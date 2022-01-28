@@ -15,6 +15,7 @@
 <body>
   <!-- 회원가입 -->
   <div class="signUp_wrap">
+    <form action="/member/signUp" method="post" enctype="multipart/form-data">
     <span id="signUp_close_btn"><i class="fas fa-times"></i></span>
     <span id="signUp_slideLeft"><i class="far fa-arrow-alt-circle-left"></i></span>
     <span id="signUp_slideRight"><i class="far fa-arrow-alt-circle-right"></i></span>
@@ -62,49 +63,56 @@
               <span class="validResult" id="mem_id_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_id" maxlength="30" name="mem_id" placeholder="ID를 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_id" maxlength="20" name="mem_id" placeholder="ID를 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-lock-open"> 비밀번호</i>
               <span class="validResult" id="mem_pw_Result"></span>
             </div>
             <div class="input">
-              <input type="password" class="signUpInput" id="mem_pw" maxlength="30" name="mem_pw" placeholder="비밀번호를 입력해주세요">
+              <input type="password" class="signUpInput" id="mem_pass" maxlength="20" name="mem_pass" placeholder="비밀번호를 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-lock"> 비밀번호 확인</i>
               <span class="validResult" id="mem_pw2_Result"></span>
             </div>
             <div class="input">
-              <input type="password" class="signUpInput" id="mem_pw2" maxlength="30" name="mem_pw2" placeholder="비밀번호를 한 번 더 입력해주세요">
+              <input type="password" class="signUpInput" id="mem_pass2" maxlength="20" placeholder="비밀번호를 한 번 더 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-user"> 이름</i>
               <span class="validResult" id="mem_name_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_name" maxlength="30" name="mem_name" placeholder="이름을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_name" maxlength="20" name="mem_name" placeholder="이름을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-file-signature"> 닉네임</i>
               <span class="validResult" id="mem_nickname_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_nickname" maxlength="30" name="mem_id" placeholder="닉네임을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_nickname" maxlength="20" name="mem_nickname" placeholder="닉네임을 입력해주세요">
+            </div>
+            <div class="title">
+              <i class="fas fa-user"> 생년월일</i>
+              <span class="validResult" id="mem_birthday_Result"></span>
+            </div>
+            <div class="input">
+              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" placeholder="이름을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-mobile-alt"> 핸드폰 번호</i>
               <span class="validResult" id="mem_name_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_phone" maxlength="30" name="mem_phone" placeholder="핸드폰 번호를 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_phone" maxlength="20" name="mem_phone" placeholder="핸드폰 번호를 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-envelope"> 이메일</i>
               <span class="validResult" id="mem_phone_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_email" maxlength="30" name="mem_email" placeholder="이메일을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_email" maxlength="20" name="mem_email" placeholder="이메일을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-venus-mars"> 성별</i>
@@ -127,9 +135,9 @@
               <img src="/images/woman1.png" alt="이미지를 선택해 주세요" id="preview_img">
             </div>
             <div class="input">
-              <input name="file" type="file" class="signUpInput" id="input-image" accept="image/*">
+              <input name="mem_photo" type="file" class="signUpInput" id="input-image" accept="image/*">
             </div>
-            <div class="validResult" id="mem_gender_Result"></div>
+            <div class="validResult" id="mem_photo_Result"></div>
           </div>
           <div class="contents_item">
             <div class="desc">
@@ -213,8 +221,8 @@
                 </svg>
               </div>
             </div>
-            <div class="select_cl_local">
-              <select name="cl_local" id="cl_local">
+            <div class="select_mem_address">
+              <select name="mem_address" id="mem_address">
                 <option selected disabled hidden>지역을 선택해주세요</option>
                 <option value="seoul">서울</option>
                 <option value="gyeonggi">경기</option>
@@ -288,6 +296,7 @@
         </div>
       </div>
     </div>
+    </form>
   </div>
 </body>
 </html>

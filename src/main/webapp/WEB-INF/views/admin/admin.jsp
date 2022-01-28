@@ -412,7 +412,7 @@ $(document).on("click","#dash", function() {
 							<div class="fontA">
 								<i class="fas fa-object-group"></i>
 							</div>
-							<div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin">동호회관리</a></div>
+							<div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin?cpage=1">동호회관리</a></div>
 						</div>
 
 						<div class="list_item">

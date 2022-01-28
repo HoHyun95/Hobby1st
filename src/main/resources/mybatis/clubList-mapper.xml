@@ -122,5 +122,10 @@
 	</update>
 	
 	
+	<!-- 관리자 페이지 동호회 리스트 페이징용 -->
+	<select id="ClubListByPaging" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from (select club_list.*, row_number() over(order by cl_id desc) rn from club_list) where rn between ${start} and #{end}
+	</select>
+	
 	
 </mapper>

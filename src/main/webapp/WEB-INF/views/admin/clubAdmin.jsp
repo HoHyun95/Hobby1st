@@ -306,27 +306,27 @@
 							</tr>
 
 
-							<c:forEach var="dto" items="${allClub}">
+							<c:forEach var="dto" items="${adminClubList}">
 								<tr>
-									<td>${dto.CL_ID}</td>
-									<td><a href="/clubHouse?cl_id=${dto.CL_ID }">${dto.CL_NAME }</a></td>
-									<td>${dto.CL_DESC }</td>
-									<td>${dto.CL_BOSS_ID }</td>
-									<td>${dto.CL_MAXMEM }</td>
-									<td>${dto.CL_LOCAL }</td>
-									<td>${dto.CL_OPENDATE }</td>
-									<td>${dto.CL_MEMCOUNT }</td>
-									<td>${dto.CL_CATEGORY_ID }</td>
-									<td>${dto.CL_DCATEGORY_ID }</td>
-									<td>${dto.CL_REC_COUNT }</td>
-									<td><button class="breakClub${dto.CL_ID }">해체</button></td>
+									<td>${dto.cl_id}</td>
+									<td><a href="/clubHouse?cl_id=${dto.cl_id }">${dto.cl_name }</a></td>
+									<td>${dto.cl_desc }</td>
+									<td>${dto.cl_boss_id }</td>
+									<td>${dto.cl_maxMem }</td>
+									<td>${dto.cl_local }</td>
+									<td>${dto.cl_openDate }</td>
+									<td>${dto.cl_memCount }</td>
+									<td>${dto.cl_category_id }</td>
+									<td>${dto.cl_dCategory_id }</td>
+									<td>${dto.cl_rec_count }</td>
+									<td><button class="breakClub${dto.cl_id }">해체</button></td>
 
 									<script>
-				$('.breakClub${dto.CL_ID }').on('click', () => {
+				$('.breakClub${dto.cl_id }').on('click', () => {
 					
 					if(confirm("동호회를 해체 시키겠습니까?")){
 						$.ajax({
-							url: "/club/breakClubAdmin?board_seq=${dto.CL_ID}"
+							url: "/club/breakClubAdmin?board_seq=${dto.cl_id}"
 						}).done(function(result){
 							if(result == 1){
 								alert("성공적으로 해체하였습니다");
@@ -350,8 +350,10 @@
 				</div>
 				<!-- clubAdmin -->
       
-      		
-      
+     
+			<div class="navi" style="text-align : center; line-height: 60px">
+				${navi }
+			</div>
       
      
       

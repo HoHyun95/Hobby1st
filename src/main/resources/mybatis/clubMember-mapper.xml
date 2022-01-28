@@ -28,7 +28,7 @@
  	</select>
  	
  	<!-- 해당 동호회 회원 정보 받아오기 -->
- 	<select id="clubMemberInfo" resultType="kh.hobby1st.dto.ClubMemberDTO">
+ 	<select id="clubMemberInfomation" resultType="kh.hobby1st.dto.MemberDTO">
  		select m.* from member m join club_member c on (m.mem_id = c.cm_mem_id) where c.cm_par_seq = #{value}
  	</select>
   	

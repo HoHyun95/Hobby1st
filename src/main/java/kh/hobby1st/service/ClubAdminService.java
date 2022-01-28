@@ -10,7 +10,7 @@ import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.statics.Statics;
 
 @Service
-public class AdminService {
+public class ClubAdminService {
 	
 	@Autowired
 	public ClubListDAO cldao;

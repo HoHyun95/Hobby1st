@@ -1,5 +1,8 @@
 package kh.hobby1st.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +32,15 @@ public class VoteController {
 	
 	// 투표 작성 하기
 	@RequestMapping("voteWrite")
-	public String voteWrite(VoteListDTO Ldto, VoteOptionDTO Odto) {
+	public String voteWrite(VoteListDTO listDto, VoteOptionDTO optionDto, String edateY, String edateM, String edateD, String[] option) {
 		
-		System.out.println(Ldto.getVl_type());
+		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
+		listDto.setVl_end_date(edate);
+		
+		System.out.println("항목 : " + option.length);
+		
+		System.out.println(listDto.getVl_end_date());
+		System.out.println(listDto.getVl_type());
 		return "vote/voteWrite";
 	}
 	

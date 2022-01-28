@@ -16,7 +16,7 @@
   <div class="modal_bg">
 
   </div>
-<!-- sign_in -->
+  <!-- sign_in -->
   <div class="loginForm">
     <div class="login_wrap">
     <div class="login_box_wrap">
@@ -37,7 +37,7 @@
                   ID
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="text" id="mem_id" maxlength="20">
+                  <input type="text" name="mem_id" maxlength="20">
                 </div>
               </div>
               <div class="login_input_contents_input_pw">
@@ -45,7 +45,7 @@
                   PASSWORD
                 </div>
                 <div class="login_input_contents_input_box">
-                  <input type="password" id="mem_pass" maxlength="20" autocomplete="off">
+                  <input type="password" name="mem_pass" maxlength="20" autocomplete="off">
                 </div>
               </div>
               <div class="input_btn1">

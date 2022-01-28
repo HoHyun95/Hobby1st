@@ -19,10 +19,12 @@
         }
 
         .container{
-            width: 50%;
+            width: 30%;
             margin: auto;
             margin-top: 100px;
-            border: 1px solid rgb(199, 197, 197);
+            border: 1px solid rgb(177, 177, 177);
+            border-radius: 10px;
+            padding: 1.5%;
         }
 
         .write{
@@ -33,39 +35,52 @@
             text-align: center;
             padding-left: 5%;
             padding-right: 5%;
-            border: 1px solid rgb(199, 197, 197);
+            border-bottom: 1px solid rgb(177, 177, 177);
+        }
+        
+        .title{
+            border-bottom: 1px solid rgb(177, 177, 177);
         }
 
 
         .title_input{
+            padding: 2%;
             width: 100%;
             height: 50px;
+            border: 0px;
         }
 
         .answers_input{
+            border-radius: 5px;
+            border: 1px solid rgb(177, 177, 177);
             width: 100%;
             height: 40px;
             margin-bottom: 5px;
         }
         .control_answers{
             margin-top: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .pick_type{
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .write{
             margin-top: 20px;
 
-            margin-bottom: 20px;
+            
         }
 
         .edate{
-            margin-top: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
             text-align: center;
+        }
+
+        .answers{
+            margin-bottom: 20px;
         }
         
     </style>
@@ -176,6 +191,7 @@
 
         <div class="write">
             <button type="reset">다시 작성</button>
+            &nbsp;&nbsp;
             <button>작성하기</button>
         </div>
         

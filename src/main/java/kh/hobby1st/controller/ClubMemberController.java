@@ -22,7 +22,7 @@ public class ClubMemberController {
 	@Autowired
 	private ClubMemberService club_member_service;
 	
-	
+	// 멤버리스트 
 	@RequestMapping("/memberList")
 	public String memberList(int cpage, Model model) throws Exception {
 		System.out.println("성공");
@@ -40,6 +40,7 @@ public class ClubMemberController {
 		return "clubMember/memberList";
 	}
 	
+	// 추방하기
 	@RequestMapping("/deleteMember")
 	public String deleteMember(int cpage, String mem_id,String mem_name, Model model) throws Exception {
 		

@@ -5,11 +5,11 @@
 
 <mapper namespace="Vote">
 	<insert id="insertVoteList">
-		insert into vote_list values(vote_list_seq.nextval, #{vl_title}, sysdate, #{vl_end_date},0);
+		insert into vote_list values(vote_list_seq.nextval, #{vl_title}, sysdate, #{vl_end_date},0)
 	</insert>
 	
 	<insert id="insertVoteOption">
-		insert into vote_option values(vote_option_seq.nextval, vote_list_seq.currval, #{value}, default);
+		insert into vote_option values(vote_option_seq.nextval, vote_list_seq.currval, #{value}, default)
 	</insert>
 
 	<!-- 공지사항 게시 된 글 수 -->

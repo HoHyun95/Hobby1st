@@ -37,14 +37,16 @@ public class VoteController {
 		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
 		listDto.setVl_end_date(edate);
 		
+		System.out.println(listDto.getVl_title());
+		
+		voteService.insertVoteList(listDto, edateY, edateM, edateD);
+		
 		for(int i =0; i < option.length; i++) {
 			System.out.println("항목 : " + option[i]);
+			voteService.insertVoteOption(option[i]);
 			
 		}
 		
-		
-		System.out.println(listDto.getVl_end_date());
-		System.out.println(listDto.getVl_type());
 		return "vote/voteWrite";
 	}
 	

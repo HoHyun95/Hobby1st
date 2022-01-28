@@ -73,12 +73,12 @@
 
 <body>
 
-    <form action="/vote/voteWrite">
+    <form action="/vote/voteWrite" method="post">
 
     
     <div class="container">
         <div class="title">
-            <input class="title_input" type="text" placeholder="투표 제목">
+            <input class="title_input" name="vl_title" type="text" placeholder="투표 제목">
         </div>
 
         <div class="items">
@@ -99,7 +99,7 @@
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" type="text" placeholder="항목 입력">
             </div>
     
             <div class="answers" style="display: none;">

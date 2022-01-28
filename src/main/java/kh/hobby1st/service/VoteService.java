@@ -1,5 +1,7 @@
 package kh.hobby1st.service;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,10 @@ public class VoteService {
 	private VoteDAO voteDao;
 	
 	// 투표 리스트에 추가
-	public int insertVoteList(VoteListDTO dto) {
+	public int insertVoteList(VoteListDTO dto,String edateY, String edateM, String edateD) {
+		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
+		dto.setVl_end_date(edate);
+		
 		return voteDao.insertVoteList(dto);
 	}
 		

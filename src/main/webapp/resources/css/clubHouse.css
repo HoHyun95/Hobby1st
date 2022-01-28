@@ -212,8 +212,11 @@
 
 .clubHouse_menu_list_item {
   border: none;
-  padding: 10px 0px 10px 0px;
-  margin-right: 50px;
+  padding: 10px 20px 10px 20px;
+}
+
+.clubHouse_menu_list_item:hover {
+  cursor: pointer;
 }
 
 #clubIntro {
@@ -228,19 +231,25 @@
   margin-bottom: 30px;
 }
 
-.clubHouse_contents_box_wrap {
+.clIntro_wrap {
   width: 95%;
-  height: 100%;
+  height: 600px;
   border: 1px solid var(--bg-color3);
 }
 
+.club_board_wrap, .club_chat_wrap {
+  width: 95%;
+  height: 600px;
+  border: 1px solid var(--bg-color3);	
+  display: none;
+}
 /* clubHouse end */
 
 /* clubMemberList */
 .cm_list_wrap {
   margin: 0 auto;
   width: 1200px;
-  height: fit-content;
+  height: 600px;
   background-color: rgba(212, 212, 212, 0.3);
   display: none;
   flex-direction: column;

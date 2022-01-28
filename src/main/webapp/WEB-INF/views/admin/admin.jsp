@@ -412,35 +412,35 @@ $(document).on("click","#dash", function() {
 							<div class="fontA">
 								<i class="fas fa-object-group"></i>
 							</div>
-							<div class="menuName" id="clubAdmin">동호회관리</div>
+							<div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin">동호회관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="far fa-list-alt"></i>
 							</div>
-							<div class="menuName" id="boardAdmin">게시판관리</div>
+							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin">게시판관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="fas fa-address-card"></i>
 							</div>
-							<div class="menuName" id="memberAdmin">회원관리</div>
+							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin">회원관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="fas fa-question-circle"></i>
 							</div>
-							<div class="menuName" id="QA">Q&A</div>
+							<div class="menuName" id="QA"><a href="/admin/qa">Q&A</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="fab fa-quora"></i>
 							</div>
-							<div class="menuName" id="FAQ">FAQ</div>
+							<div class="menuName" id="FAQ"><a href="/admin/faq">FAQ</a></div>
 
 						</div>
 
@@ -448,7 +448,7 @@ $(document).on("click","#dash", function() {
 							<div class="fontA">
 								<i class="far fa-newspaper"></i>
 							</div>
-							<div class="menuName" id="notice">공지사항</div>
+							<div class="menuName" id="notice"><a href="/admin/notice">공지사항</a></div>
 
 						</div>
 					</div>

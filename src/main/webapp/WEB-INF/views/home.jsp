@@ -230,7 +230,7 @@
    	  
       
       /* 네이버 로그인 */ 
-      const naverLogin = new naver.LoginWithNaverId(
+      /* const naverLogin = new naver.LoginWithNaverId(
     			{
     				clientId: "lBYZ6xYGSN3wiVHC2ZK4",
     				callbackUrl: "http://localhost/",
@@ -309,7 +309,7 @@
             console.log(mem_pass)
             
             location.href = "/member/logind?mem_id="+(mem_id)+"&mem_pass="+(mem_pass);
-        }
+        } */
         
         /* 회원가입 */
         let signUp_close_btn = document.getElementById("signUp_close_btn");

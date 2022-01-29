@@ -68,4 +68,15 @@
   	</select> 
   	
   	
+  	<!-- 관리자 게시판 관리용 게시글 수 -->
+	<select id="countBoard" resultType="int">
+		select count(*) cb_count from club_board
+	</select>
+  	
+  	<!-- 관리자 페이지 게시판관리 페이징용 -->
+  	<select id="ClubBoardByPaging" resultType="kh.hobby1st.dto.ClubBoardDTO">
+		select * from (select club_board.* , row_number() over(order by cb_seq desc) rn from club_board) where rn between ${start} and #{end}
+	</select>
+  	
+  	
   </mapper>

@@ -7,12 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.VoteListDTO;
 import kh.hobby1st.dto.VoteOptionDTO;
-import kh.hobby1st.service.ClubMemberService;
 import kh.hobby1st.service.VoteService;
 
 @Controller
@@ -31,6 +30,23 @@ public class VoteController {
 	public String writePage() {
 		
 		return "vote/voteWrite";
+	}
+	
+	// 투표 작성 페이지 이동
+	@RequestMapping("detailPage")
+	public String detailPage() {
+		
+		return "vote/voteDetail";
+	}
+	
+	// 투표 리스트 이동
+	@RequestMapping("listPage")
+	public String listPage(Model model) {
+		List<VoteListDTO> vote_list = voteService.selectVoteAll();
+		
+		
+		model.addAttribute("vote_list", vote_list);
+		return "vote/voteList";
 	}
 	
 	// 투표 작성 하기

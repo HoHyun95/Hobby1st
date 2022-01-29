@@ -4,18 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Vote">
+	<!-- 투표 리스트에 추가 -->
 	<insert id="insertVoteList">
-		insert into vote_list values(vote_list_seq.nextval, #{vl_title}, sysdate, #{vl_end_date},0)
+		insert into vote_list values(vote_list_seq.nextval, #{vl_title}, sysdate, #{vl_end_date},#{vl_type}, default)
 	</insert>
 	
+	
+	<!-- 투표 옵션 넣기 -->
 	<insert id="insertVoteOption">
 		insert into vote_option values(vote_option_seq.nextval, vote_list_seq.currval, #{value}, default)
 	</insert>
 
-	<!-- 공지사항 게시 된 글 수 -->
-	<select id="inseron" resultType="int">
-		select count(*) from (select notice.*, row_number() over(order by notice_seq
-		desc) rn from notice)
+	<!-- 투표 리스트 (전쳬) -->
+	<select id="selectVoteAll" resultType="kh.hobby1st.dto.VoteListDTO">
+		select * from vote_list
 	</select>
 
 

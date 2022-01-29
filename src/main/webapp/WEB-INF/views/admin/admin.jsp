@@ -405,7 +405,7 @@ $(document).on("click","#dash", function() {
 							<div class="fontA">
 								<i class="fas fa-sliders-h"></i>
 							</div>
-							<div class="menuName" id="dash">대시보드</div>
+							<div class="menuName" id="dash"><a href="/admin">대시보드</a></div>
 						</div>
 
 						<div class="list_item">
@@ -419,14 +419,14 @@ $(document).on("click","#dash", function() {
 							<div class="fontA">
 								<i class="far fa-list-alt"></i>
 							</div>
-							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin">게시판관리</a></div>
+							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin?cpage=1">게시판관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="fas fa-address-card"></i>
 							</div>
-							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin">회원관리</a></div>
+							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin?cpage=1">회원관리</a></div>
 						</div>
 
 						<div class="list_item">

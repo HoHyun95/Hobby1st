@@ -1,5 +1,7 @@
 package kh.hobby1st.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,11 @@ public class VoteDAO {
 	// 해당 투표 옵션 추가하기
 	public int insertVoteOption(String option) {
 		return mybatis.insert("Vote.insertVoteOption", option);
+	}
+	
+	// 투표 리스트 (전쳬)
+	public List<VoteListDTO> selectVoteAll() {
+		return mybatis.selectList("Vote.selectVoteAll");
 	}
 
 }

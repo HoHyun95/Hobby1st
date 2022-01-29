@@ -53,7 +53,7 @@
 
     .contents {
       width: 75%;
-      height: 600px;
+      /* height: 600px; */
       
       /* padding: 30px 20px 30px 20px; */
     }
@@ -153,7 +153,7 @@
     
     .boardAdmin1 {
     	width: 80%;
-    	border: 1px solid dimgray;
+    	/* border: 1px solid dimgray; */
         height: 20%;
     }
     
@@ -199,28 +199,28 @@
             <div class="fontA">
               <i class="fas fa-sliders-h"></i>
             </div>  
-            <div class="menuName" id="dash">대시보드</div>
+            <div class="menuName" id="dash"><a href="/admin">대시보드</a></div>
           </div>
 
           <div class="list_item">
             <div class="fontA">
               <i class="fas fa-object-group"></i>
              </div>
-            <div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin">동호회관리</a></div>
+            <div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin?cpage=1">동호회관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="far fa-list-alt"></i>
 							</div>
-							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin">게시판관리</a></div>
+							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin?cpage=1">게시판관리</a></div>
 						</div>
 
 						<div class="list_item">
 							<div class="fontA">
 								<i class="fas fa-address-card"></i>
 							</div>
-							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin">회원관리</a></div>
+							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin?cpage=1">회원관리</a></div>
 						</div>
 
 						<div class="list_item">
@@ -277,7 +277,7 @@
 								<td width=70></td>
 							</tr>
 
-							<c:forEach var="dto" items="${allBoard}">
+							<c:forEach var="dto" items="${adminClubBoard}">
 
 								<tr>
 									<td>${dto.cb_seq}</td>
@@ -313,8 +313,13 @@
 							</c:forEach>
 						</table>
 
+					</div><!-- boardAdmin1 -->
+					
+					<div class="navi" style="text-align : center; line-height: 60px">
+						${navi }
 					</div>
-				</div>
+					
+				</div><!-- boardAdmin -->
       
      
       

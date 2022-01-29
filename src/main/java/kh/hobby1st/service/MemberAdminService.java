@@ -5,23 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.hobby1st.dao.BoardAdminDAO;
-import kh.hobby1st.dto.ClubBoardDTO;
+import kh.hobby1st.dao.MemberAdminDAO;
+import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.statics.Statics;
 
 @Service
-public class BoardAdminService {
+public class MemberAdminService {
 	
 	@Autowired
-	private BoardAdminDAO adao;
+	private MemberAdminDAO madao;
 	
-	// 게시글 총 갯수
+	// 총 회원수
 	public int getRecordCount() {
-		return adao.countBoard();
+		return madao.totalMember();
 	}
 	
 	
-	public List<ClubBoardDTO> selectBoardByPaging(int cpage ) throws Exception {
+	public List<MemberDTO> selectBoardByPaging(int cpage ) throws Exception {
 		int currentPage = cpage;
 
 		int pageTotalCount = this.getRecordCount();
@@ -35,7 +35,7 @@ public class BoardAdminService {
 		int start = currentPage * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 		int end = currentPage * Statics.RECORD_COUNT_PER_PAGE;
 
-		return adao.ClubBoardByPaging(start, end);
+		return madao.MemberListByPaging(start, end);
 	}
 
 	// 게시판 총 페이지
@@ -97,21 +97,19 @@ public class BoardAdminService {
 		String pageNavi = "";
 
 		if (needPrev) {
-			pageNavi += "<a class='paging' href='/admin/boardAdmin?cpage=" + (startNavi - 1) + "'><</a>";
+			pageNavi += "<a class='paging' href='/admin/memberAdmin?cpage=" + (startNavi - 1) + "'><</a>";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/admin/boardAdmin?cpage=" + i + "'>" + i
+			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/admin/memberAdmin?cpage=" + i + "'>" + i
 					+ "</a> ";
 		}
 
 		if (needNext) {
-			pageNavi += "<a class='paging' href='/admin/boardAdmin?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi += "<a class='paging' href='/admin/memberAdmin?cpage=" + (endNavi + 1) + "'>></a>";
 		}
 		return pageNavi;
 	}
-	
-	
 	
 	
 	

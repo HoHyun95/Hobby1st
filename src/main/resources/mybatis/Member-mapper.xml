@@ -50,4 +50,11 @@
 	<update id="modifyMember">
 		update member set mem_pass = #{mem_pass}, mem_phone = #{mem_phone}, mem_email = #{mem_email}, mem_nickname = #{mem_nickname}, mem_address = #{mem_address}, mem_category_1 = #{mem_category_1}, mem_category_2 = #{mem_category_2}, mem_photo = #{mem_photo} where mem_id = #{mem_id}
 	</update>
+	
+	<!-- 관리자 페이지에서 멤버 리스트 페이지용 -->
+	<select id="MemberListByPaging" resultType="kh.hobby1st.dto.MemberDTO">
+		select * from (select member.*, row_number() over(order by mem_id desc) rn from member) where rn between ${start} and #{end}
+	</select>
+	
+	
 </mapper>

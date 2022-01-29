@@ -97,7 +97,7 @@ $('#cl_name').on('keyup', () => {
 	if(
 		$('#cl_name').val().length < 3
 	){
-		console.log('sdad');
+		
 		$('#nameSpan').text("동호회명은 3자 이상으로 작성해주세요");
 	}else if($('#cl_name').val().length > 29){
 		$('#nameSpan').text("30자 이내로 작성해주세요");

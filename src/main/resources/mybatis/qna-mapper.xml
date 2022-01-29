@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Qna">
+
+
+	<insert id="insertQna">
+		insert into qna values(qna_seq.nextval,
+		#{qna_writer}, #{qna_title},
+		#{qna_contents}, sysdate, 0)
+	</insert>
+
+	<select id="selectQna" resultType="kh.hobby1st.dto.QnaDTO">
+		select * from (select qna.*, row_number() over(order by qna_seq desc)
+		rn from
+		qna) where rn between #{start} and #{end}
+	</select>
+
+	<select id="RecordCount" resultType="int">
+		select count(*) from (select
+		qna.*, row_number() over(order by qna_seq desc)
+		rn from qna)
+	</select>
+
+	<select id="qnaDetail" resultType="kh.hobby1st.dto.QnaDTO">
+		select * from qna where
+		qna_seq = #{value}
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="increaseView">
+		update qna set qna_view_count = qna_view_count + 1
+		where qna_seq = #{value}
+	</update>
+
+	<!-- 게시판 삭제 -->
+	<delete id="deleteQna">
+		delete from qna where qna_seq = #{value}
+	</delete>
+
+	<!-- 게시판 수정 -->
+	<update id="modifyQna">
+		update qna set qna_title = #{qna_title}, qna_contents
+		= #{qna_contents},
+		qna_write_date = sysdate where qna_seq = #{qna_seq}
+	</update>
+
+	<!-- 게시판 제목 검색 -->
+	<select id="searchTitle" resultType="kh.hobby1st.dto.QnaDTO">
+		select * from (select qna.*,
+		row_number() over(order by qna_seq desc) rn
+		from qna where qna_title
+		like '%'|| #{searchWord}||'%') where rn
+		between #{start} and #{end}
+	</select>
+
+	<!-- 게시판 작성자 검색 -->
+	<select id="searchWriter" resultType="kh.hobby1st.dto.QnaDTO">
+		select * from (select
+		qna.*, row_number() over(order by qna_seq desc) rn
+		from qna where
+		qna_wrtier = #{searchWord}) where rn between #{start}
+		and #{end}
+	</select>
+
+	<!-- 제목 검색시 총 개수 -->
+	<select id="searchTitleCount" resultType="int">
+		select count(*) from
+		qna where qna_title like '%'|| #{searchWord}||'%'
+	</select>
+
+	<!-- 작성자 검색시 총 개수 -->
+	<select id="searchWriterCount" resultType="int">
+		select count(*) from
+		qna where qna_writer = #{searchWord}
+	</select>
+
+	<!-- 게시판 작성자 프로필 가져오기 -->
+	<select id="writerProfile" resultType="String">
+		select m.mem_photo from
+		member m ,(select * from qna where qna_seq =
+		#{value}) b where m.mem_id
+		= b.qna_writer
+	</select>
+
+
+
+</mapper>

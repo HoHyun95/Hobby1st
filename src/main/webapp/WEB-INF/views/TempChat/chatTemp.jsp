@@ -520,25 +520,21 @@
 		})
 
 	emoji1.on('click', () => {
-	   console.log(1);
 	   emojiVal = "emoji1";
 	   insertEmojiIntoDB(emojiVal);
 	})
 
 	   emoji2.on('click', () => {
-	      console.log(2);
 	   emojiVal = "emoji2";
 	   insertEmojiIntoDB(emojiVal);
 	})
 
 	emoji3.on('click', () => {
-	   console.log(3);
 	   emojiVal = "emoji3";
 	   insertEmojiIntoDB(emojiVal);
 	})
 
 	emoji4.on('click', () => {
-	   console.log(4);
 	   emojiVal = "emoji4";
 	   insertEmojiIntoDB(emojiVal);
 	})

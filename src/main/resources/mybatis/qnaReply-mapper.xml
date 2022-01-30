@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="QnaReply">
+  
+  	<!-- 댓글 삽입 -->
+  	<insert id="insertReply">
+  		insert into qnar values(#{qnar_par_seq}, qnar_seq.nextval, #{qnar_writer}, #{qnar_reply}, sysdate)
+  	</insert>
+  
+  	<select id="selectReply" resultType="kh.hobby1st.dto.QnaReplyDTO">
+   		select * from qnar where qnar_par_seq = #{value} order by 2, qnar_seq
+   	</select>
+   	
+   	<!-- 댓글 삭제 -->
+   	<delete id="deleteReply">
+   		delete from qnar where qnar_seq = #{value}
+   	</delete>
+   	
+   	<!-- 대댓글 삭제 -->
+   	<delete id="deleteReply_r">
+   		delete from qnar where qnar_seq = #{value}
+   	</delete>
+  	
+<!--   	<select id="replyCount" resultType="int"> -->
+<!--   		select count(*) from qnar where qnar_seq  = #{value} -->
+<!--   	</select> -->
+  	
+<!-- 	<update id="plusReply"> -->
+<!-- 		update club_board set cb_reply_count = cb_reply_count + 1 where cb_seq =#{value} -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="minusReply"> -->
+<!-- 		update club_board set cb_reply_count = cb_reply_count - 1 where cb_seq =#{value} -->
+<!-- 	</update> -->
+	
+	<!-- 댓글 쓴 유저 프로필 가져오기  -->
+  	<select id="reply_profile" resultType="String">
+  		select m.mem_photo from member m ,(select * from qnar where qnar_par_seq = #{value} order by 2, qnar_seq) r where m.mem_id = r.qnar_writer
+  	</select>
+  	
+  </mapper>

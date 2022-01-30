@@ -31,6 +31,11 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
+	// 공지사항 전체 출력 (페이징 적용 X )
+	public List<NoticeDTO> noticeListNotPaging(){
+		return mybatis.selectList("Notice.noticeListNotPaging");
+	}
+	
 	public int insert(NoticeDTO dto) {
 		return mybatis.insert("Notice.insertNotice", dto);
 	}

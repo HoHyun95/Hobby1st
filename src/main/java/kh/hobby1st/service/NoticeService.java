@@ -16,6 +16,11 @@ public class NoticeService {
 	@Autowired
 	private NoticeDAO notDao;
 
+	// 공지사항 전체 출력 (페이징 적용 X )
+	public List<NoticeDTO> noticeListNotPaging(){
+		return notDao.noticeListNotPaging();
+	}
+	
 	// 공지사항 총 개수
 	public int getRecordCount() {
 		return notDao.getRecordCount();

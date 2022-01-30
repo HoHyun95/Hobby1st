@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,153 +20,153 @@
   <link rel="stylesheet" href="/css/signUp.css">
   <script>
     window.onload = () => {
-      // let id = '<%=(String)session.getAttribute("mem_id")%>';
-      // let loginform_btn = document.getElementById("loginform_btn");
-      // let signupform_btn = document.getElementById("signupform_btn");
-      // let close_btn = document.getElementById("close_btn");
-      // let sign_up = document.getElementById("sign_up");
+       let id = '<%=(String)session.getAttribute("mem_id")%>';
+       let loginform_btn = document.getElementById("loginform_btn");
+       let signupform_btn = document.getElementById("signupform_btn");
+       let close_btn = document.getElementById("close_btn");
+       let sign_up = document.getElementById("sign_up");
 
-      // loginform_btn.onclick = () => {
-      //   let modal_bg = document.querySelector(".modal_bg");
-      //   let loginForm = document.querySelector(".loginForm");
-      //   modal_bg.style.zIndex = 10;
-      //   modal_bg.style.display = "flex";
-      //   loginForm.style.zIndex = 11;
-      //   loginForm.style.display = "flex";
-      // }
+       loginform_btn.onclick = () => {
+         let modal_bg = document.querySelector(".modal_bg");
+         let loginForm = document.querySelector(".loginForm");
+         modal_bg.style.zIndex = 10;
+         modal_bg.style.display = "flex";
+         loginForm.style.zIndex = 11;
+         loginForm.style.display = "flex";
+       }
 
-      // close_btn.onclick = () => {
-      //   let modal_bg = document.querySelector(".modal_bg");
-      //   let loginForm = document.querySelector(".loginForm");
-      //   modal_bg.style.zIndex = -1;
-      //   modal_bg.style.display = "none";
-      //   loginForm.style.zIndex = -1;
-      //   loginForm.style.display = "none";
-      // }
+       close_btn.onclick = () => {
+         let modal_bg = document.querySelector(".modal_bg");
+         let loginForm = document.querySelector(".loginForm");
+         modal_bg.style.zIndex = -1;
+         modal_bg.style.display = "none";
+         loginForm.style.zIndex = -1;
+         loginForm.style.display = "none";
+       }
 
-      // /* 회원가입 */
-      // let signUp_close_btn = document.getElementById("signUp_close_btn");
-      // let signUpBtn = document.getElementById("signUpBtn");
-      // let signUp_slideLeft = document.getElementById("signUp_slideLeft");
-      // let signUp_slideRight = document.getElementById("signUp_slideRight");
-      // let signUp_container = document.querySelector(".signUp_container");
-      // let signUp_MOVE_WIDTH = 528;
-      // let signUp_position = 0;
+       /* 회원가입 */
+       let signUp_close_btn = document.getElementById("signUp_close_btn");
+       let signUpBtn = document.getElementById("signUpBtn");
+       let signUp_slideLeft = document.getElementById("signUp_slideLeft");
+       let signUp_slideRight = document.getElementById("signUp_slideRight");
+       let signUp_container = document.querySelector(".signUp_container");
+       let signUp_MOVE_WIDTH = 528;
+       let signUp_position = 0;
 
-      // signupform_btn.onclick = () => {
-      //   let modal_bg = document.querySelector(".modal_bg");
-      //   let signUp_wrap = document.querySelector(".signUp_wrap");
-      //   modal_bg.style.zIndex = 10;
-      //   modal_bg.style.display = "flex";
-      //   signUp_wrap.style.zIndex = 11;
-      //   signUp_wrap.style.display = "flex";
-      // }
+       signupform_btn.onclick = () => {
+         let modal_bg = document.querySelector(".modal_bg");
+         let signUp_wrap = document.querySelector(".signUp_wrap");
+         modal_bg.style.zIndex = 10;
+         modal_bg.style.display = "flex";
+         signUp_wrap.style.zIndex = 11;
+         signUp_wrap.style.display = "flex";
+       }
 
-      // signUp_close_btn.onclick = () => {
-      //   let modal_bg = document.querySelector(".modal_bg");
-      //   let signUp_wrap = document.querySelector(".signUp_wrap");
-      //   modal_bg.style.zIndex = -1;
-      //   modal_bg.style.display = "none";
-      //   signUp_wrap.style.zIndex = -1;
-      //   signUp_wrap.style.display = "none";
-      // }
+       signUp_close_btn.onclick = () => {
+         let modal_bg = document.querySelector(".modal_bg");
+         let signUp_wrap = document.querySelector(".signUp_wrap");
+         modal_bg.style.zIndex = -1;
+         modal_bg.style.display = "none";
+         signUp_wrap.style.zIndex = -1;
+         signUp_wrap.style.display = "none";
+       }
 
 
-      // let signUp_current_point = 0;
+       let signUp_current_point = 0;
 
-      // let signUp_end_point = signUp_MOVE_WIDTH * 3;
+       let signUp_end_point = signUp_MOVE_WIDTH * 3;
 
-      // if (signUp_current_point == 0) {
-      //   signUp_slideLeft.style.display = "none";
-      // }
+       if (signUp_current_point == 0) {
+         signUp_slideLeft.style.display = "none";
+       }
 
-      // if (signUp_current_point == signUp_end_point) {
-      //   signUp_slideRight.style.display = "none";
-      // }
+       if (signUp_current_point == signUp_end_point) {
+         signUp_slideRight.style.display = "none";
+       }
 
-      // signUp_slideRight.onclick = () => {
-      //   signUp_current_point += signUp_MOVE_WIDTH;
-      //   if (signUp_current_point == signUp_end_point) {
-      //     signUp_slideRight.style.display = "none";
-      //     signUpBtn.style.display = "inline";
-      //     signUp_slideLeft.style.display = "inline";
-      //   } else if (signUp_current_point > 0) {
-      //     signUp_slideLeft.style.display = "inline";
-      //     signUpBtn.style.display = "none";
-      //   }
-      //   signUp_position -= signUp_MOVE_WIDTH;
-      //   signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
-      // }
+       signUp_slideRight.onclick = () => {
+         signUp_current_point += signUp_MOVE_WIDTH;
+         if (signUp_current_point == signUp_end_point) {
+           signUp_slideRight.style.display = "none";
+           signUpBtn.style.display = "inline";
+           signUp_slideLeft.style.display = "inline";
+         } else if (signUp_current_point > 0) {
+           signUp_slideLeft.style.display = "inline";
+           signUpBtn.style.display = "none";
+         }
+         signUp_position -= signUp_MOVE_WIDTH;
+         signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+       }
 
-      // signUp_slideLeft.onclick = () => {
-      //   signUp_current_point -= signUp_MOVE_WIDTH;
-      //   if (signUp_current_point == 0) {
-      //     signUp_slideLeft.style.display = "none";
-      //     signUp_slideRight.style.display = "inline";
-      //     signUpBtn.style.display = "none";
-      //   } else if (signUp_current_point < signUp_end_point) {
-      //     signUp_slideRight.style.display = "inline";
-      //     signUpBtn.style.display = "none";
-      //   }
-      //   signUp_position += signUp_MOVE_WIDTH;
-      //   signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
-      // }
+       signUp_slideLeft.onclick = () => {
+         signUp_current_point -= signUp_MOVE_WIDTH;
+         if (signUp_current_point == 0) {
+           signUp_slideLeft.style.display = "none";
+           signUp_slideRight.style.display = "inline";
+           signUpBtn.style.display = "none";
+         } else if (signUp_current_point < signUp_end_point) {
+           signUp_slideRight.style.display = "inline";
+           signUpBtn.style.display = "none";
+         }
+         signUp_position += signUp_MOVE_WIDTH;
+         signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+       }
 
-      // let city = document.querySelectorAll(".city");
-      // const cities = [...city];
+       let city = document.querySelectorAll(".city");
+       const cities = [...city];
 
-      // let option = document.querySelectorAll("#cl_local option");
-      // const options = [...option];
+       let option = document.querySelectorAll("#cl_local option");
+       const options = [...option];
 
-      // document.addEventListener("change", (e) => {
-      //   for (let i = 0; i < cities.length; i++) {
-      //     if (e.target.value == cities[i].id) {
-      //       cities[i].classList.add("active");
-      //     } else {
-      //       cities[i].classList.remove("active");
-      //     }
-      //   }
-      // })
+       document.addEventListener("change", (e) => {
+         for (let i = 0; i < cities.length; i++) {
+           if (e.target.value == cities[i].id) {
+             cities[i].classList.add("active");
+           } else {
+             cities[i].classList.remove("active");
+           }
+         }
+       })
 
-      // let getRandomNum = (min, max) => {
-      //   min = Math.ceil(min);
-      //   max = Math.floor(max);
-      //   return Math.floor(Math.random() * (max - min + 1)) + min;
-      // }
+       let getRandomNum = (min, max) => {
+         min = Math.ceil(min);
+         max = Math.floor(max);
+         return Math.floor(Math.random() * (max - min + 1)) + min;
+       }
 
-      // let select_gender = document.getElementById("select_gender");
-      // const previewImage = document.getElementById("preview_img");
-      // select_gender.addEventListener("change", (e) => {
-      //   if (e.target.id == "select_gender" && e.target.value == "M") {
-      //     previewImage.src = "/images/man" + (getRandomNum(1, 3)) + ".png";
-      //   } else if (e.target.id == "select_gender" && e.target.value == "F") {
-      //     previewImage.src = "/images/woman" + (getRandomNum(1, 3)) + ".png";
-      //   }
-      // })
+       let select_gender = document.getElementById("select_gender");
+       const previewImage = document.getElementById("preview_img");
+       select_gender.addEventListener("change", (e) => {
+         if (e.target.id == "select_gender" && e.target.value == "M") {
+           previewImage.src = "/images/man" + (getRandomNum(1, 3)) + ".png";
+         } else if (e.target.id == "select_gender" && e.target.value == "F") {
+           previewImage.src = "/images/woman" + (getRandomNum(1, 3)) + ".png";
+         }
+       })
 
-      // function readImage(input) {
-      //   if (input.files && input.files[0]) {
-      //     const reader = new FileReader()
-      //     reader.onload = e => {
-      //       previewImage.src = e.target.result;
-      //     }
-      //     reader.readAsDataURL(input.files[0])
-      //   }
-      // }
+       function readImage(input) {
+         if (input.files && input.files[0]) {
+           const reader = new FileReader()
+           reader.onload = e => {
+             previewImage.src = e.target.result;
+           }
+           reader.readAsDataURL(input.files[0])
+         }
+       }
 
-      // const inputImage = document.getElementById("input-image");
-      // inputImage.addEventListener("change", e => {
-      //   readImage(e.target)
-      // });
+       const inputImage = document.getElementById("input-image");
+       inputImage.addEventListener("change", e => {
+         readImage(e.target)
+       });
 
-      // signUp_close_btn.onclick = () => {
-      //   let modal_bg = document.querySelector(".modal_bg");
-      //   let signUp_wrap = document.querySelector(".signUp_wrap");
-      //   modal_bg.style.zIndex = -1;
-      //   modal_bg.style.display = "none";
-      //   signUp_wrap.style.zIndex = -1;
-      //   signUp_wrap.style.display = "none";
-      // }
+       signUp_close_btn.onclick = () => {
+         let modal_bg = document.querySelector(".modal_bg");
+         let signUp_wrap = document.querySelector(".signUp_wrap");
+         modal_bg.style.zIndex = -1;
+         modal_bg.style.display = "none";
+         signUp_wrap.style.zIndex = -1;
+         signUp_wrap.style.display = "none";
+       }
 
       // news menu toggle btn
       let notice = document.getElementById("notice");
@@ -275,61 +276,16 @@
       <div class="notice_wrap">
         <!-- 공지사항 -->
         <div class="notice_accordian">
-          <input type="checkbox" id="notice01">
-          <label for="notice01">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
+          <c:forEach var="notice" items="${noticeList }" varStatus="status">
+          <input type="checkbox" id="notice${status.count }">
+          <label for="notice${status.count }">${notice.notice_title } 
+            <span id="notice_writeDate"><fmt:formatDate value="${notice.notice_write_date}" pattern="yyyy-MM-dd HH:mm"/></span>
+            <em><i class="fas fa-chevron-circle-down"></i></em>
+          </label>
           <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
+          ${notice.notice_contents }
           </div>
-          <input type="checkbox" id="notice02">
-          <label for="notice02">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="notice03">
-          <label for="notice03">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="notice04">
-          <label for="notice04">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="notice05">
-          <label for="notice05">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
+          </c:forEach>
         </div>
       </div>
       <!-- QnA -->
@@ -341,61 +297,15 @@
       <!-- FAQ -->
       <div class="faq_wrap">
         <div class="faq_accordian">
-          <input type="checkbox" id="faq01">
-          <label for="faq01">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
+          <c:forEach var="faq" items="${faqList }" varStatus="status">
+          <input type="checkbox" id="faq${status.count }">
+          <label for="faq${status.count }">${faq.faq_title }<em><i class="fas fa-chevron-circle-down"></i></em></label>
           <div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
+              ${faq.faq_contents }
             </p>
           </div>
-          <input type="checkbox" id="faq02">
-          <label for="faq02">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="faq03">
-          <label for="faq03">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="faq04">
-          <label for="faq04">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
-          <input type="checkbox" id="faq05">
-          <label for="faq05">TITLE 1<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit fugiat totam ipsa quibusdam ea
-              numquam
-              eos dolorem nihil quas! Doloribus officia cupiditate nostrum officiis facere voluptas quasi ipsa,
-              explicabo
-              laborum.
-            </p>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </div>

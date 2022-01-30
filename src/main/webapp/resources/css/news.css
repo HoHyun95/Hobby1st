@@ -140,6 +140,12 @@ input[id *= "notice"] + label + div p {
 input[id *= "notice"]:checked + label + div {
   max-height:100px
 }
+
+#notice_writeDate {
+  position: absolute;
+  right: 100px;
+  font-size: 0.8rem;
+}
 /* notice end */
 
 /* qna */

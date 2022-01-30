@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Notice">
+
+	<!-- 공지사항 전체 출력 (페이징 적용 X )  -->
+	<select id="noticeListNotPaging" resultType="kh.hobby1st.dto.NoticeDTO">
+		select * from notice order by 1 desc
+	</select>
+
+
 	<insert id="insertNotice">
 		insert into notice values(notice_seq.nextval, #{notice_writer},
 		#{notice_title}, #{notice_contents}, sysdate, 0)

@@ -40,7 +40,14 @@ public class NoticeController {
 	private NoticeDAO dao;
 
 
-
+	// 공지사항 전체 출력 (페이징 적용 X )
+	@RequestMapping("/noticeListNotPaging")
+	public String noticeListNotPaging(Model model) {
+		List<NoticeDTO> noticeListNotPaging = notService.noticeListNotPaging();
+		
+		model.addAttribute("noticeListNotPaging", noticeListNotPaging);
+		return "notice/tempNoticeNotPaging";
+	}
 
 	// 공지사항 리스트로 이동
 	@RequestMapping("/noticeList")

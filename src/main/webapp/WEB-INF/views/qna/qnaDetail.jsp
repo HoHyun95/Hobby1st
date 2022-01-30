@@ -95,8 +95,8 @@
 
 		<!-- 댓글 삽입 기능 -->
 		<c:forEach var="replyList" items="${replyList }" varStatus="status">
-			<c:choose>
-				<c:when test="${replyList.deep eq '0'}">
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test="${replyList.deep eq '0'}"> --%>
 					<div class="input_commend">
 						<table
 							style="border-bottom: 1px solid rgb(202, 202, 202); width: 100%; margin-top: 15px;">
@@ -110,7 +110,7 @@
 									src="${reply_profile.get(status.index)}" alt="">
 								</td>
 								<td
-									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.qna_writer }</td>
+									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.qnar_writer }</td>
 							</tr>
 
 							<tr>
@@ -123,16 +123,15 @@
 							</tr>
 
 							<tr>
-								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
-									&nbsp
-									<button class="reply_r${replyList.cbr_seq }" type="button">답글쓰기
-									</button>
+<%-- 								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.formDate} --%>
+<!-- 									&nbsp -->
+								
 								</td>
-								<c:if test="${replyList.cbr_writer eq mem_id }">
+								<c:if test="${replyList.qnar_writer eq mem_id }">
 									<td><button type="button" class="delReply"
 											style="color: red; float: right; margin-right: 20px;">
 											X<input class="replySeq" type="hidden"
-												value="${replyList.cbr_seq }">
+												value="${replyList.qnar_seq }">
 										</button></td>
 								</c:if>
 							</tr>
@@ -142,7 +141,7 @@
 					<!------ 답글 쓰기 ------->
 					<tr>
 						<form method="post"
-							action="/qna/insertReply_rec?qna_seq=${detail.qna_seq }&cbr_seq=${replyList.qnar_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
+							action="/qna/insertReply_rec?qna_seq=${detail.qna_seq }&qnar_seq=${replyList.qnar_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
 							<!-- 답글달기 기능 -->
 							<div id="reply_rec${replyList.qnar_seq }"
 								class="commend space-y-2 rounded-md"
@@ -167,70 +166,59 @@
 									<button id="commentBtn"
 										class="summit float-right text-green-400" type="submit">등록</button>
 
-									<button type="button" id="cencelBtn${replyList.cbr_seq }"
+									<button type="button" id="cencelBtn${replyList.qnar_seq }"
 										class="summit float-right text-green-400" type="submit"
 										style="margin-right: 15px;">취소</button>
 								</div>
 							</div>
 						</form>
 					</tr>
-					<script>
-						// 대댓글 작성 창 띄우기
-						$(".reply_r${replyList.cbr_seq }").on("click", function() {
-							$("#reply_rec${replyList.qnar_seq }").css('display','block');
-						})
-		
-						// 대댓글 창 취소
-						$("#cencelBtn${replyList.cbr_seq }").on("click", function() {
-							$("#reply_rec${replyList.qnar_seq }").css('display','none');
-						})
-		
-					</script>
-				</c:when>
+				
+<%-- 				</c:when> --%>
 
 
 
-				<c:when test="${replyList.deep eq '1'}">
-					<div style="border-bottom: 1px solid rgb(202, 202, 202);"
-						class="input_commend">
-						<table style="width: 90%; margin-top: 15px; margin-left: 73px;">
-							<tr>
-								<td rowspan="3"
-									style="border-radius: 70%; height: 77px; width: 75px; padding-right: 1px;">
-									<img id="profile"
-									style="border-radius: 70%; height: 60px; width: 60px;"
-									src="${reply_profile.get(status.index)}" alt="">
-								</td>
-								<td
-									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.qnar_writer }
-								</td>
-							</tr>
+<%-- 				<c:when test="${replyList.deep eq '1'}"> --%>
+<!-- 					<div style="border-bottom: 1px solid rgb(202, 202, 202);" -->
+<!-- 						class="input_commend"> -->
+<!-- 						<table style="width: 90%; margin-top: 15px; margin-left: 73px;"> -->
+<!-- 							<tr> -->
+<!-- 								<td rowspan="3" -->
+<!-- 									style="border-radius: 70%; height: 77px; width: 75px; padding-right: 1px;"> -->
+<!-- 									<img id="profile" -->
+<!-- 									style="border-radius: 70%; height: 60px; width: 60px;" -->
+<%-- 									src="${reply_profile.get(status.index)}" alt=""> --%>
+<!-- 								</td> -->
+<!-- 								<td -->
+<%-- 									style="padding-top: 10px; font-weight: 600; font-size: 16px;">${replyList.qnar_writer } --%>
+<!-- 								</td> -->
+<!-- 							</tr> -->
 
-							<tr>
-								<td>
-									<div id="content"
-										style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;"
-										rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.qnar_reply }
-									</div>
-								</td>
-							</tr>
+<!-- 							<tr> -->
+<!-- 								<td> -->
+<!-- 									<div id="content" -->
+<!-- 										style="width: 100%; min-height: 30px; font-size: 14px; overflow-y: hidden; resize: none;" -->
+<%-- 										rows="1" onkeyup="resize(this)" onkeydown="resize(this)">${replyList.qnar_reply } --%>
+<!-- 									</div> -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
 
-							<tr>
-								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate }
-								</td>
-								<c:if test="${replyList.qnar_writer eq mem_id }">
-									<td><button type="button" class="delReply_r"
-											style="color: red; float: right; margin-right: 20px;">
-											X<input class="replySeq_r" type="hidden"
-												value="${replyList.cbr_r_seq }">
-										</button></td>
-								</c:if>
-							</tr>
-						</table>
-					</div>
-				</c:when>
+<!-- 							<tr> -->
+<%-- 								<td class="text-sm text-gray-400" style="padding-bottom: 10px;">${replyList.detailDate } --%>
+<!-- 								</td> -->
+<%-- 								<c:if test="${replyList.qnar_writer eq mem_id }"> --%>
+<!-- 									<td><button type="button" class="delReply_r" -->
+<!-- 											style="color: red; float: right; margin-right: 20px;"> -->
+<!-- 											X<input class="replySeq_r" type="hidden" -->
+<%-- 												value="${replyList.cbr_r_seq }"> --%>
+<!-- 										</button></td> -->
+<%-- 								</c:if> --%>
+<!-- 							</tr> -->
+<!-- 						</table> -->
+<!-- 					</div> -->
+<%-- 				</c:when> --%>
 
-			</c:choose>
+<%-- 			</c:choose> --%>
 
 
 		</c:forEach>

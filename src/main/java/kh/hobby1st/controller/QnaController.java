@@ -53,12 +53,15 @@ public class QnaController {
 		int check_num = 1;
 		String navi = qService.getPageNavi(cpage);
 		int totalNoticeCount = qService.getRecordCount();
+//		
+//		int replycount = qnarService.replyCount(qna_seq);
 
 		model.addAttribute("totalNoticeCount", totalNoticeCount);
 		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("navi", navi);
 		model.addAttribute("qnaList", qnaList);
+//		model.addAttribute("replycount", replycount);
 
 		return "qna/qnaList";
 	}
@@ -98,12 +101,10 @@ public class QnaController {
 		QnaDTO detail = qService.qnaDetail(qna_seq);
 		qService.increaseView(qna_seq);
 		List<QnaReplyDTO> replyList = qnarService.selectReply(qna_seq);
-//		int replycount = qnarService.replyCount(qna_seq);
+		int replycount = qnarService.replyCount(qna_seq);
+	
 		List<String> reply_profile = qService.reply_profile(qna_seq);
 
-		System.out.println(reply_profile.size());
-
-	
 		model.addAttribute("writerProfile", writerProfile);
 //		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);
@@ -112,7 +113,7 @@ public class QnaController {
 		model.addAttribute("check_num", check_num);
  
 		model.addAttribute("cpage", cpage); 
-//		model.addAttribute("replyList", replyList);
+		model.addAttribute("replyList", replyList);
 		model.addAttribute("detail", detail);
 		return "qna/qnaDetail";
 	}

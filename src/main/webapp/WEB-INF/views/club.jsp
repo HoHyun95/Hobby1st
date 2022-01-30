@@ -644,7 +644,7 @@
               <img src="" alt="이미지를 선택해 주세요" id="preview_img">
             </div>
             <div class="input">
-              <input name="file" type="file" id="input-image" accept="image/*">
+              <input name="file" type="file" id="image-input" accept="image/*">
             </div>
           </div>
           <div class="contents_item">
@@ -737,7 +737,7 @@
 	    }
 	  }
 	  
-	  const inputImage = document.getElementById("input-image");
+	  const inputImage = document.getElementById("image-input");
 	  inputImage.addEventListener("change", e => {
 	    readImage(e.target)
 	  });

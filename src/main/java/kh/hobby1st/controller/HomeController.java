@@ -18,6 +18,7 @@ import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.dto.ClubMemberDTO;
+import kh.hobby1st.dto.FaqDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.NoticeDTO;
 import kh.hobby1st.service.ClubBoardService;
@@ -25,6 +26,7 @@ import kh.hobby1st.service.ClubCategoryService;
 import kh.hobby1st.service.ClubJoinStateService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.ClubMemberService;
+import kh.hobby1st.service.FaqService;
 import kh.hobby1st.service.MemberService;
 import kh.hobby1st.service.MyPageService;
 import kh.hobby1st.service.NoticeService;
@@ -56,6 +58,9 @@ public class HomeController {
 	
 	@Autowired
 	private NoticeService ntService;
+	
+	@Autowired
+	private FaqService faqService;
 	
 	@Autowired
 	private HttpSession session;
@@ -212,7 +217,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping("news")
-	public String news() {
+	public String news(Model model) {
+		List<NoticeDTO> noticeList = ntService.noticeListNotPaging();
+		List<FaqDTO> faqList = faqService.faqList();
+
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("faqList", faqList);
+		
 		return "news";
 	}
 	

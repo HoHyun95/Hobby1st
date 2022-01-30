@@ -119,7 +119,8 @@ input[type="text"]{
 				<tr>
 	 <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
 		<c:choose>
-			<c:when test="${dateList.value=='today'}">
+            <%--오늘 표시하는 달력이 알수 없는 버그로 인한 삭제
+ 			<c:when test="${dateList.value=='today'}">
 					 		 <td class="today">
 							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
 						        <div id="num_message_${dateList.date}">	
@@ -129,23 +130,12 @@ input[type="text"]{
 						                <div id="num_message_${dateList.date}">
 						 		 	 	        ${result.schedule }<br>
 						 		 		        ${result.schedule_detail }<br>
-						 		 		        <a>삭제</a>
 						                </div>
 						             </c:if>
 						        </c:forEach>
 						        </div>
 					 		 </td>
-			 <!-- 값을 담기 위한 더미데이터 -->	 		 
-                   <c:forEach var="result" items="${result }" varStatus="status">
-					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-					         <td class="today" hidden>
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
-					        </td>
-					     </c:if>					
-				   </c:forEach>					   					    
-				</c:when>	
-		
+				</c:when>--%>
 			<c:when test="${date_status.index%7==6}">
 							<td class="sat_day">
 								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
@@ -160,15 +150,6 @@ input[type="text"]{
 						        </c:forEach>					        
 						        </div>
 							</td>
-						
-                   <c:forEach var="result" items="${result }" varStatus="status">
-					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-					         <td class="sat_day" hidden>
-								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
-					        </td>					        
-					     </c:if>					
-				   </c:forEach>					   					    
 				</c:when>	
 			<c:when test="${date_status.index%7==0}">
 				</tr>
@@ -183,18 +164,10 @@ input[type="text"]{
 						 		 		        ${result.schedule_detail }
 						                </div>
 						             </c:if>
-						        </c:forEach>	
+						    </c:forEach>	
 						</div>
-				    <c:forEach var="result" items="${result }" varStatus="status">
-					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-					         <td class="sun_day" hidden>
-								<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
-					        </td>
-					     </c:if>					
-				   </c:forEach>		
 					</td>
-					</c:when>
+			</c:when>
 					<c:otherwise>
 						<td class="normal_day">
 							<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
@@ -209,17 +182,10 @@ input[type="text"]{
 						    </c:forEach>						    	
 					    	</div>
 						</td>
-						<c:forEach var="result" items="${result }" varStatus="status">
-					     <c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-					         <td class="normal_day" hidden>
-								<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">이거보이면 충재문의</div>
-					        </td>
-					     </c:if>					
-				       </c:forEach>		
 					  </c:otherwise>
 					</c:choose>
-				</c:forEach>
+			      </c:forEach>
+				</tr>
 			</table>
 		</div>
 	<script>
@@ -227,46 +193,30 @@ input[type="text"]{
 	function number_click(a) {
 		const message_area=document.getElementById('num_message_' + a);
         message_area.innerHTML=`        
-        <form action="/calendar/input_calendar" method="get">
+        <form action="/calendar/input_calendar" method="get" name="sub1">
         <div id="message_box">
         <input type=text name='year' value=${today_info.search_year} hidden>
 		<input type=text name='month' value=${today_info.search_month} hidden>
 		<input type=text name='value' value='${club_cl_name }' hidden>
         <input type="text" name='date' value=`+a+` hidden>
-        title
-        <br>
-        <input type=text name='schedule' placeholder="null입력"><br>
-        message
-        <br>
-        <input type=text name='schedule_detail' placeholder="시 애러납니다">
-        <button type="submit" id='test_btn'>V</button> 
+        <h4>title</h4><br>
+        <input type=text name='schedule' id='input_title_1'><br>
+        <h4>message</h4><br>
+        <input type=text name='schedule_detail' id='input_title_2'>
+        <button type="button" id='test_btn' onclick=vliadInputText()>V</button> 
         <div>
         </form>
         `
 	}
-	/*서브밋에 이벤트효과(사실무의미 한것 같은데 지우면 코드가 작동이 안됩니다.) */
-	const test_btn = document.getElementById('test_btn');
-	test_btn.onclick = () => {
-		alert("정상작동")
-		if($("#schedule").val() == "" || $("#schedule_detail").val() == ""){
-			alert("인풋박스 채워주세요")
-		} else{
-			location.href = "/calendar/input_calendar";
-		}
-	}
-	/*중복되는 행을 합침 */
-	$(window).load(function () {
-		$(".sat_day").each(function () {
-			var rows = $(".sat_day:contains('" + $(this).text() + "')");
-
-			if (rows.length > 1) {
-				rows.eq(0).attr("rowspan", rows.length);
-				rows.not(":eq(0)").remove(); 
-			} 
-		});
-	    
-	});
-
+	
+	function vliadInputText() {
+    if (document.getElementById("input_title_1").value == "" || document.getElementById("input_title_2").value == "" ) {
+            alert("내용을 입력해주세요");
+            return false;
+    }else{
+    document.sub1.submit();
+  }
+}
 	</script>
 </body>
 </html>

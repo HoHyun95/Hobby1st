@@ -83,8 +83,8 @@ public class CalendarController {
 	
 	   //캘린더에서 "submit"을 누르면 호출됨
 	@RequestMapping("input_calendar")
-    public String inputDay(Model model, String year, String month, String value, String date, String schedule, String schedule_detail) {
-        
+    public String inputDay(Model model, String year, String month, String value, String date, String schedule, String schedule_detail) {		
+		
 		//해당"월, 일, 동회명"에 중복되는 값이 SQL에 존재하는지 확인
 		String value_ej = value;
 		int search_delete = cal_service.search(month, value, date);

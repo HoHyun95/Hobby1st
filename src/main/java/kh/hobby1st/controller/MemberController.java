@@ -40,7 +40,14 @@ public class MemberController {
 
     //로그인창에서 일반로그인시 발동됩니다.
 	@RequestMapping("logind")
-    public String logind(String mem_id, String mem_pass) {
+    public String logind(String mem_id, String mem_pass) {		
+		//세션에 user 정보가 남아있는 경우 세션 제거
+		if (session.getAttribute("mem_id") != null) {
+			session.removeAttribute("mem_id");
+		}
+		
+		String url = "";
+		
 		//회원정보 존재여부 체크
 		int result = mem_service.login(mem_id, mem_pass);
 		if(0<result) {
@@ -52,8 +59,11 @@ public class MemberController {
 				session.setAttribute("mem_id", mem_id);
 				session.setAttribute("user_name", user_name);
 				session.setAttribute("user_nickName", user_nickName);
+				url = "redirect: /";
+		} else {
+			url = "error";
 		}
-		return "redirect: /";
+		return url;
 	}
 	
 	//로그아웃 버튼 누를시 실행됩니다. 

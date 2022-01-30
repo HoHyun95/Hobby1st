@@ -1,0 +1,210 @@
+/* news */
+.news {
+  width: 1260px;
+  margin: 30px auto;
+}
+
+.news_box {
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.news_nav {
+  width: 100%;
+  padding: 10px 0px 0px 0px;
+}
+
+.news_title {
+  height: 50px;
+  padding: 10px 30px 10px 30px
+}
+
+.news_menu_list {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--bg-color3);
+  margin-left: 30px;
+  list-style-type: none;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--color1);
+}
+
+.news_menu_list_item {
+  border: none;
+  padding: 10px 20px 10px 20px;
+}
+
+.news_menu_list_item:hover {
+  cursor: pointer;
+}
+
+#notice {
+  border-bottom: 3px solid var(--color1);
+}
+
+.news_contents {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.news_contents_box_wrap {
+  width: 95%;
+  height: 100%;
+  border: 1px solid var(--bg-color3);
+}
+
+.clubHouse_contents {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.notice_wrap {
+  width: 95%;
+  min-height: 1000px;
+  border: 1px solid var(--bg-color3);
+  margin: 0 auto;
+}
+
+.qna_wrap, .faq_wrap {
+  width: 95%;
+  min-height: 1000px;
+  border: 1px solid var(--bg-color3);	
+  margin: 0 auto;
+  display: none;
+}
+
+/* news end */
+
+/* notice */
+.notice_accordian {
+  width: 1150px;
+  margin: 50px auto;
+}
+
+input[id *= "notice"] {
+  display: none;
+}
+
+input[id *= "notice"] + label {
+  display: block;
+  padding: 15px;
+  border: 1px solid #181818;
+  border-bottom: 0px;
+  color: #ffffff;
+  font-weight: 900;
+  background-color: dimgrey;
+  cursor: pointer;
+  position: relative;
+}
+
+input[id *= "notice"] + label em {
+  position: absolute;
+  color: #ffffff;
+  top: 50%;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  display: inline-block;
+  font-size: 1.2rem;
+}
+
+input[id *= "notice"]:checked + label em {
+  transform: rotateX(180deg);
+}
+
+input[id *= "notice"] + label + div {
+  max-height: 0px;
+  transition: all .35s;
+  overflow: hidden;
+  background-color: #ffffff;
+  font-size: 0.8rem;
+  border: 1px solid #181818;
+}
+
+input[id *= "notice"] + label + div p {
+  display: inline-block;
+  padding: 20px;
+}
+
+input[id *= "notice"]:checked + label + div {
+  max-height:100px
+}
+/* notice end */
+
+/* qna */
+.qna_board {
+  width: 1150px;
+  margin: 50px auto;
+  border: 1px dimgrey;
+}
+
+
+/* qna end */
+
+/* faq */
+.faq_accordian {
+  width: 1150px;
+  margin: 50px auto;
+}
+
+input[id *= "faq"] {
+  display: none;
+}
+
+input[id *= "faq"] + label {
+  display: block;
+  padding: 15px;
+  border: 1px solid #181818;
+  border-bottom: 0px;
+  color: #ffffff;
+  font-weight: 900;
+  background-color: dimgrey;
+  cursor: pointer;
+  position: relative;
+}
+
+input[id *= "faq"] + label em {
+  position: absolute;
+  color: #ffffff;
+  top: 50%;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  display: inline-block;
+  font-size: 1.2rem;
+}
+
+input[id *= "faq"]:checked + label em {
+  transform: rotateX(180deg);
+}
+
+input[id *= "faq"] + label + div {
+  max-height: 0px;
+  transition: all .35s;
+  overflow: hidden;
+  background-color: #ffffff;
+  font-size: 0.8rem;
+  border: 1px solid #181818;
+}
+
+input[id *= "faq"] + label + div p {
+  display: inline-block;
+  padding: 20px;
+}
+
+input[id *= "faq"]:checked + label + div {
+  max-height:100px
+}
+/* faq end */

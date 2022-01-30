@@ -470,13 +470,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item"><i class="fas fa-stream"></i></li>
-            <li class="menu_list_item"><i class="fab fa-hubspot"> Hobby1st</i></li>
-            <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
-            <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
-            <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
-            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Fullpage</i></li></a>
-            <a href="/admin"><li class="menu_list_item"><i class="far fa-newspaper"> admin</i></li></a>
+            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/club"><li class="menu_list_item">동호회</li></a>
+            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/news"><li class="menu_list_item">NEWS</li></a>
+            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/admin"><li class="menu_list_item">admin</li></a>
           </ul>
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>

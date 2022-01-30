@@ -211,6 +211,10 @@ public class HomeController {
 		return result;
 	}
 	
+	@RequestMapping("news")
+	public String news() {
+		return "news";
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

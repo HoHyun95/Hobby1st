@@ -1,26 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-   <title>QnA</title>
-   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<title>QnA</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+	integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+	crossorigin="anonymous">
 <style>
 .title:hover {
 	color: rgb(231, 75, 55);
+}
+
+#lockIcon {
+	margin-left: 5px;
 }
 </style>
 </head>
 <body>
 
-  	<!-- 글쓰기 버튼 -->
+	<!-- 글쓰기 버튼 -->
 	<div class="btn">
 		<div style="text-align: right; width: 85%;">
 			<button type="button" id="writeBtn"
@@ -40,8 +47,8 @@
 				<table class="w-full">
 					<thead>
 						<tr class="text-gray-800 border border-b-0 text-center">
-							<th colspan="6" class="px-4 py-3" style="width: 100%;">#
-								QnA
+							<th colspan="6" class="px-4 py-3" style="width: 100%;"># QnA
+							
 						</tr>
 
 						<!-- 공지사항 상단 목차 -->
@@ -64,7 +71,14 @@
 
 								<td class="title px-4 py-4" style="cursor: pointer;"
 									onclick="location.href='/qna/qnaDetail?qna_seq=${dto.qna_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
-									${dto.qna_title }</td>
+									${dto.qna_title }<i id="lockIcon" class="fas fa-lock"></i>
+									
+															<c:if test="${replycount > 0 }">
+													<span style="color: red;">답변완료</span>
+												</c:if>
+									
+									
+								</td>
 								<td class="px-4 py-4 text-center">${dto.qna_writer}</td>
 								<td class="px-4 py-4 text-center">${dto.detailDate }</td>
 								<td class="px-4 py-4 text-center">${dto.qna_view_count }</td>
@@ -91,21 +105,20 @@
 
 
 	</div>
-  
+
 
 	<!-- 검색 기능 -->
-	<form method="post"
-		action="/qna/searchQna?cpage=${cpage }&check_num=2">
+	<form method="post" action="/qna/searchQna?cpage=${cpage }&check_num=2">
 		<div>
 			<div class=""
 				style="text-align: center; height: 70px; margin-bottom: 100px;">
 
-				 <select name="keyword"
+				<select name="keyword"
 					class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto">
 					<option>제목</option>
-				</select> <input type="hidden" name="cpage" value="${cpage }">
-				<input id="searchWord" name="searchWord" type="text"
-					placeholder="Search"
+					<option>작성자</option>
+				</select> <input type="hidden" name="cpage" value="${cpage }"> <input
+					id="searchWord" name="searchWord" type="text" placeholder="Search"
 					class="
            px-2
                 py-1

@@ -32,10 +32,10 @@ public class QnaReplyDAO {
 	}
 
 
-//	// 해당 게시판 댓글 개수
-//	public int replyCount(int qna_seq) {
-//		return mybatis.selectOne("QnaReply.replyCount", qna_seq);
-//	}
+	// 해당 게시판 댓글 개수
+	public int replyCount(int qna_seq) {
+		return mybatis.selectOne("QnaReply.replyCount", qna_seq);
+	}
 //
 //	// 댓글 count 증가
 //	public int plusReply(int qna_seq) {

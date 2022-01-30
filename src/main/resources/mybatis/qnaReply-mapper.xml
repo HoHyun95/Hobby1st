@@ -24,9 +24,9 @@
    		delete from qnar where qnar_seq = #{value}
    	</delete>
   	
-<!--   	<select id="replyCount" resultType="int"> -->
-<!--   		select count(*) from qnar where qnar_seq  = #{value} -->
-<!--   	</select> -->
+  	<select id="replyCount" resultType="int">
+  		select count(*) from qnar where qnar_seq  = #{value}
+  	</select>
   	
 <!-- 	<update id="plusReply"> -->
 <!-- 		update club_board set cb_reply_count = cb_reply_count + 1 where cb_seq =#{value} -->

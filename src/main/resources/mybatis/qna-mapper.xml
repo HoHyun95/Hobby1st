@@ -61,7 +61,7 @@
 		select * from (select
 		qna.*, row_number() over(order by qna_seq desc) rn
 		from qna where
-		qna_wrtier = #{searchWord}) where rn between #{start}
+		qna_writer = #{searchWord}) where rn between #{start}
 		and #{end}
 	</select>
 

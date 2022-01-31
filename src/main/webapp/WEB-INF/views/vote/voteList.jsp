@@ -82,13 +82,28 @@ div {
 				<div class="end_date">투표 종료일 : ${dto.vl_end_date }</div>
 
 				<div class="btn">
-					<button>투표하러가기</button>
+					<button class="voteBtn">투표하러가기
+						<input class="vl_seq" type="hidden" value="${dto.vl_seq }">
+					</button>
+					
 					&nbsp;
-					<button>결과보기</button>
+					<button class="voteResult">결과보기</button>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
+	
+	<script>
+		
+		$(".voteBtn").on("click", function() {
+			let vl_seq = $(this).find(".vl_seq").val();
+			console.log(vl_seq);
+			location.href="/vote/detailPage?vl_seq=" + vl_seq; 
+		})
+	
+	
+		
+	</script>
 
 </body>
 </html>

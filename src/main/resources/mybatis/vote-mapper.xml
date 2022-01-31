@@ -21,23 +21,23 @@
 	</select>
 	
 	<!-- 해당 투표 정보 가져오기 -->
-	<select id="selectVoteAll" resultType="kh.hobby1st.dto.VoteListDTO">
+	<select id="selectVoteDetail" resultType="kh.hobby1st.dto.VoteListDTO">
 		select * from vote_list where vl_seq = #{value}
 	</select>
 	
 	
 	<!-- 해당 투표 옵션 값들 가져오기 -->
-	<select id="selectVoteAll" resultType="kh.hobby1st.dto.VoteOptionDTO">
+	<select id="selectVoteOption" resultType="kh.hobby1st.dto.VoteOptionDTO">
 		select * from vote_option where vo_vote_seq = #{value}
 	</select>
 
 	<!-- 해당 동호회에 대한 투표 여부 -->
-	<select id="selectVoteAll" resultType="int">
+	<select id="voteCheck" resultType="int">
 		select count(*) from vote_check where vc_vote_seq = #{vc_vote_seq} and vc_vote_id = #{vc_vote_id}
 	</select>
 	
 	<!-- 투표 목록들에 대한 나의 투표 참여 여부 리스트 -->
-	<select id="selectVoteAll" resultType="kh.hobby1st.dto.VoteListDTO">
+	<select id="voteCheckList" resultType="kh.hobby1st.dto.VoteListDTO">
 		select l.* from vote_list l join vote_check c on (l.vl_seq = c.vc_vote_seq) where vc_vote_id = #{value}
 	</select>
 	

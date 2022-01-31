@@ -254,7 +254,77 @@
     }    
     
     
-      
+    // 동호회 검색
+    let search_input_area_btn = document.querySelector(".search_input_area_btn");
+    let search_result_inner = document.querySelector(".search_result_inner");
+    
+    search_input_area_btn.onclick = () => {
+      let selectBox = document.getElementById("selectBox");
+      let search_club = document.querySelector(".search_club");
+      let create_hobby1st_club = document.querySelector(".create_hobby1st_club");
+      $.ajax({
+        url: "/clubList/searchClub",
+        type: "get",
+        data: {
+          "searchField": (selectBox.value),
+          "searchText": (search_club.value)
+        },
+        dataType: "json" 
+      }).done((res) => {
+        console.log(res);
+        create_hobby1st_club.style.display = "none";
+        search_result_inner.style.display = "flex";
+        if(res.length > 0) {
+          for(let k = 0; k < res.length; k++) {
+            let div1 = document.createElement("div");
+            let div2 = document.createElement("div");
+            let div3 = document.createElement("div");
+            let div4 = document.createElement("div");
+
+            let a = document.createElement("a");
+            let h3 = document.createElement("h3");
+            let h5_1 = document.createElement("h5");
+            let h5_2 = document.createElement("h5");
+            let h5_3 = document.createElement("h5");
+            let i = document.createElement("i");
+            let input = document.createElement("input");
+
+            div1.classList.add("search_list_box_wrap");
+            div2.classList.add("search_list_box");
+            div3.classList.add("badge");
+            div3.id = "theme1";
+            div3.innerHTML = res[k].cl_category_id;
+            div4.classList.add("likeBtn");
+            if(id != 'null') {
+              i.classList.add("far");
+              i.classList.add("fa-heart");
+            }
+            i.id = res[k].cl_id;
+          
+            a.href = "/clubHouse?cl_id="+res[k].cl_id;
+            h3.innerHTML = res[k].cl_name;
+            h5_1.innerHTML = res[k].cl_boss_name;
+            h5_2.innerHTML = res[k].cl_local;
+            h5_3.innerHTML = res[k].cl_desc;
+   
+            div4.appendChild(i);
+            div2.appendChild(div3);
+            div2.appendChild(div4);
+            a.appendChild(h3);
+            div2.appendChild(a);
+            div2.appendChild(h5_1);
+            div2.appendChild(h5_2);
+            div2.appendChild(h5_3);
+            div1.appendChild(div2);
+            search_result_inner.appendChild(div1);
+          }
+        } else {
+          
+          create_hobby1st_club.style.display = "flex";
+          search_result_inner.style.display = "none";
+        }
+      });
+    }
     /* 네이버 로그인 */ 
       const naverLogin = new naver.LoginWithNaverId(
     			{
@@ -416,7 +486,7 @@
               <option value="cl_local">지역
               <option value="cl_boss_name">동호회장
             </select>
-            <input type="text" class="search_club" placeholder="찾고 싶은 동호회를 검색해 보세요!">
+            <input type="text" class="search_club" name="searchText" placeholder="찾고 싶은 동호회를 검색해 보세요!">
           </div>
           <div class="search_input_area_btn">
             <i class="fas fa-search"></i>
@@ -424,26 +494,30 @@
         </div>
       </div>
     </div>
-    <!-- <div class="search_result">
+  
+ 
+    <div class="search_result">
       <div class="search_result_inner">
-
+        
       </div>
-    </div> -->
+    </div>
     <!-- search end -->
 
     <!-- create club -->
     <div class="create_hobby1st_club">
       <div class="create_hobby1st_club_inner">
-        <div class="create_hobby1st_club_inner_text">찾으시는 동호회가 없으신가요? </div>
+      <div class="create_hobby1st_club_inner_text">찾으시는 동호회가 없으신가요? </div>
         <input type="button" value="나만의 동호회를 만드세요!" id="createMyClub">
       </div>
     </div>
     <!-- create club end -->
 
+    
+
     <!-- club_list_title -->
     <div class="club_list_title">
       <div class="club_list_title_contents"> 
-        <div class="club_list_title_text"> 총 ${fn:length(listCount)}개의 동호회가 있습니다.</div>
+        <div class="club_list_title_text"> Hobby1st 전체 동호회 </div>
       </div>
     </div>
     <!-- club_list_title end-->

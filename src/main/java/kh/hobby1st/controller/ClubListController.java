@@ -89,25 +89,17 @@ public class ClubListController {
 
 	}
 
-	@RequestMapping("searchClub")
+	@ResponseBody
+	@RequestMapping(value = "searchClub", produces = "application/json; charset=UTF-8")
 	public String searchClub(String searchField, String searchText, Model model) {
 
 		System.out.println(" 검색필드 :" + searchField);
 
 		List<ClubListDTO> searchList = clService.searchClub(searchField, searchText);
+		String result = g.toJson(searchList);
+		model.addAttribute("searchList", searchList);
 
-		// 검색 결과 없을 때
-		int noResult = 0;
-
-		if (searchList.size() == 0) {
-			System.out.println("검색결과 없음");
-			model.addAttribute("noResult", noResult);
-		} else {
-			System.out.println("검색결과 존재함");
-			model.addAttribute("searchList", searchList);
-		}
-
-		return "clubList/searchClub";
+		return result;
 	}
 
 	@ResponseBody

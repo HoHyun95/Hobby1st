@@ -38,7 +38,7 @@ public class VoteController {
 		
 		String mem_id = (String) session.getAttribute("mem_id");
 		
-		List<VoteListDTO> voteDetail = voteService.selectVoteDetail(vl_seq);
+		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
 		int voteCheck = voteService.voteCheck(vl_seq, mem_id);
 		

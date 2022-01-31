@@ -80,6 +80,11 @@ public class VoteListDTO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(this.vl_start_date.getTime());
 	}
+	
+	public String getFormdDateDetail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 aa hh:mm");
+		return sdf.format(this.vl_start_date.getTime());
+	}
 
 	public String getDetailDate() {
 		long current_time = System.currentTimeMillis(); // 현재의 타임 스탬

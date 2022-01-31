@@ -37,7 +37,7 @@ public class VoteService {
 	}
 
 	// 해당 투표 정보 가져오기
-	public List<VoteListDTO> selectVoteDetail(int vl_seq) {
+	public VoteListDTO selectVoteDetail(int vl_seq) {
 		return voteDao.selectVoteDetail(vl_seq);
 	}
 

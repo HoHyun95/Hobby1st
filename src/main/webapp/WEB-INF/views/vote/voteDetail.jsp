@@ -67,12 +67,12 @@ div {
 
 	<form action="">
 		<div class="container">
-			<div class="vote_title">뭐</div>
+			<div class="vote_title">${voteDetail.vl_title }</div>
 
-			<div class="vote_write_date">2022년 1월 29일 오후 9:00</div>
+			<div class="vote_write_date">${voteDetail.formdDateDetail }</div>
 
 			<div class="attend">
-				<i class="fas fa-user-check"></i> 3명 참여
+				<i class="fas fa-user-check"></i> ${voteDetail.vl_count }명 참여
 			</div>
 
 			<div class="vote_options">

@@ -33,8 +33,8 @@ public class VoteDAO {
 	}
 	
 	// 해당 투표 정보 가져오기
-	public List<VoteListDTO> selectVoteDetail(int vl_seq) {
-		return mybatis.selectList("Vote.selectVoteDetail", vl_seq);
+	public VoteListDTO selectVoteDetail(int vl_seq) {
+		return mybatis.selectOne("Vote.selectVoteDetail", vl_seq);
 	}
 	
 	

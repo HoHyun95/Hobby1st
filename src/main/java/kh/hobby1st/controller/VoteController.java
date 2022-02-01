@@ -57,6 +57,7 @@ public class VoteController {
 		List<VoteListDTO> vote_list = voteService.selectVoteAll();
 		List<VoteListDTO> voteCheckList = voteService.voteCheckList(mem_id);
 		
+		
 		model.addAttribute("voteCheckList", voteCheckList);
 		model.addAttribute("vote_list", vote_list);
 		return "vote/voteList";

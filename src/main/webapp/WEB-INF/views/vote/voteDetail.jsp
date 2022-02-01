@@ -76,35 +76,33 @@ div {
 			</div>
 
 			<div class="vote_options">
-				<div class="answers">
-					<input type="radio" name="option" id="option1" value=""> <label
-						class="option_label" for="option1">Java</label>
-				</div>
 
-				<div class="answers">
-					<input type="radio" name="option" id="option1" value=""> <label
-						class="option_label" for="option1">nonno</label>
-				</div>
+				<c:forEach var="voteOption" items="${voteOption }" varStatus="status">
 
-				<div class="answers">
-					<input type="radio" name="option" id="option1" value=""> <label
-						class="option_label" for="option1">gg</label>
-				</div>
+					<div class="answers">
+						<input type="radio" name="option" id="option${status.index }" value="${voteOption.vo_option }"> <label
+							class="option_label" for="option${status.index }">${voteOption.vo_option }</label>
+					</div>
 
-				<div class="answers">
-					<input type="radio" name="option" id="option1" value=""> <label
-						class="option_label" for="option1">아</label>
-				</div>
+				</c:forEach>
 			</div>
 
 			<div class="vote">
 				<button class="voteBtn">투표하기</button>
 				&nbsp; &nbsp;
-				<button class="back">목록으로</button>
+				<button type="button" class="back">목록으로</button>
 			</div>
 
 		</div>
 	</form>
+	
+	<script>
+	
+		$(".back").on("click", function() {
+			history.back();
+		})
+	
+	</script>
 
 </body>
 </html>

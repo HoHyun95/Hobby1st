@@ -41,6 +41,20 @@
 		select l.* from vote_list l join vote_check c on (l.vl_seq = c.vc_vote_seq) where vc_vote_id = #{value}
 	</select>
 	
+	<!-- 투표시 count + 1 (option) -->
+	<update id="plusOptionCount">
+		update vote_option set vo_count = vo_count + 1 where vo_seq = #{value}
+	</update>
+	
+	<!-- 투표시 count + 1 (vote) -->
+	<update id="plusVoteCount">
+		update vote_list set vl_count = vl_count + 1 where vl_seq = #{value}
+	</update>
+	
+	<!-- 투표시 해당 투표에 투표한 기록 남기기 -->
+	<insert id="insertVoteCheck">
+		insert into vote_check values(#{vc_vote_seq},#{vc_vote_id})
+	</insert>
 	
 	
 </mapper>

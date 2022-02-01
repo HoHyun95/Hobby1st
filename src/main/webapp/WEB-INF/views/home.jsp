@@ -52,6 +52,7 @@
         location.href = "/member/sign_up";
       }
       
+      // 캐러셀 슬라이더
       const MOVE_WIDTH = 240;
       let current_point = 0;
       let last_point = MOVE_WIDTH * 5;
@@ -77,7 +78,8 @@
         }
         
       }
-
+    
+      // 더보기 
       let maxCount = 30;
       let listCount = 23;
       if(maxCount > listCount) {

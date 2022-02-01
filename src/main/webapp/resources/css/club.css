@@ -124,6 +124,7 @@ svg {
 /* create_hobby1st_club */
 .create_hobby1st_club {
   width: 100%;
+  display: none;
 }
 
 .create_hobby1st_club_inner {
@@ -259,7 +260,11 @@ svg {
 .search_result_inner {
   width: 1260px;
   margin: 0 auto;
-  height: fit-content;
+  padding: 30px 20px 30px 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; 
+  min-height: 400px;
 }
 
 /* search_result end */
@@ -306,18 +311,7 @@ svg {
   flex-wrap: wrap; 
 }
 
-.no_search_result {
-  min-height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.no_search_result_text {
-  font-size: 1.5rem;
-}
-
-.club_list_box_wrap {
+.club_list_box_wrap, .search_list_box_wrap {
   width: 20%;
   height: 300px;
   display: flex;
@@ -328,7 +322,7 @@ h3:hover {
   cursor: pointer;
 }
 
-.club_list_box {
+.club_list_box, .search_list_box {
   width: 100%;
   display: flex;
   flex-direction: column;

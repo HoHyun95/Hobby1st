@@ -56,5 +56,24 @@ public class VoteService {
 	public List<VoteListDTO> voteCheckList(String vc_vote_id) {
 		return voteDao.voteCheckList(vc_vote_id);
 	}
+	
+	// 투표시 해당 투표, option count 증가 / 투표기록 남기기
+	public int comVote(int vo_seq, int vl_seq, String vc_vote_seq) {
+		
+		int result = 0;
+		
+		int optionResult = voteDao.plusOptionCount(vo_seq);
+		int voteResult = voteDao.plusVoteCount(vl_seq);
+		int voteCheckResult =  voteDao.insertVoteCheck(vl_seq, vc_vote_seq);
+		
+		if(optionResult == 1 && voteResult == 1 && voteCheckResult ==1 ) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	
+	
 
 }

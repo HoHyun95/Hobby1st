@@ -16,8 +16,9 @@
 .signUp_wrap {
   width: 528px;
   margin: 0 auto;
-  top: 150px;
-  left: 40%;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   height: 900px;
   justify-content: center;
   border: 1px solid dimgray;

@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>SignUp</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <link rel="stylesheet" href="/css/default.css">
@@ -102,14 +101,14 @@
             </div>
             <div class="title">
               <i class="fas fa-mobile-alt"> 핸드폰 번호</i>
-              <span class="validResult" id="mem_name_Result"></span>
+              <span class="validResult" id="mem_phone_Result"></span>
             </div>
             <div class="input">
               <input type="text" class="signUpInput" id="mem_phone" maxlength="20" name="mem_phone" placeholder="핸드폰 번호를 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-envelope"> 이메일</i>
-              <span class="validResult" id="mem_phone_Result"></span>
+              <span class="validResult" id="mem_email_Result"></span>
             </div>
             <div class="input">
               <input type="text" class="signUpInput" id="mem_email" maxlength="20" name="mem_email" placeholder="이메일을 입력해주세요">
@@ -243,7 +242,7 @@
                 <option value="jeju">제주</option>
               </select>
             </div>
-            <div class="validResult" id="cl_local_Result"></div>
+            <div class="validResult" id="mem_address_Result"></div>
           </div>
           <div class="contents_item">
             <div class="desc">

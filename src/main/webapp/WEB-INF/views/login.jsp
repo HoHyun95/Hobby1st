@@ -50,7 +50,7 @@
               </div>
               <div class="input_btn1">
                 <div class="sign_up">ID가 없으신가요? 
-                  <a href="/member/sign_up"><span id="sign_up">회원가입</span></a>
+                  <span id="sign_up">회원가입</span>
                 </div>
                 <div class="findItem">
                   <a class="a_login" href="/member/send_email"><span id="findEmail">EMAIL 찾기</span></a>

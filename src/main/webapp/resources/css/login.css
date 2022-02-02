@@ -43,10 +43,9 @@
   border: 1px solid var(--color1);
   background-color: var(--color2);
   position: fixed;
-  top: 20%;
-  left: 37%;
-  right: 0;
-  bottom: 0;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   z-index: 11;
   display: none;
   justify-content: center;
@@ -129,7 +128,7 @@
 .login_input_contents_title {
   font-size: 0.8rem;
   font-weight: 900;
-  padding: 3px 0px 3px 0px;
+  padding: 8px 0px 8px 0px;
 }
 
 .login_input_contents_input_box {
@@ -168,6 +167,10 @@ input:focus {
 #sign_up {
   padding-left: 5px;
   font-weight: 900;
+}
+
+#sign_up:hover {
+  cursor: pointer;
 }
 
 .input_btn2 {

@@ -47,7 +47,7 @@ public class VoteController {
 		return "vote/voteDetail";
 	}
 
-	// 투표하기
+	// 투표하기 (단일투표)
 	@RequestMapping("voteComplete")
 	public String voteComplete(int option, int vl_seq, Model model) {
 
@@ -55,6 +55,23 @@ public class VoteController {
 
 		int voteResult = voteService.comVote(option, vl_seq, vc_vote_id);
 
+		model.addAttribute("voteResult", voteResult);
+		return "vote/voteDetail";
+	}
+	
+	// 투표하기 (중복투표)
+	@RequestMapping("voteCompleteCB")
+	public String voteCompleteCB(int[] option, int vl_seq, Model model) {
+
+		String vc_vote_id = (String) session.getAttribute("mem_id");
+		
+		for (int i = 0; i < option.length; i++) {
+			System.out.println("항목 : " + option[i]);
+			voteService.comVoteCB(option[i], vl_seq);
+		}
+		
+		int voteResult = voteService.recordVote(vl_seq, vc_vote_id);
+		
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
 	}

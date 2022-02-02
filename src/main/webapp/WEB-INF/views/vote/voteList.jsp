@@ -81,28 +81,35 @@ div {
 
 				<div class="end_date">투표 종료일 : ${dto.vl_end_date }</div>
 
-				<div class="btn">
-					<button class="voteBtn">투표하러가기
-						<input class="vl_seq" type="hidden" value="${dto.vl_seq }">
-					</button>
+				<div class="btn" id="btn${dto.vl_seq }">
+					<button class="comVote" style="display: none;">투표 완료</button>
 					
+					<button class="voteBtn">
+						투표하러가기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
+					</button>
 					&nbsp;
 					<button class="voteResult">결과보기</button>
 				</div>
 			</div>
+			<c:forEach var="voteCheckList" items="${voteCheckList }"
+				varStatus="status">
+				<c:if test="${voteCheckList.vl_seq eq dto.vl_seq }">
+					<script>
+						$("#btn${dto.vl_seq }").find(".voteBtn").css('display', 'none');
+						$("#btn${dto.vl_seq }").find(".comVote").css('display', 'inline');
+					</script>
+				</c:if>
+			</c:forEach>
+
 		</c:forEach>
 	</div>
-	
+
 	<script>
-		
 		$(".voteBtn").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
 			console.log(vl_seq);
-			location.href="/vote/detailPage?vl_seq=" + vl_seq; 
+			location.href = "/vote/detailPage?vl_seq=" + vl_seq;
 		})
-	
-	
-		
 	</script>
 
 </body>

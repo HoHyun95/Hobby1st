@@ -17,70 +17,98 @@ import kh.hobby1st.service.VoteService;
 @Controller
 @RequestMapping("/vote/")
 public class VoteController {
-	
+
 	@Autowired
 	private HttpSession session;
 
 	@Autowired
 	private VoteService voteService;
-	
-	
+
 	// 투표 작성 페이지 이동
 	@RequestMapping("writePage")
 	public String writePage() {
-		
+
 		return "vote/voteWrite";
 	}
-	
+
 	// 투표 작성 페이지 이동
 	@RequestMapping("detailPage")
 	public String detailPage(int vl_seq, Model model) {
-		
+
 		String mem_id = (String) session.getAttribute("mem_id");
-		
+
 		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
 		int voteCheck = voteService.voteCheck(vl_seq, mem_id);
-		
+
 		model.addAttribute("voteDetail", voteDetail);
 		model.addAttribute("voteOption", voteOption);
 		model.addAttribute("voteCheck", voteCheck);
 		return "vote/voteDetail";
 	}
+
+	// 투표하기 (단일투표)
+	@RequestMapping("voteComplete")
+	public String voteComplete(int option, int vl_seq, Model model) {
+
+		String vc_vote_id = (String) session.getAttribute("mem_id");
+
+		int voteResult = voteService.comVote(option, vl_seq, vc_vote_id);
+
+		model.addAttribute("voteResult", voteResult);
+		return "vote/voteDetail";
+	}
 	
+	// 투표하기 (중복투표)
+	@RequestMapping("voteCompleteCB")
+	public String voteCompleteCB(int[] option, int vl_seq, Model model) {
+
+		String vc_vote_id = (String) session.getAttribute("mem_id");
+		
+		for (int i = 0; i < option.length; i++) {
+			System.out.println("항목 : " + option[i]);
+			voteService.comVoteCB(option[i], vl_seq);
+		}
+		
+		int voteResult = voteService.recordVote(vl_seq, vc_vote_id);
+		
+		model.addAttribute("voteResult", voteResult);
+		return "vote/voteDetail";
+	}
+
 	// 투표 리스트 이동
 	@RequestMapping("listPage")
 	public String listPage(Model model) {
-		
+
 		String mem_id = (String) session.getAttribute("mem_id");
-		
+
 		List<VoteListDTO> vote_list = voteService.selectVoteAll();
 		List<VoteListDTO> voteCheckList = voteService.voteCheckList(mem_id);
-		
+
 		model.addAttribute("voteCheckList", voteCheckList);
 		model.addAttribute("vote_list", vote_list);
 		return "vote/voteList";
 	}
-	
+
 	// 투표 작성 하기
 	@RequestMapping("voteWrite")
-	public String voteWrite(VoteListDTO listDto, VoteOptionDTO optionDto, String edateY, String edateM, String edateD, String[] option) {
-		
+	public String voteWrite(VoteListDTO listDto, VoteOptionDTO optionDto, String edateY, String edateM, String edateD,
+			String[] option) {
+
 		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
 		listDto.setVl_end_date(edate);
-		
+
 		System.out.println(listDto.getVl_title());
-		
+
 		voteService.insertVoteList(listDto, edateY, edateM, edateD);
-		
-		for(int i =0; i < option.length; i++) {
+
+		for (int i = 0; i < option.length; i++) {
 			System.out.println("항목 : " + option[i]);
 			voteService.insertVoteOption(option[i]);
-			
+
 		}
-		
+
 		return "vote/voteWrite";
 	}
-	
-	
+
 }

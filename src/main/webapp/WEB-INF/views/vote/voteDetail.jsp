@@ -65,7 +65,9 @@ div {
 </head>
 <body>
 
-	<form action="">
+
+
+	<form class="form" action="/vote/voteComplete">
 		<div class="container">
 			<div class="vote_title">${voteDetail.vl_title }</div>
 
@@ -77,14 +79,32 @@ div {
 
 			<div class="vote_options">
 
-				<c:forEach var="voteOption" items="${voteOption }" varStatus="status">
+				<c:if test="${voteDetail.vl_type eq 0 }">
+					<c:forEach var="voteOption" items="${voteOption }"
+						varStatus="status">
 
-					<div class="answers">
-						<input type="radio" name="option" id="option${status.index }" value="${voteOption.vo_seq }"> <label
-							class="option_label" for="option${status.index }">${voteOption.vo_option }</label>
-					</div>
+						<div class="answers">
+							<input type="radio" name="option" id="option${status.index }"
+								value="${voteOption.vo_seq }"> <label
+								class="option_label" for="option${status.index }">${voteOption.vo_option }</label>
+						</div>
 
-				</c:forEach>
+					</c:forEach>
+				</c:if>
+
+				<c:if test="${voteDetail.vl_type eq 1 }">
+					<c:forEach var="voteOption" items="${voteOption }"
+						varStatus="status">
+
+						<div class="answers">
+							<input type="checkbox" name="option" id="option${status.index }"
+								value="${voteOption.vo_seq }"> <label
+								class="option_label" for="option${status.index }">${voteOption.vo_option }</label>
+						</div>
+
+					</c:forEach>
+				</c:if>
+
 			</div>
 
 			<div class="vote">
@@ -92,16 +112,21 @@ div {
 				&nbsp; &nbsp;
 				<button type="button" class="back">목록으로</button>
 			</div>
-
+			<input type="hidden" name="vl_seq" value="${voteDetail.vl_seq }">
 		</div>
 	</form>
-	
+
+	<c:if test="${voteDetail.vl_type eq 1 }">
+		<script>
+			$(".form").attr("action","/vote/voteCompleteCB");
+		</script>
+	</c:if>
+
+
 	<script>
-	
 		$(".back").on("click", function() {
 			history.back();
 		})
-	
 	</script>
 
 </body>

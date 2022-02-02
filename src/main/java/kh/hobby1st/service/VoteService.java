@@ -58,13 +58,13 @@ public class VoteService {
 	}
 	
 	// 투표시 해당 투표, option count 증가 / 투표기록 남기기
-	public int comVote(int vo_seq, int vl_seq, String vc_vote_seq) {
+	public int comVote(int vo_seq, int vl_seq, String vc_vote_id) {
 		
 		int result = 0;
 		
 		int optionResult = voteDao.plusOptionCount(vo_seq);
 		int voteResult = voteDao.plusVoteCount(vl_seq);
-		int voteCheckResult =  voteDao.insertVoteCheck(vl_seq, vc_vote_seq);
+		int voteCheckResult =  voteDao.insertVoteCheck(vl_seq, vc_vote_id);
 		
 		if(optionResult == 1 && voteResult == 1 && voteCheckResult ==1 ) {
 			result = 1;

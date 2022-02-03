@@ -62,7 +62,7 @@
                 type:"get",
                 url:"${path}/calendar/method?club=${club_cl_name}",
                 data:
-                {title:title}
+                {title:title, day_start:arg.start, day_end:arg.end}
          	});
         	if (title) {
         	calendar.addEvent({
@@ -76,12 +76,28 @@
         }
         calendar.unselect()
         },
+        
+        //리스트 출력
+        events: [
+        	{
+        		title : "list.title",
+        		start : "2022-02-04",
+        		end : "2022-02-04"
+        	},
+        	{
+        		title : "list.title",
+        		start : "2022-02-05",
+        		end : "2022-02-05"
+        	}  
+        ]  
+
     });
     calendar.render();
     });
 </script>
 </head>
-<body>
-  <div id='calendar'></div>
+ <body>
+  <div id='calendar'>
+  </div>
  </body>
 </html>

@@ -8,7 +8,55 @@ import java.util.Map;
 
 public class CalendarDateDTO {
 
-	private String year = "";
+
+	
+    public String getClub() {
+		return club;
+	}
+	public void setClub(String club) {
+		this.club = club;
+	}
+	public String getDay_start() {
+		return day_start;
+	}
+	public void setDay_start(String day_start) {
+		this.day_start = day_start;
+	}
+	public String getDay_end() {
+		return day_end;
+	}
+	public void setDay_end(String day_end) {
+		this.day_end = day_end;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
+   private String club;
+   private String day_start;
+   private String day_end;
+   private String title;
+   
+   public CalendarDateDTO() {}
+   public CalendarDateDTO(String club, String day_start, String day_end, String title) {
+	   super();
+	   this.club = club;
+	   this.day_start = day_start;
+	   this.day_end = day_end;
+	   this.title = title;	   
+   }
+   
+   
+	
+	
+	
+	
+}
+/*	private String year = "";
 	private String month = "";
 	private String date = "";
 	private String value = "";
@@ -164,3 +212,4 @@ public class CalendarDateDTO {
 	}
 
 }
+*/

@@ -3,6 +3,7 @@ package kh.hobby1st.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,18 +36,19 @@ public class CalendarController {
 	  @RequestMapping(value = "do", method = RequestMethod.GET) 
 	  public String calendar(Model model, String club_cl_name) { 
 	  model.addAttribute("club_cl_name", club_cl_name);
+	  model.addAttribute("list", cal_service.selectAll(club_cl_name));
 	  return "calendar"; 
 	  }
 	  
 	  @ResponseBody
 	  @RequestMapping(value = "method", method = RequestMethod.GET) 
-	  public String method(Model model, String title, String club, String allDay) {
+	  public String method(Model model, String title, String club, String day_start, String day_end) {		  
+	  int result = cal_service.insert(new CalendarDateDTO(club, day_start, day_end, title));
+	   
 	  model.addAttribute("list", cal_service.selectAll(club));
-	  System.out.println(title + club + allDay); 
 	  return"pageJsonResport"; 
 	  }
 	 
-
 	/*
 	 * @GetMapping(params = "method=list") public String list() { return "calendar";
 	 * }

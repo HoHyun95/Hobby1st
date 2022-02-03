@@ -21,6 +21,7 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/clubPic/**" location="/clubPic/"/>
 	<resources mapping="/chat/**" location="/chat/"/> <!-- chat CSS -->
+    <resources mapping="/lib/**" location="/resources/lib/"/> <!-- calendar -->
 	
 	<resources mapping="/js/**" location="/resources/js/"/><!-- fullpage.js -->
 	<resources mapping="/chatJs/**" location="/resources/js/chat/"/> <!-- chat JS -->

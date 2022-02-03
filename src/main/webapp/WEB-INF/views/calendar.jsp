@@ -7,216 +7,97 @@
 <meta charset="UTF-8">
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>calendar</title>
-<style TYPE="text/css">
-/*  보기 쉽게 무늬만 한거니 없애셔도 상관 없읍니다! */
-* {
-	text-align: center;
-	margin: auto;
-}
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js'></script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/locales-all.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+    	//사이즈
+    	height : '600px',
+    	expandRows: true,
+    	
+    	//캘린더헤더부분
+    	headerToolbar: {
+    		left: 'prev,next today',
+    		center: 'title',
+    		right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' 
+    		},
+        //첫페이지에서 보여지는 달
+        initialView: 'dayGridMonth',
+        
+        //수정가능
+        editable: true,
+        
+        //달력에 여러가지 날 선택가능
+        selectable: true,
+        
+        //현재시간 보여주는 마크생성
+        nowIndicator: true,
+        
+        //이벤트 오버할시 자동 크기 조절
+        dayMaxEvents: true,
+        locale: 'ko',
+        //이벤트가 추가되면 발생하는 이벤트
+        eventAdd: function(arg) {
 
-a {
-	text-decoration-line: none;
-	color: black;
-}
-td {
-    height: 100px;
-    width: 100px;
-    style: word-break:break-all;
-}
+            console.log(arg.event);
+        },
+        
+        //이벤트 삭제
+        eventClick: function(arg){  
+        	console.log(arg.event);
+        	if(confirm("정말로 삭제하시겠습니까?")){
+            arg.event.remove();
+        	}
+        },
+        
+        //캘린더에서 드래그로 이벤트를 생성
+        select: function(arg) {
+        	var title = prompt('입력할 이벤트 :');
+        	
+/*         	$.ajax({
+                type:"get",
+                url:"${path}/calendar/method",
+                dataType: "text",
+                data: 
+                {title:title}
+        	}); */
+        	
+        	if (title) {
+        	calendar.addEvent({
+        	title: title,
+        	start: arg.start,
+        	end: arg.end,
+        	allDay: arg.allDay,
+        	backgroundColor:"rgba(158, 128, 247, 0.9)", 
+        	textColor:"white"
+        	})
+        }
+        calendar.unselect()
+        },
+        
+        events: function(info, successCallback, failureCallback){ 
+        	// ajax 처리로 데이터를 로딩 시킨다.
+        	$.ajax({ 
+        		type:"get", 
+        		url:"${path}/calendar?method=data",
+        	    dataType:"json" 
+        	    }); 
+        }
 
-.navigation {
-	font-size: 15pt;
-	height: 50px;
-	line-height: 200%;
-}
-
-.calendar {
-	width: 700px;
-	height: 700px;
-}
-
-.calendar_body {
-	width: 600px;
-	height: 600px;
-}
-
-.calendar_wrap_top {
-	background-color: rgba(158, 128, 247, 0.9);
-	color: white;
-	font-weight: bold;
-}
-
-.sun_day {
-	color: red;
-}
-
-.sat_day {
-	color: blue;
-}
-.low_box{
-	line-height: 250%;
-    height: 50px;
-}
-.today{
-	background-color: gray;
-	font-weight: bold;
-}
-button{
-    border:none;
-	background-color: white;
-    width: 20pt;
-	height: 20pt;
-	color: blue;
-}
- button{
-    cursor: pointer;
- }
-.sun:hover{
-    cursor: pointer;
-}
-input[type="text"]{
-    width: 80%;
-	height: 100%;
-}
-</style>
+    });
+    calendar.render();
+ });
+</script>
 </head>
 <body>
-		<div class="calendar">
-			<!-- 클럽이름 -->
-			<div class="club_name">
-				<h2>
-					어서오세요!<br> ${club_cl_name }동호회의 캘린더 입니다!
-				</h2>
-			</div>
-			<!--날짜 네비게이션  -->
-			<div class="navigation">
-				<a class="before_after_year"
-					href="/calendar/do?year=${today_info.search_year-1}&month=${today_info.search_month-1}&club_cl_name=${club_cl_name}">
-					&lt;&lt; <!-- 이전해 -->
-				</a> <a class="before_after_month"
-					href="/calendar/do?year=${today_info.before_year}&month=${today_info.before_month}&club_cl_name=${club_cl_name}">
-					&lt; <!-- 이전달 -->
-				</a> <span class="this_month"> &nbsp;${today_info.search_year}. <c:if
-						test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
-				</span> <a class="before_after_month"
-					href="/calendar/do?year=${today_info.after_year}&month=${today_info.after_month}&club_cl_name=${club_cl_name}">
-					<!-- 다음달 --> &gt;
-				</a> <a class="before_after_year"
-					href="/calendar/do?year=${today_info.search_year+1}&month=${today_info.search_month-1}&club_cl_name=${club_cl_name}">
-					<!-- 다음해 --> &gt;&gt;
-				</a>
-			</div>
-			<table class="calendar_body" border=1>
-				<tr class="calendar_wrap_top">
-					<td class="day sun">일</td>
-					<td class="day">월</td>
-					<td class="day">화</td>
-					<td class="day">수</td>
-					<td class="day">목</td>
-					<td class="day">금</td>
-					<td class="day sat">토</td>
-				</tr>
-				<tr>
-	 <c:forEach var="dateList" items="${dateList}" varStatus="date_status">
-		<c:choose>
-            <%--오늘 표시하는 달력이 알수 없는 버그로 인한 삭제
- 			<c:when test="${dateList.value=='today'}">
-					 		 <td class="today">
-							 	<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">	
-						        <!-- 만약에 "오늘"에 데이터가 담겨있으면 출력됨 -->
-						        <c:forEach var="result" items="${result }" varStatus="status">
-						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-						                <div id="num_message_${dateList.date}">
-						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }<br>
-						                </div>
-						             </c:if>
-						        </c:forEach>
-						        </div>
-					 		 </td>
-				</c:when>--%>
-			<c:when test="${date_status.index%7==6}">
-							<td class="sat_day">
-								<div class="sat" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						        <div id="num_message_${dateList.date}">
-						         <c:forEach var="result" items="${result }" varStatus="status">
-						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-						                <div id="num_message_${dateList.date}">
-						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }
-						                </div>
-						             </c:if>
-						        </c:forEach>					        
-						        </div>
-							</td>
-				</c:when>	
-			<c:when test="${date_status.index%7==0}">
-				</tr>
-				 <tr>
-					<td class="sun_day">
-						<div class="sun" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-						<div id="num_message_${dateList.date}">
-							<c:forEach var="result" items="${result }" varStatus="status">
-						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-						                <div id="num_message_${dateList.date}">
-						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }
-						                </div>
-						             </c:if>
-						    </c:forEach>	
-						</div>
-					</td>
-			</c:when>
-					<c:otherwise>
-						<td class="normal_day">
-							<div class="date" onclick="number_click('${dateList.date}')">${dateList.date}</div>
-					    	<div id="num_message_${dateList.date}">
-							<c:forEach var="result" items="${result }" varStatus="status">
-						        	<c:if test="${result.date == dateList.date && result.month == today_info.search_month && result.year == today_info.search_year }">
-						                <div id="num_message_${dateList.date}">
-						 		 	 	        ${result.schedule }<br>
-						 		 		        ${result.schedule_detail }
-						                </div>
-						             </c:if>
-						    </c:forEach>						    	
-					    	</div>
-						</td>
-					  </c:otherwise>
-					</c:choose>
-			      </c:forEach>
-				</tr>
-			</table>
-		</div>
-	<script>
-	/*캘린더 내에서 날짜를 클릭하면 "input - submit" 자동생성 */
-	function number_click(a) {
-		const message_area=document.getElementById('num_message_' + a);
-        message_area.innerHTML=`        
-        <form action="/calendar/input_calendar" method="get" name="sub1">
-        <div id="message_box">
-        <input type=text name='year' value=${today_info.search_year} hidden>
-		<input type=text name='month' value=${today_info.search_month} hidden>
-		<input type=text name='value' value='${club_cl_name }' hidden>
-        <input type="text" name='date' value=`+a+` hidden>
-        <h4>title</h4><br>
-        <input type=text name='schedule' id='input_title_1'><br>
-        <h4>message</h4><br>
-        <input type=text name='schedule_detail' id='input_title_2'>
-        <button type="button" id='test_btn' onclick=vliadInputText()>V</button> 
-        <div>
-        </form>
-        `
-	}
-	
-	function vliadInputText() {
-    if (document.getElementById("input_title_1").value == "" || document.getElementById("input_title_2").value == "" ) {
-            alert("내용을 입력해주세요");
-            return false;
-    }else{
-    document.sub1.submit();
-  }
-}
-	</script>
+  <div id='calendar'></div>
+  <!-- 동호회 검색을 위한 더미 --> 
+  <input type='text' value='${club_cl_name }' name='club' hidden>
 </body>
 </html>

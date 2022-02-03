@@ -640,13 +640,11 @@
           <ul class="login_list">
             <c:choose>
               <c:when test="${mem_id !=null || admin != null }">
-             
-             
+			<c:if test="${admin != null}">
+                <li id="login_id"><b>관리자</b>님 환영합니다</li>
+                </c:if>
               <c:if test="${mem_id != null}">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
-                </c:if>
-			<c:if test="${mem_id == null}">
-                <li id="login_id"><b>관리자</b>님 환영합니다</li>
                 </c:if>
                 
                 <a href="/member/logout">

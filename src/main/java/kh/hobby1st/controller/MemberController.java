@@ -49,36 +49,45 @@ public class MemberController {
 		String url = "";
 
 			// 	관리자 로그인 체크
-		if(mem_id.contains("admin")) {
-			int result = mem_service.adminLogin(mem_id, mem_pass);
-			if(result > 0) { 
-				String admin = mem_id;
-				session.setAttribute("admin", admin);
-				url = "redirect: /";
-				return url;
-			}else {
-				return "error";
-			}
-		}else {
+//		if(mem_id.contains("admin")) {
+//			int result = mem_service.adminLogin(mem_id, mem_pass);
+//			if(result > 0) { 
+//				String admin = mem_id;
+//
+//				session.setAttribute("admin", admin);		
+//				url = "redirect: /";
+//				return url;
+//			}else {
+//				return "error";
+//			}
+//		}else {
 
 			//회원정보 존재여부 체크
 			int result = mem_service.login(mem_id, mem_pass);
 			if(0<result) {
 				//사용자 로그인 정보 session 저장
+				
+				if(mem_id.contains("admin")) {
+					String admin = mem_id;
+					session.setAttribute("admin", admin);
+					session.setAttribute("mem_id", mem_id);
+				}else {
+					session.setAttribute("mem_id", mem_id);
+				}
 				MemberDTO mem_dto = mem_service.selectOne(mem_id);
 				String user_name = mem_dto.getMem_name();
 				String user_nickName = mem_dto.getMem_nickname();
 
-				session.setAttribute("mem_id", mem_id);
 				session.setAttribute("user_name", user_name);
 				session.setAttribute("user_nickName", user_nickName);
+				
 				url = "redirect: /";
 			} else {
 				url = "error";
 			}
 			return url;
 		}
-	}
+//	}
 
 	//로그아웃 버튼 누를시 실행됩니다. 
 	@RequestMapping("logout")

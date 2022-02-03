@@ -286,11 +286,12 @@
 		
 		// 뒤로가기
 		$("#back").on("click", function() {
-			if(${check_num} == 1){
+			/* if(${check_num} == 1){
 				location.href = "/qna/qnaList?cpage=${cpage}";
 			}else if(${check_num} == 2){
 				 location.href = "/qna/searchQna?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }";
-			}
+			} */
+			window.close();
 		})
 			
 			
@@ -305,6 +306,8 @@
 			 if (confirm("정말 삭제하시겠습니까? 하시겠습니까??")) {
 				location.href = "/qna/deleteQna?qna_seq=${detail.qna_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
 				 /* history.back(); */
+				
+				self.close();
 			}
 		}) 
 	

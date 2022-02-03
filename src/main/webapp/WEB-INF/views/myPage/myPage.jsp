@@ -193,7 +193,7 @@
           <c:choose>
             <c:when test="${rStateInfo.cs_state eq 1 }">
               <div class="recent_act_contents_list">
-                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회에 가입 신청
+                ${recentlyClubInfo[status.index].cl_name } 동호회에 가입 신청
               </div>
               <div class="recent_act_contents_list">
                 ${recentlyClubInfo[status.index].cl_name }
@@ -207,7 +207,7 @@
             </c:when>
             <c:when test="${rStateInfo.cs_state eq 2 }">
               <div class="recent_act_contents_list">
-                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회 가입 승인
+                ${recentlyClubInfo[status.index].cl_name } 동호회 가입 승인
               </div>
               <div class="recent_act_contents_list">
                 ${recentlyClubInfo[status.index].cl_name }
@@ -221,7 +221,7 @@
             </c:when>
             <c:when test="${rStateInfo.cs_state eq 3 }">
               <div class="recent_act_contents_list">
-                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회 가입 거절
+               ${recentlyClubInfo[status.index].cl_name } 동호회 가입 거절
               </div>
               <div class="recent_act_contents_list">
                 ${recentlyClubInfo[status.index].cl_name }

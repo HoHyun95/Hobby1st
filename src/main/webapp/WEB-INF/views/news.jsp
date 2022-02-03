@@ -294,7 +294,7 @@
       <!-- QnA -->
       <div class="qna_wrap">
         <div class="qna_board">
-          QNA BOARD
+          <jsp:include page="qna/qnaList.jsp"></jsp:include>
         </div>
       </div>
       <!-- FAQ -->

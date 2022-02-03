@@ -34,6 +34,15 @@ public class MemberDAO {
 		return mybatis.selectOne("member.login", map);
 	}
 	
+	// 관리자 로그인
+	public int adminLogin(String mem_id, String mem_pass) {
+		Map<String, String> map = new HashMap<>();
+		map.put("mem_id", mem_id);
+		map.put("mem_pass", mem_pass);
+		return mybatis.selectOne("member.adminLogin", map);
+	}
+	
+	
 	//회원가입 페이지에서 자동으로 아이디 중복여부를 체크합니다.
 	public int id_check(String id) {
 		return mybatis.selectOne("member.id_check", id);

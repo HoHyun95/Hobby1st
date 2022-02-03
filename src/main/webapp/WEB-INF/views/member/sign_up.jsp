@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+3<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -437,6 +437,8 @@
                $("#id_check2").text("#4~16자 사이의 영어와 숫자만 입력")
 		   }
 	   })
+	   
+	  
        $("#pass").blur(function() {
         var passcheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
 		   if(passcheck.test($("#pass").val())){

@@ -43,6 +43,11 @@ public class MemberService {
 	public int login(String mem_id, String mem_pass) {
 		return mem_dao.login(mem_id, mem_pass);
 	}
+	
+	// 관리자 로그인
+	public int adminLogin(String mem_id, String mem_pass) {
+		return mem_dao.adminLogin(mem_id, mem_pass);
+	}
 
 	// 회원가입 페이지에서 자동으로 아이디 중복여부를 체크합니다.
 	public int id_check(String id) {

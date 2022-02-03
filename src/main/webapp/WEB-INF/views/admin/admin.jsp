@@ -1,745 +1,482 @@
+
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>admin</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/footer.css">
-<style>
-* {
-	box-sizing: border-box;
-}
-
-div {
-	/* border: 1px solid black; */
-	
-}
-
-.wrap {
-	width: 1260px;
-	margin: 0 auto;
-}
-
-.header {
-	height: 100px;
-	display: flex;
-	border: 1px solid dimgray;
-}
-
-.logo {
-	width: 25%;
-}
-
-.logo img {
-	width: 100%;
-	height: 100%;
-	padding: 10px 10px 10px 10px;
-}
-
-.temp {
-	width: 75%;
-}
-
-.container {
-	display: flex;
-}
-
-.sidebar {
-	width: 20%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	padding: 30px 0px;
-}
-
-.contents {
-	width: 75%;
-	height: 600px;
-
-	/* padding: 30px 20px 30px 20px; */
-}
-
-.list {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	align-items: center;
-}
-
-.list_item_wrap {
-	width: 100%;
-}
-
-.list_item_wrap :hover {
-	cursor: pointer;
-	color: skyblue;
-}
-
-.list_item {
-	border: 1px solid dimgray;
-	display: flex;
-}
-
-.fontA {
-	/* border: 1px solid dimgray; */
-	width: 25%;
-	text-align: right;
-}
-
-.menuName {
-	/* border: 1px solid dimgray; */
-	width: 75%;
-}
-
-.list_item i {
-	padding: 0px 10px 0 0;
-}
-
-.adminID {
-	height: 75px;
-	border: 1px solid dimgray;
-	display: flex;
-	/* justify-content: space-around; */
-}
-
-.imgbox {
-	/* border: 1px solid dimgray; */
-	width: 25%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.loginImg {
-	display: flex;
-	width: 40px;
-	height: 40px;
-	overflow: hidden;
-	border-radius: 25px;
-}
-
-.loginID {
-	/* border: 1px solid dimgray; */
-	width: 45%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
-
-.desc {
-	font-size: 0.7rem;
-}
-
-.button {
-	/* border: 1px solid dimgray; */
-	width: 30%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.button i {
-	font-size: 1.5rem;
-}
-
-.dash {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.dash1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 25%;
-}
-
-.dash2 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 25%;
-}
-
-.dash3 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 25%;
-}
-
-.clubAdmin {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.clubAdmin1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 50%;
-}
-
-.boardAdmin {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.boardAdmin1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 20%;
-}
-
-.memberAdmin {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.memberAdmin1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 90%;
-}
-
-.QA {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.QA1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 40%;
-}
-
-.FAQ {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.FAQ1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 30%;
-}
-
-.notice {
-	height: 100%;
-	width: 100%;
-	padding: 30px 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.notice1 {
-	width: 80%;
-	border: 1px solid dimgray;
-	height: 70%;
-}
-
-.list_item {
-	padding: 10px 0px 10px 20px;
-}
-
-.footer {
-	/* height: 100px;
-      background-color: gray; */
-	/* clear: both; */
-	
-}
-</style>
-
-
-<script>
-  
-$(document).on("click","#dash", function() {
-	
-	$(".dash").show();
-	$(".clubAdmin").hide();
-	$(".boardAdmin").hide();
-	$(".memberAdmin").hide();
-	$(".QA").hide();
-	$(".FAQ").hide();
-	$(".notice").hide();
-  
-  })
- 
- 
- 
-  $(document).on("click","#clubAdmin", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").show();
-	  $(".boardAdmin").hide();
-	  $(".memberAdmin").hide();
-	  $(".QA").hide();
-	  $(".FAQ").hide();
-	  $(".notice").hide();
-  
-  })
-  
-  $(document).on("click","#boardAdmin", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").hide();
-	  $(".boardAdmin").show();
-	  $(".memberAdmin").hide();
-	  $(".QA").hide();
-	  $(".FAQ").hide();
-	  $(".notice").hide();
-  
-  })
-  
-  $(document).on("click","#memberAdmin", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").hide();
-	  $(".boardAdmin").hide();
-	  $(".memberAdmin").show();
-	  $(".QA").hide();
-	  $(".FAQ").hide();
-	  $(".notice").hide();
-  
-  })
-  
-  $(document).on("click","#QA", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").hide();
-	  $(".boardAdmin").hide();
-	  $(".memberAdmin").hide();
-	  $(".QA").show();
-	  $(".FAQ").hide();
-	  $(".notice").hide();
-  
-  })
-  
-  $(document).on("click","#FAQ", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").hide();
-	  $(".boardAdmin").hide();
-	  $(".memberAdmin").hide();
-	  $(".QA").hide();
-	  $(".FAQ").show();
-	  $(".notice").hide();
-  
-  })
-  
-  $(document).on("click","#notice", function(){
-	  
-	  $(".dash").hide();
-	  $(".clubAdmin").hide();
-	  $(".boardAdmin").hide();
-	  $(".memberAdmin").hide();
-	  $(".QA").hide();
-	  $(".FAQ").hide();
-	  $(".notice").show();
-  
-  })
-  
-  
-  
-  
-</script>
-
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="/css/footer.css">
+  <title>
+    Material Dashboard 2 by Creative Tim
+  </title>
+  <!-- Extra details for Live View on GitHub Pages -->
+  <!-- Canonical SEO -->
+  <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard" />
+  <!--  Social tags      -->
+  <meta name="keywords" content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 5 dashboard, bootstrap 5, css3 dashboard, bootstrap 5 admin, Material Dashboard bootstrap 5 dashboard, frontend, responsive bootstrap 5 dashboard, free dashboard, free admin dashboard, free bootstrap 5 admin dashboard">
+  <meta name="description" content="Material Dashboard 2 is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful and organized. If you are looking for a tool to manage and visualize data about your business, this dashboard is the thing for you.">
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="product">
+  <meta name="twitter:site" content="@creativetim">
+  <meta name="twitter:title" content="Material Dashboard 2 by Creative Tim">
+  <meta name="twitter:description" content="Material Dashboard 2 is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful and organized. If you are looking for a tool to manage and visualize data about your business, this dashboard is the thing for you.">
+  <meta name="twitter:creator" content="@creativetim">
+  <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/50/original/material-dashboard.jpg">
+  <!-- Open Graph data -->
+  <meta property="fb:app_id" content="655968634437471">
+  <meta property="og:title" content="Material Dashboard 2 by Creative Tim" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="http://demos.creative-tim.com/material-dashboard/pages/dashboard.html" />
+  <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/50/original/material-dashboard.jpg" />
+  <meta property="og:description" content="Material Dashboard 2 is a beautiful Bootstrap 5 admin dashboard with a large number of components, designed to look beautiful and organized. If you are looking for a tool to manage and visualize data about your business, this dashboard is the thing for you." />
+  <meta property="og:site_name" content="Creative Tim" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/material-dashboard.min.css?v=3.0.0" rel="stylesheet" />
+  <!-- Anti-flicker snippet (recommended)  -->
+  <style>
+    .async-hide {
+      opacity: 0 !important
+    }
+  </style>
+  <script>
+    (function(a, s, y, n, c, h, i, d, e) {
+      s.className += ' ' + y;
+      h.start = 1 * new Date;
+      h.end = i = function() {
+        s.className = s.className.replace(RegExp(' ?' + y), '')
+      };
+      (a[n] = a[n] || []).hide = h;
+      setTimeout(function() {
+        i();
+        h.end = null
+      }, c);
+      h.timeout = c;
+    })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
+      'GTM-K9BGS8K': true
+    });
+  </script>
+  <!-- Analytics-Optimize Snippet -->
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-46172202-22', 'auto', {
+      allowLinker: true
+    });
+    ga('set', 'anonymizeIp', true);
+    ga('require', 'GTM-K9BGS8K');
+    ga('require', 'displayfeatures');
+    ga('require', 'linker');
+    ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
+  </script>
+  <!-- end Analytics-Optimize Snippet -->
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
-<body>
-	<div class="wrap">
 
-		<div class="header">
-			<div class="logo">
-				<img src="/images/LOGO.png">
-			</div>
-			<div class="temp"></div>
-		</div>
-		<!--header-->
-
-		<div class="container">
-
-			<div class="sidebar">
-
-				<div class="list">
-					<div class="list_item_wrap">
-
-						<div class="list_item">
-
-							<div class="fontA">
-								<i class="fas fa-sliders-h"></i>
-							</div>
-							<div class="menuName" id="dash"><a href="/admin">대시보드</a></div>
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="fas fa-object-group"></i>
-							</div>
-							<div class="menuName" id="clubAdmin"><a href="/admin/clubAdmin?cpage=1">동호회관리</a></div>
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="far fa-list-alt"></i>
-							</div>
-							<div class="menuName" id="boardAdmin"><a href="/admin/boardAdmin?cpage=1">게시판관리</a></div>
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="fas fa-address-card"></i>
-							</div>
-							<div class="menuName" id="memberAdmin"><a href="/admin/memberAdmin?cpage=1">회원관리</a></div>
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="fas fa-question-circle"></i>
-							</div>
-							<div class="menuName" id="QA"><a href="/admin/qa">Q&A</a></div>
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="fab fa-quora"></i>
-							</div>
-							<div class="menuName" id="FAQ"><a href="/admin/faq">FAQ</a></div>
-
-						</div>
-
-						<div class="list_item">
-							<div class="fontA">
-								<i class="far fa-newspaper"></i>
-							</div>
-							<div class="menuName" id="notice"><a href="/admin/notice">공지사항</a></div>
-
-						</div>
-					</div>
-				</div>
-
-				<div class="adminID">
-
-					<div class="imgbox">
-						<div class="loginImg">
-							<img src="">
-						</div>
-					</div>
-					<div class="loginID">
-						<div class="id">LoginID</div>
-						<div class="desc">ddd</div>
-					</div>
-					<div class="button">
-						<i class="fas fa-sign-out-alt"></i>
-					</div>
-
-				</div>
-
-			</div>
-			<!--sidebar-->
-
-
-			<div class="contents">
-
-				<div class="dash">
-					<div class="dash1"></div>
-
-					<div class="dash2"></div>
-
-					<div class="dash3"></div>
-				</div>
-				<!-- dash -->
-
-				<div class="clubAdmin">
-					<div class="clubAdmin1">
-
-						<table class="table table-hover" id="table" border="1"
-							align="center">
-							<td colspan=11 align=center>동호회 목록</td>
-							<tr>
-								<td width=50>동호회 ID</td>
-								<td width=70>동호회명</td>
-								<td width=100>소개</td>
-								<td width=50>동호회장</td>
-								<td width=50>정원</td>
-								<td width=50>지역</td>
-								<td width=50>개설일</td>
-								<td width=50>회원수</td>
-								<td width=70>카테고리 대</td>
-								<td width=70>카테고리 소</td>
-								<td width=50>추천수</td>
-								<td width=50>해체</td>
-							</tr>
-
-
-							<c:forEach var="dto" items="${allClub}">
-								<tr>
-									<td>${dto.CL_ID}</td>
-									<td><a href="/clubHouse?cl_id=${dto.CL_ID }">${dto.CL_NAME }</a></td>
-									<td>${dto.CL_DESC }</td>
-									<td>${dto.CL_BOSS_ID }</td>
-									<td>${dto.CL_MAXMEM }</td>
-									<td>${dto.CL_LOCAL }</td>
-									<td>${dto.CL_OPENDATE }</td>
-									<td>${dto.CL_MEMCOUNT }</td>
-									<td>${dto.CL_CATEGORY_ID }</td>
-									<td>${dto.CL_DCATEGORY_ID }</td>
-									<td>${dto.CL_REC_COUNT }</td>
-									<td><button class="breakClub${dto.CL_ID }">해체</button></td>
-
-									<script>
-				$('.breakClub${dto.CL_ID }').on('click', () => {
-					
-					if(confirm("동호회를 해체 시키겠습니까?")){
-						$.ajax({
-							url: "/club/breakClubAdmin?board_seq=${dto.CL_ID}"
-						}).done(function(result){
-							if(result == 1){
-								alert("성공적으로 해체하였습니다");
-			
-							}else{
-								alert("동호회를 해체 하는 과정에서 문제가 발생하였습니다");
-								location.reload();
-								}
-							})
-						}
-					});
-							// 해체 후 존재하는 동호회만 다시 출력 구현 
-				</script>
-
-								</tr>
-							</c:forEach>
-						</table>
-
-
-					</div>
-				</div>
-				<!-- clubAdmin -->
-
-
-				<div class="boardAdmin">
-					<div class="boardAdmin1">
-
-						<table class="table table-hover" id="table" border="1"
-							align="center">
-							<td colspan=5 align=center>게시판</td>
-							<tr>
-								<td width=50>글 번호</td>
-								<td width=320>게시물</td>
-								<td width=100>작성자</td>
-								<td width=100>작성날짜</td>
-								<td width=70></td>
-							</tr>
-
-							<c:forEach var="dto" items="${allBoard}">
-
-								<tr>
-									<td>${dto.cb_seq}</td>
-									<td><a
-										href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=1&cpage=1&keyword=&searchWord=">
-											${dto.cb_title }</a></td>
-									<td>${dto.cb_writer }</td>
-									<td>${dto.detailDate }</td>
-									<td><button type="button"
-											class="boardDelBtn${dto.cb_seq }">삭제</button></td>
-
-									<script>
-				
-				$('.boardDelBtn${dto.cb_seq}').on('click', () => {
-					if(confirm("정말로 삭제하시겠습니까?")){
-						$.ajax({
-							url : "/clubBoard/deleteBoardAdmin?cb_seq=${dto.cb_seq}"
-						}).done(function(result){
-							if(result == 1){
-								alert("성공적으로 삭제하였습니다");
-							}else{
-								alert("게시글을 삭제 하는 과정에서 문제가 발생하였습니다");
-								location.reload();
-									}
-								})				
-							}
-						})
-//x
-				</script>
-
-
-								</tr>
-							</c:forEach>
-						</table>
-
-					</div>
-				</div>
-
-				<div class="memberAdmin">
-					<div class="memberAdmin1">
-
-
-						<table class="table table-hover" id="table" border="1"
-							align="center">
-							<td colspan=9 align=center>회원 목록</td>
-							<tr>
-								<td width=50>아이디</td>
-								<td width=60>이름</td>
-								<td width=100>연락처</td>
-								<td width=100>이메일</td>
-								<td width=70>생년월일</td>
-								<td width=70>성별</td>
-								<td width=100>주소</td>
-								<td width=70>카테고리 대</td>
-								<td width=70>카테고리 소</td>
-								<td width=50>탈퇴</td>
-							</tr>
-
-
-							<c:forEach var="dto" items="${allMember}">
-								<tr>
-									<td>${dto.mem_id}</td>
-									<td>${dto.mem_nickname }</td>
-									<td>${dto.mem_phone }</td>
-									<td>${dto.mem_email }</td>
-									<td>${dto.mem_birthday }</td>
-									<td>${dto.mem_gender }</td>
-									<td>${dto.mem_address }</td>
-									<td>${dto.mem_category_1 }</td>
-									<td>${dto.mem_category_2 }</td>
-									<td><button class="asignMem${dto.mem_id }">탈퇴</button></td>
-
-									<script>
-									
-				$('.asignMem${dto.mem_id}').on('click', () => {
-					if(confirm("회원을 탈퇴시키겠습니까?")){
-						$.ajax({
-							url : "/member/asignAdmin",
-							data : {mem_id : "${dto.mem_id}"}
-						}).done(function(result){
-							if(result == 1){
-								alert("성공적으로 삭제되었습니다");
-							}else{
-								alert("회원을 탈퇴시키는 과정에서 문제가 발생하였습니다");
-								location.reload();
-							}
-						})
-						
-					}
-				})
-				
-				</script>
-				
-								</tr>
-							</c:forEach>
-						</table>
-
-					</div>
-				</div>
-
-				<div class="QA">
-					<div class="QA1"></div>
-				</div>
-
-				<div class="FAQ">
-					<div class="FAQ1"></div>
-				</div>
-
-				<div class="notice">
-					<div class="notice1">
-
-						<table class="table table-hover" id="table" border="1"
-							align="center">
-							<td colspan=5 align=center>공지사항</td>
-							<tr>
-								<td width=50>글 번호</td>
-								<td width=320>공지사항</td>
-								<td width=100>작성자</td>
-								<td width=100>작성날짜</td>
-								<td width=70></td>
-							</tr>
-
-
-							<c:forEach var="dto" items="${allNotice}">
-								<tr>
-									<td>${dto.notice_seq }</td>
-									<td><a
-										href="/notice/noticeDetail?notice_seq=${dto.notice_seq }&check_num=1&cpage=1&keyword=&searchWord=">
-											${dto.notice_title }</a></td>
-									<td>${dto.notice_writer }</td>
-									<td>${dto.formDate }</td>
-									<td><button type="button"
-											class="noticeDelBtn${dto.notice_seq }">삭제</button></td>
-
-									<script>
-				
-		
-				$('.noticeDelBtn${dto.notice_seq}').on('click', () => {
-					if(confirm("정말로 삭제하시겠습니까?")){
-					$.ajax({
-						url : "/notice/deleteNoticeAdmin?notice_seq=${dto.notice_seq}"
-					}).done(function(result){
-						if(result == 1){
-							alert("성공적으로 삭제하였습니다");
-						}else{
-							alert("공지사항을 삭제 하는 과정에서 문제가 발생하였습니다");
-							location.reload();
-								}
-							})
-						}
-					});
-			
-				
-				
-				</script>
-
-								</tr>
-							</c:forEach>
-						</table>
-
-					</div>
-				</div>
-
-
-			</div>
-			<!--contents-->
-
-		</div>
-		<!--container-->
-
-
-		<div class="footer">
+<body class="g-sidenav-show  bg-gray-200">
+  <!-- Extra details for Live View on GitHub Pages -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+      </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/clubAdmin?cpage=1">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">동호회관리</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/memberAdmin?cpage=1">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">회원관리</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/qaAdmin">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">view_in_ar</i>
+            </div>
+            <span class="nav-link-text ms-1">Q&A</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/faqAdmin">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+            </div>
+            <span class="nav-link-text ms-1">FAQ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/noticeAdmin">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">notifications</i>
+            </div>
+            <span class="nav-link-text ms-1">공지사항</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/profile.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/sign-in.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">login</i>
+            </div>
+            <span class="nav-link-text ms-1">Sign In</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/sign-up.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">assignment</i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+      <div class="mx-3">
+        <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+      </div>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label">Type here...</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign In</span>
+              </a>
+            </li>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <title>credit-card</title>
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                              <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">weekend</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                <h4 class="mb-0">$53k</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+                <h4 class="mb-0">2,300</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">New Clients</p>
+                <h4 class="mb-0">3,462</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">weekend</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Sales</p>
+                <h4 class="mb-0">$103,430</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+          <div class="card z-index-2 ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <div class="chart">
+                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0 ">Website Views</h6>
+              <p class="text-sm ">Last Campaign Performance</p>
+              <hr class="dark horizontal">
+              <div class="d-flex ">
+                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+          <div class="card z-index-2  ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+              <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                <div class="chart">
+                  <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0 "> Daily Sales </h6>
+              <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+              <hr class="dark horizontal">
+              <div class="d-flex ">
+                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                <p class="mb-0 text-sm"> updated 4 min ago </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                <div class="chart">
+                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0 ">Completed Tasks</h6>
+              <p class="text-sm ">Last Campaign Performance</p>
+              <hr class="dark horizontal">
+              <div class="d-flex ">
+                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                <p class="mb-0 text-sm">just updated</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
 
 			<div class="links">
 				<div class="links_inner">
@@ -776,10 +513,347 @@ $(document).on("click","#dash", function() {
 
 		</div>
 		<!--footer-->
+    </div>
+  </main>
+  <div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+      <i class="material-icons py-2">settings</i>
+    </a>
+    <div class="card shadow-lg">
+      <div class="card-header pb-0 pt-3">
+        <div class="float-start">
+          <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+          <p>See our dashboard options.</p>
+        </div>
+        <div class="float-end mt-4">
+          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+        <!-- End Toggle Button -->
+      </div>
+      <hr class="horizontal dark my-1">
+      <div class="card-body pt-sm-3 pt-0">
+        <!-- Sidebar Backgrounds -->
+        <div>
+          <h6 class="mb-0">Sidebar Colors</h6>
+        </div>
+        <a href="javascript:void(0)" class="switch-trigger background-color">
+          <div class="badge-colors my-2 text-start">
+            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+          </div>
+        </a>
+        <!-- Sidenav Type -->
+        <div class="mt-3">
+          <h6 class="mb-0">Sidenav Type</h6>
+          <p class="text-sm">Choose between 2 different sidenav types.</p>
+        </div>
+        <div class="d-flex">
+          <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
+          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
+          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
+        </div>
+        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+        <!-- Navbar Fixed -->
+        <div class="mt-3 d-flex">
+          <h6 class="mb-0">Navbar Fixed</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          </div>
+        </div>
+        <hr class="horizontal dark my-3">
+        <div class="mt-2 d-flex">
+          <h6 class="mb-0">Light / Dark</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+          </div>
+        </div>
+        <hr class="horizontal dark my-sm-4">
+        <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard" target="_blank">View documentation</a>
+        <div class="w-100 text-center">
+          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+          <h6 class="mt-3">Thank you for sharing!</h6>
+          <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        datasets: [{
+          label: "Sales",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "rgba(255, 255, 255, .8)",
+          data: [50, 20, 10, 22, 50, 10, 40],
+          maxBarThickness: 6
+        }, ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
 
 
-	</div>
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
 
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Mobile apps",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          maxBarThickness: 6
 
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+
+    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Mobile apps",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#f8f9fa',
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
 </body>
+
 </html>

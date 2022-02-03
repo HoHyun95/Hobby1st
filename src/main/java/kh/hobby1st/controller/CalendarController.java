@@ -22,6 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kh.hobby1st.dto.CalendarDateDTO;
 import kh.hobby1st.service.CalendarDateService;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
+
+
 @Controller
 @RequestMapping("/calendar/")
 public class CalendarController {
@@ -41,14 +47,39 @@ public class CalendarController {
 	  }
 	  
 	  @ResponseBody
-	  @RequestMapping(value = "method", method = RequestMethod.GET) 
+	  @RequestMapping(value = "method", method = RequestMethod.POST) 
 	  public String method(Model model, String title, String club, String day_start, String day_end) {		  
 	  int result = cal_service.insert(new CalendarDateDTO(club, day_start, day_end, title));
 	   
 	  model.addAttribute("list", cal_service.selectAll(club));
-	  return"pageJsonResport"; 
+	  return "ssss"; 
 	  }
 	 
+	  @ResponseBody
+	  @RequestMapping(value = "get/schedules", method = RequestMethod.GET) 
+	  public String getSchedules(Model model,String club) {
+	  
+	  List<CalendarDateDTO> data = cal_service.selectAll(club);
+      System.out.println(data);
+	  System.out.println("갯입니다 여기"+club);
+
+	  JSONObject schedules = new JSONObject((Map) data);
+	
+	
+	  
+	  return schedules.toString(); 
+	  }
+}	  
+		/*ㅈ
+		 * @RequestMapping(value="get/schedules", method={ RequestMethod.GET,
+		 * RequestMethod.POST }) public String getSchedules( HttpServletRequest request
+		 * ) throws Exception { JSONObject json = new JSONObject();
+		 * 
+		 * json.put("success", true); json.put("data", 10); json.put(null, 10);
+		 * 
+		 * return json.toString(4); }
+		 */
+	  
 	/*
 	 * @GetMapping(params = "method=list") public String list() { return "calendar";
 	 * }
@@ -58,7 +89,6 @@ public class CalendarController {
 	 * cal_service.selectAll(club_cl_name)); return "pageJsonReport"; }
 	 */
 
-}
 
 /*
  * // 캘린더 호출 무조건 "do" 타고 들어와야함!

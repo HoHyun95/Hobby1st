@@ -16,6 +16,22 @@
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     
+    // 일정 GET
+   	let allSchedule;
+    $.ajax({
+             type: "GET",
+             url: "get/schedules?club=${club_cl_name}",
+             async:false, // 이 한줄만 추가해주시면 됩니다.
+          
+             dataType: "json",
+             success: function (data) {
+            	 allSchedule = data;
+            	 console.log(allSchedule,'allSchedule')
+             }
+         });
+	
+    
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
     	//사이즈
     	height : '600px',
@@ -79,7 +95,7 @@
         
         //리스트 출력
         events: [
-        	{
+        	/* {
         		title : "list.title",
         		start : "2022-02-04",
         		end : "2022-02-04"
@@ -88,7 +104,7 @@
         		title : "list.title",
         		start : "2022-02-05",
         		end : "2022-02-05"
-        	}  
+        	}   */
         ]  
 
     });

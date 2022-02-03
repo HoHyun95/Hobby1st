@@ -89,6 +89,9 @@ div {
 						</div>
 
 					</c:forEach>
+					<script>
+						$("#option0").prop('checked',true);
+					</script>
 				</c:if>
 
 				<c:if test="${voteDetail.vl_type eq 1 }">

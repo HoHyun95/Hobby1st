@@ -83,5 +83,10 @@ public class VoteDAO {
 	public int voteTotalCount(int vo_vote_seq) {
 		return mybatis.selectOne("Vote.voteTotalCount", vo_vote_seq);
 	}
+	
+	// 투표수가 많은 option 순으로 가져오기
+	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq){
+		return  mybatis.selectList("Vote.selectOptionByCount", vo_vote_seq);
+	}
 
 }

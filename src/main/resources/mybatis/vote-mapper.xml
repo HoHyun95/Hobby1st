@@ -61,5 +61,11 @@
 		select sum(vo_count) from vote_option where vo_vote_seq = #{value}
 	</select>
 	
+	<!-- 투표수가 많은 option 순으로 가져오기 -->
+	<select id="selectOptionByCount" resultType="kh.hobby1st.dto.VoteOptionDTO">
+		select * from vote_option where vo_vote_seq = #{value} order by vo_count desc
+	</select>
+	
+	
 	
 </mapper>

@@ -252,6 +252,12 @@ svg {
 }
 /* search_area end */
 
+.search_result_title {
+  width: 1260px;
+  margin: 0 auto;
+  padding: 30px 20px 30px 20px;
+}
+
 /* search_result */
 .search_result {
   width: 100%;

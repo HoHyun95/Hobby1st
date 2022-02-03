@@ -11,9 +11,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CLUB</title>
   <!-- 네이버 로그인스크립트  -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -262,6 +263,8 @@
       let selectBox = document.getElementById("selectBox");
       let search_club = document.querySelector(".search_club");
       let create_hobby1st_club = document.querySelector(".create_hobby1st_club");
+      let search_result_title = document.querySelector(".search_result_title");
+      
       $.ajax({
         url: "/clubList/searchClub",
         type: "get",
@@ -269,11 +272,18 @@
           "searchField": (selectBox.value),
           "searchText": (search_club.value)
         },
-        dataType: "json" 
+        dataType: "json"
       }).done((res) => {
         console.log(res);
         create_hobby1st_club.style.display = "none";
         search_result_inner.style.display = "flex";
+        search_result_title.innerText = "총 " + (res.length) + "건의 검색 결과가 있습니다.";
+        if(search_result_inner.hasChildNodes()) {
+          while (search_result_inner.hasChildNodes()) {	
+            search_result_inner.removeChild(search_result_inner.firstChild);
+    	  }
+        }
+        
         if(res.length > 0) {
           for(let k = 0; k < res.length; k++) {
             let div1 = document.createElement("div");
@@ -316,10 +326,10 @@
             div2.appendChild(h5_2);
             div2.appendChild(h5_3);
             div1.appendChild(div2);
+            
             search_result_inner.appendChild(div1);
           }
         } else {
-          
           create_hobby1st_club.style.display = "flex";
           search_result_inner.style.display = "none";
         }
@@ -442,19 +452,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item"><i class="fas fa-stream"></i></li>
-            <li class="menu_list_item"><i class="fab fa-hubspot"> Hobby1st</i></li>
-            <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
-            <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
-            <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
-            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Main</i></li></a>
-          </ul>
-          <ul class="icon_list">
-            <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
-            <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-instagram"></i></li></a>
-            <a href="/clubBoard/boardList?cpage=1"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
-            <a href="/clubList/clubListPage"><li class="icon_list_item"><i class="fab fa-github"></i></li></a>
-            <a href="/chat/clubChat"><li class="icon_list_item"><i class="fab fa-google"></i></li></a>
+            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/club"><li class="menu_list_item">동호회</li></a>
+            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/news"><li class="menu_list_item">NEWS</li></a>
+            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/admin"><li class="menu_list_item">admin</li></a>
           </ul>
         </div>
       </div>
@@ -495,6 +498,7 @@
       </div>
     </div>
   
+ 	<div class="search_result_title"></div>
  
     <div class="search_result">
       <div class="search_result_inner">

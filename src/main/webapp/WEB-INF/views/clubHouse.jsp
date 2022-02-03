@@ -251,6 +251,7 @@
         <div class="clIntro_wrap">
           <div class="clIntro_box">
                <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
+               <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
           </div>
         </div> 
         

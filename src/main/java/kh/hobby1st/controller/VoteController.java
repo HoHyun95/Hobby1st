@@ -55,6 +55,7 @@ public class VoteController {
 
 		int voteResult = voteService.comVote(option, vl_seq, vc_vote_id);
 
+		model.addAttribute("vl_seq", vl_seq);
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
 	}
@@ -71,6 +72,7 @@ public class VoteController {
 		}
 		int voteResult = voteService.icVoteRecord(vl_seq, vc_vote_id);
 		
+		model.addAttribute("vl_seq", vl_seq);
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
 	}

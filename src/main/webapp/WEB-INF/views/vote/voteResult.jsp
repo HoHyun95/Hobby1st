@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,6 +87,10 @@ div {
 
 <body>
 
+	<!-- 오늘 날자 구하기 -->
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+
 	<div class="container">
 		<div class="vote_list">
 			<div class="vote_title">
@@ -97,8 +102,9 @@ div {
 			<c:forEach var="dto" items="${voteOption }" varStatus="status">
 				<div class="vote_result">
 					<div class="vote_option">
-						<span class="option">${dto.vo_option }</span> <span class="vote_count"
-							style="float: right;"><i class="fas fa-user-check"></i> ${dto.vo_count }명</span>
+						<span class="option">${dto.vo_option }</span> <span
+							class="vote_count" style="float: right;"><i
+							class="fas fa-user-check"></i> ${dto.vo_count }명</span>
 					</div>
 
 					<div class="option_bar">
@@ -110,18 +116,41 @@ div {
 				</div>
 			</c:forEach>
 			<div class="btn">
-				<button>투표하러가기</button>
+				<c:if test="${voteCheck eq 1 }">
+					<button class="voteCom">투표완료</button>
+				</c:if>
+				<c:if test="${voteCheck eq 0 }">
+					<button class="voteBtn">투표하러가기</button>
+				</c:if>
+
+
 				&nbsp;
-				<button>목록으로</button>
+				<button class="back">목록으로</button>
 			</div>
 		</div>
 	</div>
 
+	<c:if test="${today > voteDetail.vl_end_date }">
+		<script>
+			$(".voteCom").css('display', 'none');
+			$(".voteBtn").css('display', 'none');
+		</script>
+	</c:if>
 
 
-	<%-- <c:forEach var="dto" items="${resultCount }" varStatus="status">
-		항목 : ${dto }
-	</c:forEach> --%>
+	<script>
+		// 목록으로
+		$(".back").on("click", function() {
+			location.href = "/vote/listPage";
+		})
+
+		// 투표하기
+		$(".voteBtn").on("click", function() {
+			location.href = "/vote/detailPage?vl_seq=${voteDetail.vl_seq}";
+		})
+	</script>
+
+
 
 </body>
 </html>

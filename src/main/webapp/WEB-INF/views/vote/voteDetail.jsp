@@ -66,7 +66,6 @@ div {
 <body>
 
 
-
 	<form class="form" action="/vote/voteComplete">
 		<div class="container">
 			<div class="vote_title">${voteDetail.vl_title }</div>
@@ -121,11 +120,18 @@ div {
 			$(".form").attr("action","/vote/voteCompleteCB");
 		</script>
 	</c:if>
+	
+	<c:if test="${voteResult eq 1 }">
+		<script>
+			alert("투표에 참여해주셔서 감사합니다.");
+			location.href="/vote/voteResultPage?vl_seq=${vl_seq}";
+		</script>
+	</c:if>
 
 
 	<script>
 		$(".back").on("click", function() {
-			history.back();
+			location.href="/vote/listPage";
 		})
 	</script>
 

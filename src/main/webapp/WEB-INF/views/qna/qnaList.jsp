@@ -26,18 +26,8 @@
 </style>
 </head>
 <body>
-
-	<!-- 글쓰기 버튼 -->
-	<div class="btn">
-		<div style="text-align: right; width: 85%;">
-			<button type="button" id="writeBtn"
-				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-1.5"
-				style="margin-right: 10px; margin-top: 10px;">문의하기</button>
-		</div>
-	</div>
-
 	<!-- 공지사항 -->
-	<div class="board" style="width: 70%; height: 100%; margin: auto;">
+	<div class="board" style="width: 90%; height: 100%; margin: auto;">
 
 		<div class="bg-white rounded-lg shadow-lg py-6" style="height: 100%;">
 			<!-- 공지사항 큰 틀-->
@@ -47,7 +37,7 @@
 				<table class="w-full">
 					<thead>
 						<tr class="text-gray-800 border border-b-0 text-center">
-							<th colspan="6" class="px-4 py-3" style="width: 100%;"># QnA
+							<th colspan="6" class="px-4 py-3" style="width: 100%;">Q&A Board
 							
 						</tr>
 
@@ -70,7 +60,7 @@
 								<td class="px-4 py-4 text-center">${totalNoticeCount - ((cpage-1) * 10) - status.index}</td>
 
 								<td class="title px-4 py-4" style="cursor: pointer;"
-									onclick="location.href='/qna/qnaDetail?qna_seq=${dto.qna_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+									onclick="window.open('/qna/qnaDetail?qna_seq=${dto.qna_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}','QnA보기','width=1000, height=900, left=' + (window.screen.width - 1000) / 2 + ', top=' + (window.screen.height - 900) / 2 + ',toolbar=no, menubar=no, scrollbars=no, resizable=no')">
 									${dto.qna_title }<i id="lockIcon" class="fas fa-lock"></i>
 									
 															<c:if test="${replycount > 0 }">
@@ -94,12 +84,12 @@
 
 	<!-- 게시판 페이징 밑 글쓰기 -->
 	<div class="footer"
-		style="width: 70%; height: 60px; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
+		style="width: 90%; height: 100px; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
 		<div class="navi" style="text-align: center; line-height: 60px">
 			${navi }
 			<button type="button" id="writeBtn"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 "
-				style="margin-right: 10px; margin-top: 10px; height: 35px; line-height: 35px; float: right;">문의하기
+				style="width: 100px; margin-right: 10px; margin-top: 85px; height: 35px; line-height: 35px; float: right;">문의하기
 			</button>
 		</div>
 
@@ -114,7 +104,8 @@
 				style="text-align: center; height: 70px; margin-bottom: 100px;">
 
 				<select name="keyword"
-					class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto">
+					class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto"
+					style="height: 40px;">
 					<option>제목</option>
 					<option>작성자</option>
 				</select> <input type="hidden" name="cpage" value="${cpage }"> <input
@@ -137,7 +128,7 @@
 
 				<button id="search"
 					class="border border-gray-500 text-black-500 bg-Gray-400 bg-gray-200 rounded px-4 py-1.5"
-					style="margin-top: 15px;">검색</button>
+					style="width: 100px; height: 40px; margin-top: 15px;">검색</button>
 			</div>
 		</div>
 	</form>
@@ -147,11 +138,13 @@
 
 	<script>
 	// 페이징 스타일
-	$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
-	
+	$(".paging").addClass("text-black-500 hover:bg-gray-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
+	  
 	
 		$("#writeBtn").on("click", function() {
-			location.href = "/qna/qnaWrite?"
+			let left = Math.ceil((window.screen.width - 1000) / 2);
+		    let top = Math.ceil((window.screen.height - 900) / 2); 
+			window.open("/qna/qnaWrite?", "Q&A 작성", "width=1000, height=900, left=" + left + ", top=" + top + ",toolbar=no, menubar=no, scrollbars=no, resizable=no" );  
 		});
 	</script>
 </body>

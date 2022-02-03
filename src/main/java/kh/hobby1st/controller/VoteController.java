@@ -55,6 +55,7 @@ public class VoteController {
 
 		int voteResult = voteService.comVote(option, vl_seq, vc_vote_id);
 
+		model.addAttribute("vl_seq", vl_seq);
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
 	}
@@ -67,13 +68,47 @@ public class VoteController {
 		
 		for (int i = 0; i < option.length; i++) {
 			System.out.println("항목 : " + option[i]);
-			voteService.comVoteCB(option[i], vl_seq);
+			voteService.icOption(option[i]);
 		}
+		int voteResult = voteService.icVoteRecord(vl_seq, vc_vote_id);
 		
-		int voteResult = voteService.recordVote(vl_seq, vc_vote_id);
-		
+		model.addAttribute("vl_seq", vl_seq);
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
+	}
+	
+	//투표 결과 보기
+	@RequestMapping("voteResultPage")
+	public String voteResultPage(int vl_seq, Model model) {
+
+		String vc_vote_id = (String) session.getAttribute("mem_id");
+		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
+		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
+		int voteTotalCount = voteService.voteTotalCount(vl_seq);
+		List<VoteOptionDTO> optionRank = voteService.selectOptionByCount(vl_seq);
+		
+		int[] resultCount = new int[voteOption.size()];
+		int[] resultCountM = new int[voteOption.size()];
+		
+		for(int i = 0; i < voteOption.size(); i++) {
+			if(voteOption.get(i).getVo_count() != 0) {
+				resultCount[i] = (voteOption.get(i).getVo_count() * 100) / voteTotalCount;
+			}else  {
+				resultCount[i] = 0;
+			}
+			resultCountM[i] = 100 - resultCount[i];
+		}
+		
+		int voteCheck = voteService.voteCheck(vl_seq, vc_vote_id);
+		
+		
+		model.addAttribute("voteDetail", voteDetail);
+		model.addAttribute("voteOption", voteOption);
+		model.addAttribute("resultCountM", resultCountM);
+		model.addAttribute("resultCount", resultCount);
+		model.addAttribute("voteCheck", voteCheck);
+		model.addAttribute("optionRank", optionRank);
+		return "vote/voteResult";
 	}
 
 	// 투표 리스트 이동

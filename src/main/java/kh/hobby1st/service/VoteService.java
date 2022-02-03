@@ -73,18 +73,33 @@ public class VoteService {
 	}
 
 	// 중복 투표시 해당 투표 option count 증가
-	public int icOption(int vo_seq, int vl_seq) {
+	public int icOption(int vo_seq) {
 		return voteDao.plusOptionCount(vo_seq);
 	}
 
-	// 중복 투표시 해당 투표 vote count 증가
-	public int icVote(int vl_seq) {
-		return voteDao.plusVoteCount(vl_seq);
+	// 중복 투표시 해당 투표 vote count 증가 / 기록 남기기
+	public int icVoteRecord(int vl_seq, String vc_vote_id) {
+
+		int result = 0;
+
+		int plusVoteCount = voteDao.plusVoteCount(vl_seq);
+		int voteCheck = voteDao.insertVoteCheck(vl_seq, vc_vote_id);
+
+		if (plusVoteCount == 1 && voteCheck == 1) {
+			result = 1;
+		}
+
+		return result;
 	}
 
-	// 중복투표시 기록 남기기
-	public int recordVote(int vl_seq, String vc_vote_id) {
-		return voteDao.voteCheck(vl_seq, vc_vote_id);
+	// 중복투표시 총 투표수
+	public int voteTotalCount(int vo_vote_seq) {
+		return voteDao.voteTotalCount(vo_vote_seq);
+	}
+
+	// 투표수가 많은 option 순으로 가져오기
+	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq) {
+		return voteDao.selectOptionByCount(vo_vote_seq);
 	}
 
 }

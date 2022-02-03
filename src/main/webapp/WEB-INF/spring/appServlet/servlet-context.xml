@@ -21,12 +21,18 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/clubPic/**" location="/clubPic/"/>
 	<resources mapping="/chat/**" location="/chat/"/> <!-- chat CSS -->
+    <resources mapping="/lib/**" location="/resources/lib/"/> <!-- calendar -->
 	
 	<resources mapping="/js/**" location="/resources/js/"/><!-- fullpage.js -->
 	<resources mapping="/chatJs/**" location="/resources/js/chat/"/> <!-- chat JS -->
 	
 	<resources mapping="/upload/**" location="/upload/"/><!-- SummerNote -->
 	
+	<resources mapping="/assets/img/**" location="/resources/assets/img/" />
+	<resources mapping="/assets/js/**" location="/resources/assets/js/" />
+	<resources mapping="/assets/fonts/**" location="/resources/assets/fonts/" />
+	<resources mapping="/assets/scss/**" location="/resources/assets/scss/" />
+	<resources mapping="/assets/css/**" location="/resources/assets/css/" />
 	
 	
 

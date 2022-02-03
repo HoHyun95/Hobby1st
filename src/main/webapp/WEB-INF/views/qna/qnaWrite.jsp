@@ -25,7 +25,7 @@
 
 <body>
 
-	<form id="frm" action="/qna/qnaInsert" method="post">
+	<form name="myFrm" id="frm" method="post">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
@@ -36,7 +36,7 @@
 			<!-- 제목 입력 -->
 			<div>
 				<input name="qna_title" id="title"
-					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
+					style="width:100%; font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 					type="text" placeholder="제목을 입력해 주세요."
 					class="
                         placeholder-gray-400
@@ -124,7 +124,15 @@
 
 		// 뒤로가기
 		$("#back").on("click", function() {
-			history.back();
+			window.close();
+		})
+		
+		$("#input_board").on("click", function() {
+			window.opener.name = "parentPage";
+			document.myFrm.target = "parentPage";
+			document.myFrm.action = "/qna/qnaInsert";
+			document.myFrm.submit();
+			self.close();
 		})
 	</script>
 

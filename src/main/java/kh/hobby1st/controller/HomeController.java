@@ -17,10 +17,10 @@ import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubCategoryDTO;
 import kh.hobby1st.dto.ClubJoinStateDTO;
 import kh.hobby1st.dto.ClubListDTO;
-import kh.hobby1st.dto.ClubMemberDTO;
 import kh.hobby1st.dto.FaqDTO;
 import kh.hobby1st.dto.MemberDTO;
 import kh.hobby1st.dto.NoticeDTO;
+import kh.hobby1st.dto.QnaDTO;
 import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubCategoryService;
 import kh.hobby1st.service.ClubJoinStateService;
@@ -30,6 +30,7 @@ import kh.hobby1st.service.FaqService;
 import kh.hobby1st.service.MemberService;
 import kh.hobby1st.service.MyPageService;
 import kh.hobby1st.service.NoticeService;
+import kh.hobby1st.service.QnaService;
 
 
 @Controller
@@ -58,6 +59,9 @@ public class HomeController {
 
 	@Autowired
 	private NoticeService ntService;
+	
+	@Autowired
+	private QnaService qnaService;
 
 	@Autowired
 	private FaqService faqService;
@@ -235,10 +239,20 @@ public class HomeController {
 	}
 
 	@RequestMapping("news")
-	public String news(Model model) {
+	public String news(Model model) throws Exception {
 		List<NoticeDTO> noticeList = ntService.noticeListNotPaging();
 		List<FaqDTO> faqList = faqService.faqList();
+		List<QnaDTO> qnaList = qnaService.selectQnaByPaging(1);
 
+		int check_num = 1;
+		String navi = qnaService.getPageNavi(1);
+		int totalNoticeCount = qnaService.getRecordCount();
+
+		model.addAttribute("totalNoticeCount", totalNoticeCount);
+		model.addAttribute("check_num", check_num);
+		model.addAttribute("cpage", 1);
+		model.addAttribute("navi", navi);
+		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("faqList", faqList);
 

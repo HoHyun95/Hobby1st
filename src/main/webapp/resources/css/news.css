@@ -78,6 +78,7 @@
 .qna_wrap, .faq_wrap {
   width: 95%;
   min-height: 1000px;
+  height: fit-content;
   border: 1px solid var(--bg-color3);	
   margin: 0 auto;
   display: none;
@@ -151,6 +152,7 @@ input[id *= "notice"]:checked + label + div {
 /* qna */
 .qna_board {
   width: 1150px;
+  height: 90%;
   margin: 50px auto;
   border: 1px dimgrey;
 }

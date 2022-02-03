@@ -47,6 +47,16 @@
          loginForm.style.display = "none";
        }
 
+       sign_up.onclick = () => {
+       	 let modal_bg = document.querySelector(".modal_bg");
+         let loginForm = document.querySelector(".loginForm");
+         let signUp_wrap = document.querySelector(".signUp_wrap");
+         loginForm.style.zIndex = -1;
+         loginForm.style.display = "none";  
+         signUp_wrap.style.zIndex = 11;
+         signUp_wrap.style.display = "flex";
+        }
+       
        /* 회원가입 */
        let signUp_close_btn = document.getElementById("signUp_close_btn");
        let signUpBtn = document.getElementById("signUpBtn");
@@ -55,7 +65,7 @@
        let signUp_container = document.querySelector(".signUp_container");
        let signUp_MOVE_WIDTH = 528;
        let signUp_position = 0;
-
+       
        signupform_btn.onclick = () => {
          let modal_bg = document.querySelector(".modal_bg");
          let signUp_wrap = document.querySelector(".signUp_wrap");
@@ -64,7 +74,7 @@
          signUp_wrap.style.zIndex = 11;
          signUp_wrap.style.display = "flex";
        }
-
+       
        signUp_close_btn.onclick = () => {
          let modal_bg = document.querySelector(".modal_bg");
          let signUp_wrap = document.querySelector(".signUp_wrap");
@@ -73,8 +83,175 @@
          signUp_wrap.style.zIndex = -1;
          signUp_wrap.style.display = "none";
        }
+       
+       let mem_id = document.getElementById("mem_id");
+       let mem_id_Result = document.getElementById("mem_id_Result");
+       
+       let mem_pass = document.getElementById("mem_pass");
+       let mem_pw_Result = document.getElementById("mem_pw_Result");
+       
+       let mem_pass2 = document.getElementById("mem_pass2");
+       let mem_pw2_Result = document.getElementById("mem_pw2_Result");
+       
+       let mem_name = document.getElementById("mem_name");
+       let mem_name_Result = document.getElementById("mem_name_Result");
+       
+       let mem_nickname = document.getElementById("mem_nickname");
+       let mem_nickname_Result = document.getElementById("mem_nickname_Result");
+       
+       let mem_birthday = document.getElementById("mem_birthday");
+       let mem_birthday_Result = document.getElementById("mem_birthday_Result");
+       
+       let mem_phone = document.getElementById("mem_phone");
+       let mem_phone_Result = document.getElementById("mem_phone_Result");
+       
+       let mem_email = document.getElementById("mem_email");
+       let mem_email_Result = document.getElementById("mem_email_Result");
+       
+       let select_gender = document.getElementById("select_gender");
+       let mem_gender_Result = document.getElementById("mem_gender_Result");
+       
+       let mem_address = document.getElementById("mem_address");
+       let mem_address_Result = document.getElementById("mem_address_Result");
+       
+       
+       mem_id.onblur = () => {
+         if(mem_id.value == "") {
+       	mem_id_Result.style.color = "tomato";
+           mem_id_Result.innerText = "ID를 입력해 주세요";  
+         } else {
+           $.ajax({
+		      url : "/member/idCheck",
+			  data: {id: mem_id.value}
+			}).done(function(resp){
+		      if(resp == "1") {
+		    	mem_id_Result.style.color = "tomato";
+		    	mem_id_Result.innerText = "중복된 아이디입니다.";
+		    	mem_id.value = ""
+			    mem_id.focus();
+			  } else if(resp == "0") {
+				mem_id_Result.style.color = "forestgreen";
+				mem_id_Result.innerText = "사용 가능한 아이디입니다.";    
+			  }
+			})
+         }
+       }
+       
+       mem_id.onkeyup = () => {
+         if(mem_id.value != "") {
+           mem_id_Result.innerText = "";
+         }	  	
+       }
+       
+       mem_pass.onblur = () => {
+         if(mem_pass.value == "") {
+       	mem_pw_Result.innerText = "패스워드를 입력해 주세요";	  
+         }
+       }
+       
+       mem_pass.onkeyup = () => {
+         if(mem_pass.value != "") {
+       	mem_pw_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_pass2.onblur = () => {
+         if(mem_pass2.value == "") {
+           mem_pw2_Result.innerText = "패스워드를 한번 더 입력해 주세요";	  
+         }	
+       }
 
+       mem_pass2.onkeyup = () => {
+         if(mem_pass2.value != "") {
+       	  mem_pw2_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_name.onblur = () => {
+         if(mem_name.value == "") {
+       	mem_name_Result.innerText = "이름을 입력해 주세요";	  
+         }	
+       }
 
+       mem_name.onkeyup = () => {
+         if(mem_name.value != "") {
+       	mem_name_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_nickname.onblur = () => {
+         if(mem_nickname.value == "") {
+       	mem_nickname_Result.innerText = "닉네임을 입력해 주세요";	  
+         }	
+       }
+
+       mem_nickname.onkeyup = () => {
+         if(mem_nickname.value != "") {
+       	mem_nickname_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_birthday.onblur = () => {
+         if(mem_birthday.value == "") {
+       	mem_birthday_Result.innerText = "생일을 입력해 주세요";	  
+         }	
+       }
+
+       mem_birthday.onkeyup = () => {
+         if(mem_birthday.value != "") {
+       	mem_birthday_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_phone.onblur = () => {
+         if(mem_phone.value == "") {
+       	mem_phone_Result.innerText = "전화번호를 입력해 주세요";	  
+         }	
+       }
+
+       mem_phone.onkeyup = () => {
+         if(mem_phone.value != "") {
+       	mem_phone_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_email.onblur = () => {
+         if(mem_email.value == "") {
+       	mem_email_Result.innerText = "전화번호를 입력해 주세요";	  
+         }	
+       }
+
+       mem_email.onkeyup = () => {
+         if(mem_email.value != "") {
+       	mem_email_Result.innerText = "";  
+         }  	
+       }
+       
+       select_gender.onblur = () => {
+         if(select_gender.options[0].selected) {
+       	mem_gender_Result.innerText = "성별을 선택해 주세요";	  
+         }	
+       }
+       
+       select_gender.onclick = () => {
+         if(select_gender.options[1].selected || select_gender.options[2].selected) {
+       	mem_gender_Result.innerText = "";  
+         }  	
+       }
+       
+       mem_address.onblur = () => {
+         if(mem_address.options[0].selected) {
+       	mem_address_Result.innerText = "지역을 선택해 주세요";	  
+         }	
+       }
+       
+       mem_address.onclick = () => {
+         if(!mem_address.options[0].selected) {
+       	mem_address_Result.innerText = "";  
+         }  	
+       }
+       
+       
        let signUp_current_point = 0;
 
        let signUp_end_point = signUp_MOVE_WIDTH * 3;
@@ -88,19 +265,28 @@
        }
 
        signUp_slideRight.onclick = () => {
+         if (mem_id.value != "" && mem_pass.value != "" && mem_pass2.value != "" && 
+             mem_name.value != "" && mem_nickname.value != "" && mem_birthday.value != "" && 
+       	  mem_phone.value != "" && mem_email.value != "" && !select_gender.options[0].selected) {
          signUp_current_point += signUp_MOVE_WIDTH;
-         if (signUp_current_point == signUp_end_point) {
-           signUp_slideRight.style.display = "none";
-           signUpBtn.style.display = "inline";
-           signUp_slideLeft.style.display = "inline";
-         } else if (signUp_current_point > 0) {
-           signUp_slideLeft.style.display = "inline";
-           signUpBtn.style.display = "none";
+           
+           if (signUp_current_point == signUp_end_point) {
+             signUp_slideRight.style.display = "none";
+             signUpBtn.style.display = "inline";
+             signUp_slideLeft.style.display = "inline";
+           } else if (signUp_current_point > 0) {
+             signUp_slideLeft.style.display = "inline";
+             signUpBtn.style.display = "none";
+           }
+           
+           signUp_position -= signUp_MOVE_WIDTH;
+           signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+         
+         } else {
+           alert("정보를 모두 입력해 주세요");	  
          }
-         signUp_position -= signUp_MOVE_WIDTH;
-         signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
        }
-
+       
        signUp_slideLeft.onclick = () => {
          signUp_current_point -= signUp_MOVE_WIDTH;
          if (signUp_current_point == 0) {
@@ -134,16 +320,15 @@
        let getRandomNum = (min, max) => {
          min = Math.ceil(min);
          max = Math.floor(max);
-         return Math.floor(Math.random() * (max - min + 1)) + min;
+         return Math.floor(Math.random() * (max - min + 1)) + min; 
        }
 
-       let select_gender = document.getElementById("select_gender");
        const previewImage = document.getElementById("preview_img");
        select_gender.addEventListener("change", (e) => {
-         if (e.target.id == "select_gender" && e.target.value == "M") {
-           previewImage.src = "/images/man" + (getRandomNum(1, 3)) + ".png";
-         } else if (e.target.id == "select_gender" && e.target.value == "F") {
-           previewImage.src = "/images/woman" + (getRandomNum(1, 3)) + ".png";
+         if(e.target.id == "select_gender" && e.target.value == "M") {
+           previewImage.src = "/images/man" + (getRandomNum(1, 3)) +".png";
+         } else if(e.target.id == "select_gender" && e.target.value == "F") {
+           previewImage.src = "/images/woman" + (getRandomNum(1, 3)) +".png";
          }
        })
 

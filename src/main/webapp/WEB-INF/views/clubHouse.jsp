@@ -572,6 +572,32 @@
 	        <div class="cm_list_title_text">${club.cl_name } 동호회 회원 목록</div>
 	      </div>
 	      <div class="cm_list_item_wrap">
+	        <c:forEach var="cb" items="${clubBossInfomation }">
+	        <div class="cm_list_item">
+	          <div class="cm_list_item_photo_area">
+	            <div class="cm_list_item_photo">
+	              <img src="images/man2.png">
+	            </div>
+	          </div>
+	          <div class="cm_list_item_profile_area">
+	            <span id="cm_list_admin_badge">ADMIN</span>
+	            <div class="cm_list_item_profile_title">${cb.mem_name }(${cb.mem_id })</div>
+	            <div class="cm_list_item_profile_item">닉네임 : ${cb.mem_nickname }</div>
+	            <div class="cm_list_item_profile_item">생년월일 :${cb.mem_birthday }</div>
+	            <div class="cm_list_item_profile_item">지역 : ${cb.mem_address }</div>
+	            <div class="cm_list_item_profile_item">관심분야 : ${cb.mem_category_1 } / ${cm.mem_category_2 }</div>
+	            <div class="cm_list_item_profile_item">최근 로그인 : ${cb.mem_lastlogin}</div>
+	          </div>
+	          <div class="cm_list_item_btns_area">
+	            <div class="cm_list_item_btn1">
+	              <i class="far fa-envelope"> EMAIL</i>
+	            </div>
+	            <div class="cm_list_item_btn2">
+	              <i class="fas fa-mobile-alt"> PHONE</i>
+	            </div>
+	          </div>
+	        </div>
+	        </c:forEach>
 	        <c:forEach var="cm" items="${clubMemberInfo }">
 	        <div class="cm_list_item">
 	          <div class="cm_list_item_photo_area">

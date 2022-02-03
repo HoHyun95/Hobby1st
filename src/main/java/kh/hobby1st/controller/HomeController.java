@@ -34,45 +34,45 @@ import kh.hobby1st.service.NoticeService;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private MemberService mService;
-	
+
 	@Autowired
 	private ClubMemberService cmService;
-	
+
 	@Autowired
 	private ClubListService clService;
-	
+
 	@Autowired
 	private MyPageService myService;
-	
+
 	@Autowired
 	private ClubCategoryService ccService;
-	
+
 	@Autowired
 	private ClubJoinStateService csService;
-	
+
 	@Autowired
 	private ClubBoardService cbService;
-	
+
 	@Autowired
 	private NoticeService ntService;
-	
+
 	@Autowired
 	private FaqService faqService;
-	
+
 	@Autowired
 	private HttpSession session;
-	
-	
+
+
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
 		String my_id = (String) session.getAttribute("mem_id");
 		int memberCount = mService.totalMember();
 		int clmemCount = cmService.totalClubMember();
 		int clCount = clService.countClub();
-//		List<ClubListDTO> map = clService.selectAll();
+		//		List<ClubListDTO> map = clService.selectAll();
 		System.out.println("여기");
 		List<ClubListDTO> map = clService.ClubListByCategory("개발");
 		System.out.println(map.get(0).getCl_id());
@@ -82,7 +82,7 @@ public class HomeController {
 			List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	
 			model.addAttribute("interestList", clubList_interest);
 		}
-		
+
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("clmemCount", clmemCount);
@@ -90,13 +90,13 @@ public class HomeController {
 		model.addAttribute("clubCategory",categoryList);
 		return "home";
 	}
-	
+
 	// Fullpage 이동
 	@RequestMapping("fullpage")
 	public String main() {
 		return "fullpage/fullpage";
 	}
-	
+
 	// admin
 	@RequestMapping("admin")
 	public String admin(Model model) {
@@ -104,15 +104,15 @@ public class HomeController {
 		List<ClubBoardDTO> boardList = cbService.selectAll();
 		List<MemberDTO> memberList = mService.selectAll();
 		List<NoticeDTO> noticeList = ntService.selectAll();
-		
+
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
 		model.addAttribute("allMember", memberList);
 		model.addAttribute("allNotice", noticeList);
-		
+
 		return "admin/admin";
 	}
-	
+
 	// myPage
 	@RequestMapping("myPage")
 	public String myPage(Model model) {
@@ -125,21 +125,21 @@ public class HomeController {
 		List<ClubListDTO> clubList_join = myService.clubList_join(my_id);	// 내가 가입한 동호회 리스트
 		List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	// 내가 관심있는 동호회 리스트
 		List<ClubBoardDTO> clubBoardList = myService.clubBoardList(my_id);
-		
+
 		List<MemberDTO> joinMemberInfo = csService.joinMemberInfo(my_id); // 요청한 회원 정보
 		List<ClubListDTO> joinClubInfo = csService.joinClubInfo(my_id); // 요청된 동호회 정보
-		
+
 		// 1 = 날짜순
 		// 2 = 상태순
 		int check = 1;
-		
+
 		List<ClubListDTO> recentlyClubInfo = csService.recentlyClubInfo(my_id, check);	// 최근 활동한 동호회 정보
 		List<ClubJoinStateDTO> recentlyStateInfo = csService.recentlyStateInfo(my_id, check); // 최근 활동한 상태 정보
-		
-//		System.out.println(recentlyClubInfo.get(0).getCl_name() + " : " + recentlyStateInfo.get(0).getCs_state());
-//		System.out.println(recentlyClubInfo.get(1).getCl_name() + " : " + recentlyStateInfo.get(1).getCs_state());
-//		System.out.println(recentlyClubInfo.get(2).getCl_name() + " : " + recentlyStateInfo.get(2).getCs_state());
-		
+
+		//		System.out.println(recentlyClubInfo.get(0).getCl_name() + " : " + recentlyStateInfo.get(0).getCs_state());
+		//		System.out.println(recentlyClubInfo.get(1).getCl_name() + " : " + recentlyStateInfo.get(1).getCs_state());
+		//		System.out.println(recentlyClubInfo.get(2).getCl_name() + " : " + recentlyStateInfo.get(2).getCs_state());
+
 
 		model.addAttribute("recentlyStateInfo", recentlyStateInfo);
 		model.addAttribute("recentlyClubInfo", recentlyClubInfo);
@@ -150,16 +150,16 @@ public class HomeController {
 		model.addAttribute("clubList_join", clubList_join);
 		model.addAttribute("clubList_interest", clubList_interest);
 		model.addAttribute("clubBoardList", clubBoardList); 
-		
+
 		return "myPage/myPage";
 	}
-	
+
 	// club 
 	@RequestMapping("club")
 	public String club(Model model) {
 		String mem_id = (String)session.getAttribute("mem_id");
 		List<ClubListDTO> listCount = clService.selectAll();
-		
+
 		if(mem_id != null) {
 			List<ClubListDTO> interestClubList = clService.interestClubList(mem_id);
 			model.addAttribute("clubList", interestClubList);
@@ -171,24 +171,42 @@ public class HomeController {
 		}
 		return "club";
 	}
-	
+
 	// club 상세페이지
 	@RequestMapping("clubHouse")
 	public String clubHouse(String cl_id, Model model) {
-		ClubListDTO club = clService.selectClub(cl_id);
 		String mem_id = (String)session.getAttribute("mem_id");
-		int checkMember = clService.checkMember(Integer.parseInt(cl_id), mem_id);
-//		int checkClubJoin = csService.checkClubJoin(Integer.parseInt(cl_id), mem_id);
-		
+		ClubListDTO club = clService.selectClub(cl_id);
 		List<MemberDTO> clubMemberInfo = cmService.clubMemberInfo(Integer.parseInt(cl_id));
-		
-		model.addAttribute("club", club);
-//		model.addAttribute("checkClubJoin", checkClubJoin);
-		model.addAttribute("checkMember", checkMember);
-		model.addAttribute("clubMemberInfo", clubMemberInfo);
-		return "clubHouse";
+
+		if(mem_id != null) {
+			List<ClubListDTO> clubList_interest = myService.clubList_interest(mem_id);
+			int likeResult = 0;
+			for(int i = 0; i < clubList_interest.size(); i++) {
+				if(Integer.parseInt(cl_id) == clubList_interest.get(i).getCl_id()) {
+					System.out.println(clubList_interest.get(i).getCl_id());
+					likeResult = 1;
+					break;
+				} 
+			}
+			
+			int checkMember = clService.checkMember(Integer.parseInt(cl_id), mem_id);
+			//		int checkClubJoin = csService.checkClubJoin(Integer.parseInt(cl_id), mem_id);
+			
+			model.addAttribute("club", club);
+			//		model.addAttribute("checkClubJoin", checkClubJoin);
+			model.addAttribute("checkMember", checkMember);
+			model.addAttribute("clubMemberInfo", clubMemberInfo);
+			model.addAttribute("clubList_interest", clubList_interest);
+			model.addAttribute("likeResult", likeResult);
+			return "clubHouse";
+		} else {
+			model.addAttribute("club", club);
+			model.addAttribute("clubMemberInfo", clubMemberInfo);
+			return "clubHouse";
+		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "splitList", produces = "application/json; charset=UTF-8")
 	public String loadSplitList(int start, int end) {
@@ -206,7 +224,7 @@ public class HomeController {
 		}
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "selectByCategory", produces = "application/json; charset=UTF-8")
 	public String ClubListByCategory(String cl_category_id) {
@@ -215,7 +233,7 @@ public class HomeController {
 		String result = g.toJson(selectByCategory);
 		return result;
 	}
-	
+
 	@RequestMapping("news")
 	public String news(Model model) {
 		List<NoticeDTO> noticeList = ntService.noticeListNotPaging();
@@ -223,17 +241,17 @@ public class HomeController {
 
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("faqList", faqList);
-		
+
 		return "news";
 	}
-	
+
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		System.out.println("예외 처리 코드가 실행되었습니다.");
 		return "error";
 	}
-	
-	
-	
+
+
+
 }

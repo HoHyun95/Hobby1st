@@ -21,6 +21,10 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/clubHouse.css">
   <link rel="stylesheet" href="/css/footer.css">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+	rel="stylesheet">
+  <link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
   <script>
     window.onload = () => {
       let loginform_btn = document.getElementById("loginform_btn");
@@ -163,12 +167,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item"><i class="fas fa-stream"></i></li>
-            <li class="menu_list_item"><i class="fab fa-hubspot"> Hobby1st</i></li>
-            <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
-            <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
-            <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
-            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Main</i></li></a>
+            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/club"><li class="menu_list_item">동호회</li></a>
+            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/news"><li class="menu_list_item">NEWS</li></a>
+            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/admin"><li class="menu_list_item">admin</li></a>
           </ul>
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
@@ -194,7 +198,14 @@
           </div>
           <div class="club_profile_btns">
             <div class="club_profile_btns_item">
-                <div class="likeBtn"><i class="far fa-heart" id="${club.cl_id }"></i></div>
+              <div class="likeBtn">
+              <c:if test="${likeResult eq 0}">
+                <i class="far fa-heart" id="${club.cl_id }"></i>
+              </c:if>
+ 			  <c:if test="${likeResult eq 1}">
+                <i class="fas fa-heart" id="${club.cl_id }"></i>   
+              </c:if>        
+              </div>
              	<c:if test="${checkMember eq 0}">
               	  <button type="button" id="joinClub"><i class="fas fa-user-check"></i> 가입하기</button>
               	</c:if>
@@ -262,11 +273,11 @@
 	              <span id="cm_list_admin_badge">ADMIN</span>
 	            </c:if>
 	            <div class="cm_list_item_profile_title">${cm.mem_name }(${cm.mem_id })</div>
-	            <div class="cm_list_item_profile_item">${cm.mem_nickname }</div>
-	            <div class="cm_list_item_profile_item">${cm.mem_birthday }</div>
-	            <div class="cm_list_item_profile_item">${cm.mem_address }</div>
-	            <div class="cm_list_item_profile_item">${cm.mem_category_1 } / ${cm.mem_category_2 }</div>
-	            <div class="cm_list_item_profile_item">가입일</div>
+	            <div class="cm_list_item_profile_item">닉네임 : ${cm.mem_nickname }</div>
+	            <div class="cm_list_item_profile_item">생년월일 :${cm.mem_birthday }</div>
+	            <div class="cm_list_item_profile_item">지역 : ${cm.mem_address }</div>
+	            <div class="cm_list_item_profile_item">관심분야 : ${cm.mem_category_1 } / ${cm.mem_category_2 }</div>
+	            <div class="cm_list_item_profile_item">최근 로그인 : ${cm.mem_lastlogin}</div>
 	          </div>
 	          <div class="cm_list_item_btns_area">
 	            <div class="cm_list_item_btn1">
@@ -282,14 +293,19 @@
         </div>
         <!-- 동호회 게시판 -->
         <div class="club_board_wrap">
-            동호회 게시판
+          <div class="club_board_title">
+	        <div class="club_board_title_text">${club.cl_name } 동호회 게시판</div>
+	      </div>
+	      <div class="club_board_item_wrap">
+          	<jsp:include page="clubBoard/boardList.jsp"></jsp:include>
+          </div>
         </div>
         <!-- 동호회 채팅 -->
         <div class="club_chat_wrap">
              동호회 채팅
         </div>  
       </div>
-      </div>
+    </div>
       <!-- clubHouse end -->
       <div class="links">
         <div class="links_inner">
@@ -320,7 +336,6 @@
         </div>
       </div>
     </div>
-   </div>
     
     <c:if test="${result eq '1' }">
 		<script>

@@ -73,6 +73,23 @@
   cursor: pointer;
 }
 
+#requestClub {
+  width: 100px;
+  height: 35px;
+  font-size: 0.8rem;
+  border: 1px solid #9684A1;
+  background-color: #9684A1;
+  color: var(--color2);
+  margin: 0px 5px;	
+}
+
+#requestClub:hover {
+  border: 1px solid #9684A1;
+  background-color: var(--color2);
+  color: #9684A1;
+  margin: 0px 5px;	
+}
+
 .likeBtn {
   position: absolute;
   top: 0px;
@@ -237,7 +254,8 @@
   border: 1px solid var(--bg-color3);
 }
 
-.club_board_wrap, .club_chat_wrap {
+.club_chat_wrap {
+  margin: 0 auto;
   width: 95%;
   height: 600px;
   border: 1px solid var(--bg-color3);	
@@ -368,3 +386,33 @@
   align-items: center;
 }
 /* clubMemberList end */
+
+/* club_board */
+.club_board_wrap {
+  margin: 0 auto;
+  width: 1200px;
+  height: 1000px;
+  background-color: rgba(212, 212, 212, 0.3);
+  display: none;
+  flex-direction: column;
+}
+
+.club_board_title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  width: 100%;
+  padding: 30px 0px 10px 20px;
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;  	
+}
+
+.club_board_item_wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+/* club_board end */

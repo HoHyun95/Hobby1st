@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,12 +87,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item"><i class="fas fa-stream"></i></li>
-            <li class="menu_list_item"><i class="fab fa-hubspot"> Hobby1st</i></li>
-            <a href="/club"><li class="menu_list_item"><i class="far fa-handshake"> 동호회</i></li></a>
-            <a href="/myPage"><li class="menu_list_item"><i class="fas fa-person-booth"> 마이페이지</i></li></a>
-            <li class="menu_list_item"><i class="far fa-newspaper"> NEWS</i></li>
-            <a href="/fullpage"><li class="menu_list_item"><i class="far fa-newspaper"> Fullpage</i></li></a>
+            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/club"><li class="menu_list_item">동호회</li></a>
+            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/news"><li class="menu_list_item">NEWS</li></a>
+            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/admin"><li class="menu_list_item">admin</li></a>
           </ul>
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>
@@ -186,62 +187,55 @@
           <div class="recent_act_contents_header_list">STATUS</div>
           <div class="recent_act_contents_header_list">DATE</div>
         </div>
+       
+        <c:forEach var="rStateInfo" items="${recentlyStateInfo }" varStatus="status">
         <div class="recent_act_contents">
-          <div class="recent_act_contents_list">
-            <i class="fas fa-sign-in-alt"></i> Hobby1st 동호회에 가입 신청
-          </div>
-          <div class="recent_act_contents_list">
-            Hobby1st
-          </div>
-          <div class="recent_act_contents_list">
-            <span id="no1">신청완료</span>
-          </div>
-          <div class="recent_act_contents_list">
-            2022-01-19
-          </div>
+          <c:choose>
+            <c:when test="${rStateInfo.cs_state eq 1 }">
+              <div class="recent_act_contents_list">
+                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회에 가입 신청
+              </div>
+              <div class="recent_act_contents_list">
+                ${recentlyClubInfo[status.index].cl_name }
+              </div>
+              <div class="recent_act_contents_list">
+                <span id="no1">신청완료</span>
+              </div>
+              <div class="recent_act_contents_list">
+				<fmt:formatDate value="${rStateInfo.cs_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+              </div>
+            </c:when>
+            <c:when test="${rStateInfo.cs_state eq 2 }">
+              <div class="recent_act_contents_list">
+                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회 가입 승인
+              </div>
+              <div class="recent_act_contents_list">
+                ${recentlyClubInfo[status.index].cl_name }
+              </div>
+              <div class="recent_act_contents_list">
+                <span id="no3">승인완료</span>
+              </div>
+              <div class="recent_act_contents_list">
+                <fmt:formatDate value="${rStateInfo.cs_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+              </div>
+            </c:when>
+            <c:when test="${rStateInfo.cs_state eq 3 }">
+              <div class="recent_act_contents_list">
+                <i class="fas fa-sign-in-alt"></i> ${recentlyClubInfo[status.index].cl_name } 동호회 가입 거절
+              </div>
+              <div class="recent_act_contents_list">
+                ${recentlyClubInfo[status.index].cl_name }
+              </div>
+              <div class="recent_act_contents_list">
+                <span id="no4">승인거절</span>
+              </div>
+              <div class="recent_act_contents_list">
+                <fmt:formatDate value="${rStateInfo.cs_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+              </div>
+            </c:when>
+          </c:choose>
         </div>
-        <div class="recent_act_contents">
-          <div class="recent_act_contents_list">
-            <i class="fas fa-sign-in-alt"></i> 주식/코인 동호회에 가입 신청
-          </div>
-          <div class="recent_act_contents_list">
-            DDeokSangCoinClub
-          </div>
-          <div class="recent_act_contents_list">
-            <span id="no2">승인대기중</span>
-          </div>
-          <div class="recent_act_contents_list">
-            2022-01-13
-          </div>
-        </div>
-        <div class="recent_act_contents">
-          <div class="recent_act_contents_list">
-            <i class="fas fa-sign-in-alt"></i> 프론트엔드 개발 동호회에 가입 신청
-          </div>
-          <div class="recent_act_contents_list">
-            Reaction
-          </div>
-          <div class="recent_act_contents_list">
-            <span id="no3">승인완료</span>
-          </div>
-          <div class="recent_act_contents_list">
-            2022-01-01
-          </div>
-        </div>
-        <div class="recent_act_contents">
-          <div class="recent_act_contents_list">
-            <i class="fas fa-sign-in-alt"></i> 풋살 동호회에 가입 신청
-          </div>
-          <div class="recent_act_contents_list">
-            FC KH
-          </div>
-          <div class="recent_act_contents_list">
-            <span id="no4">승인거절</span>
-          </div>
-          <div class="recent_act_contents_list">
-            2022-01-01
-          </div>
-        </div>
+        </c:forEach>
       </div>
     </div>
     <!-- recent_act end -->

@@ -26,7 +26,7 @@
 
 
 <body>
-<body>
+
 	<!-- 글쓰기 버튼 -->
 	<div class="btn">
 		<div style="text-align: right; width: 85%;">
@@ -37,7 +37,7 @@
 	</div>
 
 	<!-- 게시판 -->
-	<div class="board" style="width: 70%; height: 100%; margin: auto;">
+	<div class="board" style="width: 100%; height: 100%; margin: auto;">
 
 		<div class="bg-white rounded-lg shadow-lg py-6" style="height: 100%;">
 			<!-- 게시판 큰 틀-->
@@ -166,7 +166,6 @@
 		});
 	</script>
 
-</body>
 
 </body>
 

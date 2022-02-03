@@ -89,6 +89,16 @@ public class QnaController {
 	@RequestMapping("/qnaDetail")
 	public String qnaDetail(int qna_seq, int cpage, Model model, int check_num, String keyword, String searchWord) {
 
+		
+		//작성자와 관리자만 확인할 수 있게 해준다
+		String loginID = (String)session.getAttribute("mem_id");
+//		String adminID = (String)session.getAttribute();
+		
+		String loginSession[] = new String[2];
+		
+		loginSession[0] = loginID;
+		
+		
 		if (keyword.equals("title")) {
 			keyword = "제목";
 		} else if (keyword.equals("writer")) {

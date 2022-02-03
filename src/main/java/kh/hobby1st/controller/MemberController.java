@@ -35,24 +35,37 @@ public class MemberController {
 	private MemberService mem_service;
 
 
-//  로그인부터 회원가입까지	
-// -------------------------------------------------------------------------------------------
+	//  로그인부터 회원가입까지	
+	// -------------------------------------------------------------------------------------------
 
-    //로그인창에서 일반로그인시 발동됩니다.
+	//로그인창에서 일반로그인시 발동됩니다.
 	@RequestMapping("logind")
-    public String logind(String mem_id, String mem_pass) {		
+	public String logind(String mem_id, String mem_pass) {		
 		//세션에 user 정보가 남아있는 경우 세션 제거
 		if (session.getAttribute("mem_id") != null) {
 			session.removeAttribute("mem_id");
 		}
-		
+
 		String url = "";
-		
-		//회원정보 존재여부 체크
-		int result = mem_service.login(mem_id, mem_pass);
-		if(0<result) {
-			   //사용자 로그인 정보 session 저장
-			    MemberDTO mem_dto = mem_service.selectOne(mem_id);
+
+			// 	관리자 로그인 체크
+		if(mem_id.contains("admin")) {
+			int result = mem_service.adminLogin(mem_id, mem_pass);
+			if(result > 0) { 
+				String admin = mem_id;
+				session.setAttribute("admin", admin);
+				url = "redirect: /";
+				return url;
+			}else {
+				return "error";
+			}
+		}else {
+
+			//회원정보 존재여부 체크
+			int result = mem_service.login(mem_id, mem_pass);
+			if(0<result) {
+				//사용자 로그인 정보 session 저장
+				MemberDTO mem_dto = mem_service.selectOne(mem_id);
 				String user_name = mem_dto.getMem_name();
 				String user_nickName = mem_dto.getMem_nickname();
 
@@ -60,12 +73,13 @@ public class MemberController {
 				session.setAttribute("user_name", user_name);
 				session.setAttribute("user_nickName", user_nickName);
 				url = "redirect: /";
-		} else {
-			url = "error";
+			} else {
+				url = "error";
+			}
+			return url;
 		}
-		return url;
 	}
-	
+
 	//로그아웃 버튼 누를시 실행됩니다. 
 	@RequestMapping("logout")
 	public String logout() {
@@ -87,7 +101,7 @@ public class MemberController {
 	@RequestMapping("signUp")
 	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
 			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
-        
+
 		// DB에 디폴트 값을 전달하기 위해 임의 설정		
 		String mem_lastlogin = "default";       
 		for(MultipartFile mf : mem_photo) {
@@ -102,7 +116,7 @@ public class MemberController {
 
 				mf.transferTo(new File(realPath+"/"+sysName));
 				String profile = "/upload/profile/"+sysName;
-				
+
 				int result = mem_service.insert(new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email)); 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -112,8 +126,8 @@ public class MemberController {
 		return "redirect: /";
 	}
 
-// 이메일찾기 기능	
-// -------------------------------------------------------------------------------------------
+	// 이메일찾기 기능	
+	// -------------------------------------------------------------------------------------------
 	// 이메일 찾기 페이지로 이동
 	@RequestMapping("send_email")
 	public String send_email() {
@@ -159,10 +173,10 @@ public class MemberController {
 		System.out.println("이메일 인증 성공!");
 		return "member/sign_email";
 	}
-	
-	
-// 관리자 페이지	
-// -------------------------------------------------------------------------------------------
+
+
+	// 관리자 페이지	
+	// -------------------------------------------------------------------------------------------
 
 	// 관리자 페이지 회원 추방
 	@RequestMapping("signOutAdmin")
@@ -172,39 +186,39 @@ public class MemberController {
 		return result;
 	}
 
-// 자료보존	
-// -------------------------------------------------------------------------------------------
-		
-//  네이버 로그인기능
-//	@RequestMapping("Naver_login")
-//	public String login(String naver_id, String naver_mobile, String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
-//			            String naver_birthday, String naver_gender) {
-//    	// 네이버 아이디 정보가 없을 시에만 발동	
-//		if(naver_id != null) {
-//			// 네이버 아이디가 디비에 저장되어 있는지 확인
-//			int naver_result = mem_service.naver_idCheck(naver_id);
-//			if(0<naver_result) {
-//				// 만약에 네이버 아이디가 디비에 존재한다면 아이디정보를 홈에 세션으로 넘겨줌
-//				MemberDTO mem_dto = new MemberDTO();		
-//				String user_name = mem_dto.getMem_name();
-//				session.setAttribute("user_name", user_name);
-//				session.setAttribute("mem_id", naver_id);
-//			}else if(0 == naver_result) {
-//				// 만약에 네이버 아이디가 디비에 존재하지 않는다면 사용자 네이버 정보를 디비에 신규저장하고 로그인 시켜줌 
-//                // 네이버에서 넘겨주지 않는 정보는 임의지정값으로 설정
-//				String modf_mobile = naver_mobile.replaceAll("[-]", "");		
-//				String naver_login = "naver_login";
-//				String mem_birthday = naver_birthyear + "-" + naver_birthday;
-//				String mem_lastlogin = "default";
-//
-//				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
-//				int naver_Rinsert = mem_service.naver_insert(dto);
-//				session.setAttribute("mem_id", naver_id);
-//			}
-//		}
-//		return "redirect: /";
-//	}	
-	
+	// 자료보존	
+	// -------------------------------------------------------------------------------------------
+
+	//  네이버 로그인기능
+	//	@RequestMapping("Naver_login")
+	//	public String login(String naver_id, String naver_mobile, String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
+	//			            String naver_birthday, String naver_gender) {
+	//    	// 네이버 아이디 정보가 없을 시에만 발동	
+	//		if(naver_id != null) {
+	//			// 네이버 아이디가 디비에 저장되어 있는지 확인
+	//			int naver_result = mem_service.naver_idCheck(naver_id);
+	//			if(0<naver_result) {
+	//				// 만약에 네이버 아이디가 디비에 존재한다면 아이디정보를 홈에 세션으로 넘겨줌
+	//				MemberDTO mem_dto = new MemberDTO();		
+	//				String user_name = mem_dto.getMem_name();
+	//				session.setAttribute("user_name", user_name);
+	//				session.setAttribute("mem_id", naver_id);
+	//			}else if(0 == naver_result) {
+	//				// 만약에 네이버 아이디가 디비에 존재하지 않는다면 사용자 네이버 정보를 디비에 신규저장하고 로그인 시켜줌 
+	//                // 네이버에서 넘겨주지 않는 정보는 임의지정값으로 설정
+	//				String modf_mobile = naver_mobile.replaceAll("[-]", "");		
+	//				String naver_login = "naver_login";
+	//				String mem_birthday = naver_birthyear + "-" + naver_birthday;
+	//				String mem_lastlogin = "default";
+	//
+	//				MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name, naver_nickname, mem_birthday, naver_gender,naver_login, naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email); 
+	//				int naver_Rinsert = mem_service.naver_insert(dto);
+	//				session.setAttribute("mem_id", naver_id);
+	//			}
+	//		}
+	//		return "redirect: /";
+	//	}	
+
 }
 
 

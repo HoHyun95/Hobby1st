@@ -639,8 +639,16 @@
           </div>
           <ul class="login_list">
             <c:choose>
-              <c:when test="${mem_id !=null }">
+              <c:when test="${mem_id !=null || admin != null }">
+             
+             
+              <c:if test="${mem_id != null}">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
+                </c:if>
+			<c:if test="${mem_id == null}">
+                <li id="login_id"><b>관리자</b>님 환영합니다</li>
+                </c:if>
+                
                 <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
@@ -661,7 +669,9 @@
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
             <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
+            </c:if>
           </ul>
           <ul class="icon_list">
             <a href="/clubMember/memberList?cpage=1"><li class="icon_list_item"><i class="fab fa-facebook"></i></li></a>

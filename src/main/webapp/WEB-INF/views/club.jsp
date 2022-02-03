@@ -263,6 +263,8 @@
       let selectBox = document.getElementById("selectBox");
       let search_club = document.querySelector(".search_club");
       let create_hobby1st_club = document.querySelector(".create_hobby1st_club");
+      let search_result_title = document.querySelector(".search_result_title");
+      
       $.ajax({
         url: "/clubList/searchClub",
         type: "get",
@@ -270,11 +272,18 @@
           "searchField": (selectBox.value),
           "searchText": (search_club.value)
         },
-        dataType: "json" 
+        dataType: "json"
       }).done((res) => {
         console.log(res);
         create_hobby1st_club.style.display = "none";
         search_result_inner.style.display = "flex";
+        search_result_title.innerText = "총 " + (res.length) + "건의 검색 결과가 있습니다.";
+        if(search_result_inner.hasChildNodes()) {
+          while (search_result_inner.hasChildNodes()) {	
+            search_result_inner.removeChild(search_result_inner.firstChild);
+    	  }
+        }
+        
         if(res.length > 0) {
           for(let k = 0; k < res.length; k++) {
             let div1 = document.createElement("div");
@@ -317,10 +326,10 @@
             div2.appendChild(h5_2);
             div2.appendChild(h5_3);
             div1.appendChild(div2);
+            
             search_result_inner.appendChild(div1);
           }
         } else {
-          
           create_hobby1st_club.style.display = "flex";
           search_result_inner.style.display = "none";
         }
@@ -489,6 +498,7 @@
       </div>
     </div>
   
+ 	<div class="search_result_title"></div>
  
     <div class="search_result">
       <div class="search_result_inner">

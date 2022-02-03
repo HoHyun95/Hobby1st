@@ -64,17 +64,6 @@ div {
 	float: left;
 }
 
-.back {
-	background-color: rgb(235, 233, 233);
-	width: 40%;
-}
-
-.result {
-	/* background-color: gray; */
-	background-color: rgb(240, 209, 35);
-	width: 60%;
-}
-
 .vote_result {
 	margin-top: 20px;
 }
@@ -100,24 +89,26 @@ div {
 	<div class="container">
 		<div class="vote_list">
 			<div class="vote_title">
-				<div class="title">Q. 피자 vs 치킨</div>
+				<div class="title">Q. ${voteDetail.vl_title }</div>
 				<div class="select">복수 선택</div>
 
-				<div class="end_date">투표 종료일 : 2020-02-25</div>
+				<div class="end_date">투표 종료일 : ${voteDetail.vl_end_date }</div>
 			</div>
+			<c:forEach var="dto" items="${voteOption }" varStatus="status">
+				<div class="vote_result">
+					<div class="vote_option">
+						<span class="option">${dto.vo_option }</span> <span class="vote_count"
+							style="float: right;"><i class="fas fa-user-check"></i> ${dto.vo_count }명</span>
+					</div>
 
-			<div class="vote_result">
-				<div class="vote_option">
-					<span class="option">피자</span> <span class="vote_count"
-						style="float: right;">3명</span>
+					<div class="option_bar">
+						<div class="result"
+							style="background-color: rgb(240, 209, 35); width: ${resultCount[status.index]}%;"></div>
+						<div class="back"
+							style="background-color: rgb(235, 233, 233); width: ${resultCountM[status.index]}%;"></div>
+					</div>
 				</div>
-
-				<div class="option_bar">
-					<div class="result"></div>
-					<div class="back"></div>
-				</div>
-			</div>
-
+			</c:forEach>
 			<div class="btn">
 				<button>투표하러가기</button>
 				&nbsp;
@@ -125,6 +116,12 @@ div {
 			</div>
 		</div>
 	</div>
+
+
+
+	<%-- <c:forEach var="dto" items="${resultCount }" varStatus="status">
+		항목 : ${dto }
+	</c:forEach> --%>
 
 </body>
 </html>

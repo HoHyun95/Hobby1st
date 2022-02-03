@@ -82,15 +82,28 @@ public class VoteController {
 		String vc_vote_id = (String) session.getAttribute("mem_id");
 		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
-		int voteTatalCount = voteService.voteTotalCount(vl_seq);
+		int voteTotalCount = voteService.voteTotalCount(vl_seq);
 		
-		System.out.println(voteTatalCount);
-				
-
+		int[] resultCount = new int[voteOption.size()];
+		int[] resultCountM = new int[voteOption.size()];
+		
+		for(int i = 0; i < voteOption.size(); i++) {
+			if(voteOption.get(i).getVo_count() != 0) {
+				resultCount[i] = (voteOption.get(i).getVo_count() * 100) / voteTotalCount;
+			}else  {
+				resultCount[i] = 0;
+			}
+			resultCountM[i] = 100 - resultCount[i];
+		}
+		
+		int voteCheck = voteService.voteCheck(vl_seq, vc_vote_id);
+		
 		
 		model.addAttribute("voteDetail", voteDetail);
 		model.addAttribute("voteOption", voteOption);
-		model.addAttribute("voteTatalCount", voteTatalCount);
+		model.addAttribute("resultCountM", resultCountM);
+		model.addAttribute("resultCount", resultCount);
+		model.addAttribute("voteCheck", voteCheck);
 		return "vote/voteResult";
 	}
 

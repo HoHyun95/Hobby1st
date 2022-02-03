@@ -52,7 +52,7 @@ public class CalendarController {
 	  int result = cal_service.insert(new CalendarDateDTO(club, day_start, day_end, title));
 	   
 	  model.addAttribute("list", cal_service.selectAll(club));
-	  return "ssss"; 
+	  return "pageJsonReport"; 
 	  }
 	 
 	  @ResponseBody

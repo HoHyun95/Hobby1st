@@ -17,7 +17,7 @@
     var calendarEl = document.getElementById('calendar');
     
     // 일정 GET
-   	let allSchedule;
+/*    	let allSchedule;
     $.ajax({
              type: "GET",
              url: "get/schedules?club=${club_cl_name}",
@@ -28,7 +28,7 @@
             	 allSchedule = data;
             	 console.log(allSchedule,'allSchedule')
              }
-         });
+         }); */
 	
     
     
@@ -75,7 +75,7 @@
         select: function(arg) {
         	var title = prompt('입력할 이벤트 :');
          	$.ajax({
-                type:"get",
+                type:"post",
                 url:"${path}/calendar/method?club=${club_cl_name}",
                 data:
                 {title:title, day_start:arg.start, day_end:arg.end}

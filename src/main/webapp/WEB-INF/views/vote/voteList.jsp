@@ -83,20 +83,24 @@ div {
 
 				<div class="btn" id="btn${dto.vl_seq }">
 					<button class="comVote" style="display: none;">투표 완료</button>
-					
+
 					<button class="voteBtn">
 						투표하러가기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
 					</button>
 					&nbsp;
-					<button class="voteResult">결과보기</button>
+					<button class="voteResult">
+						결과보기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
+					</button>
 				</div>
 			</div>
 			<c:forEach var="voteCheckList" items="${voteCheckList }"
 				varStatus="status">
 				<c:if test="${voteCheckList.vl_seq eq dto.vl_seq }">
 					<script>
-						$("#btn${dto.vl_seq }").find(".voteBtn").css('display', 'none');
-						$("#btn${dto.vl_seq }").find(".comVote").css('display', 'inline');
+						$("#btn${dto.vl_seq }").find(".voteBtn").css('display',
+								'none');
+						$("#btn${dto.vl_seq }").find(".comVote").css('display',
+								'inline');
 					</script>
 				</c:if>
 			</c:forEach>
@@ -105,17 +109,16 @@ div {
 	</div>
 
 	<script>
-	
-	// 투표하기
+		// 투표하기
 		$(".voteBtn").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
-			console.log(vl_seq);
 			location.href = "/vote/detailPage?vl_seq=" + vl_seq;
 		})
-		
-	// 결과보러가기
+
+		// 결과보러가기
 		$(".voteResult").on("click", function() {
-			location.href = "/vote/voteResultPage";
+			let vl_seq = $(this).find(".vl_seq").val();
+			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq;
 		})
 	</script>
 

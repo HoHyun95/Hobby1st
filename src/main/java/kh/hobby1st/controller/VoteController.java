@@ -77,10 +77,20 @@ public class VoteController {
 	
 	//투표 결과 보기
 	@RequestMapping("voteResultPage")
-	public String voteResultPage(Model model) {
+	public String voteResultPage(int vl_seq, Model model) {
 
 		String vc_vote_id = (String) session.getAttribute("mem_id");
+		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
+		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
+		int voteTatalCount = voteService.voteTotalCount(vl_seq);
 		
+		System.out.println(voteTatalCount);
+				
+
+		
+		model.addAttribute("voteDetail", voteDetail);
+		model.addAttribute("voteOption", voteOption);
+		model.addAttribute("voteTatalCount", voteTatalCount);
 		return "vote/voteResult";
 	}
 

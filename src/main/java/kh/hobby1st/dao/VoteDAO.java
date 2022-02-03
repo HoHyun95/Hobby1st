@@ -78,5 +78,10 @@ public class VoteDAO {
 
 		return mybatis.insert("Vote.insertVoteCheck", map);
 	}
+	
+	//	중복투표시 총 투표수
+	public int voteTotalCount(int vo_vote_seq) {
+		return mybatis.selectOne("Vote.voteTotalCount", vo_vote_seq);
+	}
 
 }

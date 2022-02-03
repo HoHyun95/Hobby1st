@@ -79,22 +79,22 @@ public class VoteService {
 
 	// 중복 투표시 해당 투표 vote count 증가 / 기록 남기기
 	public int icVoteRecord(int vl_seq, String vc_vote_id) {
-		
+
 		int result = 0;
-		
+
 		int plusVoteCount = voteDao.plusVoteCount(vl_seq);
 		int voteCheck = voteDao.insertVoteCheck(vl_seq, vc_vote_id);
-		
-		if(plusVoteCount == 1 && voteCheck ==1 ) {
+
+		if (plusVoteCount == 1 && voteCheck == 1) {
 			result = 1;
 		}
-		
+
 		return result;
 	}
 
-	// 중복투표시 기록 남기기
-//	public int recordVote(int vl_seq, ) {
-//		return 
-//	}
+	//	중복투표시 총 투표수
+	public int voteTotalCount(int vo_vote_seq) {
+		return voteDao.voteTotalCount(vo_vote_seq);
+	}
 
 }

@@ -56,5 +56,10 @@
 		insert into vote_check values(#{vc_vote_seq},#{vc_vote_id})
 	</insert>
 	
+	<!-- 중복투표시 총 투표수 -->
+	<select id="voteTotalCount" resultType="int">
+		select sum(vo_count) from vote_option where vo_vote_seq = #{value}
+	</select>
+	
 	
 </mapper>

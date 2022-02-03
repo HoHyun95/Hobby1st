@@ -32,6 +32,14 @@
  		select m.* from member m join club_member c on (m.mem_id = c.cm_mem_id) where c.cm_par_seq = #{value}
  	</select>
   	
+  	<!-- 해당 동호회 회장 정보 가져오기  -->
+  	<select id="clubBossInfomation" resultType="kh.hobby1st.dto.MemberDTO">
+ 		select m.* from member m join club_list l on (m.mem_id = l.cl_boss_id) where l.cl_id = #{value}
+ 	</select>
+  	
+  	
+  	
+  	
   	
   	
   </mapper>

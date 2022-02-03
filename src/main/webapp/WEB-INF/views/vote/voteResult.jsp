@@ -108,8 +108,8 @@ div {
 					</div>
 
 					<div class="option_bar">
-						<div class="result"
-							style="background-color: rgb(240, 209, 35); width: ${resultCount[status.index]}%;"></div>
+						<div class="result${dto.vo_seq }"
+							style="background-color: gray; width: ${resultCount[status.index]}%;"></div>
 						<div class="back"
 							style="background-color: rgb(235, 233, 233); width: ${resultCountM[status.index]}%;"></div>
 					</div>
@@ -134,11 +134,22 @@ div {
 		<script>
 			$(".voteCom").css('display', 'none');
 			$(".voteBtn").css('display', 'none');
+			/* $(".result${optionRank[0].vo_seq}").css('background-color','rgb(240, 209, 35)'); */
 		</script>
 	</c:if>
+	
+	<c:forEach var="option" items="${optionRank }" varStatus="status">
+		<c:if test="${optionRank[0].vo_count eq option.vo_count }">
+			<script>
+				$(".result${optionRank[status.index].vo_seq}").css('background-color','rgb(240, 209, 35)');
+			</script>
+		</c:if>
+	</c:forEach>
 
 
 	<script>
+	
+		
 		// 목록으로
 		$(".back").on("click", function() {
 			location.href = "/vote/listPage";

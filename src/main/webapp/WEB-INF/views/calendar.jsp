@@ -58,14 +58,12 @@
         //캘린더에서 드래그로 이벤트를 생성
         select: function(arg) {
         	var title = prompt('입력할 이벤트 :');
-        	
          	$.ajax({
                 type:"get",
                 url:"${path}/calendar/method?club=${club_cl_name}",
                 data:
                 {title:title}
          	});
-         	
         	if (title) {
         	calendar.addEvent({
         	title: title,

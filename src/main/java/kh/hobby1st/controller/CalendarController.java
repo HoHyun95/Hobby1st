@@ -40,9 +40,9 @@ public class CalendarController {
 	  
 	  @ResponseBody
 	  @RequestMapping(value = "method", method = RequestMethod.GET) 
-	  public String method(Model model, String title, String club, String day) {
+	  public String method(Model model, String title, String club, String allDay) {
 	  model.addAttribute("list", cal_service.selectAll(club));
-	  System.out.println(title + club + day); 
+	  System.out.println(title + club + allDay); 
 	  return"pageJsonResport"; 
 	  }
 	 

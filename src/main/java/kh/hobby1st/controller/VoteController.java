@@ -67,13 +67,21 @@ public class VoteController {
 		
 		for (int i = 0; i < option.length; i++) {
 			System.out.println("항목 : " + option[i]);
-			voteService.comVoteCB(option[i], vl_seq);
+			voteService.icOption(option[i]);
 		}
-		
-		int voteResult = voteService.recordVote(vl_seq, vc_vote_id);
+		int voteResult = voteService.icVoteRecord(vl_seq, vc_vote_id);
 		
 		model.addAttribute("voteResult", voteResult);
 		return "vote/voteDetail";
+	}
+	
+	//투표 결과 보기
+	@RequestMapping("voteResultPage")
+	public String voteResultPage(Model model) {
+
+		String vc_vote_id = (String) session.getAttribute("mem_id");
+		
+		return "vote/voteResult";
 	}
 
 	// 투표 리스트 이동

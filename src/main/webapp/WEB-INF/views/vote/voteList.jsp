@@ -105,10 +105,17 @@ div {
 	</div>
 
 	<script>
+	
+	// 투표하기
 		$(".voteBtn").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
 			console.log(vl_seq);
 			location.href = "/vote/detailPage?vl_seq=" + vl_seq;
+		})
+		
+	// 결과보러가기
+		$(".voteResult").on("click", function() {
+			location.href = "/vote/voteResultPage";
 		})
 	</script>
 

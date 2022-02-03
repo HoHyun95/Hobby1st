@@ -27,6 +27,11 @@
 	
 	<resources mapping="/upload/**" location="/upload/"/><!-- SummerNote -->
 	
+	<resources mapping="/assets/img/**" location="/resources/assets/img/" />
+	<resources mapping="/assets/js/**" location="/resources/assets/js/" />
+	<resources mapping="/assets/fonts/**" location="/resources/assets/fonts/" />
+	<resources mapping="/assets/scss/**" location="/resources/assets/scss/" />
+	<resources mapping="/assets/css/**" location="/resources/assets/css/" />
 	
 	
 

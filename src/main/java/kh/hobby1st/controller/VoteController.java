@@ -85,6 +85,7 @@ public class VoteController {
 		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
 		int voteTotalCount = voteService.voteTotalCount(vl_seq);
+		List<VoteOptionDTO> optionRank = voteService.selectOptionByCount(vl_seq);
 		
 		int[] resultCount = new int[voteOption.size()];
 		int[] resultCountM = new int[voteOption.size()];
@@ -106,6 +107,7 @@ public class VoteController {
 		model.addAttribute("resultCountM", resultCountM);
 		model.addAttribute("resultCount", resultCount);
 		model.addAttribute("voteCheck", voteCheck);
+		model.addAttribute("optionRank", optionRank);
 		return "vote/voteResult";
 	}
 

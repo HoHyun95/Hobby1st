@@ -92,9 +92,14 @@ public class VoteService {
 		return result;
 	}
 
-	//	중복투표시 총 투표수
+	// 중복투표시 총 투표수
 	public int voteTotalCount(int vo_vote_seq) {
 		return voteDao.voteTotalCount(vo_vote_seq);
+	}
+
+	// 투표수가 많은 option 순으로 가져오기
+	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq) {
+		return voteDao.selectOptionByCount(vo_vote_seq);
 	}
 
 }

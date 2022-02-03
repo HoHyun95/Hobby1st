@@ -44,7 +44,6 @@
         locale: 'ko',
         //이벤트가 추가되면 발생하는 이벤트
         eventAdd: function(arg) {
-
             console.log(arg.event);
         },
         
@@ -60,14 +59,13 @@
         select: function(arg) {
         	var title = prompt('입력할 이벤트 :');
         	
-/*         	$.ajax({
+         	$.ajax({
                 type:"get",
-                url:"${path}/calendar/method",
-                dataType: "text",
-                data: 
+                url:"${path}/calendar/method?club=${club_cl_name}",
+                data:
                 {title:title}
-        	}); */
-        	
+         	});
+         	
         	if (title) {
         	calendar.addEvent({
         	title: title,
@@ -80,24 +78,12 @@
         }
         calendar.unselect()
         },
-        
-        events: function(info, successCallback, failureCallback){ 
-        	// ajax 처리로 데이터를 로딩 시킨다.
-        	$.ajax({ 
-        		type:"get", 
-        		url:"${path}/calendar?method=data",
-        	    dataType:"json" 
-        	    }); 
-        }
-
     });
     calendar.render();
- });
+    });
 </script>
 </head>
 <body>
   <div id='calendar'></div>
-  <!-- 동호회 검색을 위한 더미 --> 
-  <input type='text' value='${club_cl_name }' name='club' hidden>
-</body>
+ </body>
 </html>

@@ -31,29 +31,30 @@ public class CalendarController {
 	@Autowired
 	private CalendarDateService cal_service;
 
-	/*
-	 * @RequestMapping(value = "do", method = RequestMethod.GET) public String
-	 * calendar(Model model, String club_cl_name) { List<CalendarDateDTO> result =
-	 * cal_service.selectAll(club_cl_name); model.addAttribute("list", result);
-	 * model.addAttribute("club_cl_name", club_cl_name);
-	 * System.out.println(club_cl_name); return "calendar"; }
-	 * 
-	 * @ResponseBody
-	 * @RequestMapping(value = "method", method = RequestMethod.GET) public String
-	 * method(String title, String club) { System.out.println(title + club); return
-	 * "pageJsonResport"; }
-	 */
-
 	
-	  @GetMapping(params="method=list") 
-	  public String list() { 
-      return"calendar"; 
-      }
+	  @RequestMapping(value = "do", method = RequestMethod.GET) 
+	  public String calendar(Model model, String club_cl_name) { 
+	  model.addAttribute("club_cl_name", club_cl_name);
+	  return "calendar"; 
+	  }
 	  
-	  @GetMapping(params = "method=data") public String data(Model model, String club_cl_name) {
-	  model.addAttribute("list", cal_service.selectAll(club_cl_name)); 
-	  return "pageJsonReport"; }
+	  @ResponseBody
+	  @RequestMapping(value = "method", method = RequestMethod.GET) 
+	  public String method(Model model, String title, String club, String day) {
+	  model.addAttribute("list", cal_service.selectAll(club));
+	  System.out.println(title + club + day); 
+	  return"pageJsonResport"; 
+	  }
 	 
+
+	/*
+	 * @GetMapping(params = "method=list") public String list() { return "calendar";
+	 * }
+	 * 
+	 * @GetMapping(params = "method=data") public String data(Model model, String
+	 * club_cl_name) { model.addAttribute("list",
+	 * cal_service.selectAll(club_cl_name)); return "pageJsonReport"; }
+	 */
 
 }
 

@@ -239,7 +239,7 @@
         <!-- 동호회 소개 -->
         <div class="clIntro_wrap">
           <div class="clIntro_box">
-               <a href="/calendar/?method=list">캘린더 확인</a>
+               <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
                <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
           </div>
         </div> 

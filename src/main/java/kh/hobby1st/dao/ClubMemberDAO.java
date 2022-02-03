@@ -65,6 +65,11 @@ public class ClubMemberDAO {
 		return mybatis.selectList("ClubMember.clubMemberInfomation", cb_seq);
 	}
 	
+	// 해당 동호회 회원 정보 가져오기
+		public List<MemberDTO> clubBossInfomation(int cb_seq){
+			return mybatis.selectList("ClubMember.clubBossInfomation", cb_seq);
+		}
+	
 	
 	
 	

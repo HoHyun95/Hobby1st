@@ -175,12 +175,12 @@ public class HomeController {
 	// club 상세페이지
 	@RequestMapping("clubHouse")
 	public String clubHouse(String cl_id, Model model) {
-		ClubListDTO club = clService.selectClub(cl_id);
 		String mem_id = (String)session.getAttribute("mem_id");
+		ClubListDTO club = clService.selectClub(cl_id);
 		List<MemberDTO> clubMemberInfo = cmService.clubMemberInfo(Integer.parseInt(cl_id));
-		List<ClubListDTO> clubList_interest = myService.clubList_interest(mem_id);
 
 		if(mem_id != null) {
+			List<ClubListDTO> clubList_interest = myService.clubList_interest(mem_id);
 			int likeResult = 0;
 			for(int i = 0; i < clubList_interest.size(); i++) {
 				if(Integer.parseInt(cl_id) == clubList_interest.get(i).getCl_id()) {

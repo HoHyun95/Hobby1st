@@ -34,8 +34,18 @@ public class ClubListService {
 	public List<ClubListDTO> selectAll() {
 		return cldao.selectAll();
 	}
+	
+	// 클럽 수정 페이지 해당 리스트 정보 출력 
+	public List<ClubListDTO> modifyClubPage(int cl_id){
+		return cldao.modifyClubPage(cl_id);
+	}
 
-	//
+	// 클럽 정보 수정
+	public int modifyClubProc(ClubListDTO dto) {
+		return cldao.modifyClubProc(dto);
+	}
+	
+	
 	public List<ClubListDTO> selectSplit(int start, int end) {
 		return cldao.selectSplit(start, end);
 	}

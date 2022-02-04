@@ -182,7 +182,7 @@ public class HomeController {
 		String mem_id = (String)session.getAttribute("mem_id");
 		ClubListDTO club = clService.selectClub(cl_id);
 		List<MemberDTO> clubMemberInfo = cmService.clubMemberInfo(Integer.parseInt(cl_id));
-
+        List<MemberDTO> clubBossInfomation = cmService.clubBossInfomation(Integer.parseInt(cl_id));
 		if(mem_id != null) {
 			List<ClubListDTO> clubList_interest = myService.clubList_interest(mem_id);
 			int likeResult = 0;
@@ -201,6 +201,7 @@ public class HomeController {
 			//		model.addAttribute("checkClubJoin", checkClubJoin);
 			model.addAttribute("checkMember", checkMember);
 			model.addAttribute("clubMemberInfo", clubMemberInfo);
+			model.addAttribute("clubBossInfomation", clubBossInfomation);
 			model.addAttribute("clubList_interest", clubList_interest);
 			model.addAttribute("likeResult", likeResult);
 			return "clubHouse";

@@ -35,11 +35,10 @@ public class CalendarDateDAO {
 		return mybatis.selectOne("calendar.search", map);
 	}
 	//캘린더내 중복 스케줄 삭제
-	public String delete(String month, String value, String date) {
+	public int delete(String club_cl_name, String title) {
 		Map<String, String> map = new HashMap<>();
-		map.put("month", month);
-		map.put("date", date);
-		map.put("value", value);
+		map.put("club_cl_name", club_cl_name);
+		map.put("title", title);
 		return mybatis.selectOne("calendar.delete", map);
 	}
 }

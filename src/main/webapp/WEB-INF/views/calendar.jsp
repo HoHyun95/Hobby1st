@@ -15,23 +15,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-    
-    // 일정 GET
-/*    	let allSchedule;
-    $.ajax({
-             type: "GET",
-             url: "get/schedules?club=${club_cl_name}",
-             async:false, // 이 한줄만 추가해주시면 됩니다.
-          
-             dataType: "json",
-             success: function (data) {
-            	 allSchedule = data;
-            	 console.log(allSchedule,'allSchedule')
-             }
-         }); */
+   
 	
-    
-    
     var calendar = new FullCalendar.Calendar(calendarEl, {
     	//사이즈
     	height : '600px',
@@ -64,19 +49,25 @@
         },
         
         //이벤트 삭제
-        eventClick: function(arg){  
-        	console.log(arg.event);
+        eventClick: function(arg){
+        	console.log(arg.event.title);
+            
         	if(confirm("정말로 삭제하시겠습니까?")){
-            arg.event.remove();
+             	$.ajax({
+                    type:"post",
+                    url:"${path}/calendar/delete?club_cl_name=${club_cl_name}",
+                    data:
+                    {title:arg.event.title}
+             	});
+                arg.event.remove();
         	}
         },
         
-        //캘린더에서 드래그로 이벤트를 생성
         select: function(arg) {
-        	var title = prompt('입력할 이벤트 :');
+        	var title = prompt('스케줄을 입력해주세요');
          	$.ajax({
-                type:"post",
-                url:"${path}/calendar/method?club=${club_cl_name}",
+                type:"get",
+                url:"${path}/calendar/insert?club=${club_cl_name}",
                 data:
                 {title:title, day_start:arg.start, day_end:arg.end}
          	});
@@ -94,17 +85,21 @@
         },
         
         //리스트 출력
-        events: [
-        	/* {
-        		title : "list.title",
-        		start : "2022-02-04",
-        		end : "2022-02-04"
-        	},
+        events: 
+        [
+    		<c:forEach items="${list}" var="item" varStatus="status">
         	{
-        		title : "list.title",
-        		start : "2022-02-05",
-        		end : "2022-02-05"
-        	}   */
+        		  title : "${item.title}",
+        		  start : "${item.day_start}",
+        		  end : "${item.day_end}"
+        	},
+    		</c:forEach>
+
+        	{
+        		title : "이충재생일",
+        		start : "2022-01-19 09:00:00",
+        		end : "2022-01-19 09:30:00"
+        	} 
         ]  
 
     });

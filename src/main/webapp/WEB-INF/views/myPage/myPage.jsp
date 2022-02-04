@@ -265,7 +265,7 @@
 
     <!-- recent_act -->
     <div class="recent_act">
-      <div class="recent_act_title_text">RECENT ACTIVITY</div>
+      <div class="recent_act_title_text">최근 활동</div>
       <div class="recent_act_contents_wrap">
         <div class="recent_act_contents_header">
           <div class="recent_act_contents_header_list">ACTIVITY</div>
@@ -326,9 +326,60 @@
     </div>
     <!-- recent_act end -->
 
+    <c:if test="${fn:length(clubList_make) gt 0 && fn:length(joinMemberInfo) gt 0}">
+	<!-- club control -->
+    <div class="club_control">
+      <div class="club_control_title_text">내 동호회 가입 신청 현황</div>
+      <div class="club_control_contents_wrap">
+        <div class="club_control_contents_header">
+          <div class="club_control_contents_header_list">동호회명</div>
+          <div class="club_control_contents_header_list">신청자명</div>
+          <div class="club_control_contents_header_list">생년월일</div>
+          <div class="club_control_contents_header_list">성별</div>
+          <div class="club_control_contents_header_list">거주지</div>
+          <div class="club_control_contents_header_list">관심1</div>
+          <div class="club_control_contents_header_list">관심2</div>
+          <div class="club_control_contents_header_list">수락여부</div>
+        </div>
+
+        <c:forEach var="mem" items="${joinMemberInfo }" varStatus="status">
+        <div class="club_control_contents">
+          <div class="club_control_contents_list">
+            ${joinClubInfo[status.index].cl_name }  
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_name }
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_birthday }
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_gender }
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_address }
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_category_1 }
+          </div>
+          <div class="club_control_contents_list">
+            ${mem.mem_category_2 }
+          </div>
+          <div class="club_control_contents_list">
+            <button class="approve">수락 </button>
+    		<button class="refuse">거절 </button>
+    		<input type="hidden" class="cl_id" value="${joinClubInfo[status.index].cl_id }">
+    		<input type="hidden" class="mem_id" value="${mem.mem_id }">
+          </div>
+        </div>
+        </c:forEach>
+      </div>
+    </div>
+    <!-- recent_act end -->
+	</c:if>
     <!-- container -->
     <div class="container">
-      <div class="myclub_list_title_text">MY CLUB LIST</div>
+      <div class="myclub_list_title_text">나의 동호회 목록</div>
       <div class="myclub_list_wrap">
         <div class="myclub_list">
           <c:if test="${fn:length(clubList_make) eq 0 && fn:length(clubList_join) eq 0 && fn:length(clubList_interest) eq 0}">
@@ -400,31 +451,6 @@
       </div>
     </div>
     <!-- container end -->
-    <!-- test start -->
-    <div>
-    	<table border=1>
-    		<c:forEach var="mem" items="${joinMemberInfo }" varStatus="status">
-    			<tr>
-    				<td> 동호회 명 : ${joinClubInfo[status.index].cl_name }
-    				<td> 가입자 성함 : ${mem.mem_name }
-    				<td> 생년 월일 : ${mem.mem_birthday }
-    				<td> 성별 : ${mem.mem_gender }
-    				<td> 거주지 : ${mem.mem_address }
-    				<td> 관심 1 : ${mem.mem_category_1 }
-    				<td> 관심 2 : ${mem.mem_category_2 }
-    				<td class="arbtn"> 
-    					<button class="approve">수락 </button>
-    					<button class="refuse">거절 </button>
-    					<input type="hidden" class="cl_id" value="${joinClubInfo[status.index].cl_id }">
-    					<input type="hidden" class="mem_id" value="${mem.mem_id }">
-    			</tr>
-    			
-    			
-    		</c:forEach>
-    	</table>
-    </div>
-    
-    <!-- test end -->
 
     <div class="links">
       <div class="links_inner">

@@ -16,6 +16,11 @@
 		mem_id = #{mem_id} and mem_pass = #{mem_pass}
 	</select>
 	
+	<!--  관리자 로그인 -->
+	<select id="adminLogin" resultType="Integer">
+		select count(*) from ad where ad_id = #{mem_id} and ad_pass = #{mem_pass}
+	</select>
+	
 	<select id="id_check" resultType="Integer">
 		select count(*) from member where mem_id = #{id}
 	</select>

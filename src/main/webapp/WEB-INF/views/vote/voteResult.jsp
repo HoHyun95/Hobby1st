@@ -136,20 +136,20 @@ div {
 			$(".voteBtn").css('display', 'none');
 			/* $(".result${optionRank[0].vo_seq}").css('background-color','rgb(240, 209, 35)'); */
 		</script>
+		<c:forEach var="option" items="${optionRank }" varStatus="status">
+			<c:if test="${optionRank[0].vo_count eq option.vo_count }">
+				<script>
+					$(".result${optionRank[status.index].vo_seq}").css(
+							'background-color', 'rgb(240, 209, 35)');
+				</script>
+			</c:if>
+		</c:forEach>
 	</c:if>
-	
-	<c:forEach var="option" items="${optionRank }" varStatus="status">
-		<c:if test="${optionRank[0].vo_count eq option.vo_count }">
-			<script>
-				$(".result${optionRank[status.index].vo_seq}").css('background-color','rgb(240, 209, 35)');
-			</script>
-		</c:if>
-	</c:forEach>
+
+
 
 
 	<script>
-	
-		
 		// 목록으로
 		$(".back").on("click", function() {
 			location.href = "/vote/listPage";

@@ -78,8 +78,14 @@
         createClub_wrap.style.display = "none";	  
       }
 
-      sign_up.onclick = () => {
-        location.href = "/member/sign_up";
+ 	  sign_up.onclick = () => {
+        let modal_bg = document.querySelector(".modal_bg");
+        let loginForm = document.querySelector(".loginForm");
+        let signUp_wrap = document.querySelector(".signUp_wrap");
+        loginForm.style.zIndex = -1;
+        loginForm.style.display = "none";  
+        signUp_wrap.style.zIndex = 11;
+        signUp_wrap.style.display = "flex";
       }
 
       // 찜하기
@@ -416,6 +422,305 @@
             
             location.href = "/member/logind?mem_id="+(mem_id)+"&mem_pass="+(mem_pass);
         }
+        
+        /* 회원가입 */
+        let signUp_close_btn = document.getElementById("signUp_close_btn");
+        let signUpBtn = document.getElementById("signUpBtn");
+        let signUp_slideLeft = document.getElementById("signUp_slideLeft");
+        let signUp_slideRight = document.getElementById("signUp_slideRight");
+        let signUp_container = document.querySelector(".signUp_container");
+        let signUp_MOVE_WIDTH = 528;
+        let signUp_position = 0;
+        
+        signupform_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = 10;
+          modal_bg.style.display = "flex";
+          signUp_wrap.style.zIndex = 11;
+          signUp_wrap.style.display = "flex";
+        }
+        
+        signUp_close_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = -1;
+          modal_bg.style.display = "none";
+          signUp_wrap.style.zIndex = -1;
+          signUp_wrap.style.display = "none";
+        }
+        
+        let mem_id = document.getElementById("mem_id");
+        let mem_id_Result = document.getElementById("mem_id_Result");
+        
+        let mem_pass = document.getElementById("mem_pass");
+        let mem_pw_Result = document.getElementById("mem_pw_Result");
+        
+        let mem_pass2 = document.getElementById("mem_pass2");
+        let mem_pw2_Result = document.getElementById("mem_pw2_Result");
+        
+        let mem_name = document.getElementById("mem_name");
+        let mem_name_Result = document.getElementById("mem_name_Result");
+        
+        let mem_nickname = document.getElementById("mem_nickname");
+        let mem_nickname_Result = document.getElementById("mem_nickname_Result");
+        
+        let mem_birthday = document.getElementById("mem_birthday");
+        let mem_birthday_Result = document.getElementById("mem_birthday_Result");
+        
+        let mem_phone = document.getElementById("mem_phone");
+        let mem_phone_Result = document.getElementById("mem_phone_Result");
+        
+        let mem_email = document.getElementById("mem_email");
+        let mem_email_Result = document.getElementById("mem_email_Result");
+        
+        let select_gender = document.getElementById("select_gender");
+        let mem_gender_Result = document.getElementById("mem_gender_Result");
+        
+        let mem_address = document.getElementById("mem_address");
+        let mem_address_Result = document.getElementById("mem_address_Result");
+        
+        
+        mem_id.onblur = () => {
+          if(mem_id.value == "") {
+        	mem_id_Result.style.color = "tomato";
+            mem_id_Result.innerText = "ID를 입력해 주세요";  
+          } else {
+            $.ajax({
+		      url : "/member/idCheck",
+			  data: {id: mem_id.value}
+			}).done(function(resp){
+		      if(resp == "1") {
+		    	mem_id_Result.style.color = "tomato";
+		    	mem_id_Result.innerText = "중복된 아이디입니다.";
+		    	mem_id.value = ""
+			    mem_id.focus();
+			  } else if(resp == "0") {
+				mem_id_Result.style.color = "forestgreen";
+				mem_id_Result.innerText = "사용 가능한 아이디입니다.";    
+			  }
+			})
+          }
+        }
+        
+        mem_id.onkeyup = () => {
+          if(mem_id.value != "") {
+            mem_id_Result.innerText = "";
+          }	  	
+        }
+        
+        mem_pass.onblur = () => {
+          if(mem_pass.value == "") {
+        	mem_pw_Result.innerText = "패스워드를 입력해 주세요";	  
+          }
+        }
+        
+        mem_pass.onkeyup = () => {
+          if(mem_pass.value != "") {
+        	mem_pw_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_pass2.onblur = () => {
+          if(mem_pass2.value == "") {
+            mem_pw2_Result.innerText = "패스워드를 한번 더 입력해 주세요";	  
+          }	
+        }
+
+        mem_pass2.onkeyup = () => {
+          if(mem_pass2.value != "") {
+        	  mem_pw2_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_name.onblur = () => {
+          if(mem_name.value == "") {
+        	mem_name_Result.innerText = "이름을 입력해 주세요";	  
+          }	
+        }
+
+        mem_name.onkeyup = () => {
+          if(mem_name.value != "") {
+        	mem_name_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_nickname.onblur = () => {
+          if(mem_nickname.value == "") {
+        	mem_nickname_Result.innerText = "닉네임을 입력해 주세요";	  
+          }	
+        }
+
+        mem_nickname.onkeyup = () => {
+          if(mem_nickname.value != "") {
+        	mem_nickname_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_birthday.onblur = () => {
+          if(mem_birthday.value == "") {
+        	mem_birthday_Result.innerText = "생일을 입력해 주세요";	  
+          }	
+        }
+
+        mem_birthday.onkeyup = () => {
+          if(mem_birthday.value != "") {
+        	mem_birthday_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_phone.onblur = () => {
+          if(mem_phone.value == "") {
+        	mem_phone_Result.innerText = "전화번호를 입력해 주세요";	  
+          }	
+        }
+
+        mem_phone.onkeyup = () => {
+          if(mem_phone.value != "") {
+        	mem_phone_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_email.onblur = () => {
+          if(mem_email.value == "") {
+        	mem_email_Result.innerText = "전화번호를 입력해 주세요";	  
+          }	
+        }
+
+        mem_email.onkeyup = () => {
+          if(mem_email.value != "") {
+        	mem_email_Result.innerText = "";  
+          }  	
+        }
+        
+        select_gender.onblur = () => {
+          if(select_gender.options[0].selected) {
+        	mem_gender_Result.innerText = "성별을 선택해 주세요";	  
+          }	
+        }
+        
+        select_gender.onclick = () => {
+          if(select_gender.options[1].selected || select_gender.options[2].selected) {
+        	mem_gender_Result.innerText = "";  
+          }  	
+        }
+        
+        mem_address.onblur = () => {
+          if(mem_address.options[0].selected) {
+        	mem_address_Result.innerText = "지역을 선택해 주세요";	  
+          }	
+        }
+        
+        mem_address.onclick = () => {
+          if(!mem_address.options[0].selected) {
+        	mem_address_Result.innerText = "";  
+          }  	
+        }
+        
+        
+        let signUp_current_point = 0;
+
+        let signUp_end_point = signUp_MOVE_WIDTH * 3;
+
+        if (signUp_current_point == 0) {
+          signUp_slideLeft.style.display = "none";
+        }
+
+        if (signUp_current_point == signUp_end_point) {
+          signUp_slideRight.style.display = "none";
+        }
+
+        signUp_slideRight.onclick = () => {
+          if (mem_id.value != "" && mem_pass.value != "" && mem_pass2.value != "" && 
+              mem_name.value != "" && mem_nickname.value != "" && mem_birthday.value != "" && 
+        	  mem_phone.value != "" && mem_email.value != "" && !select_gender.options[0].selected) {
+          signUp_current_point += signUp_MOVE_WIDTH;
+            
+            if (signUp_current_point == signUp_end_point) {
+              signUp_slideRight.style.display = "none";
+              signUpBtn.style.display = "inline";
+              signUp_slideLeft.style.display = "inline";
+            } else if (signUp_current_point > 0) {
+              signUp_slideLeft.style.display = "inline";
+              signUpBtn.style.display = "none";
+            }
+            
+            signUp_position -= signUp_MOVE_WIDTH;
+            signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+          
+          } else {
+            alert("정보를 모두 입력해 주세요");	  
+          }
+        }
+        
+        signUp_slideLeft.onclick = () => {
+          signUp_current_point -= signUp_MOVE_WIDTH;
+          if (signUp_current_point == 0) {
+            signUp_slideLeft.style.display = "none";
+            signUp_slideRight.style.display = "inline";
+            signUpBtn.style.display = "none";
+          } else if (signUp_current_point < signUp_end_point) {
+            signUp_slideRight.style.display = "inline";
+            signUpBtn.style.display = "none";
+          }
+          signUp_position += signUp_MOVE_WIDTH;
+          signUp_container.style.transform = "translateX(" + (signUp_position) + "px)";
+        }
+
+        let city = document.querySelectorAll(".city");
+        const cities = [...city];
+
+        let option = document.querySelectorAll("#cl_local option");
+        const options = [...option];
+
+        document.addEventListener("change", (e) => {
+          for (let i = 0; i < cities.length; i++) {
+            if (e.target.value == cities[i].id) {
+              cities[i].classList.add("active");
+            } else {
+              cities[i].classList.remove("active");
+            }
+          }
+        })
+
+        let getRandomNum = (min, max) => {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min; 
+        }
+
+        const previewImage = document.getElementById("preview_img");
+        select_gender.addEventListener("change", (e) => {
+          if(e.target.id == "select_gender" && e.target.value == "M") {
+            previewImage.src = "/images/man" + (getRandomNum(1, 3)) +".png";
+          } else if(e.target.id == "select_gender" && e.target.value == "F") {
+            previewImage.src = "/images/woman" + (getRandomNum(1, 3)) +".png";
+          }
+        })
+
+        function readImage(input) {
+          if (input.files && input.files[0]) {
+            const reader = new FileReader()
+            reader.onload = e => {
+              previewImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0])
+          }
+        }
+
+        const inputImage = document.getElementById("input-image");
+        inputImage.addEventListener("change", e => {
+          readImage(e.target)
+        });
+
+        signUp_close_btn.onclick = () => {
+          let modal_bg = document.querySelector(".modal_bg");
+          let signUp_wrap = document.querySelector(".signUp_wrap");
+          modal_bg.style.zIndex = -1;
+          modal_bg.style.display = "none";
+          signUp_wrap.style.zIndex = -1;
+          signUp_wrap.style.display = "none";
+        }
     }
   </script>
 </head>
@@ -434,18 +739,22 @@
             <a href="/"><img src="/images/LOGO.png"></a>
           </div>
           <ul class="login_list">
-            <c:choose>
-              <c:when test="${mem_id !=null }">
+               <c:choose>
+              <c:when test="${mem_id !=null || admin != null }">
+			<c:if test="${admin != null}">
+                <li id="login_id"><b>관리자</b>님 환영합니다</li>
+                </c:if>
+              <c:if test="${mem_id != null}">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
-                <a href="/member/logout">
+                </c:if>
                   <li class="login_list_item">로그아웃</li>
                 </a>
                 <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
-                <li class="login_list_item" id="signup_btn" style="display:none">회원가입</li>
+                <li class="login_list_item" id="signupform_btn" style="display:none">회원가입</li>
               </c:when>
               <c:otherwise>
                 <li class="login_list_item" id="loginform_btn">로그인</li>
-                <li class="login_list_item" id="signup_btn">회원가입</li>
+                <li class="login_list_item" id="signupform_btn">회원가입</li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -457,7 +766,9 @@
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
             <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
+            </c:if>
           </ul>
         </div>
       </div>
@@ -868,6 +1179,7 @@
 
 	</script>
   </div>
+  <jsp:include page="signUp.jsp"></jsp:include>
 </body>
 
 </html>

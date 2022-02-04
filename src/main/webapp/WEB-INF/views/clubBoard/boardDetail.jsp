@@ -275,10 +275,12 @@
 			<button type="button" id="modify"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 				style="float: right; margin-left: 20px;">수정하기</button>
+				</c:if>
+			<c:if test="${admin != null  || detail.cb_writer == mem_id}">
 			<button type="button" id="delete"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 				style="float: right; margin-bottom: 70px;">삭제하기</button>
-		</c:if>
+				</c:if>
 	</div>
 
 	<script>

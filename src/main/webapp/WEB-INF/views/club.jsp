@@ -712,15 +712,6 @@
         inputImage.addEventListener("change", e => {
           readImage(e.target)
         });
-
-        signUp_close_btn.onclick = () => {
-          let modal_bg = document.querySelector(".modal_bg");
-          let signUp_wrap = document.querySelector(".signUp_wrap");
-          modal_bg.style.zIndex = -1;
-          modal_bg.style.display = "none";
-          signUp_wrap.style.zIndex = -1;
-          signUp_wrap.style.display = "none";
-        }
     }
   </script>
 </head>

@@ -28,34 +28,118 @@
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
       let myclub_list_box = document.querySelectorAll(".myclub_list_box");
+      let modal_bg = document.querySelector(".modal_bg");
+      let loginForm = document.querySelector(".loginForm");
       
       loginform_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let loginForm = document.querySelector(".loginForm");
         modal_bg.style.zIndex = 10;
         modal_bg.style.display = "flex";
         loginForm.style.zIndex = 11;
         loginForm.style.display = "flex";
       }
+      
       close_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let loginForm = document.querySelector(".loginForm");
         modal_bg.style.zIndex = -1;
         modal_bg.style.display = "none";
         loginForm.style.zIndex = -1;
         loginForm.style.display = "none";
       }
 
-      sign_up.onclick = () => {
-        location.href = "/member/sign_up";
-      }
-      
       for (let i = 0; i < myclub_list_box.length; i++) {
         myclub_list_box[i].onclick = () => {
           let clickedList = myclub_list_box[i].children[5].value;
           location.href = "/clubHouse?cl_id=" + clickedList;
         }
       }
+      
+      let mModify_wrap = document.querySelector(".mModify_wrap");
+      let mModifyform_btn = document.getElementById("mModifyform_btn");
+      let mModify_close_btn = document.getElementById("mModify_close_btn");
+      let mModifyBtn = document.getElementById("mModifyBtn");
+      let mModify_slideLeft = document.getElementById("mModify_slideLeft");
+      let mModify_slideRight = document.getElementById("mModify_slideRight");
+      let mModify_container = document.querySelector(".mModify_container");
+      let mModify_MOVE_WIDTH = 528;
+      let mModify_position = 0;
+
+      mModifyform_btn.onclick = () => {
+        modal_bg.style.zIndex = 10;
+        modal_bg.style.display = "flex";
+        mModify_wrap.style.zIndex = 11;
+        mModify_wrap.style.display = "flex";
+      }
+
+      mModify_close_btn.onclick = () => {
+        modal_bg.style.zIndex = -1;
+        modal_bg.style.display = "none";
+        mModify_wrap.style.zIndex = -1;
+        mModify_wrap.style.display = "none";
+      }
+
+      let mModify_current_point = 0;
+
+      let mModify_end_point = mModify_MOVE_WIDTH * 3;
+
+      if (mModify_current_point == 0) {
+        mModify_slideLeft.style.display = "none";
+      }
+
+      if (mModify_current_point == mModify_end_point) {
+        mModify_slideRight.style.display = "none";
+      }
+
+      mModify_slideRight.onclick = () => {
+        // if (m_id.value != "" && m_pass.value != "" && m_pass2.value != "" &&
+        //   m_name.value != "" && m_nickname.value != "" && m_birthday.value != "" &&
+        //   m_phone.value != "" && m_email.value != "" && !select_gender.options[0].selected) {
+          mModify_current_point += mModify_MOVE_WIDTH;
+
+          if (mModify_current_point == mModify_end_point) {
+            mModify_slideRight.style.display = "none";
+            mModifyBtn.style.display = "inline";
+            mModify_slideLeft.style.display = "inline";
+          } else if (mModify_current_point > 0) {
+            mModify_slideLeft.style.display = "inline";
+            mModifyBtn.style.display = "none";
+          }
+
+          mModify_position -= mModify_MOVE_WIDTH;
+          mModify_container.style.transform = "translateX(" + (mModify_position) + "px)";
+
+        // } else {
+        //   alert("정보를 모두 입력해 주세요");
+        // }
+      }
+
+      mModify_slideLeft.onclick = () => {
+        mModify_current_point -= mModify_MOVE_WIDTH;
+        if (mModify_current_point == 0) {
+          mModify_slideLeft.style.display = "none";
+          mModify_slideRight.style.display = "inline";
+          mModifyBtn.style.display = "none";
+        } else if (mModify_current_point < mModify_end_point) {
+          mModify_slideRight.style.display = "inline";
+          mModifyBtn.style.display = "none";
+        }
+        mModify_position += mModify_MOVE_WIDTH;
+        mModify_container.style.transform = "translateX(" + (mModify_position) + "px)";
+      }
+
+      let city = document.querySelectorAll(".city");
+      const cities = [...city];
+
+      let option = document.querySelectorAll("#cl_local option");
+      const options = [...option];
+
+      document.addEventListener("change", (e) => {
+        for (let i = 0; i < cities.length; i++) {
+          if (e.target.value == cities[i].id) {
+            cities[i].classList.add("active");
+          } else {
+            cities[i].classList.remove("active");
+          }
+        }
+      })
     }
   </script>
 </head>
@@ -127,7 +211,7 @@
         <div class="profile_btn_area">
           <div class="profile_btn">
             <div class="btn_item">
-              <button type="button" id="showProfile"><i class="far fa-address-card"></i> 내 계정 정보 </button>
+              <button type="button" id="mModifyform_btn"><i class="far fa-address-card"></i> 내 정보 수정 </button>
             </div>
           </div>
         </div>
@@ -375,6 +459,7 @@
   <div class="modal_bg">
 
   </div>
+  <jsp:include page="/WEB-INF/views/modifyMember.jsp"></jsp:include>
   <!-- sign_in -->
   <jsp:include page="/WEB-INF/views/login.jsp"></jsp:include>
   <script>

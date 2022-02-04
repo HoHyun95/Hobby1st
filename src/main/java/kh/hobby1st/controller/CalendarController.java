@@ -1,8 +1,10 @@
 package kh.hobby1st.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,106 +47,38 @@ public class CalendarController {
 	  model.addAttribute("list", cal_service.selectAll(club_cl_name));
 	  return "calendar"; 
 	  }
-	  
+	 
+	  //삭제요청
 	  @ResponseBody
-	  @RequestMapping(value = "method", method = RequestMethod.POST) 
-	  public String method(Model model, String title, String club, String day_start, String day_end) {		  
-	  int result = cal_service.insert(new CalendarDateDTO(club, day_start, day_end, title));
-	   
-	  model.addAttribute("list", cal_service.selectAll(club));
+	  @RequestMapping(value = "delete", method = RequestMethod.POST)
+	  public String delete(Model model, String title, String club_cl_name) {
+      int result = cal_service.delete(club_cl_name, title);
+      return "pageJsonReport";
+	  }
+	  
+	  
+	  
+	  //달력에서 입력만 하게되면 자동 저장이 됩니다.(스케줄 저장기능)
+	  @ResponseBody
+	  @RequestMapping(value = "insert", method = RequestMethod.GET) 
+	  public String insert(String title, String club, Date day_start, Date day_end) {
+	  //널값을 잡기위한 날짜 계산
+	  day_end = new Date(day_end.getTime()+(1000*60*60*24*-1));	  
+	    
+	  //출력결과물을 보여주기 위해 달력형식 변환  
+	  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	  SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	  String update_start = simpleDateFormat.format(day_start);
+	  String update_end = endDateFormat.format(day_end);
+	  
+	  //시간단위 자르기
+	  if(update_start.equals(update_end)) {
+	  String change_start = update_start.substring(0,10);
+	  String change_end = update_end.substring(0,10);
+	  int result = cal_service.insert(new CalendarDateDTO(club, change_start, change_end, title));
+	  } else {
+	  int result = cal_service.insert(new CalendarDateDTO(club, update_start, update_end, title));
+	  }
 	  return "pageJsonReport"; 
 	  }
-	 
-	  @ResponseBody
-	  @RequestMapping(value = "get/schedules", method = RequestMethod.GET) 
-	  public String getSchedules(Model model,String club) {
-	  
-	  List<CalendarDateDTO> data = cal_service.selectAll(club);
-      System.out.println(data);
-	  System.out.println("갯입니다 여기"+club);
-
-	  JSONObject schedules = new JSONObject((Map) data);
-	
-	
-	  
-	  return schedules.toString(); 
-	  }
 }	  
-		/*ㅈ
-		 * @RequestMapping(value="get/schedules", method={ RequestMethod.GET,
-		 * RequestMethod.POST }) public String getSchedules( HttpServletRequest request
-		 * ) throws Exception { JSONObject json = new JSONObject();
-		 * 
-		 * json.put("success", true); json.put("data", 10); json.put(null, 10);
-		 * 
-		 * return json.toString(4); }
-		 */
-	  
-	/*
-	 * @GetMapping(params = "method=list") public String list() { return "calendar";
-	 * }
-	 * 
-	 * @GetMapping(params = "method=data") public String data(Model model, String
-	 * club_cl_name) { model.addAttribute("list",
-	 * cal_service.selectAll(club_cl_name)); return "pageJsonReport"; }
-	 */
-
-
-/*
- * // 캘린더 호출 무조건 "do" 타고 들어와야함!
- * 
- * @RequestMapping(value = "do", method = RequestMethod.GET) public String
- * calendar(Model model, HttpServletRequest request, CalendarDateDTO dateData,
- * String club_cl_name){
- * 
- * Calendar cal = Calendar.getInstance(); CalendarDateDTO calendarData;
- * 
- * //검색 날짜 if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
- * dateData = new
- * CalendarDateDTO(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get
- * (Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null); }
- * 
- * //검색 날짜 end Map<String, Integer> today_info = dateData.today_info(dateData);
- * List<CalendarDateDTO> dateList = new ArrayList<CalendarDateDTO>();
- * 
- * //실질적인 달력 데이터 리스트에 데이터 삽입 시작. //일단 시작 인덱스까지 아무것도 없는 데이터 삽입 for(int i=1;
- * i<today_info.get("start"); i++){ calendarData= new CalendarDateDTO(null,
- * null, null, null); dateList.add(calendarData); }
- * 
- * //날짜 삽입 for (int i = today_info.get("startDay"); i <=
- * today_info.get("endDay"); i++) { if(i==today_info.get("today")){
- * calendarData= new CalendarDateDTO(String.valueOf(dateData.getYear()),
- * String.valueOf(dateData.getMonth()), String.valueOf(i), "today"); }else{
- * calendarData= new CalendarDateDTO(String.valueOf(dateData.getYear()),
- * String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date"); }
- * dateList.add(calendarData); }
- * 
- * //달력 빈곳 빈 데이터로 삽입 int index = 7-dateList.size()%7; if(dateList.size()%7!=0){
- * for (int i = 0; i < index; i++) { calendarData= new CalendarDateDTO(null,
- * null, null, null); dateList.add(calendarData); } }
- * 
- * //해당 동호회의 리스트만 출력 List<CalendarDateDTO> result =
- * cal_service.selectAll(club_cl_name);
- * 
- * model.addAttribute("result", result); model.addAttribute("dateList",
- * dateList); model.addAttribute("today_info", today_info);
- * model.addAttribute("club_cl_name", club_cl_name); return "calendar"; }
- * 
- * //캘린더에서 "submit"을 누르면 호출됨
- * 
- * @RequestMapping("input_calendar") public String inputDay(Model model, String
- * year, String month, String value, String date, String schedule, String
- * schedule_detail) {
- * 
- * //해당"월, 일, 동회명"에 중복되는 값이 SQL에 존재하는지 확인 String value_ej = value; int
- * search_delete = cal_service.search(month, value, date);
- * 
- * //만약에 존재한다면 "0"을 돌려받음, SQL에 정보가 없으면 ELSE if(0==search_delete) { int result =
- * cal_service.insert(new CalendarDateDTO(year, month, date, value, schedule,
- * schedule_detail)); } else { //기존에 존재하던 정보를 삭제하고 새로운 정보를 입력 String delete =
- * cal_service.delete(month, value, date); int result = cal_service.insert(new
- * CalendarDateDTO(year, month, date, value, schedule, schedule_detail)); }
- * //"submit"을 누르면 원래 있었던 페이지로 돌아감 session.setAttribute("club_cl_name",
- * value_ej); model.addAttribute("club_cl_name", value_ej); return
- * "redirect: /calendar/do"; } }
- */

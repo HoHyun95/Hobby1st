@@ -18,6 +18,6 @@
 	</select>
 	
 	<delete id="delete">
-	    delete from calendar where month=#{month} and &quot;date&quot;=#{date} and value=#{value}
+	    delete from calendar where club=#{club_cl_name} and title=#{title}
 	</delete>
 </mapper>

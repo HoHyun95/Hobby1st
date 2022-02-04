@@ -27,7 +27,7 @@ public class CalendarDateService {
 		 return dao.search(month, value, date);
 	 }
 	 
-	 public String delete(String month, String value, String date) {
-		 return dao.delete(month, value, date);
+	 public int delete(String club_cl_name, String title) {
+		 return dao.delete(club_cl_name, title);
 	 }
 }

@@ -143,7 +143,7 @@
                 <img src="/images/woman1.png" alt="이미지를 선택해 주세요" id="preview_img">
               </div>
               <div class="input">
-                <input name="mem_photo" type="file" class="mModifyInput" id="input-image" accept="image/*" value="${memberInfo.mem_photo}">
+                <input type="file" class="mModifyInput" id="input-image" accept="image/*" value="${memberInfo.mem_photo}">
               </div>
               <div class="validResult" id="m_photo_Result"></div>
             </div>

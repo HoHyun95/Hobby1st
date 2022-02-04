@@ -227,7 +227,47 @@ public class MemberController {
 	//		}
 	//		return "redirect: /";
 	//	}	
+	
+	// 회원 정보 수정
+	@RequestMapping("mModify")
+	public String mModify(MemberDTO dto, MultipartFile file) throws Exception {
+		
+		System.out.println(dto.getMem_pass());
+		System.out.println(dto.getMem_nickname());
+		System.out.println(dto.getMem_phone());
+		System.out.println(dto.getMem_email());
+		System.out.println(dto.getMem_address());
+		System.out.println(dto.getMem_address());
+		System.out.println(dto.getMem_category_1());
+		System.out.println(dto.getMem_category_2());
+		
 
+		String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
+
+		File realPathFile = new File(realPath);
+
+		if (!realPathFile.exists()) {
+			realPathFile.mkdir();
+		}
+
+		if (!file.isEmpty()) {
+
+			String photoName = file.getOriginalFilename();
+			System.out.println(photoName);
+
+			file.transferTo(new File(realPath + "/" + photoName));
+//			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
+			dto.setMem_photo("/upload/profile/" + photoName);
+//			int result = clService.createClub(dto);
+			System.out.println(dto.getMem_photo());
+		}
+		
+		
+		return "redirect:/myPage";
+	}
+	
+	
+	
 }
 
 

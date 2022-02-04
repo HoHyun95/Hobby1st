@@ -685,6 +685,11 @@
     		}
     	})
     	
+    	document.querySelector('#controlClub').addEventListener('click', () => {
+    		location.href ="/clubList/modifyClubPage?cl_id=${club.cl_id}";
+    	})
+    	
+    	
     </script>
     <jsp:include page="signUp.jsp"></jsp:include>
     

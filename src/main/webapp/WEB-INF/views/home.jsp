@@ -681,7 +681,7 @@
 		<!-- FAQ -->        	
 		<!-- <a href="/faq/faqList><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
 		<!-- chat -->
-		<!-- <a href="/chat/clubChat"><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
+<!-- 		<a href="/chat/clubChat"><li class="icon_list_item"><i clzass="fab fa-google"></i></li></a> -->
 		<!-- qna -->
 		<!-- <a href="/qna/qnaList?cpage=1"><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
           </ul>

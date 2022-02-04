@@ -93,11 +93,9 @@ inputImage.addEventListener("change", e => {
 
 
 $('#cl_name').on('keyup', () => {
-	
 	if(
 		$('#cl_name').val().length < 3
 	){
-		
 		$('#nameSpan').text("동호회명은 3자 이상으로 작성해주세요");
 	}else if($('#cl_name').val().length > 29){
 		$('#nameSpan').text("30자 이내로 작성해주세요");
@@ -303,8 +301,8 @@ $("#cl_name").on("blur", function() {
 			if ($("#cl_desc").val() == "") {
 				alert("동호회 소개글을 입력해주세요");
 				return false;
-
 			}
+			
 			if ($("#cl_category_id").val() == "") {
 				alert("관심있는 동호회 분류를 선택해주세요");
 				return false;
@@ -326,8 +324,6 @@ $("#cl_name").on("blur", function() {
 			}else{
 				$('#clubCreateForm').submit();
 			}
-
-			
      })
      
     

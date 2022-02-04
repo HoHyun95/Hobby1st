@@ -28,6 +28,15 @@ public class ClubListDAO {
 	public List<ClubListDTO> selectAll() {
 		return mybatis.selectList("ClubList.selectAll");
 	}
+	
+	public List<ClubListDTO> modifyClubPage(int cl_id){
+		return mybatis.selectList("ClubList.modifyClubPage", cl_id);
+	}
+	
+	public int modifyClubProc(ClubListDTO dto) {
+	
+		return mybatis.update("ClubList.modifyClubProc", dto);
+	}
 
 	// 동호회 리스트 10개씩 가져오기
 	public List<ClubListDTO> selectSplit(int start, int end) {

@@ -36,6 +36,20 @@
 		select * from club_list order by cl_id asc
 	</select>
 	
+	<select id="modifyClubPage" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from club_list where cl_id = #{cl_id}
+	</select>
+	
+	<update id="modifyClubProc">
+		update club_list set cl_desc = #{cl_desc}, 
+							 cl_local = #{cl_local}, 
+							 cl_maxMem = #{cl_maxMem}, 
+							 cl_photo = #{cl_photo},
+							 cl_category_id = #{cl_category_id}, 
+							 cl_dCategory_id = #{cl_dCategory_id} 
+							 where cl_id = #{cl_id}
+	</update>
+	
 	<select id="selectSplit" resultType="kh.hobby1st.dto.ClubListDTO">
 		select * from (select club_list.*, row_number() over (order by cl_id asc) rn from club_list)
 								where rn between #{start} and #{end}

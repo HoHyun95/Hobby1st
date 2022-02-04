@@ -77,5 +77,10 @@ public class MemberDAO {
 	public int modifyMember(MemberDTO dto) {
 		return mybatis.update("member.modifyMember", dto);
 	}
+	
+	// 회원 정보 수정 (사진제외)
+		public int modifyMemberP(MemberDTO dto) {
+			return mybatis.update("member.modifyMemberP", dto);
+		}
 
 }

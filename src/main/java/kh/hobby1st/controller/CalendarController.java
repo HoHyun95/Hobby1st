@@ -1,32 +1,19 @@
 package kh.hobby1st.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.hobby1st.dto.CalendarDateDTO;
 import kh.hobby1st.service.CalendarDateService;
-
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 
 
 
@@ -47,17 +34,7 @@ public class CalendarController {
 	  model.addAttribute("list", cal_service.selectAll(club_cl_name));
 	  return "calendar"; 
 	  }
-	 
-	  //삭제요청
-	  @ResponseBody
-	  @RequestMapping(value = "delete", method = RequestMethod.POST)
-	  public String delete(Model model, String title, String club_cl_name) {
-      int result = cal_service.delete(club_cl_name, title);
-      return "pageJsonReport";
-	  }
-	  
-	  
-	  
+	 	  
 	  //달력에서 입력만 하게되면 자동 저장이 됩니다.(스케줄 저장기능)
 	  @ResponseBody
 	  @RequestMapping(value = "insert", method = RequestMethod.GET) 
@@ -67,9 +44,8 @@ public class CalendarController {
 	    
 	  //출력결과물을 보여주기 위해 달력형식 변환  
 	  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	  SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	  String update_start = simpleDateFormat.format(day_start);
-	  String update_end = endDateFormat.format(day_end);
+	  String update_end = simpleDateFormat.format(day_end);
 	  
 	  //시간단위 자르기
 	  if(update_start.equals(update_end)) {
@@ -81,4 +57,50 @@ public class CalendarController {
 	  }
 	  return "pageJsonReport"; 
 	  }
-}	  
+	  
+	  //메인 캘린더에서 스케줄 클릭시 디테일 jsp로 이동
+	  @RequestMapping(value = "calendarDetail")
+	  public String detail(Model model, String title, String club_cl_name, String start, String end) {
+		  //자바언어로 시간변경
+			/*
+			 * SimpleDateFormat simpleDateFormat = new
+			 * SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); String update_start =
+			 * simpleDateFormat.format(start);
+			 */
+		  model.addAttribute("club_cl_name", club_cl_name);
+		  model.addAttribute("title", title);
+		  model.addAttribute("start", start);
+		  model.addAttribute("end",end);
+		  return "/calendar/calendarDetail"; 
+	  }
+	  
+         @ResponseBody
+		 @RequestMapping(value = "delete", method = RequestMethod.POST) 
+         public String delete(String title, String club_cl_name) { 
+         int result = cal_service.delete(club_cl_name, title); 
+         return "pageJsonReport";
+       }
+} 
+	  
+	  
+	  
+	  
+	  
+		/*
+		 * @RequestMapping("delete") public String delete(String title, String
+		 * club_cl_name) { int result = cal_service.delete(club_cl_name, title); return
+		 * ("<script language='javascript' type='text/javascript'> alert('에러다.'); </script>"
+		 * );
+		 * 
+		 * }
+		 */
+
+//-------------------------소스 보관용 -------------------------------------	  
+	  //에이작스를 통한 프론트단에서 삭제요청
+	/*
+		 * @ResponseBody
+		 * @RequestMapping(value = "delete", method = RequestMethod.POST) public String
+		 * delete(String title, String club_cl_name) { int result =
+		 * cal_service.delete(club_cl_name, title); return "pageJsonReport"; }
+	 */
+	  

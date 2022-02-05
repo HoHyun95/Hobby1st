@@ -21,12 +21,9 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/clubHouse.css">
   <link rel="stylesheet" href="/css/footer.css">
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-	rel="stylesheet">
-  <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
   <script>
     window.onload = () => {
+      let id = '<%=(String)session.getAttribute("mem_id")%>';
       let loginform_btn = document.getElementById("loginform_btn");
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
@@ -102,6 +99,10 @@
    	  }   
    	  
    	  club_member_list.onclick = () => {
+   		if(id == 'null') {
+    		alert("로그인 후 이용 가능합니다.");
+    		return false;
+    	} else {
    		clubIntro.style.borderBottom = "none";
    		club_member_list.style.borderBottom = "3px solid var(--bg-color3)";
    		club_board.style.borderBottom = "none"; 
@@ -111,9 +112,14 @@
    		cm_list_wrap.style.display = "flex";
    		club_board_wrap.style.display = "none";
    		club_chat_wrap.style.display = "none";
+    	}
    	  }
    
    	  club_board.onclick = () => {
+   		if(id == 'null') {
+    		alert("로그인 후 이용 가능합니다.");
+    		return false;
+    	} else {
    		clubIntro.style.borderBottom = "none";
    		club_member_list.style.borderBottom = "none"; 
    		club_board.style.borderBottom = "3px solid var(--bg-color3)";
@@ -123,9 +129,14 @@
    		cm_list_wrap.style.display = "none";
    		club_board_wrap.style.display = "flex";
    		club_chat_wrap.style.display = "none";
+    	}
    	  }
    	  
    	  club_chat.onclick = () => {
+   		if(id == 'null') {
+    		alert("로그인 후 이용 가능합니다.");
+    		return false;
+    	} else {
    		clubIntro.style.borderBottom = "none";
    		club_member_list.style.borderBottom = "none"; 
    		club_board.style.borderBottom = "none";    
@@ -135,6 +146,7 @@
    		cm_list_wrap.style.display = "none";
    		club_board_wrap.style.display = "none";
    		club_chat_wrap.style.display = "flex";
+    	}
    	  }
    	  
       /* 회원가입 */
@@ -462,14 +474,15 @@
               <c:if test="${mem_id != null}">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
                 </c:if>
+                <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
                 <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
-                <li class="login_list_item" id="signup_btn" style="display:none">회원가입</li>
+                <li class="login_list_item" id="signupform_btn" style="display:none">회원가입</li>
               </c:when>
               <c:otherwise>
                 <li class="login_list_item" id="loginform_btn">로그인</li>
-                <li class="login_list_item" id="signup_btn">회원가입</li>
+                <li class="login_list_item" id="signupform_btn">회원가입</li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -602,7 +615,7 @@
 	        <div class="cm_list_item">
 	          <div class="cm_list_item_photo_area">
 	            <div class="cm_list_item_photo">
-	              <img src="images/man1.png">
+	              <img src="${cm.mem_photo }">
 	            </div>
 	          </div>
 	          <div class="cm_list_item_profile_area">

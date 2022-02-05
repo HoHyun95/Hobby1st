@@ -615,7 +615,7 @@
 	        <div class="cm_list_item">
 	          <div class="cm_list_item_photo_area">
 	            <div class="cm_list_item_photo">
-	              <img src="images/man1.png">
+	              <img src="${cm.mem_photo }">
 	            </div>
 	          </div>
 	          <div class="cm_list_item_profile_area">

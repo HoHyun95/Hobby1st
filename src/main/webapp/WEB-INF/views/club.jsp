@@ -738,6 +738,7 @@
               <c:if test="${mem_id != null}">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
                 </c:if>
+                <a href="/member/logout">
                   <li class="login_list_item">로그아웃</li>
                 </a>
                 <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
@@ -908,18 +909,6 @@
     </div>
 
     <!-- container end -->
-    <div class="links">
-      <div class="links_inner">
-        <ul class="links_inner_list">
-          <li class="links_inner_list_item">회사소개</li>
-          <li class="links_inner_list_item">인재채용</li>
-          <li class="links_inner_list_item">회원약관</li>
-          <li class="links_inner_list_item">개인정보처리방침</li>
-          <li class="links_inner_list_item">제휴문의</li>
-          <li class="links_inner_list_item">고객센터</li>
-        </ul>
-      </div>
-    </div>
     <div class="footer">
       <div class="footer_inner">
         <div class="footer_logo">

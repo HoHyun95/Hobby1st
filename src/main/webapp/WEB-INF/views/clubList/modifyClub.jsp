@@ -176,8 +176,8 @@
 				</div>
 			 </div>
 		  </div>
-		</div>
 	  </form>
+		</div>
 	  
 	  <script>
 	  function readImage(input) {

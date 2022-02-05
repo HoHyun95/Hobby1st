@@ -277,6 +277,89 @@ button {
 }
 /* recent_act end */
 
+/* club_control */
+.club_control {
+  width: 1260px;
+  height: fit-content;
+  margin: 30px auto;
+  padding: 20px 30px 20px 30px;
+  box-shadow: 1px 1px 1px 1px darkgrey;
+}
+
+.club_control_title_text {
+  font-size: 1.1rem;
+  padding: 0px 0px 10px 0px;
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.club_control_contents_wrap {
+  height: 100%;
+  box-shadow: 1px 1px 1px 1px dimgrey;
+  border-radius: 3px;
+  background-color: var(--color2);
+}
+
+.club_control_contents_header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px 0px 5px 0px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: dimgrey;
+  border: none;
+  border-bottom: 1px solid dimgrey;
+  background-color: var(--bg-color4);
+  text-align: center;
+}
+
+.club_control_contents_header_list {
+  width: 12.5%;
+}
+
+.club_control_contents {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px 0px 5px 0px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: dimgrey;
+  border: none;
+  border-bottom: 1px solid dimgrey;
+  text-align: center;
+}
+
+.club_control_contents_list {
+  width: 12.5%;
+}
+
+.approve {
+  width: 50px;
+  height: 20px;
+  font-size: 0.8rem;
+  color: forestgreen;
+  border: 1px solid forestgreen;
+}
+
+.approve:hover {
+  background-color: forestgreen;
+  color: white;
+}
+
+.refuse {
+  width: 50px;
+  height: 20px;
+  font-size: 0.8rem;
+  color: tomato;
+  border: 1px solid tomato;
+}
+
+.refuse:hover {
+  background-color: tomato;
+  color: white;
+}
+/* club_control end */
+
 /* container */
 .container {
   width: 1260px;

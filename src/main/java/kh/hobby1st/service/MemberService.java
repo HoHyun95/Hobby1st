@@ -43,7 +43,7 @@ public class MemberService {
 	public int login(String mem_id, String mem_pass) {
 		return mem_dao.login(mem_id, mem_pass);
 	}
-	
+
 	// 관리자 로그인
 	public int adminLogin(String mem_id, String mem_pass) {
 		return mem_dao.adminLogin(mem_id, mem_pass);
@@ -76,6 +76,11 @@ public class MemberService {
 	// 회원 정보 수정
 	public int modifyMember(MemberDTO dto) {
 		return mem_dao.modifyMember(dto);
+	}
+
+	// 회원 정보 수정 (사진제외)
+	public int modifyMemberP(MemberDTO dto) {
+		return mem_dao.modifyMemberP(dto);
 	}
 
 }

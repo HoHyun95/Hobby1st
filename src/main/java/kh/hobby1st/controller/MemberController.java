@@ -266,7 +266,7 @@ public class MemberController {
 			dto.setMem_photo("/upload/profile/" + photoName);
 			result = mem_service.modifyMember(dto);
 		}else {
-			System.out.println("파일 비어있따");
+			result = mem_service.modifyMemberP(dto);
 		}
 		
 		model.addAttribute("result",result);

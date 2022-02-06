@@ -305,6 +305,7 @@ public class MemberController {
 		
 		int leaveMember = mem_service.leaveMember(my_id);
 		
+		session.invalidate();
 		model.addAttribute("leaveMember", leaveMember);
 		return "myPage/myPage";
 	}

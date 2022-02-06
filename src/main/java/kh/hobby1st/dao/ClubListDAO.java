@@ -180,9 +180,14 @@ public class ClubListDAO {
 		map.put("end", String.valueOf(end));
 		
 		return mybatis.selectList("ClubList.ClubListByPaging",map);
-		
 	}
 	
+	
+	
+	//	회원 수 많ㅇ느 동호회 TOP 30
+	public List<ClubListDTO> ClubListByTop30() {
+		return mybatis.selectList("ClubList.ClubListByTop30");
+	}
 	
 	
 	

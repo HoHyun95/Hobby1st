@@ -86,7 +86,8 @@ public class HomeController {
 			List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	
 			model.addAttribute("interestList", clubList_interest);
 		}
-
+		List<ClubListDTO> ClubListByTop5 = clService.ClubListByTop30(1, 5);
+		model.addAttribute("ClubListByTop5", ClubListByTop5);
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("clmemCount", clmemCount);
@@ -108,12 +109,16 @@ public class HomeController {
 		List<ClubBoardDTO> boardList = cbService.selectAll();
 		List<MemberDTO> memberList = mService.selectAll();
 		List<NoticeDTO> noticeList = ntService.selectAll();
-
+		int totalMember = mService.totalMember();
+		int totalClub = clService.countClub();
+		
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
 		model.addAttribute("allMember", memberList);
 		model.addAttribute("allNotice", noticeList);
-
+		model.addAttribute("totalMember",totalMember);
+		model.addAttribute("totalClub", totalClub);
+		
 		return "admin/admin";
 	}
 
@@ -260,18 +265,26 @@ public class HomeController {
 		return "news";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "showMore", produces = "application/json; charset=UTF-8")
+	public String showMore(int start, int end) {
+	  List<ClubListDTO> ClubListByTop5 = clService.ClubListByTop30(start, end);
+	  Gson g = new Gson();
+	  String result = g.toJson(ClubListByTop5);
+	  return result;
+	}
+
+	// Interceptor Error 
 	@RequestMapping("error")
 	public String error() {
 		return "error";
 	}
-	
+
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		System.out.println("예외 처리 코드가 실행되었습니다.");
 		return "error";
 	}
-
-
 
 }

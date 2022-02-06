@@ -22,16 +22,17 @@ input:-webkit-autofill:active {
   display: none;
 }
 
-.createClub_wrap {
+.modifyClub_wrap {
   width: 528px;
   margin: 0 auto;
+  margin-top: 150px;
   height: 900px;
   display: none;
   justify-content: center;
   border: 1px solid dimgray;
   border-radius: 5px;
-  position: fixed;
-  top: 200px;
+  position: absolute;
+  top: 100px;
   left: 40%;
   z-index: 12;
   background-color: white;
@@ -39,74 +40,87 @@ input:-webkit-autofill:active {
   transition: 1s all ease;
 }
 
-#slideLeft {
+#mc_slideLeft {
   position: absolute;
   bottom: 30px;
   left: 20px;
   font-size: 1.5rem;
 }
 
-#slideRight {
+#mc_slideRight {
   position: absolute;
   bottom: 30px;
   right: 20px;
   font-size: 1.5rem;
 }
 
-#slideLeft:hover,
-#slideRight:hover,
-#createClubBtn:hover,
-#createClub_close_btn:hover {
+#mc_slideLeft:hover,
+#mc_slideRight:hover {
   cursor: pointer;
 }
 
-#createClub {
+#modifyClub {
   position: absolute;
   bottom: 30px;
   right: 200px;
 }
 
-#createClubBtn {
+#modifyClubBtn {
   border: none;
   background-color: dimgray;
   color: white;
-  width: 100px;
+  width: 125px;
   height: 30px;
   display: none;
   transition: 1s all ease;
 }
 
-#createClub_close_btn i {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  z-index: 15;
-  font-size: 1.5rem;
-  color: var(--color1);
+#modifyClubBtn:hover {
+  cursor: pointer;
 }
 
-.createClub_container {
+#modifyClub_close_btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 15;
+  font-size: 1.5rem;
+}
+
+#modifyClub_close_btn i {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 15;
+  font-size: 1.5rem;
+}
+
+#modifyClub_close_btn:hover {
+  cursor: pointer;
+}
+
+.modifyClub_container {
   width: 2400px;
   height: 710px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-
   top: 0px;
   left: 0px;
+  z-index: 11;
   padding: 50px 0px 0px 0px;
   transition: all 1s ease;
 }
 
-.steps_wrap {
+.mc_steps_wrap {
   width: 100%;
   height: 15%;
   display: flex;
   padding: 10px 0px 10px 0px;
 }
 
-.steps_item_wrap {
+.mc_steps_item_wrap {
   width: 22%;
   /* border: 1px solid dimgray; */
   padding: 10px 10px 10px 10px;
@@ -126,29 +140,29 @@ hr {
   color: var(--bg-color);
 }
 
-.steps_item_title {
+.mc_steps_item_title {
   font-size: 0.75rem;
   font-weight: 700;
   color: dimgray;
 }
 
-.steps_item_detail {
+.mc_steps_item_detail {
   font-size: 0.85rem;
   font-weight: 900;
 }
 
-.contents_wrap {
+.mc_contents_wrap {
   height: 85%;
   width: 100%;
   display: flex;
 }
 
-.contents_item_wrap {
+.mc_contents_item_wrap {
   display: flex;
   width: 100%;
 }
 
-.contents_item {
+.mc_contents_item {
   width: 22%;
   height: 100%;
   padding: 10px 12.5px;
@@ -157,65 +171,75 @@ hr {
   align-items: flex-start;
 }
 
-.desc {
+.mc_desc {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 30px;
 }
 
-.title {
+.mc_title {
   font-size: 0.9rem;
   padding: 5px 0px;
 }
 
-.input {
+.mc_input {
   height: 40px;
   display: flex;
   align-items: center;
   padding: 10px 0px;
-  margin-bottom: 10px;
-}
-
-#cl_name, #cl_boss_id, #cl_boss_name, #cl_maxMem {
-  width: 500px;
-  height: 30px;
-  transition: 1s all ease;
-  padding: 0px 0px 0px 5px;
-}
-
-#cc-image-input {
-  width: 500px;
-  height: 30px;
-}
-
-input:focus {
-  outline: 1px solid var(--bg-color);
-}
-
-.cc_img_box {
-  width: 100%;
-  height: 40%;
-  border: 1px solid dimgray;
   margin-bottom: 20px;
 }
 
-.cc_img_box img {
+.mc_input_box {
+  width: 500px;
+  height: 30px;
+  transition: 1s all ease;
+  padding: 0px 10px;
+}
+
+.mc_input_box:focus {
+  outline: 1px solid var(--bg-color);
+}
+
+.mc_img_box {
+  width: 100%;
+  height: 40%;
+  border: 1px solid dimgray;
+}
+
+.mc_img_box img {
   width: 100%;
   height: 100%;
 }
 
-select {
-  width: 500px;
-  height: 30px;
-}
-
-.cc_map,
+.map,
 .dg-map {
   width: 500px;
   height: 500px;
 }
 
-.cc_city {
+.mc_city {
   fill: #ffffff;
+}
+
+.active {
+  fill: #424268;
+}
+
+.select_cl_local {
+  width: 500px;
+  height: 50px;
+}
+
+#cl_local {
+  width: 100%;
+  height: 35px;
+  text-align: center;
+}
+
+.mc_select_box {
+  width: 500px;
+  height: 30px;
+  padding: 0px 0px;
 }

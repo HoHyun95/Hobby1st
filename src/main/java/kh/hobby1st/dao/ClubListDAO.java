@@ -180,9 +180,16 @@ public class ClubListDAO {
 		map.put("end", String.valueOf(end));
 		
 		return mybatis.selectList("ClubList.ClubListByPaging",map);
-		
 	}
 	
+	//	회원 수 많은 동호회 TOP 30
+	public List<ClubListDTO> ClubListByTop30(int start, int end) {
+		Map<String,String> map = new HashMap<>();
+		
+		map.put("start", String.valueOf(start));
+		map.put("end", String.valueOf(end));
+		return mybatis.selectList("ClubList.ClubListByTop30", map);
+	}
 	
 	
 	

@@ -6,18 +6,22 @@
 <mapper namespace="calendar">
    <insert id="insert">
    insert into calendar values(#{club},#{day_start},
-   #{day_end},#{title})
+   #{day_end},#{title},#{memberWrite},#{detailWrite})
    </insert>
    
    	<select id="selectAll" resultType="kh.hobby1st.dto.CalendarDateDTO">
 		select*from calendar where club=#{club_cl_name}
 	</select>
 	
-	<select id="search" resultType="int">
-	    select count(*) from calendar where month=#{month} and &quot;date&quot;=#{date} and value=#{value}
+	<select id="selectAllDetail" resultType="kh.hobby1st.dto.CalendarDateDTO">
+	    select*from calendar where club=#{club_cl_name} and title=#{title}
 	</select>
 	
 	<delete id="delete">
 	    delete from calendar where club=#{club_cl_name} and title=#{title}
 	</delete>
+	
+	<update id="update">
+	    update calendar set memberwrite=#{member}, detailwrite=#{detail} where club=#{club_cl_name} and title=#{title}
+	</update>
 </mapper>

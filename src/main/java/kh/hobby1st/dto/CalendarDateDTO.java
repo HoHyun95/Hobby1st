@@ -41,13 +41,33 @@ public class CalendarDateDTO {
    private String day_end;
    private String title;
    
+   
+public String getMemberWrite() {
+	return memberWrite;
+}
+public void setMemberWrite(String memberWrite) {
+	this.memberWrite = memberWrite;
+}
+public String getDetailWrite() {
+	return detailWrite;
+}
+public void setDetailWrite(String detailWrite) {
+	this.detailWrite = detailWrite;
+}
+
+
+   private String memberWrite;
+   private String detailWrite;
+   
    public CalendarDateDTO() {}
-   public CalendarDateDTO(String club, String day_start, String day_end, String title) {
+   public CalendarDateDTO(String club, String day_start, String day_end, String title, String memberWrite, String detailWrite) {
 	   super();
 	   this.club = club;
 	   this.day_start = day_start;
 	   this.day_end = day_end;
 	   this.title = title;	   
+	   this.memberWrite = memberWrite;
+	   this.detailWrite = detailWrite;
    }
    
    

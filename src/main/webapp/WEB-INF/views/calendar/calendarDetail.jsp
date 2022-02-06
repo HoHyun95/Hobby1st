@@ -15,47 +15,75 @@
 </head>
 <body>
 <form action="delete" method="get">
- <table border=1 style="text-align:center">
+ <table border=1 style="text-align:center; hegiht:500px; width:500px">
+     <tr>
+      <td colspan=2><h1>이건 팝업창입니다!</h1>
+   </tr>
     <tr>
-      <td colspan=2> <input type="text" value="${club_cl_name }" name="club_cl_name" readonly>
+      <td> 동호회
+      <td>${list.club }
    </tr>
    <tr>
-      <td> 제목
-      <td> <input type="text" value="${title }" name="title" readonly>
+      <td> 스케줄 제목 
+      <td> ${list.title }
    </tr>
     <tr>
       <td> 시작날짜
-      <td> ${start }
+      <td> ${list.day_start }
    </tr>
-   <c:if test="${end != 'null' }">
+   <c:if test="${list.day_end != 'null' }">
     <tr>
        <td> 종료날짜
-       <td> ${end }
+       <td> ${list.day_end }
     </tr>
    </c:if>
    <tr>
       <td> 참여자
-      <td> <input type="text">
+      <td> <textarea style="resize:none; hegih:150px; width:300px" id="memberWrite">${list.memberWrite }</textarea>     
    </tr>
    <tr>
       <td> 스케줄세부내용
-      <td> <textarea style="resize: none;"></textarea>
+      <td> <textarea style="resize: none; hegiht:400px; width:300px" id="detailWrite">${list.detailWrite }</textarea>
    </tr>
     <tr>
-      <td colspan=2> <button type="button" id="delete">스케줄 삭제</button>
+      <td colspan=2> 
+      <button type="button" id="deleteWirte">스케줄 삭제</button>
+      <button type="button" id="insert">내용등록</button>
    </tr> 
  </table>
  </form>
 </body>
 <script>
-$("#delete").on("click",function() {
+// 삭제요청 
+$("#deleteWirte").on("click",function() {
 	$.ajax({
         type: "post",
-        url: "/calendar/delete?club_cl_name=${club_cl_name}",
-        data: {title:'${title}'}      
- 	});
+        url: "/calendar/delete?club_cl_name=${list.club}",
+        data: {title:'${list.title}'}      
+ 	})
 	alert("삭제성공!")
-	window.close();
+	opener.document.location.href="/calendar/do?club_cl_name=${list.club}"
+	self.close();
+	
+	//location.reload();
+	//window.close();
+	
+
+})
+
+//내용등록 update로 
+$("#insert").on("click",function() {
+	var detail = document.getElementById("detailWrite").value
+	var member = document.getElementById("memberWrite").value
+	
+	$.ajax({
+		type: "post",
+		url: "/calendar/insertDetail?club_cl_name=${list.club}",
+		data: {detail:detail, member:member, title:'${list.title}'}
+	})
+	alert("내용등록성공!")
+	opener.document.location.href="/calendar/do?club_cl_name=${list.club}"
+	self.close();
 })
 </script>
 </html>

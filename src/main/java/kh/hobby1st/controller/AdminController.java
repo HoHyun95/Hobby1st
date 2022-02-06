@@ -17,6 +17,7 @@ import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubListService;
 import kh.hobby1st.service.MemberAdminService;
 import kh.hobby1st.service.MemberService;
+import kh.hobby1st.service.NoticeAdminService;
 import kh.hobby1st.service.NoticeService;
 
 @Controller
@@ -43,6 +44,9 @@ public class AdminController {
 	
 	@Autowired
 	private MemberAdminService maService;
+	
+	@Autowired
+	private NoticeAdminService naService;
 	
 	
 	
@@ -110,11 +114,19 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/noticeAdmin")
-	public String notice(Model model) {
+	public String notice(int cpage, Model model) throws Exception{
 		
-		List<NoticeDTO> noticeList = ntService.selectAll();
+//		List<NoticeDTO> noticeList = ntService.selectAll();
+		List<NoticeDTO> noticeAllList = naService.selectBoardByPaging(cpage);
+		String navi = naService.getPageNavi(cpage);
+		int totalListCount = naService.getRecordCount();
 		
-		model.addAttribute("allNotice", noticeList);
+//		model.addAttribute("allNotice", noticeList);
+		
+		model.addAttribute("noticeAllList",noticeAllList);
+		model.addAttribute("cpage",cpage);
+		model.addAttribute("navi", navi);
+		model.addAttribute("totalListCount",totalListCount);
 		
 		return "admin/noticeAdmin";
 	}

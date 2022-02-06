@@ -26,7 +26,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="/css/footer.css">
   <title>
-    회원관리
+    동호회관리
   </title>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <!--     Fonts and icons     -->
@@ -77,6 +77,15 @@
             </div>
             <span class="nav-link-text ms-1">게시판관리</span>
           </a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="/admin/noticeAdmin?cpage=1">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">공지사항 관리</span>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-white " href="/admin/memberAdmin?cpage=1">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

@@ -167,6 +167,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white" href="/admin/noticeAdmin?cpage=1">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">공지사항 관리</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white " href="/admin/memberAdmin?cpage=1">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>

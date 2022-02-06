@@ -75,14 +75,24 @@ public class NoticeController {
 	}
 
 	// 공지사항 작성
-	@RequestMapping("/noticeInsert")
-	public String noticeInsert(NoticeDTO dto) {
+	/*
+	 * @RequestMapping("/noticeInsert") public String noticeInsert(NoticeDTO dto) {
+	 * 
+	 * dto.setNotice_writer((String) session.getAttribute("mem_id"));
+	 * notService.insert(dto);
+	 * 
+	 * return "redirect:/notice/noticeList?cpage=1"; }
+	 */
+	
+	// 공지사항  작성 (관리자)
+		@RequestMapping("/noticeInsert")
+		public String noticeInsertAdmin(NoticeDTO dto) {
 
-		dto.setNotice_writer((String) session.getAttribute("mem_id"));
-		notService.insert(dto);
+			dto.setNotice_writer((String) session.getAttribute("mem_id"));
+			notService.insert(dto);
 
-		return "redirect:/notice/noticeList?cpage=1";
-	}
+			return "redirect:/admin/noticeAdmin?cpage=1";
+		}
 
 
 	// 공지사항 상세페이지 이동

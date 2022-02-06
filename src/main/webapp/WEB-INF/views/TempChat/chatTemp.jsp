@@ -99,7 +99,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="message-box">
 					<div class="head-box-1">
 

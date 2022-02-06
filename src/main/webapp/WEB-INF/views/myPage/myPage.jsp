@@ -204,8 +204,8 @@
         <div class="profile_btn_area">
           <div class="profile_btn">
             <div class="btn_item">
-              <button type="button" id="mModifyform_btn"><i class="far fa-address-card"></i> 내 정보 수정 </button>
-              <button type="button" id="leave"> 회원 탈퇴 </button>
+              <button type="button" id="mModifyform_btn"><i class="far fa-address-card"> 내 정보 수정</i></button>
+              <button type="button" id="leave"><i class="fas fa-sign-out-alt"> 회원 탈퇴</i></button>
             </div>
           </div>
         </div>

@@ -110,9 +110,14 @@ public class MemberController {
 	@RequestMapping("signUp")
 	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
 			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
-
+		
+		System.out.println(mem_gender);
+		
 		// DB에 디폴트 값을 전달하기 위해 임의 설정		
-		String mem_lastlogin = "default";       
+		String mem_lastlogin = "default";
+		if(mem_photo.length == 0) {
+			System.out.println("비어있다.");
+		}
 		for(MultipartFile mf : mem_photo) {
 			try{
 				//서버 저장주소

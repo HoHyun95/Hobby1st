@@ -832,9 +832,6 @@
     <!-- container -->
     <div class="container">
       <div class="club_list_wrap">
-        <!-- <div class="no_search_result"> 
-          <div class="no_search_result_text"> 검색 결과가 없습니다.</div>
-        </div> -->
         <div class="club_list">
           <c:choose>
     		<c:when test="${sessionScope.mem_id eq null}">

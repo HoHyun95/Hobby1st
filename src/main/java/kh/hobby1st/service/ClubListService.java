@@ -136,8 +136,8 @@ public class ClubListService {
 	}
 
 	//	회원 수 많은 동호회 TOP 30
-	public List<ClubListDTO> ClubListByTop30() {
-		return cldao.ClubListByTop30();
+	public List<ClubListDTO> ClubListByTop30(int start, int end) {
+		return cldao.ClubListByTop30(start, end);
 	}
 
 }

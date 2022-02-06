@@ -86,7 +86,8 @@ public class HomeController {
 			List<ClubListDTO> clubList_interest = myService.clubList_interest(my_id);	
 			model.addAttribute("interestList", clubList_interest);
 		}
-
+		List<ClubListDTO> ClubListByTop5 = clService.ClubListByTop30(1, 5);
+		model.addAttribute("ClubListByTop5", ClubListByTop5);
 		model.addAttribute("list", map);
 		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("clmemCount", clmemCount);
@@ -264,6 +265,16 @@ public class HomeController {
 		return "news";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "showMore", produces = "application/json; charset=UTF-8")
+	public String showMore(int start, int end) {
+	  List<ClubListDTO> ClubListByTop5 = clService.ClubListByTop30(start, end);
+	  Gson g = new Gson();
+	  String result = g.toJson(ClubListByTop5);
+	  return result;
+	}
+	
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

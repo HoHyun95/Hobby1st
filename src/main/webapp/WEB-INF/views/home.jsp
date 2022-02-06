@@ -68,7 +68,7 @@
       let position = 0;
       let leftBtn = document.getElementById("leftBtn");
       let rightBtn = document.getElementById("rightBtn");
-      console.log(position);
+      
       leftBtn.onclick = () => {
         if (current_point > 0) {
     	  current_point -= MOVE_WIDTH;
@@ -89,56 +89,69 @@
       }
     
       // 더보기 
-      let maxCount = 30;
-      let listCount = 23;
-      if(maxCount > listCount) {
-        maxCount = listCount;
-      }
-      let count = 5;
+      let sm_start = 6;
+      let sm_end = 10;
       let target = 5;
+      let sm_total = 25;
       showMore.onclick = () => {
-        listCount -= 5;
-        if(listCount > 0 && listCount < 5) {
-          target = listCount % 5;
-        }
-
-        if (count <= maxCount-1) {
-          count += 5;
-
-          let div = document.querySelector(".fav_club_list_add_btn");
+    	$.ajax({
+          url: "/showMore?start=" + (sm_start) + "&end=" + (sm_end),
+          type: "get",
+          dataType: "json" 
+        }).done((res) => {  
+          if(res.length > 0 && res.length < 5) {
+            target = listCount % 5;
+          }
+          let div = document.querySelector(".fav_club_list_wrap");
           let div1 = document.createElement("div");
           div1.classList.add("fav_club_list_row");
-          let ul = document.createElement("ul");
-          ul.classList.add("fav_club_list");
 
           for (let i = 0; i < target; i++) {
-            let li = document.createElement("li");
-            li.classList.add("fav_club_list_item_wrap");
             let div2 = document.createElement("div");
-            div2.classList.add("fav_club_list_item");
-            let h2 = document.createElement("h2");
-            h2.innerText = "CLUB TITLE";
-            let b = document.createElement("b");
-            b.innerText = "CLUB OWNER";
-            let span1 = document.createElement("span");
-            span1.innerText = "CLUB LOC";
-            let span2 = document.createElement("span");
-            span2.innerText = "CLUB DESC";
-
-            div2.appendChild(h2);
-            div2.appendChild(b);
-            div2.appendChild(span1);
-            div2.appendChild(span2);
-            li.appendChild(div2);
-            ul.appendChild(li);
+            div2.classList.add("fav_club_list_item_wrap");
+            let div3 = document.createElement("div");
+            div3.classList.add("fav_club_list_item");
+          
+            let div4 = document.createElement("div");
+      	    div4.classList.add("badge");
+        	div4.id = "theme1";
+        	div4.innerHTML = (sm_start + i) + "위";
+        	   
+            let h3 = document.createElement("h3");
+        	      
+            let a = document.createElement("a");
+    	    a.href = "/clubHouse?cl_id=" + (res[i].cl_id);
+    	    a.innerHTML = res[i].cl_name;
+    	      
+    	    let h5_1 = document.createElement("h5");
+    	    h5_1.innerHTML = res[i].cl_boss_name;
+    	      
+    	    let h5_2 = document.createElement("h5");
+    	    h5_2.innerHTML = res[i].cl_local;
+    	      
+    	    let h5_3 = document.createElement("h5");
+    	    h5_3.innerHTML = res[i].cl_desc;
+                
+        	h3.appendChild(a);
+            div3.appendChild(div4);
+            div3.appendChild(h3);
+            div3.appendChild(h5_1);
+            div3.appendChild(h5_2);
+            div3.appendChild(h5_3);
+            div2.appendChild(div3);
+            div1.appendChild(div2);
           }
-          div1.appendChild(ul);
-          div.before(div1);
-        }
-        if(count >= maxCount) {
-          showMore.style.display = "none";
-        }
-      }
+          div.appendChild(div1);
+          sm_start += 5;
+          sm_end += target;
+  		  sm_total -= target;
+          showMore.value = sm_start + "위 ~ " + sm_end + "위 더보기";
+          
+          if(sm_total < 5) {
+            showMore.style.display = "none";
+          }
+        })
+      }  
       
    	  // 찜하기
       document.addEventListener("click", (event) => {
@@ -739,6 +752,17 @@
       </div>
     </div>
 
+    <!-- VOTE -->
+	<div class="vote_preview_title">
+      <div class="vote_preview_title_text">
+        <h4>VOTE</h4>
+      </div>
+    </div>
+	<div class="vote_preview">
+	  VOTE CONTENTS
+	</div>
+    <!-- VOTE END -->
+
     <div class="container">
       <div class="fav_club_list_title">
         <div class="fav_club_list_title_text">
@@ -747,55 +771,25 @@
       </div>
       <div class="fav_club_list_wrap">
         <div class="fav_club_list_row">
-          <ul class="fav_club_list">
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-            <li class="fav_club_list_item_wrap">
-              <div class="fav_club_list_item">
-                <h2>CLUB TITLE</h2>
-                <b>CLUB OWNER</b>
-                <span>CLUB LOC</span>
-                <p>CLUB DESC</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="fav_club_list_add_btn">
-          <input type="button" value="더보기" id="showMore">
+          <c:forEach var="Clt5" items="${ClubListByTop5 }" varStatus="status">
+          <div class="fav_club_list_item_wrap">
+            <div class="fav_club_list_item">
+              <div class="badge" id="theme1">${status.count }위</div>
+              <h3><a href="/clubHouse?cl_id=${Clt5.cl_id }">${Clt5.cl_name }</a></h3>
+              <h5>${Clt5.cl_boss_name}</h5> 
+              <h5>${Clt5.cl_local }</h5>
+              <h5>${Clt5.cl_desc }</h5>
+            </div>
+          </div>
+          </c:forEach>
         </div>
       </div>
+
+      <div class="fav_club_list_add_btn">
+        <input type="button" value="6위 ~ 10위 더보기" id="showMore">
+      </div>
     </div>
+
     <div class="footer">
       <div class="footer_inner">
         <div class="footer_logo">

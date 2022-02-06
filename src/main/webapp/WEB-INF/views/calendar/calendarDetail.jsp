@@ -21,33 +21,33 @@
    </tr>
     <tr>
       <td> 동호회
-      <td>${club_cl_name }
+      <td>${list.club }
    </tr>
    <tr>
       <td> 스케줄 제목 
-      <td> ${title }
+      <td> ${list.title }
    </tr>
     <tr>
       <td> 시작날짜
-      <td> ${start }
+      <td> ${list.day_start }
    </tr>
-   <c:if test="${end != 'null' }">
+   <c:if test="${list.day_end != 'null' }">
     <tr>
        <td> 종료날짜
-       <td> ${end }
+       <td> ${list.day_end }
     </tr>
    </c:if>
    <tr>
       <td> 참여자
-      <td> <input type="text" id="member" placeholder="셀렉으로하는게 좋을까요?">
+      <td> <textarea style="resize:none; hegih:150px; width:300px" id="memberWrite">${list.memberWrite }</textarea>     
    </tr>
    <tr>
       <td> 스케줄세부내용
-      <td> <textarea style="resize: none; hegiht:400px; width:300px" id="detail"></textarea>
+      <td> <textarea style="resize: none; hegiht:400px; width:300px" id="detailWrite">${list.detailWrite }</textarea>
    </tr>
     <tr>
       <td colspan=2> 
-      <button type="button" id="delete">스케줄 삭제</button>
+      <button type="button" id="deleteWirte">스케줄 삭제</button>
       <button type="button" id="insert">내용등록</button>
    </tr> 
  </table>
@@ -55,30 +55,35 @@
 </body>
 <script>
 // 삭제요청 
-$("#delete").on("click",function() {
+$("#deleteWirte").on("click",function() {
 	$.ajax({
         type: "post",
-        url: "/calendar/delete?club_cl_name=${club_cl_name}",
-        data: {title:'${title}'}      
+        url: "/calendar/delete?club_cl_name=${list.club}",
+        data: {title:'${list.title}'}      
  	})
-	alert("삭제성공!??? 새로고침하세요")
-	window.close();
+	alert("삭제성공!")
+	opener.document.location.href="/calendar/do?club_cl_name=${list.club}"
+	self.close();
+	
+	//location.reload();
+	//window.close();
 	
 
 })
 
-//내용 이너조인으로 등록
+//내용등록 update로 
 $("#insert").on("click",function() {
-	var detail = document.getElementById("detail").value
-	var member = document.getElementById("member").value
+	var detail = document.getElementById("detailWrite").value
+	var member = document.getElementById("memberWrite").value
 	
 	$.ajax({
 		type: "post",
-		url: "/calendar/insertDetail?club_cl_name=${club_cl_name}",
-		data: {detail:detail, member:member}
+		url: "/calendar/insertDetail?club_cl_name=${list.club}",
+		data: {detail:detail, member:member, title:'${list.title}'}
 	})
 	alert("내용등록성공!")
-	window.close();
+	opener.document.location.href="/calendar/do?club_cl_name=${list.club}"
+	self.close();
 })
 </script>
 </html>

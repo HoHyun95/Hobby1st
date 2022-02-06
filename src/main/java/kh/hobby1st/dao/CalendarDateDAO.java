@@ -26,13 +26,12 @@ public class CalendarDateDAO {
 		return mybatis.selectList("calendar.selectAll", club_cl_name);
 	}
 	
-	//캘린더에 중복 스케줄이 있는지 확인
-	public int search(String month, String value, String date) {
+	//캘린더 디테일 페이지 출력
+	public CalendarDateDTO selectAllDetail(String club_cl_name, String title) {
 		Map<String, String> map = new HashMap<>();
-		map.put("month", month);
-		map.put("date", date);
-		map.put("value", value);
-		return mybatis.selectOne("calendar.search", map);
+		map.put("club_cl_name", club_cl_name);
+		map.put("title", title);
+		return mybatis.selectOne("calendar.selectAllDetail", map);
 	}
 	//캘린더내 중복 스케줄 삭제
 	public int delete(String club_cl_name, String title) {
@@ -40,6 +39,18 @@ public class CalendarDateDAO {
 		map.put("club_cl_name", club_cl_name);
 		map.put("title", title);
 		return mybatis.selectOne("calendar.delete", map);
+	}
+	
+	//세부스케줄 update로 추가 
+	public int update(String club_cl_name, String title, String member, String detail) {
+		Map<String, String> map = new HashMap<>();
+		map.put("club_cl_name", club_cl_name);
+		map.put("title", title);
+		map.put("member", member);
+		map.put("detail", detail);
+		return mybatis.update("calendar.update", map);
+		
+		
 	}
 }
 

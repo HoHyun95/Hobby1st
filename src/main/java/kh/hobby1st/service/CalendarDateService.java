@@ -23,11 +23,15 @@ public class CalendarDateService {
 		 return dao.selectAll(club_cl_name);
 	 }
 	 
-	 public int search(String month, String value, String date) {
-		 return dao.search(month, value, date);
+	 public CalendarDateDTO selectAllDetail(String club_cl_name, String title) {
+		 return dao.selectAllDetail(club_cl_name, title);
 	 }
 	 
 	 public int delete(String club_cl_name, String title) {
 		 return dao.delete(club_cl_name, title);
+	 }
+	 
+	 public int update(String club_cl_name, String title, String member, String detail) {
+		 return dao.update(club_cl_name, title, member, detail);
 	 }
 }

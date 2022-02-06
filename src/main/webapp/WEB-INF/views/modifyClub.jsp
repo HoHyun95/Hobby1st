@@ -61,6 +61,7 @@
             </div>
             <div class="mc_title">
               <i class="fas fa-users"> 동호회명</i>
+              <input type="hidden" name="cl_id" value="${club.cl_id }">
             </div>
             <div class="mc_input">
               <input type="text" id="cl_name" maxlength="30" name="cl_name"  class="mc_input_box" value="${club.cl_name }">

@@ -141,5 +141,12 @@
 		select * from (select club_list.*, row_number() over(order by cl_id desc) rn from club_list) where rn between ${start} and #{end}
 	</select>
 	
+	<!-- 회원 수 많은 동호회 TOP 30 -->
+	<select id="ClubListByTop30" resultType="kh.hobby1st.dto.ClubListDTO">
+		select * from (select club_list.*, row_number() over (order by cl_memcount desc) rn from club_list) where rn between 1 and 30
+	</select>
+	
+	
+	
 	
 </mapper>

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,33 +60,41 @@ public class CalendarController {
 	  }
 	  
 	  //메인 캘린더에서 스케줄 클릭시 디테일 jsp로 이동
+//	  @DateTimeFormat(pattern = "yyyy-MM-dd")
 	  @RequestMapping(value = "calendarDetail")
 	  public String detail(Model model, String title, String club_cl_name, String start, String end) {
-		  //자바언어로 시간변경
-			/*
-			 * SimpleDateFormat simpleDateFormat = new
-			 * SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); String update_start =
-			 * simpleDateFormat.format(start);
-			 */
+		 //자바언어로 시간변경			
+//		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+//		 String update_start = simpleDateFormat.format(start);
+//		 String update_end = simpleDateFormat.format(end);
+		  
+		  //자바언어 변경이 안되서 출력결과물을 제거했습니다. 
+          String change_start = start.substring(0,15);
+          String change_end = end.substring(0,15);		  
+		  
 		  model.addAttribute("club_cl_name", club_cl_name);
 		  model.addAttribute("title", title);
-		  model.addAttribute("start", start);
-		  model.addAttribute("end",end);
+		  model.addAttribute("start", change_start);
+		  model.addAttribute("end",change_end);
 		  return "/calendar/calendarDetail"; 
 	  }
-	  
+	     //팝업창에서 스케줄 삭제를 누를 시
          @ResponseBody
 		 @RequestMapping(value = "delete", method = RequestMethod.POST) 
          public String delete(String title, String club_cl_name) { 
          int result = cal_service.delete(club_cl_name, title); 
          return "pageJsonReport";
        }
+         //팝업창에서 스케줄 내용등록을 할 시
+         @ResponseBody
+		 @RequestMapping(value = "insertDetail", method = RequestMethod.POST) 
+         public String insertDetail(String detail, String member, String club_cl_name) { 
+         System.out.println(detail + member + club_cl_name); 
+         return "pageJsonReport";
+       }
 } 
-	  
-	  
-	  
-	  
-	  
+
+
 		/*
 		 * @RequestMapping("delete") public String delete(String title, String
 		 * club_cl_name) { int result = cal_service.delete(club_cl_name, title); return

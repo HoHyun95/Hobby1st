@@ -659,7 +659,7 @@
             <div class="clubHouse_menu_list_item" id="clubIntro">동호회 소개</div>
             <div class="clubHouse_menu_list_item" id="club_member_list">회원 목록</div>
             <div class="clubHouse_menu_list_item" id="club_board">게시판</div>
-            <div class="" id="club_chat">채팅</div>
+            <div class="clubHouse_menu_list_item" id="club_chat">채팅</div>
           </div>
         </div>
       </div>

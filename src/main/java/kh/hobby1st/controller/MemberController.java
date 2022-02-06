@@ -227,7 +227,54 @@ public class MemberController {
 	//		}
 	//		return "redirect: /";
 	//	}	
+	
+	// 회원 정보 수정
+	@RequestMapping("mModify")
+	public String mModify(MemberDTO dto, MultipartFile file, Model model) throws Exception {
+		
+		System.out.println(dto.getMem_pass());
+		System.out.println(dto.getMem_nickname());
+		System.out.println(dto.getMem_phone());
+		System.out.println(dto.getMem_email());
+		System.out.println(dto.getMem_address());
+		System.out.println(dto.getMem_category_1());
+		System.out.println(dto.getMem_category_2());
+		
+		dto.setMem_id((String)session.getAttribute("mem_id"));
+		
+		System.out.println("파일 : " + file); 
+		System.out.println(dto.getMem_id());
 
+		String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
+
+		File realPathFile = new File(realPath);
+
+		if (!realPathFile.exists()) {
+			realPathFile.mkdir();
+		}
+		
+		System.out.println("A : " + file.getOriginalFilename());
+		
+		int result = 0;
+		
+		if (!file.isEmpty()) {
+
+			String photoName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+			System.out.println(photoName);
+
+			file.transferTo(new File(realPath + "/" + photoName));
+			dto.setMem_photo("/upload/profile/" + photoName);
+			result = mem_service.modifyMember(dto);
+		}else {
+			result = mem_service.modifyMemberP(dto);
+		}
+		
+		model.addAttribute("result",result);
+		return "redirect:/myPage";
+	}
+	
+	
+	
 }
 
 

@@ -45,14 +45,18 @@
         locale: 'ko',
         //이벤트가 추가되면 발생하는 이벤트
         eventAdd: function(arg) {
-            console.log(arg.event);
+        	//window.open(arg.event.url);
+            console.log(arg.event.title);
         },
         
-        //이벤트 삭제
+        //이벤트 제목을 선택했을시
         eventClick: function(arg){
         	console.log(arg.event.title);
-            
-        	if(confirm("정말로 삭제하시겠습니까?")){
+        	console.log(arg.event.start)
+        	window.open("/calendar/calendarDetail?title="+arg.event.title+"&end="+arg.event.end+"&start="+arg.event.start+"&club_cl_name=${club_cl_name}","PopupWin","toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+        	
+        	//프론트에서 에이작스로 삭제요청
+/*         	if(confirm("정말로 삭제하시겠습니까?")){
              	$.ajax({
                     type:"post",
                     url:"${path}/calendar/delete?club_cl_name=${club_cl_name}",
@@ -60,7 +64,7 @@
                     {title:arg.event.title}
              	});
                 arg.event.remove();
-        	}
+        	} */
         },
         
         select: function(arg) {
@@ -91,16 +95,16 @@
         	{
         		  title : "${item.title}",
         		  start : "${item.day_start}",
-        		  end : "${item.day_end}"
+        		  end : "${item.day_end}",
         	},
     		</c:forEach>
 
         	{
         		title : "이충재생일",
         		start : "2022-01-19 09:00:00",
-        		end : "2022-01-19 09:30:00"
+        		end : "2022-01-19 09:30:00",
         	} 
-        ]  
+        ]
 
     });
     calendar.render();
@@ -108,7 +112,6 @@
 </script>
 </head>
  <body>
-  <div id='calendar'>
-  </div>
+  <div id='calendar'></div>
  </body>
 </html>

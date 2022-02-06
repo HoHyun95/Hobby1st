@@ -513,7 +513,7 @@
 		let name = "${memberInfo.mem_name }";
 		let out = name + "님 정말 탈퇴하시겠습니까 ?"
 		if (confirm(out)) {
-			location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h + "&mem_name=" + name_h;
+			location.href = "/member/leave";
 			return true;
 		} else {
 			return false;

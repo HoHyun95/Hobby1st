@@ -135,6 +135,10 @@ public class ClubJoinStateDAO {
 		return mybatis.update("JoinState.breakClubState", club_seq);
 	}
 	
+	//	회원 탈퇴시 상태 정보 삭제
+	public int leaveMemberState(String cs_join_id) {
+		return mybatis.delete("JoinState.leaveMemberState", cs_join_id);
+	}
 	
 	
 	

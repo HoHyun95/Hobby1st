@@ -122,5 +122,10 @@ public class ClubJoinStateService {
 	public int joinCencel(String mem_id, int cb_seq) {
 		return csDao.deleteJoinState(mem_id, cb_seq);
 	}
+	
+//	회원 탈퇴시 상태 정보 삭제
+	public int leaveMemberState(String cs_join_id) {
+		return csDao.leaveMemberState(cs_join_id);
+	}
 
 }

@@ -12,12 +12,12 @@
   
   	<!-- 가입신청한 회원 정보 리스트 -->
   	<select id="joinMemberInfo" resultType="kh.hobby1st.dto.MemberDTO">
-  		select m.* from (select * from club_join_state where cs_boss_id = #{value} and cs_state=1) s join member m on (s.cs_join_id = m.mem_id)
+  		select m.* from (select * from club_join_state where cs_boss_id = #{value} and cs_state=1) s join member m on (s.cs_join_id = m.mem_id) order by s.cs_date desc
   	</select>
   	
   	<!-- 가입신청된 동호회 정보 리스트 -->
   	<select id="joinClubInfo" resultType="kh.hobby1st.dto.ClubListDTO">
-  		select c.* from (select * from club_join_state where cs_boss_id = #{value} and cs_state=1) s join club_list c on (s.cs_board_seq  = c.cl_id)
+  		select c.* from (select * from club_join_state where cs_boss_id = #{value} and cs_state=1) s join club_list c on (s.cs_board_seq  = c.cl_id) order by s.cs_date desc
   	</select>
   	
   	<!-- 동호회 가입 승인 -->
@@ -84,5 +84,11 @@
   	<update id="breakClubState">
   		update club_join_state set cs_state = 4 where cs_board_seq = #{value}
   	</update>
+  	
+  	<!-- 회원 탈퇴시 상태 정보 삭제 -->
+  	<delete id="leaveMemberState">
+  		delete from club_join_state where cs_join_id = #{value}
+  	</delete>
+  	
   	
   </mapper>

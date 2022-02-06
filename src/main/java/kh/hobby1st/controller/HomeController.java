@@ -273,15 +273,18 @@ public class HomeController {
 	  String result = g.toJson(ClubListByTop5);
 	  return result;
 	}
-	
-	
+
+	// Interceptor Error 
+	@RequestMapping("error")
+	public String error() {
+		return "error";
+	}
+
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		System.out.println("예외 처리 코드가 실행되었습니다.");
 		return "error";
 	}
-
-
 
 }

@@ -44,6 +44,8 @@ public class AdminController {
 	@Autowired
 	private MemberAdminService maService;
 	
+	
+	
 	@RequestMapping("/admin/clubAdmin")
 	public String clubAdmin(int cpage, Model model) throws Exception{
 		

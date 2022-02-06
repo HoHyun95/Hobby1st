@@ -175,7 +175,7 @@
                         <span class="text-secondary text-xs font-weight-bold">${dto.cl_rec_count }</span>
                       </td>
                       <td class="align-middle text-center">
-                        <button class="breakClub${dto.cl_id } text-secondary font-weight-bold text-xs">탈퇴</button>
+                        <button class="breakClub${dto.cl_id } text-secondary font-weight-bold text-xs">해체</button>
                       </td>
                      
                    

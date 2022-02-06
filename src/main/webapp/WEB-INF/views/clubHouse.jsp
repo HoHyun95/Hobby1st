@@ -29,7 +29,8 @@
       let sign_up = document.getElementById("sign_up");
       let main_bg_inner_bottom_list = document.querySelector(".main_bg_inner_bottom_list");
       let showMore = document.getElementById("showMore");
-
+      let modal_bg = document.querySelector(".modal_bg");
+      
       loginform_btn.onclick = () => {
         let modal_bg = document.querySelector(".modal_bg");
         let loginForm = document.querySelector(".loginForm");
@@ -157,10 +158,8 @@
       let signUp_container = document.querySelector(".signUp_container");
       let signUp_MOVE_WIDTH = 528;
       let signUp_position = 0;
-      
+      let signUp_wrap = document.querySelector(".signUp_wrap");
       signupform_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let signUp_wrap = document.querySelector(".signUp_wrap");
         modal_bg.style.zIndex = 10;
         modal_bg.style.display = "flex";
         signUp_wrap.style.zIndex = 11;
@@ -168,8 +167,6 @@
       }
       
       signUp_close_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let signUp_wrap = document.querySelector(".signUp_wrap");
         modal_bg.style.zIndex = -1;
         modal_bg.style.display = "none";
         signUp_wrap.style.zIndex = -1;
@@ -447,6 +444,102 @@
         signUp_wrap.style.zIndex = -1;
         signUp_wrap.style.display = "none";
       }
+      
+      // 동호회 정보 변경
+      let modifyClub_wrap = document.querySelector(".modifyClub_wrap");
+      
+      controlClub.onclick = () => {
+    	modal_bg.style.zIndex = 10;
+        modal_bg.style.display = "flex";
+        modifyClub_wrap.style.zIndex = 12;
+        modifyClub_wrap.style.display = "flex";
+      }
+      
+      modifyClub_close_btn.onclick = () => {
+     	modal_bg.style.zIndex = -1;
+        modal_bg.style.display = "none";
+        modifyClub_wrap.style.zIndex = -1;
+        modifyClub_wrap.style.display = "none";	  
+      }
+      
+      let modifyClubBtn = document.getElementById("modifyClubBtn");
+      let mc_slideLeft = document.getElementById("mc_slideLeft");
+      let mc_slideRight = document.getElementById("mc_slideRight");
+      let modifyClub_container = document.querySelector(".modifyClub_container");
+      let mc_MOVE_WIDTH = 528;
+      let mc_position = 0;
+
+      let mc_current_point = 0;
+
+      let mc_end_point = mc_MOVE_WIDTH * 3;
+
+      if (mc_current_point == 0) {
+        mc_slideLeft.style.display = "none";
+      }
+
+      if (mc_current_point == mc_end_point) {
+        mc_slideRight.style.display = "none";
+      }
+
+      mc_slideRight.onclick = () => {
+        mc_current_point += mc_MOVE_WIDTH;
+        if (mc_current_point == mc_end_point) {
+          mc_slideRight.style.display = "none";
+          modifyClubBtn.style.display = "inline";
+          mc_slideLeft.style.display = "inline";
+        } else if (mc_current_point > 0) {
+          mc_slideLeft.style.display = "inline";
+          modifyClubBtn.style.display = "none";
+        }
+        mc_position -= mc_MOVE_WIDTH;
+        modifyClub_container.style.transform = "translateX(" + (mc_position) + "px)";
+      }
+
+      mc_slideLeft.onclick = () => {
+        mc_current_point -= mc_MOVE_WIDTH;
+        if (mc_current_point == 0) {
+          mc_slideLeft.style.display = "none";
+          mc_slideRight.style.display = "inline";
+          modifyClubBtn.style.display = "none";
+        } else if (mc_current_point < mc_end_point) {
+          mc_slideRight.style.display = "inline";
+          modifyClubBtn.style.display = "none";
+        }
+        mc_position += mc_MOVE_WIDTH;
+        modifyClub_container.style.transform = "translateX(" + (mc_position) + "px)";
+      }
+
+      let mc_city = document.querySelectorAll(".mc_city");
+      const mc_cities = [...mc_city];
+
+      document.addEventListener("change", (e) => {
+        for (let i = 0; i < mc_cities.length; i++) {
+          if (e.target.value == mc_cities[i].id) {
+            mc_cities[i].classList.add("active");
+            console.log(e.target);
+          } else {
+            mc_cities[i].classList.remove("active");
+          }
+        }
+      })
+
+      const mc_previewImage = document.getElementById("mc_preview_img");
+
+      function readImage(input) {
+        if (input.files && input.files[0]) {
+          const mc_reader = new FileReader()
+          mc_reader.onload = e => {
+        	  mc_previewImage.src = e.target.result;
+          }
+          mc_reader.readAsDataURL(input.files[0])
+        }
+      }
+
+      const mc_inputImage = document.getElementById("mc-input-image");
+      mc_inputImage.addEventListener("change", e => {
+        readImage(e.target)
+      });
+      
     }
   </script>
 </head>
@@ -647,7 +740,7 @@
 	        <div class="club_board_title_text">${club.cl_name } 동호회 게시판</div>
 	      </div>
 	      <div class="club_board_item_wrap">
-          	<jsp:include page="clubBoard/boardList.jsp"></jsp:include>
+          	
           </div>
         </div>
         <!-- 동호회 채팅 -->
@@ -712,16 +805,17 @@
     		}
     	})
     	
-    	document.querySelector('#controlClub').addEventListener('click', () => {
+    	/* document.querySelector('#controlClub').addEventListener('click', () => {
     		location.href ="/clubList/modifyClubPage?cl_id=${club.cl_id}";
-    	})
+    	}) */
     	
     	
     </script>
     <jsp:include page="signUp.jsp"></jsp:include>
+    <!-- 동호회 정보 변경 -->
+    <jsp:include page="modifyClub.jsp"></jsp:include>
     
-    
-    
+
 </body>
 
 </html>

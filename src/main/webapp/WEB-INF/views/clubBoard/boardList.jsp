@@ -7,11 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-	
 <style>
 
 	.title:hover {

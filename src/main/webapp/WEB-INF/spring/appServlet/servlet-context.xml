@@ -42,6 +42,36 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Member Session  -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/myPage/myPage"/>
+			<mapping path="/clubBoard/boardWrite"/>
+			<mapping path="/clubBoard/modifyBoard"/>
+			<mapping path="/member/mModify"/>
+			<mapping path="/member/logout" />
+			<beans:bean class="kh.hobby1st.interceptor.Interceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<!-- Admin Session  -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<mapping path="/notice/noticeWrite" />
+			<mapping path="/notice/noticeInsert" />
+			<mapping path="/notice/deleteNotice" />
+			<mapping path="/notice/deleteNoticeAdmin" />
+			<mapping path="/notice/modifyNotice" />
+			<mapping path="/qna/qnaWrite" />
+			<mapping path="/qna/deleteQna" />
+			<mapping path="/qna/modifyQna" />
+			<mapping path="/faq/faqWrite" />			
+			<beans:bean class="kh.hobby1st.interceptor.AdminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	
 	<context:component-scan base-package="kh.hobby1st" />
 	
 	<aop:aspectj-autoproxy/>

@@ -59,7 +59,7 @@ public void setQna_view_count(int qna_view_count) {
 }
 
 public String getFormDate() {
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.DD");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 	return sdf.format(this.getQna_write_date());
 }	
 public String getDetailDate() {

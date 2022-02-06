@@ -41,7 +41,8 @@ public class ChatController {
 	private void renewalChat(ChatDTO dto, Model model) {
 
 		// 어느 동호회의 채팅인지 알기위해 동호회 번호 가져온다. 
-		String cl_id = "47";
+		String cl_id = String.valueOf(dto.getChat_cl_id());
+		System.out.println(cl_id);
 		// 상세 동호회의 채팅이므로, 동호회 ID 가져와서 해당 동호회의 채팅인 것을 알려야한다.
 
 
@@ -57,6 +58,7 @@ public class ChatController {
 		// Login ID 를 통해 로그인한 멤버의 정보를 가져온다.
 
 		List<ChatDTO> chatList = chatService.chatSelectAll(cl_id);
+	
 		
 		// 동호회 멤버의 프로필 사진이 포함 된 채팅 전체
 		

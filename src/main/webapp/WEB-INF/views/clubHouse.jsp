@@ -659,7 +659,7 @@
             <div class="clubHouse_menu_list_item" id="clubIntro">동호회 소개</div>
             <div class="clubHouse_menu_list_item" id="club_member_list">회원 목록</div>
             <div class="clubHouse_menu_list_item" id="club_board">게시판</div>
-            <div class="clubHouse_menu_list_item" id="club_chat">채팅</div>
+            <div class="" id="club_chat">채팅</div>
           </div>
         </div>
       </div>
@@ -745,7 +745,13 @@
         </div>
         <!-- 동호회 채팅 -->
         <div class="club_chat_wrap">
-             동호회 채팅
+             <button id="test">동호회 채팅</button>
+             <script>
+             $('#test').on('click', () => {
+            	 location.href="/chat/clubChat?chat_cl_id="+${club.cl_id};
+             })
+             
+             </script>
         </div>  
       </div>
     </div>

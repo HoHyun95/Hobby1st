@@ -66,5 +66,10 @@
 		select * from (select member.*, row_number() over(order by mem_id desc) rn from member) where rn between ${start} and #{end}
 	</select>
 	
+	<!-- 회원 탈퇴 -->
+	<delete id="leaveMember">
+		delete from member where mem_id = #{value}
+	</delete>
+	
 	
 </mapper>

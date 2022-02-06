@@ -260,6 +260,11 @@ public class HomeController {
 		return "news";
 	}
 
+	@RequestMapping("error")
+	public String error() {
+		return "error";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

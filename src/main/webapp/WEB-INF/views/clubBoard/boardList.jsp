@@ -7,12 +7,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+	rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <style>
-
+    
 	.title:hover {
 		color: rgb(231, 75, 55);
 	}
-
 
 </style>
 	
@@ -21,15 +33,6 @@
 
 
 <body>
-
-	<!-- 글쓰기 버튼 -->
-	<div class="btn">
-		<div style="text-align: right; width: 85%;">
-			<button type="button" id="writeBtn"
-				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-1.5"
-				style="margin-right: 10px; margin-top: 10px;">글쓰기</button>
-		</div>
-	</div>
 
 	<!-- 게시판 -->
 	<div class="board" style="width: 100%; height: 100%; margin: auto;">
@@ -42,17 +45,17 @@
 				<table class="w-full">
 					<thead>
 						<tr class="text-gray-800 border border-b-0 text-center">
-							<th colspan="6" class="px-4 py-3" style="width: 100%;"># 동호회 게시판
+							<th colspan="6" class="px-4 py-3 text-center" style="width: 100%;" ># 동호회 게시판
 						</tr>
 
 						<!-- 게시판 상단 목차 -->
-						<tr class="text-gray-800 border border-b-0 text-center text-sm">
-							<th class="px-4 py-3 w-1/12">#</th>
-							<th class="px-4 py-3 w-7/12">제목</th>
-							<th class="px-4 py-3 w-1/12">작성자</th>
-							<th class="px-4 py-3 w-1/12">등록일</th>
-							<th class="px-4 py-3 w-1/12">조회수</th>
-							<th class="px-4 py-3 w-1/12">추천</th>
+						<tr class="text-gray-800 border border-b-0 text-center">
+							<th class="px-4 py-3 w-1/12 text-center">#</th>
+							<th class="px-4 py-3 w-7/12 text-center">제목</th>
+							<th class="px-4 py-3 w-1/12 text-center">작성자</th>
+							<th class="px-4 py-3 w-1/12 text-center">등록일</th>
+							<th class="px-4 py-3 w-1/12 text-center">조회수</th>
+							<th class="px-4 py-3 w-1/12 text-center">추천</th>
 						</tr>
 					</thead>
 
@@ -60,7 +63,7 @@
 					<tbody>
 						<c:forEach var="dto" items="${clubBoardList }" varStatus="status">
 							<tr
-								class="w-full font-light text-gray-700 bg-gray-50 whitespace-no-wrap border border-b-0 text-sm hover:bg-gray-200">
+								class="w-full font-light text-gray-700 bg-gray-50 whitespace-no-wrap border border-b-0 hover:bg-gray-200">
 								<td class="px-4 py-4 text-center">${totalBoardCount - ((cpage-1) * 10) - status.index}</td>
 
 										<td class="title px-4 py-4" style="cursor: pointer;"  onclick="location.href='/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
@@ -84,7 +87,7 @@
 	</div>
 
 	<!-- 게시판 페이징 밑 글쓰기 -->
-		<div class="footer" style="width: 70%; height:60px; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
+		<div class="footer" style="width: 100%; height:100px; background-color: rgba(224, 223, 223, 0.288); margin: auto;">
 			<div class="navi" style="text-align : center; line-height: 60px">
 				${navi }
 				<button type="button" id="writeBtn"
@@ -96,10 +99,6 @@
 			
 		</div>
 
-
-		
-
-
 		<!-- 검색 기능 -->
 		<form method="post"
 			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=2">
@@ -109,7 +108,7 @@
 
 					<!-- 검색 조건 -->
 					<select name="keyword"
-						class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 w-auto">
+						class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 pl-3 pr-10 w-auto">
 						<option>제목</option>
 						<option>작성자</option>
 					</select> <input type="hidden" name="cpage" value="${cpage }">
@@ -125,12 +124,11 @@
                 relative
                 bg-white bg-white
                 rounded
-                text-sm
                 border border-gray-400
                 outline-none
                 focus:outline-none focus:ring
                 w-5/12
-                h-10
+                h-18
               " />
 
 					<!-- 검색 버튼 -->
@@ -153,7 +151,7 @@
 	
 	<script>
 	// 페이징 스타일
-	$(".paging").addClass("text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold text-xs px-4 py-2 rounded transition-all duration-150");
+	$(".paging").addClass("text-black-500 hover:bg-gray-500 hover:text-white font-bold px-4 py-2 rounded transition-all duration-150");
 	
 	
 		$("#writeBtn").on("click", function() {

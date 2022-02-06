@@ -659,9 +659,13 @@
       <div class="clubHouse_contents">
         <!-- 동호회 소개 -->
         <div class="clIntro_wrap">
+          <div class="cm_list_title">
+	        <div class="cm_list_title_text">${club.cl_name } 동호회 일정</div>
+	      </div>
           <div class="clIntro_box">
-               <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a>
                <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
+               <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
+               <iframe src="/calendar/do?club_cl_name=${club.cl_name }"></iframe>
           </div>
         </div> 
         
@@ -733,18 +737,19 @@
 	        <div class="club_board_title_text">${club.cl_name } 동호회 게시판</div>
 	      </div>
 	      <div class="club_board_item_wrap">
-          	
+          	<iframe src="/clubBoard/boardList?cpage=1" scrolling = "no"></iframe>
           </div>
         </div>
         <!-- 동호회 채팅 -->
         <div class="club_chat_wrap">
-             <button id="test">동호회 채팅</button>
+          <iframe src="/chat/clubChat?chat_cl_id=${club.cl_id}" scrolling = "no"></iframe>
+             <!-- <button id="test">동호회 채팅</button>
              <script>
              $('#test').on('click', () => {
             	 location.href="/chat/clubChat?chat_cl_id="+${club.cl_id};
              })
              
-             </script>
+             </script> -->
         </div>  
       </div>
     </div>

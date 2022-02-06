@@ -212,6 +212,7 @@
           <div class="profile_btn">
             <div class="btn_item">
               <button type="button" id="mModifyform_btn"><i class="far fa-address-card"></i> 내 정보 수정 </button>
+              <button type="button" id="leave"> 회원 탈퇴 </button>
             </div>
           </div>
         </div>
@@ -506,6 +507,19 @@
 		 
 		location.href = "/club/joinRefuse?cs_board_seq=" + cl_id + "&cs_join_id=" + mem_id;
 	 })
+	 
+	// 회원 탈퇴
+	$("#leave").on("click", function() {
+		let name = "${memberInfo.mem_name }";
+		let out = name + "님 정말 탈퇴하시겠습니까 ?"
+		if (confirm(out)) {
+			location.href = "/clubMember/deleteMember?cpage=${cpage }&mem_id=" + id_h + "&mem_name=" + name_h;
+			return true;
+		} else {
+			return false;
+		}
+	 })
+	
 	 
 
   	

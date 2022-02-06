@@ -196,7 +196,7 @@
         <div class="profile_contents_area">
           <div class="profile_photo_area">
             <div class="profile_photo">
-              <img src="images/default.jpg">
+              <img src="${memberInfo.mem_photo }">
             </div>
           </div>
           <div class="profile_text_area">
@@ -476,6 +476,16 @@
   <jsp:include page="/WEB-INF/views/modifyMember.jsp"></jsp:include>
   <!-- sign_in -->
   <jsp:include page="/WEB-INF/views/login.jsp"></jsp:include>
+  
+  
+  <!-- 회원정보 수정 완료 -->
+  <c:if test="${result eq 1 }">
+  	<script>
+  		alert("회원정보가 수정되었습니다.");
+  		location.href = "/myPage";
+  	</script>
+  </c:if>
+  
   <script>
   // 동호회 가입 승인
  	 $(".approve").on("click", function() {
@@ -497,6 +507,7 @@
 		location.href = "/club/joinRefuse?cs_board_seq=" + cl_id + "&cs_join_id=" + mem_id;
 	 })
 	 
+
   	
   </script>
 </body>

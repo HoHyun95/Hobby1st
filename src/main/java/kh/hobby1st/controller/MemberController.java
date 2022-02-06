@@ -109,17 +109,20 @@ public class MemberController {
 	//SignUp Jsp에 form 형식 만 추가하면 됨
 	@RequestMapping("signUp")
 	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday, String mem_gender,
-			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) {
+			String mem_address, String mem_category_1, String mem_category_2, String mem_phone, String mem_email,  MultipartFile[] mem_photo) throws Exception {
 		
-		System.out.println(mem_gender);
 		
 		// DB에 디폴트 값을 전달하기 위해 임의 설정		
 		String mem_lastlogin = "default";
-		if(mem_photo.length == 0) {
-			System.out.println("비어있다.");
-		}
+		String profile = "";
 		for(MultipartFile mf : mem_photo) {
-			try{
+			if(mf.getOriginalFilename().isEmpty()) {
+				if(mem_gender.equals("M")) {
+					profile = "/upload/profile/man1.png";
+				}else if(mem_gender.equals("F")) {
+					profile = "/upload/profile/woman1.png";
+				}
+			}else {
 				//서버 저장주소
 				String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/profile";
 				File realPathFile = new File(realPath);
@@ -129,13 +132,9 @@ public class MemberController {
 				String sysName = UUID.randomUUID() + "_" + oriName;   
 
 				mf.transferTo(new File(realPath+"/"+sysName));
-				String profile = "/upload/profile/"+sysName;
-
+				profile = "/upload/profile/" + sysName;
+			}
 				int result = mem_service.insert(new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email)); 
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "error";
-			}	
 		}
 		return "redirect: /";
 	}
@@ -275,7 +274,7 @@ public class MemberController {
 		}
 		
 		model.addAttribute("result",result);
-		return "redirect:/myPage";
+		return "myPage/myPage";
 	}
 	
 	

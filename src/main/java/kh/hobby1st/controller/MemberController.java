@@ -279,7 +279,7 @@ public class MemberController {
 
 	// 회원 탈퇴
 	@RequestMapping("leave")
-	public String leave() {
+	public String leave(Model model) {
 		
 		String my_id = (String) session.getAttribute("mem_id");
 		
@@ -303,8 +303,10 @@ public class MemberController {
 		
 		int leaveState = csService.leaveMemberState(my_id);
 		
-		System.out.println("여기다");
-		return "redirect:/";
+		int leaveMember = mem_service.leaveMember(my_id);
+		
+		model.addAttribute("leaveMember", leaveMember);
+		return "myPage/myPage";
 	}
 
 }

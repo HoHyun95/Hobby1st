@@ -83,4 +83,9 @@ public class MemberService {
 		return mem_dao.modifyMemberP(dto);
 	}
 
+	// 회원 탈퇴
+	public int leaveMember(String mem_id) {
+		return mem_dao.leaveMember(mem_id);
+	}
+
 }

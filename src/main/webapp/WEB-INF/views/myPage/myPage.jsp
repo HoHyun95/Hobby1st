@@ -487,7 +487,16 @@
   	</script>
   </c:if>
   
+  <!-- 회원 탈퇴 완료 -->
+  <c:if test="${leaveMember eq 1 }">
+  	<script>
+  		alert("성공적으로 탈퇴되었습니다.");
+  		location.href = "/";
+  	</script>
+  </c:if>
   <script>
+  
+  
   // 동호회 가입 승인
  	 $(".approve").on("click", function() {
  		let cl_id = $(this).siblings(".cl_id").val();

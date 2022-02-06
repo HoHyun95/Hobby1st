@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.tags.form.AbstractFormTag;
 
 import kh.hobby1st.dto.MemberDTO;
 
@@ -79,6 +80,11 @@ public class MemberDAO {
 	// 회원 정보 수정 (사진제외)
 	public int modifyMemberP(MemberDTO dto) {
 		return mybatis.update("member.modifyMemberP", dto);
+	}
+	
+	// 회원 탈퇴
+	public int leaveMember(String mem_id) {
+		return mybatis.delete("member.leaveMember", mem_id);
 	}
 
 }

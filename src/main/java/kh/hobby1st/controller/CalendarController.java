@@ -40,6 +40,9 @@ public class CalendarController {
 	  @ResponseBody
 	  @RequestMapping(value = "insert", method = RequestMethod.GET) 
 	  public String insert(String title, String club, Date day_start, Date day_end) {
+	  //sql table 디폴트값 주입
+	  String memberWrite = "No Message";	  
+	  String detailWrite = "No Message";	  
 	  //널값을 잡기위한 날짜 계산
 	  day_end = new Date(day_end.getTime()+(1000*60*60*24*-1));	  
 	    
@@ -52,30 +55,17 @@ public class CalendarController {
 	  if(update_start.equals(update_end)) {
 	  String change_start = update_start.substring(0,10);
 	  String change_end = update_end.substring(0,10);
-	  int result = cal_service.insert(new CalendarDateDTO(club, change_start, change_end, title));
+	  int result = cal_service.insert(new CalendarDateDTO(club, change_start, change_end, title, memberWrite, detailWrite));
 	  } else {
-	  int result = cal_service.insert(new CalendarDateDTO(club, update_start, update_end, title));
+	  int result = cal_service.insert(new CalendarDateDTO(club, update_start, update_end, title, memberWrite, detailWrite));
 	  }
 	  return "pageJsonReport"; 
 	  }
 	  
 	  //메인 캘린더에서 스케줄 클릭시 디테일 jsp로 이동
-//	  @DateTimeFormat(pattern = "yyyy-MM-dd")
 	  @RequestMapping(value = "calendarDetail")
-	  public String detail(Model model, String title, String club_cl_name, String start, String end) {
-		 //자바언어로 시간변경			
-//		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-//		 String update_start = simpleDateFormat.format(start);
-//		 String update_end = simpleDateFormat.format(end);
-		  
-		  //자바언어 변경이 안되서 출력결과물을 제거했습니다. 
-          String change_start = start.substring(0,15);
-          String change_end = end.substring(0,15);		  
-		  
-		  model.addAttribute("club_cl_name", club_cl_name);
-		  model.addAttribute("title", title);
-		  model.addAttribute("start", change_start);
-		  model.addAttribute("end",change_end);
+	  public String detail(Model model, String title, String club_cl_name) {
+		  model.addAttribute("list", cal_service.selectAllDetail(club_cl_name, title));
 		  return "/calendar/calendarDetail"; 
 	  }
 	     //팝업창에서 스케줄 삭제를 누를 시
@@ -88,9 +78,12 @@ public class CalendarController {
          //팝업창에서 스케줄 내용등록을 할 시
          @ResponseBody
 		 @RequestMapping(value = "insertDetail", method = RequestMethod.POST) 
-         public String insertDetail(String detail, String member, String club_cl_name) { 
-         System.out.println(detail + member + club_cl_name); 
-         return "pageJsonReport";
+         public String insertDetail(String detail, String member, String club_cl_name, String title) { 
+          System.out.println(detail); 
+          System.out.println(member); 
+           
+          int result = cal_service.update(club_cl_name, title, member, detail);
+          return "pageJsonReport";
        }
 } 
 

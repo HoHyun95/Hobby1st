@@ -57,7 +57,7 @@
 						<c:forEach var="dto" items="${qnaList }" varStatus="status">
 							<tr
 								class="w-full font-light text-gray-700 bg-gray-50 whitespace-no-wrap border border-b-0 text-sm hover:bg-gray-200">
-								<td class="px-4 py-4 text-center">${totalNoticeCount - ((cpage-1) * 10) - status.index}</td>
+								<td class="px-4 py-4 text-center">${totalQnaCount - ((cpage-1) * 10) - status.index}</td>
 
 								<td class="title px-4 py-4" id="qnaDetail${dto.qna_seq }" style="cursor: pointer;">${dto.qna_title }<i id="lockIcon" class="fas fa-lock"></i>
 									

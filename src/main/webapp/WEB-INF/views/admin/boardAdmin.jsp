@@ -132,7 +132,8 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글 번호</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글번호</th>
+                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글 번호</th> -->
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">게시물</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">작성자</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">작성날짜</th>

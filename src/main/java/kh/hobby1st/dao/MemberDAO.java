@@ -61,7 +61,12 @@ public class MemberDAO {
 	public MemberDTO selectOne(String mem_ID) {
 		return mybatis.selectOne("member.selectOne", mem_ID);
 	}
-
+	
+	// 이메일찾기에서 사용
+	public MemberDTO selectEmail(String email) {
+		return mybatis.selectOne("member.selectEmaile", email);
+	}
+	
 	// 회원가입 된 멤버들 전체 출력
 	public List<MemberDTO> selectAll() {
 		return mybatis.selectList("member.selectAll");

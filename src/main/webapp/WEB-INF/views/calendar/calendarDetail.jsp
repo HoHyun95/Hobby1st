@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="delete" method="get">
- <table border=1 style="text-align:center; hegiht:500px; width:500px">
+ <table border=1 style="text-align:center; height:500px; width:500px">
      <tr>
       <td colspan=2><h1>이건 팝업창입니다!</h1>
    </tr>
@@ -39,11 +39,11 @@
    </c:if>
    <tr>
       <td> 참여자
-      <td> <textarea style="resize:none; hegih:150px; width:300px" id="memberWrite">${list.memberWrite }</textarea>     
+      <td> <textarea style="resize:none; width:300px" id="memberWrite">${list.memberWrite }</textarea>     
    </tr>
    <tr>
       <td> 스케줄세부내용
-      <td> <textarea style="resize: none; hegiht:400px; width:300px" id="detailWrite">${list.detailWrite }</textarea>
+      <td> <textarea style="resize: none; width:300px" id="detailWrite">${list.detailWrite }</textarea>
    </tr>
     <tr>
       <td colspan=2> 

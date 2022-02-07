@@ -8,50 +8,72 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>user_email</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/signUp.css">
 </head>
 <body>
-	<form action="find_email" method="post">
-		<table border=1>
-			<tr>
-				<th colspan=2>인증할 이메일(요청시 10분 내외로 회신됩니다)
-			</tr>
-			<tr>
-				<td><input type="text" name="email" id="user_email">
-				<td><button type="submit">제출</button>
-			</tr>
-			<c:if test ="${result eq 0}">
-			<tr>
-			    <td colspan=2>등록 이메일이 없습니다! 이메일을 입력해주세요!</h7>
-			</tr>
-			</c:if>
-			<tr>
-				<td>인증하기 
-				<c:if test = "${random_num != null}">
-				<td>사용자에게 전송된 인증번호 : '${random_num }'
-				<input type="text" value="${random_num }" hidden id="dum">
-				</c:if>
-			</tr>
-			<tr>
-				<td><input type="text" id="email_num">
-				<td><button type="button" id="emailNum_btn">제출</button>
-			</tr>
-			<tr style="display:none" id="member_lo">
-				<td>사용자의 정보는? 
-				<td>~~~회원아이디는 ~~~ 회원비밀번호는 입니다
-			</tr>
-		</table>
-	</form>
-	
-
+ <div class="email_wrap">
+ 	<form action="find_email" method="post">
+       <div class="email_container"> 
+         
+         <!-- 머리 -->
+         <div class="steps_item_wrap">
+            <div class="steps_item_line">
+            <hr class="active_bg">
+            </div>
+            <div class="steps_item_title"><span class="active_text">STEP 0</span></div>
+            <div class="steps_item_detail">이메일찾기!(table에 두개의 동일한 이메일이 존재할시 애러납니다 더미삭제하고 테스트해주세요!)</div>
+         </div>
+       
+         <!-- 몸통 -->
+        <div class="contents_wrap">
+          <div class="contents_item_wrap">
+            <div class="contents_item">
+                 <div class="desc">
+                    <h3>인증할 이메일 주소를 입력해주세요!</h3>                 
+                 </div>                        
+                 <div class="title">
+                    <i class="fas fa-envelope">회원 이메일</i>
+                    <c:if test ="${result eq 0}">
+                    <span class="validResult" id="mem_email_Result">등록된 이메일이 없습니다!</span>
+                    </c:if>
+                 </div>
+                 <div class="input">
+                    <input type="text" id="user_email" name="email" placeholder="이메일입력">
+                    <button type="submit">메일전송</button>
+                 </div>
+                 <div class="title">
+                    <i class="fas fa-envelope">인증번호</i>
+                    <span class="validResult" id="mem_email_Result"></span>
+                 </div>
+                 <div class="input">
+                    <input type="text" id="email_num" placeholder="인증번호입력">
+                    <button type="button" id="emailNum_btn">인증하기</button>
+                 </div>
+                 <div class="title" style="display:none" id="member_lo">
+                    <i class="fas fa-envelope">사용자 정보</i><br>
+                     아이디 : ${members.mem_id }<br>
+                     비밀번호 : ${members.mem_pass }
+                 </div>
+            </div>
+          </div>
+        </div>
+       </div>        
+    </form>
+ </div>
  <script>
  $("#emailNum_btn").on("click",function(){
-	 if($("#dum").val() === $("#email_num").val()){
+	 if('${random_num}' === $("#email_num").val()){
 		 alert("이메일 인증성공!");
 		 $("#member_lo").show()
 	 } else {
-			 alert("인증번호가 다릅니다");
+		 alert("인증번호가 다릅니다");
 	 }
  })
- 
  </script>
 </html>

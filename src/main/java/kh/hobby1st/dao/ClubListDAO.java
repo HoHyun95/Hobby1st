@@ -193,12 +193,14 @@ public class ClubListDAO {
 	
 	
 	// 관리자 페이지 오늘 생성된 동호회 수
-			public int newClub() {
+	public int newClub() {
 				return mybatis.selectOne("ClubList.newClub");
 			}
 	
-	
-	
+	// 관리자 페이지 지난주 총 동호회 수
+	public int lastClub() {
+		return mybatis.selectOne("ClubList.lastClub");
+	}
 	
 	
 	

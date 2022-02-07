@@ -113,6 +113,11 @@ public class HomeController {
 		int totalClub = clService.countClub();
 		int newMember = mService.newMember();
 		int newClub = clService.newClub();
+		int lastMember = mService.lastMember();
+		int lastClub = clService.lastClub();
+		
+		int addMember = totalMember - lastMember;
+		int addClub = totalClub - lastClub;
 		
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
@@ -122,7 +127,8 @@ public class HomeController {
 		model.addAttribute("totalClub", totalClub);
 		model.addAttribute("newMember", newMember);
 		model.addAttribute("newClub", newClub);
-		
+		model.addAttribute("addMember", addMember);
+		model.addAttribute("addClub", addClub);
 		
 		return "admin/admin";
 	}

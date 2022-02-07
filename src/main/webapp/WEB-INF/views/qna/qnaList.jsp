@@ -64,7 +64,7 @@
 									<script>
 									document.querySelector('#qnaDetail${dto.qna_seq}').addEventListener('click', function(){
 									if(${dto.qna_writer == mem_id || admin != null}){
-										window.open('/qna/qnaDetail?qna_seq=${dto.qna_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}','QnA보기','width=1000, height=900, left=' + (window.screen.width - 1000) / 2 + ', top=' + (window.screen.height - 900) / 2 + ',toolbar=no, menubar=no, scrollbars=no, resizable=no')
+										location.href = "/qna/qnaDetail?qna_seq=${dto.qna_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}";
 									}else{
 										alert("관리자만 조회 할 수 있는 글 입니다");	
 									}
@@ -93,7 +93,7 @@
 			${navi }
 			<button type="button" id="writeBtn"
 				class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 "
-				style="width: 100px; margin-right: 10px; margin-top: 85px; height: 35px; line-height: 35px; float: right;">문의하기
+				style="width: 100px; margin-right: 10px; margin-top: 120px; height: 35px; line-height: 35px; float: right;">문의하기
 			</button>
 		</div>
 
@@ -146,9 +146,7 @@
 	  
 	
 		$("#writeBtn").on("click", function() {
-			let left = Math.ceil((window.screen.width - 1000) / 2);
-		    let top = Math.ceil((window.screen.height - 900) / 2); 
-			window.open("/qna/qnaWrite?", "Q&A 작성", "width=1000, height=900, left=" + left + ", top=" + top + ",toolbar=no, menubar=no, scrollbars=no, resizable=no" );  
+			location.href="/qna/qnaWrite?";  
 		});
 	</script>
 </body>

@@ -25,7 +25,7 @@
 
 <body>
 
-	<form name="myFrm" id="frm" method="post">
+	<form action="/qna/qnaInsert" name="myFrm" id="frm" method="post">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
@@ -134,16 +134,9 @@
 
 		// 뒤로가기
 		$("#back").on("click", function() {
-			window.close();
+			location.href = history.back();
 		})
-		
-		$("#input_board").on("click", function() {
-			window.opener.name = "parentPage";
-			document.myFrm.target = "parentPage";
-			document.myFrm.action = "/qna/qnaInsert";
-			document.myFrm.submit();
-			self.close();
-		})
+
 	</script>
 
 

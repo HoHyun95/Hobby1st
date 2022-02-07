@@ -328,12 +328,12 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Completed Tasks</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
+              <h6 class="mb-0 ">게시글 작성</h6>
+              <p class="text-sm ">지난주 요일별 게시글 작성 수</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm">just updated</p>
+                <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
+                <p class="mb-0 text-sm">just updated</p> -->
               </div>
             </div>
           </div>
@@ -598,9 +598,9 @@
     new Chart(ctx3, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    	  labels: ["M", "T", "W", "T", "F", "S", "S"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Board",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -610,7 +610,7 @@
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          data: [${BlastMonday }, ${BlastTuesday }, ${BlastWednesday }, ${BlastThurseday }, ${BlastFriday }, ${BlastSaturday }, ${BlastSunday }],
           maxBarThickness: 6
 
         }],

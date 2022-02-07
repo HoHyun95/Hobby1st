@@ -83,7 +83,7 @@ public class QnaController {
 		qService.insert(dto);
 		int totalQnaCount = qService.getRecordCount();
 
-		return "redirect:/news";
+		return "redirect:/qna/qnaList?cpage=1";
 	}
 
 
@@ -175,7 +175,7 @@ public class QnaController {
 
 		int result = qService.deleteQna(qna_seq);
 		
-		return "redirect:/news";
+		return "redirect:/qna/qnaList?cpage=" + cpage;
 	}
 	
 	// 게시판 수정페이지 이동

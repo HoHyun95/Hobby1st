@@ -63,9 +63,6 @@
 			<mapping path="/notice/deleteNotice" />
 			<mapping path="/notice/deleteNoticeAdmin" />
 			<mapping path="/notice/modifyNotice" />
-			<mapping path="/qna/qnaWrite" />
-			<mapping path="/qna/deleteQna" />
-			<mapping path="/qna/modifyQna" />
 			<mapping path="/faq/faqWrite" />			
 			<beans:bean class="kh.hobby1st.interceptor.AdminInterceptor" />
 		</interceptor>

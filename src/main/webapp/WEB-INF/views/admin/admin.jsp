@@ -233,7 +233,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">오늘 가입자 수</p>
-                <h4 class="mb-0">${newMember }</h4>
+                <h4 class="mb-0">${newMember } 명</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -267,7 +267,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">오늘 생성된 동호회 수</p>
-                <h4 class="mb-0">${newClub }</h4>
+                <h4 class="mb-0">${newClub } 개</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">

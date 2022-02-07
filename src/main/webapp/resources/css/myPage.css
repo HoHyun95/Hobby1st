@@ -355,6 +355,7 @@ button {
   font-size: 0.8rem;
   color: forestgreen;
   border: 1px solid forestgreen;
+  margin: 0px 0px;
 }
 
 .approve:hover {
@@ -368,6 +369,7 @@ button {
   font-size: 0.8rem;
   color: tomato;
   border: 1px solid tomato;
+  margin: 0px 0px;
 }
 
 .refuse:hover {

@@ -689,7 +689,6 @@
 	            <div class="cm_list_item_profile_item">생년월일 :${cb.mem_birthday }</div>
 	            <div class="cm_list_item_profile_item">지역 : ${cb.mem_address }</div>
 	            <div class="cm_list_item_profile_item">관심분야 : ${cb.mem_category_1 } / ${cm.mem_category_2 }</div>
-	            <div class="cm_list_item_profile_item">최근 로그인 : ${cb.mem_lastlogin}</div>
 	          </div>
 	          <div class="cm_list_item_btns_area">
 	            <div class="cm_list_item_btn1">
@@ -717,7 +716,6 @@
 	            <div class="cm_list_item_profile_item">생년월일 :${cm.mem_birthday }</div>
 	            <div class="cm_list_item_profile_item">지역 : ${cm.mem_address }</div>
 	            <div class="cm_list_item_profile_item">관심분야 : ${cm.mem_category_1 } / ${cm.mem_category_2 }</div>
-	            <div class="cm_list_item_profile_item">최근 로그인 : ${cm.mem_lastlogin}</div>
 	          </div>
 	          <div class="cm_list_item_btns_area">
 	            <div class="cm_list_item_btn1">
@@ -737,7 +735,7 @@
 	        <div class="club_board_title_text">${club.cl_name } 동호회 게시판</div>
 	      </div>
 	      <div class="club_board_item_wrap">
-          	<iframe src="/clubBoard/boardList?cpage=1" scrolling = "no"></iframe>
+          	<iframe src="/clubBoard/boardList?cpage=1"></iframe>
           </div>
         </div>
         <!-- 동호회 채팅 -->

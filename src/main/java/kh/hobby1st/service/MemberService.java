@@ -92,4 +92,9 @@ public class MemberService {
 		return mem_dao.leaveMember(mem_id);
 	}
 
+	// 오늘 가입한 회원 수 관리자용
+	public int newMember() {
+		return mem_dao.newMember();
+	}
+	
 }

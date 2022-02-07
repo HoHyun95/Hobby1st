@@ -140,4 +140,9 @@ public class ClubListService {
 		return cldao.ClubListByTop30(start, end);
 	}
 
+	// 오늘 생성된 동호회 수 관리자용
+		public int newClub() {
+			return cldao.newClub();
+		}
+	
 }

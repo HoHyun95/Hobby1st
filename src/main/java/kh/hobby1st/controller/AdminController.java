@@ -2,6 +2,8 @@ package kh.hobby1st.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,8 @@ public class AdminController {
 	@Autowired
 	private NoticeAdminService naService;
 	
+	@Autowired
+	private HttpSession session;
 	
 	
 	@RequestMapping("/admin/clubAdmin")
@@ -130,4 +134,13 @@ public class AdminController {
 		
 		return "admin/noticeAdmin";
 	}
+	
+	// 로그아웃 버튼 누를시 실행됩니다.
+		@RequestMapping("/admin/logout")
+		public String logout() {
+			session.invalidate();
+			return "redirect: /";
+		}
+	
+	
 }

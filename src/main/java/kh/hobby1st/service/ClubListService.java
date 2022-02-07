@@ -149,6 +149,7 @@ public class ClubListService {
 	public int lastClub() {
 		return cldao.lastClub();
 	}
+	
 	// 관리자 지난주 월요일 가입자 수
 	public int lastMonday() {
 		return cldao.lastMonday();

@@ -137,6 +137,15 @@ public class HomeController {
 		int ClastSaturday = clService.lastSaturday();
 		int ClastSunday = clService.lastSunday();		
 		
+		// 지난 주 요일별 게시판 등록 수
+		int BlastMonday = cbService.lastMonday();
+		int BlastTuesday = cbService.lastTuesday();
+		int BlastWednesday = cbService.lastWednesday();
+		int BlastThurseday = cbService.lastThurseday();
+		int BlastFriday = cbService.lastFriday();
+		int BlastSaturday = cbService.lastSaturday();
+		int BlastSunday = cbService.lastSunday();
+		
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
 		model.addAttribute("allMember", memberList);
@@ -163,6 +172,14 @@ public class HomeController {
 		model.addAttribute("ClastFriday", ClastFriday);
 		model.addAttribute("ClastSaturday", ClastSaturday);
 		model.addAttribute("ClastSunday", ClastSunday);
+		
+		model.addAttribute("BlastMonday", BlastMonday);
+		model.addAttribute("BlastTuesday", BlastTuesday);
+		model.addAttribute("BlastWednesday", BlastWednesday);
+		model.addAttribute("BlastThurseday", BlastThurseday);
+		model.addAttribute("BlastFriday", BlastFriday);
+		model.addAttribute("BlastSaturday", BlastSaturday);
+		model.addAttribute("BlastSunday", BlastSunday);
 		
 		return "admin/admin";
 	}

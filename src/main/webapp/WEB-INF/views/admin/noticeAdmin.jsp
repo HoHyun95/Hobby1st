@@ -42,6 +42,7 @@
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 </head>
 
+
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
@@ -196,7 +197,7 @@
 						${navi }
 					</div>
 					<div>
-						<button id="writeBtn">글쓰기</button>
+						<button id="writeBtn" class="text-secondary font-weight-bold text-xs">글쓰기</button>
 					</div>
               </div>
             </div>

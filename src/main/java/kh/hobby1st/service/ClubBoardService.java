@@ -296,5 +296,41 @@ public class ClubBoardService {
 	public List<ClubBoardDTO> selectAll(){
 		return cbdao.selectAll();
 	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastMonday() {
+		return cbdao.lastMonday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastTuesday() {
+		return cbdao.lastTuesday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastWednesday() {
+		return cbdao.lastWednesday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastThurseday() {
+		return cbdao.lastThurseday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastFriday() {
+		return cbdao.lastFriday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastSaturday() {
+		return cbdao.lastSaturday();
+	}
+	
+	// 관리자 지난주 게시글 등록 수
+	public int lastSunday() {
+		return cbdao.lastSunday();
+	}
+	
 
 }

@@ -52,6 +52,16 @@
                         h-14
                       " />
 
+<script>
+	let title = document.querySelector('#title');
+	title.addEventListener('keyup', () => {
+		if(title.value.length > 100){
+			alert("100자 이상 입력 할 수 없습니다");
+			title.value="";
+			title.focus();
+		}
+	})
+</script>
 
 				<!-- textarea 태그에 작성 -->
 				<div>

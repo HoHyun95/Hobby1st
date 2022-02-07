@@ -30,7 +30,7 @@
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"
 				style="border-bottom: 1px solid rgb(173, 173, 173); font-size: 20px; height: 50px;">
-				<b># 반려견 게시판 글쓰기</b>
+				<b>#게시판 글쓰기</b>
 			</div>
 
 			<!-- 제목 입력 -->
@@ -52,13 +52,35 @@
                         h-14
                       " />
 
+<script>
+	let title = document.querySelector('#title');
+	title.addEventListener('keyup', () => {
+		if(title.value.length > 100){
+			alert("100자 이상 입력 할 수 없습니다");
+			title.value="";
+			title.focus();
+		}
+	})
+</script>
+
+
 
 				<!-- textarea 태그에 작성 -->
 				<div>
 					<textarea name="cb_contents" id="summernote"></textarea>
 				</div>
 
-
+	<script>
+// 	let summernote = document.querySelector('#summernote');
+// 	summernote.addEventListener('keyup', () => {
+// 	console.log("ㅆ ");
+// 		if(summernote.value.length > 1990){
+// 			alert("2000자 이상 입력 할 수 없습니다");
+//  			summernote.value="";
+//  			summernote.focus();
+//  		}
+//  	})
+	</script>
 
 				<!-- 목록, 등록 버튼 생성 -->
 

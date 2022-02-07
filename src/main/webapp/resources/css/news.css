@@ -216,3 +216,10 @@ input[id *= "faq"]:checked + label + div {
   max-height:100px
 }
 /* faq end */
+
+iframe {   
+  display: block;   
+  border: none;   
+  width: 100%; 
+  height: 1000px;   
+}

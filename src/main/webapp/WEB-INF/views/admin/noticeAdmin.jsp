@@ -133,7 +133,8 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글번호</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글번호</th>
+                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">글번호</th> -->
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">작성자</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">제목</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">작성일자</th>
@@ -146,11 +147,7 @@
                   <c:forEach var="dto" items="${noticeAllList}">
                     <tr> <!-- for 문 시작점 -->
                       <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                          	${dto.notice_seq }　
-                          </div>
-                        </div>
+                        <p class="text-xs font-weight-bold mb-0 text-center">${dto.notice_seq }</p>
                       </td>
                       <td>
                         <p class="text-xs font-weight-bold mb-0">${dto.notice_writer }</p>

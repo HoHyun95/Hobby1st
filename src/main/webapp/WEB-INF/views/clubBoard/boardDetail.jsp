@@ -351,9 +351,9 @@
 		// 뒤로가기
 		$("#back").on("click", function() {
 			if(${check_num} == 1){
-				location.href = "/clubBoard/boardList?cpage=${cpage}";
+				location.href = "/clubBoard/boardList?cpage=${cpage}&cb_club_id=${cb_club_id}";
 			}else if(${check_num} == 2){
-				 location.href = "/clubBoard/searchBoard?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }";
+				 location.href = "/clubBoard/searchBoard?cpage=${cpage}&keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}";
 			}
 		})
 			

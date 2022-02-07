@@ -52,44 +52,47 @@ public class ClubBoardController {
 	Gson g = new Gson();
 
 	@RequestMapping("/boardList")
-	public String memberList(int cpage, Model model) throws Exception {
-		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardByPaging(cpage, 5);
+	public String memberList(int cpage,int cb_club_id, Model model) throws Exception {
+		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardByPaging(cpage, cb_club_id);
 
 		int check_num = 1;
-		String navi = club_board_service.getPageNavi(cpage, 5);
-		int totalBoardCount = club_board_service.getRecordCount(5);
+		String navi = club_board_service.getPageNavi(cpage, cb_club_id);
+		int totalBoardCount = club_board_service.getRecordCount(cb_club_id);
 
 		model.addAttribute("totalBoardCount", totalBoardCount);
 		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("navi", navi);
 		model.addAttribute("clubBoardList", clubBoardList);
+		model.addAttribute("cb_club_id", cb_club_id);
 
 		return "clubBoard/boardList";
 	}
 
 //	게시판 작성 페이지 이동
 	@RequestMapping("/boardWrite")
-	public String boardWrite() {
+	public String boardWrite(Model model, int cb_club_id) {
+		
+		model.addAttribute("cb_club_id", cb_club_id);
 		return "clubBoard/boardWrite";
 	}
 
 	// 게시판 작성
 	@RequestMapping("/boardInsert")
-	public String boardInsert(ClubBoardDTO dto, Model model) {
-		dto.setCb_club_id(5);
+	public String boardInsert(ClubBoardDTO dto, Model model, int cb_club_id) {
+		dto.setCb_club_id(cb_club_id);
 		dto.setCb_writer((String) session.getAttribute("mem_id"));
 		dto.setCb_nickname((String) session.getAttribute("user_nickName"));
 
 		club_board_service.insert(dto);
-		int totalBoardCount = club_board_service.getRecordCount(5);
+		int totalBoardCount = club_board_service.getRecordCount(cb_club_id);
 
-		return "redirect:/clubBoard/boardList?cpage=1&totalBoardNum=5";
+		return "redirect:/clubBoard/boardList?cpage=1&totalBoardNum=5&cb_club_id=" + cb_club_id;
 	}
 
 	// 게시판 상세페이지 이동
 	@RequestMapping("/boardDetail")
-	public String boardDetail(int cb_seq, int cpage, Model model, int check_num, String keyword, String searchWord) {
+	public String boardDetail(int cb_seq, int cpage, Model model, int check_num, String keyword, String searchWord, int cb_club_id) {
 
 		if (keyword.equals("title")) {
 			keyword = "제목";
@@ -131,6 +134,7 @@ public class ClubBoardController {
 		model.addAttribute("cpage", cpage); 
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("detail", detail);
+		model.addAttribute("cb_club_id", cb_club_id);
 		return "clubBoard/boardDetail";
 	}
 

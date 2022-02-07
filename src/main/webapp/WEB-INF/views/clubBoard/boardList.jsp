@@ -66,7 +66,7 @@
 								class="w-full font-light text-gray-700 bg-gray-50 whitespace-no-wrap border border-b-0 hover:bg-gray-200">
 								<td class="px-4 py-4 text-center">${totalBoardCount - ((cpage-1) * 10) - status.index}</td>
 
-										<td class="title px-4 py-4" style="cursor: pointer;"  onclick="location.href='/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
+										<td class="title px-4 py-4" style="cursor: pointer;"  onclick="location.href='/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&cb_club_id=${cb_club_id }&check_num=${check_num }&cpage=${cpage }&keyword=${keyword }&searchWord=${searchWord}'">
 											${dto.cb_title }
 												<c:if test="${dto.cb_reply_count ne 0 }">
 							&nbsp <i class="far fa-comment-dots"> </i>
@@ -155,7 +155,7 @@
 	
 	
 		$("#writeBtn").on("click", function() {
-			location.href = "/clubBoard/boardWrite?"
+			location.href = "/clubBoard/boardWrite?cb_club_id=${cb_club_id}"
 		});
 	</script>
 

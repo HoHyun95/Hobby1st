@@ -729,7 +729,7 @@
 	        <div class="club_board_title_text">${club.cl_name } 동호회 게시판</div>
 	      </div>
 	      <div class="club_board_item_wrap">
-          	<iframe src="/clubBoard/boardList?cpage=1"></iframe>
+          	<iframe src="/clubBoard/boardList?cpage=1&cb_club_id=${club.cl_id }"></iframe>
           </div>
         </div>
         <!-- 동호회 채팅 -->

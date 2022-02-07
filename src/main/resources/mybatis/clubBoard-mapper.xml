@@ -77,6 +77,48 @@
   	<select id="ClubBoardByPaging" resultType="kh.hobby1st.dto.ClubBoardDTO">
 		select * from (select club_board.* , row_number() over(order by cb_seq desc) rn from club_board) where rn between ${start} and #{end}
 	</select>
-  	
+	
+	<!-- 지난주 월요일 게시글 작성 수 -->
+	<select id="lastMonday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-7, 'yyyymmdd')
+	</select>
+	
+	<!-- 지난주 화요일 게시글 작성 수 -->
+	<select id="lastTuesday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-6, 'yyyymmdd')
+	</select>
+	
+	<!-- 지난주 수요일 게시글 작성 수 -->
+	<select id="lastWednesday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-5, 'yyyymmdd')
+	</select>
+		
+	<!-- 지난주 목요일 게시글 작성 수 -->
+	<select id="lastThurseday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-4, 'yyyymmdd')
+	</select>
+		
+	<!-- 지난주 금요일 게시글 작성 수 -->
+	<select id="lastFriday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-3, 'yyyymmdd')
+	</select>
+		
+	<!-- 지난주 토요일 게시글 작성 수 -->
+	<select id="lastSaturday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-2, 'yyyymmdd')
+	</select>
+		
+	<!-- 지난주 일요일 게시글 작성 수 -->
+	<select id="lastSunday" resultType="int">
+	select count(*) from club_board where to_char(cb_write_date, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw')-1, 'yyyymmdd')
+	</select>	
+	
   	
   </mapper>

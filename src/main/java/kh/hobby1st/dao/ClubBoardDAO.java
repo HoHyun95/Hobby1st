@@ -157,5 +157,40 @@ public class ClubBoardDAO {
 		return mybatis.selectList("ClubBoard.selectAll");
 	}
 	
+	// 관리자 페이지 지난주 월요일 게시글 작성 수
+	public int lastMonday() {
+		return mybatis.selectOne("ClubBoard.lastMonday");
+	}
+	
+	// 관리자 페이지 지난주 화요일 게시글 작성 수
+	public int lastTuesday() {
+		return mybatis.selectOne("ClubBoard.lastTuesday");
+	}
+	
+	// 관리자 페이지 지난주 수요일 게시글 작성 수
+	public int lastWednesday() {
+		return mybatis.selectOne("ClubBoard.lastWednesday");
+	}
+	
+	// 관리자 페이지 지난주 목요일 게시글 작성 수
+	public int lastThurseday() {
+		return mybatis.selectOne("ClubBoard.lastThurseday");
+	}
+	
+	// 관리자 페이지 지난주 금요일 게시글 작성 수
+	public int lastFriday() {
+		return mybatis.selectOne("ClubBoard.lastFriday");
+	}
+	
+	// 관리자 페이지 지난주 토요일 게시글 작성 수
+	public int lastSaturday() {
+		return mybatis.selectOne("ClubBoard.lastSaturday");
+	}
+	
+	// 관리자 페이지 지난주 일요일 게시글 작성 수
+	public int lastSunday() {
+		return mybatis.selectOne("ClubBoard.lastSunday");
+	}		
+	
 
 }

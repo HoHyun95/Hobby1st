@@ -25,7 +25,7 @@ public class QnaDAO {
 
 	// 해당 동호회 게시판 총 개수
 	public int getRecordCount() {
-		return mybatis.selectOne("Qna.RecordCount");
+		return mybatis.selectOne("Qna.recordCount");
 	}
 
 	// 검색 시 총 개수

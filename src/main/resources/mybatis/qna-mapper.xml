@@ -18,7 +18,7 @@
 		qna) where rn between #{start} and #{end}
 	</select>
 
-	<select id="RecordCount" resultType="int">
+	<select id="recordCount" resultType="int">
 		select count(*) from (select
 		qna.*, row_number() over(order by qna_seq desc)
 		rn from qna)
@@ -49,11 +49,7 @@
 
 	<!-- 게시판 제목 검색 -->
 	<select id="searchTitle" resultType="kh.hobby1st.dto.QnaDTO">
-		select * from (select qna.*,
-		row_number() over(order by qna_seq desc) rn
-		from qna where qna_title
-		like '%'|| #{searchWord}||'%') where rn
-		between #{start} and #{end}
+select * from (select qna.*, row_number() over(order by qna_seq desc) rn from qna where qna_title like '%'|| #{searchWord}||'%') where rn between #{start} and #{end}
 	</select>
 
 	<!-- 게시판 작성자 검색 -->

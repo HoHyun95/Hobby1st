@@ -154,7 +154,7 @@
 					<!------ 답글 쓰기 ------->
 					<tr>
 						<form method="post"
-							action="/clubBoard/insertReply_rec?cb_seq=${detail.cb_seq }&cbr_seq=${replyList.cbr_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
+							action="/clubBoard/insertReply_rec?cb_seq=${detail.cb_seq }&cbr_seq=${replyList.cbr_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}">
 							<!-- 답글달기 기능 -->
 							<div id="reply_rec${replyList.cbr_seq }"
 								class="commend space-y-2 rounded-md"
@@ -245,7 +245,7 @@
 
 		</c:forEach>
 		<form method="post"
-			action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }">
+			action="/clubBoard/insertReply?cb_seq=${detail.cb_seq }&check_num=${check_num } &keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}">
 			<!-- 댓글달기 기능 -->
 			<div class="commend space-y-2 rounded-md"
 				style="padding: 15px; border: 1px solid rgb(187, 186, 186); margin-top: 15px;">
@@ -336,7 +336,7 @@
 		$(".delReply").on("click", function() {
 			let replySeq = $(this).find(".replySeq").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+				location.href = "/clubBoard/deleteReply?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_seq=" + replySeq + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}&cb_club_id=${cb_club_id}" ;
 			} 
 		})
 		
@@ -344,7 +344,7 @@
 		$(".delReply_r").on("click", function() {
 			let replySeq_r = $(this).find(".replySeq_r").val();
 			 if (confirm("정말 삭제하시겠습니까?")) {
-				location.href = "/clubBoard/deleteReply_r?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_r_seq=" + replySeq_r + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}" ;
+				location.href = "/clubBoard/deleteReply_r?cpage=${cpage }&cb_seq=${detail.cb_seq}&cbr_r_seq=" + replySeq_r + "&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord}&cb_club_id=${cb_club_id}" ;
 			} 
 		})
 		
@@ -360,14 +360,14 @@
 			
 		// 게시글 수정하기
 		$("#modify").on("click", function() {
-				location.href = "/clubBoard/modifyBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
+				location.href = "/clubBoard/modifyBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}";
 				
 		}) 
 
 		 // 게시글 삭제하기
 		 $("#delete").on("click", function() {
 			 if (confirm("정말 삭제하시겠습니까? 하시겠습니까??")) {
-				location.href = "/clubBoard/deleteBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }";
+				location.href = "/clubBoard/deleteBoard?cb_seq=${detail.cb_seq}&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}";
 				 /* history.back(); */
 			}
 		}) 

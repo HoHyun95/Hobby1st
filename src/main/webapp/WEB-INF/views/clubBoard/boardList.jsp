@@ -101,7 +101,7 @@
 
 		<!-- 검색 기능 -->
 		<form method="post"
-			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=2">
+			action="/clubBoard/searchBoard?cpage=${cpage }&check_num=2&cb_club_id=${cb_club_id}">
 			<div>
 				<div class=""
 					style="text-align: center; height: 70px; margin-bottom: 100px;">

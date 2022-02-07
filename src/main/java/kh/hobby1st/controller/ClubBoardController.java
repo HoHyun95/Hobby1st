@@ -109,7 +109,7 @@ public class ClubBoardController {
 		}
 		String writerProfile = club_board_service.writerProfile(cb_seq);
 		
-		System.out.println(writerProfile);
+		System.out.println("숫자 " + cb_club_id);
 		
 //		ClubListDTO list = club_list_service.selectClub("54");
 //		
@@ -141,7 +141,7 @@ public class ClubBoardController {
 	// 댓글 작성
 	@RequestMapping("/insertReply")
 	public String insertReply(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword,
-			String searchWord) {
+			String searchWord, int cb_club_id) {
 
 		if (keyword.equals("제목")) {
 			keyword = "title";
@@ -157,12 +157,12 @@ public class ClubBoardController {
 		int result = club_board_reply_service.insert(dto);
 
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 
 	// 댓글 삭제
 	@RequestMapping("/deleteReply")
-	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
+	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) {
 
 		if (keyword.equals("제목")) {
 			keyword = "title";
@@ -174,13 +174,13 @@ public class ClubBoardController {
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 	
 	// 대댓글 작성
 		@RequestMapping("/insertReply_rec")
 		public String insertReply_rec(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword,
-				String searchWord, int cbr_seq) {
+				String searchWord, int cbr_seq, int cb_club_id) {
 
 			if (keyword.equals("제목")) {
 				keyword = "title";
@@ -196,12 +196,12 @@ public class ClubBoardController {
 			int result = club_board_reply_service.insert_rec(dto);
 
 			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+					+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 		}
 	
 		// 대댓글 삭제
 		@RequestMapping("/deleteReply_r")
-		public String deleteReply_r(int cbr_r_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord) {
+		public String deleteReply_r(int cbr_r_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) {
 
 			if (keyword.equals("제목")) {
 				keyword = "title";
@@ -213,18 +213,18 @@ public class ClubBoardController {
 			int result = club_board_reply_service.deleteReply_r(cbr_r_seq);
 
 			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+					+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 		}
 	
 	
 
 	// 게시판 삭제
 	@RequestMapping("/deleteBoard")
-	public String deleteBoard(int cpage, int cb_seq) {
+	public String deleteBoard(int cpage, int cb_seq, int cb_club_id) {
 
 		int result = club_board_service.deleteBoard(cb_seq);
 		
-		return "redirect:/clubBoard/boardList?cpage=" + cpage;
+		return "redirect:/clubBoard/boardList?cpage=" + cpage + "&cb_club_id=" + cb_club_id;
 	}
 	
 	// 게시글 삭제 관리자 페이지에서 삭제 
@@ -240,7 +240,7 @@ public class ClubBoardController {
 
 	// 게시판 수정페이지 이동
 	@RequestMapping("/modifyBoard")
-	public String modifyBoard(int cpage, int cb_seq, Model model, int check_num, String keyword, String searchWord) {
+	public String modifyBoard(int cpage, int cb_seq, Model model, int check_num, String keyword, String searchWord, int cb_club_id) {
 		ClubBoardDTO detail = club_board_service.boardDetail(cb_seq);
 
 		model.addAttribute("keyword", keyword);
@@ -248,13 +248,14 @@ public class ClubBoardController {
 		model.addAttribute("check_num", check_num);
 		model.addAttribute("cpage", cpage);
 		model.addAttribute("detail", detail);
+		model.addAttribute("cb_club_id", cb_club_id);
 		return "clubBoard/modify_boardWrite";
 	}
 
 	// 게시판 수정페이지 수정
 	@RequestMapping("/updateBoard")
 	public String updateBoard(int cpage, Model model, ClubBoardDTO dto, int check_num, String keyword,
-			String searchWord) {
+			String searchWord, int cb_club_id) {
 
 		if (keyword.equals("제목")) {
 			keyword = "title";
@@ -267,7 +268,7 @@ public class ClubBoardController {
 		model.addAttribute("result", result);
 
 		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq() + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num;
+				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 
 	// 게시판 검색 기능

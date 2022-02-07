@@ -23,7 +23,7 @@
 </head>
 <body>
 	<form method="post" onsubmit="return confirm('정말 수정하시겠습니까?')"
-		action="/clubBoard/updateBoard?cb_seq=${detail.cb_seq }&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }">
+		action="/clubBoard/updateBoard?cb_seq=${detail.cb_seq }&cpage=${cpage }&check_num=${check_num }&keyword=${keyword }&searchWord=${searchWord }&cb_club_id=${cb_club_id}">
 		<!-- 글쓰기 Header -->
 		<div style="padding-top: 40px;" class="container con22">
 			<div class="head"

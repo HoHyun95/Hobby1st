@@ -111,6 +111,8 @@ public class HomeController {
 		List<NoticeDTO> noticeList = ntService.selectAll();
 		int totalMember = mService.totalMember();
 		int totalClub = clService.countClub();
+		int newMember = mService.newMember();
+		int newClub = clService.newClub();
 		
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
@@ -118,6 +120,9 @@ public class HomeController {
 		model.addAttribute("allNotice", noticeList);
 		model.addAttribute("totalMember",totalMember);
 		model.addAttribute("totalClub", totalClub);
+		model.addAttribute("newMember", newMember);
+		model.addAttribute("newClub", newClub);
+		
 		
 		return "admin/admin";
 	}

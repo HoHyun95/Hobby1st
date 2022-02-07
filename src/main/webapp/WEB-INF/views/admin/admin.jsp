@@ -187,7 +187,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" type="button">Logout</a>
+        <a href="/admin/logout" class="btn bg-gradient-primary mt-4 w-100" type="button">Logout</a>
       </div>
     </div>
   </aside>
@@ -233,7 +233,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">오늘 가입자 수</p>
-                <h4 class="mb-0">X</h4>
+                <h4 class="mb-0">${newMember }</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -267,7 +267,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">오늘 생성된 동호회 수</p>
-                <h4 class="mb-0">X</h4>
+                <h4 class="mb-0">${newClub }</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">

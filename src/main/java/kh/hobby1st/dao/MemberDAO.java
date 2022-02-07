@@ -92,4 +92,9 @@ public class MemberDAO {
 		return mybatis.delete("member.leaveMember", mem_id);
 	}
 
+	// 관리자 페이지 오늘 가입한 회원 수
+		public int newMember() {
+			return mybatis.selectOne("member.newMember");
+		}
+	
 }

@@ -75,5 +75,12 @@
 		delete from member where mem_id = #{value}
 	</delete>
 	
+	<!-- 관리자페이지 오늘 가입 회원 수 -->
+	<select id="newMember" resultType="int">
+		select count(*) 
+    from member
+    where to_char(mem_lastlogin, 'yyyymmdd') =
+        to_char(trunc(sysdate,'iw'), 'yyyymmdd') 
+	</select>
 	
 </mapper>

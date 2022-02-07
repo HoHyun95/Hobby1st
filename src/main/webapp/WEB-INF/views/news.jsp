@@ -474,7 +474,7 @@
       <!-- QnA -->
       <div class="qna_wrap">
         <div class="qna_board">
-          <jsp:include page="qna/qnaList.jsp"></jsp:include>
+          <iframe src="qna/qnaList?cpage=1"></iframe>
         </div>
       </div>
       <!-- FAQ -->

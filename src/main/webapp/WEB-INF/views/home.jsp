@@ -680,7 +680,7 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>

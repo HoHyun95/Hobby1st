@@ -37,6 +37,10 @@
 		select * from member where mem_id = #{id}
 	</select>
 	
+	<select id="selectEmaile" resultType="kh.hobby1st.dto.MemberDTO">
+		select * from member where mem_email = #{email}
+	</select>
+	
 	<select id="email_check" resultType="Integer">
 	    select count(*) from member where mem_email = #{email}
 	</select>

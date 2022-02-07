@@ -180,12 +180,10 @@ public class MemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 리턴값은 추후 디자인 정해지면 수정
+			model.addAttribute("members", mem_service.selectEmail(email));
 			model.addAttribute("random_num", random_num);
-			return "member/sign_email";
 		} else if (result == 0) {
 			model.addAttribute("result", result);
-			return "member/sign_email";
 		}
 		return "member/sign_email";
 	}

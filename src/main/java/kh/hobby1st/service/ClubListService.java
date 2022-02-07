@@ -149,5 +149,39 @@ public class ClubListService {
 	public int lastClub() {
 		return cldao.lastClub();
 	}
+	// 관리자 지난주 월요일 가입자 수
+	public int lastMonday() {
+		return cldao.lastMonday();
+	}
+	
+	// 관리자 지난주 화요일 가입자 수
+	public int lastTuesday() {
+		return cldao.lastTuesday();
+	}
+	
+	// 관리자 지난주 수요일 가입자 수
+	public int lastWednesday() {
+		return cldao.lastWednesday();
+	}
+	
+	// 관리자 지난주 목요일 가입자 수
+	public int lastThurseday() {
+		return cldao.lastThurseday();
+	}
+	
+	// 관리자 지난주 금요일 가입자 수
+	public int lastFriday() {
+		return cldao.lastFriday();
+	}
+	
+	// 관리자 지난주 토요일 가입자 수
+	public int lastSaturday() {
+		return cldao.lastSaturday();
+	}
+	
+	// 관리자 지난주 일요일 가입자 수
+	public int lastSunday() {
+		return cldao.lastSunday();
+	}
 		
 }

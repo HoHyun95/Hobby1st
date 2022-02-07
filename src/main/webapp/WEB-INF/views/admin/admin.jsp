@@ -292,8 +292,8 @@
               <p class="text-sm ">지난주 요일별 회원가입 수</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                <!-- <i class="material-icons text-sm my-auto me-1">schedule</i> -->
+                <!-- <p class="mb-0 text-sm"> campaign sent 2 days ago </p> -->
               </div>
             </div>
           </div>
@@ -308,12 +308,12 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 "> Daily Sales </h6>
-              <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+              <h6 class="mb-0 "> 동호회 개설 </h6>
+              <p class="text-sm "> 지난주 요일별 동호회 개설 수 </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated 4 min ago </p>
+                <!-- <i class="material-icons text-sm my-auto me-1">schedule</i>
+                <p class="mb-0 text-sm"> updated 4 min ago </p> -->
               </div>
             </div>
           </div>
@@ -436,13 +436,13 @@
       data: {
         labels: ["M", "T", "W", "T", "F", "S", "S"],
         datasets: [{
-          label: "Sales",
+          label: "Member",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
           backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [${totalMember }, 20, 10, 22, 50, 10, 40],
+          data: [${lastMonday }, ${lastTuesday }, ${lastWednesday }, ${lastThurseday }, ${lastFriday }, ${lastSaturday }, ${lastSunday }],
           maxBarThickness: 6
         }, ],
       },
@@ -515,9 +515,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    	  labels: ["M", "T", "W", "T", "F", "S", "S"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Club",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -528,7 +528,7 @@
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          data: [${ClastMonday }, ${ClastTuesday }, ${ClastWednesday }, ${ClastThurseday }, ${ClastFriday }, ${ClastSaturday }, ${ClastSunday }],
           maxBarThickness: 6
 
         }],

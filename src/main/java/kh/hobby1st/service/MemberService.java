@@ -102,4 +102,39 @@ public class MemberService {
 		return mem_dao.lastMember();
 	}
 	
+	// 관리자 지난주 월요일 가입자 수
+	public int lastMonday() {
+		return mem_dao.lastMonday();
+	}
+	
+	// 관리자 지난주 화요일 가입자 수
+	public int lastTuesday() {
+		return mem_dao.lastTuesday();
+	}
+	
+	// 관리자 지난주 수요일 가입자 수
+	public int lastWednesday() {
+		return mem_dao.lastWednesday();
+	}
+	
+	// 관리자 지난주 목요일 가입자 수
+	public int lastThurseday() {
+		return mem_dao.lastThurseday();
+	}
+	
+	// 관리자 지난주 금요일 가입자 수
+	public int lastFriday() {
+		return mem_dao.lastFriday();
+	}
+	
+	// 관리자 지난주 토요일 가입자 수
+	public int lastSaturday() {
+		return mem_dao.lastSaturday();
+	}
+	
+	// 관리자 지난주 일요일 가입자 수
+	public int lastSunday() {
+		return mem_dao.lastSunday();
+	}
+	
 }

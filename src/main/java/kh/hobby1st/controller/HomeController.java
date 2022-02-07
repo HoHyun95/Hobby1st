@@ -332,6 +332,12 @@ public class HomeController {
 	  return result;
 	}
 
+	@RequestMapping("hobby1st")
+	public String hobby1st(Model model) throws Exception {
+		return "hobby1st";
+	}
+	
+	
 	// Interceptor Error 
 	@RequestMapping("error")
 	public String error() {

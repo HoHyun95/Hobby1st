@@ -202,7 +202,40 @@ public class ClubListDAO {
 		return mybatis.selectOne("ClubList.lastClub");
 	}
 	
+	// 관리자 페이지 지난주 월요일 동호회 개설 수
+	public int lastMonday() {
+		return mybatis.selectOne("ClubList.lastMonday");
+	}
 	
+	// 관리자 페이지 지난주 화요일 동호회 개설 수
+	public int lastTuesday() {
+		return mybatis.selectOne("ClubList.lastTuesday");
+	}
+	
+	// 관리자 페이지 지난주 수요일 동호회 개설 수
+	public int lastWednesday() {
+		return mybatis.selectOne("ClubList.lastWednesday");
+	}
+	
+	// 관리자 페이지 지난주 목요일 동호회 개설 수
+	public int lastThurseday() {
+		return mybatis.selectOne("ClubList.lastThurseday");
+	}
+	
+	// 관리자 페이지 지난주 금요일 동호회 개설 수
+	public int lastFriday() {
+		return mybatis.selectOne("ClubList.lastFriday");
+	}
+	
+	// 관리자 페이지 지난주 토요일 동호회 개설 수
+	public int lastSaturday() {
+		return mybatis.selectOne("ClubList.lastSaturday");
+	}
+	
+	// 관리자 페이지 지난주 일요일 동호회 개설 수
+	public int lastSunday() {
+		return mybatis.selectOne("ClubList.lastSunday");
+	}	
 	
 
 }

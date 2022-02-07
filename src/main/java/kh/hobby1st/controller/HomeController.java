@@ -119,6 +119,24 @@ public class HomeController {
 		int addMember = totalMember - lastMember;
 		int addClub = totalClub - lastClub;
 		
+		// 지난 주 요일별 회원 가입 수
+		int lastMonday = mService.lastMonday();
+		int lastTuesday = mService.lastTuesday();
+		int lastWednesday = mService.lastWednesday();
+		int lastThurseday = mService.lastThurseday();
+		int lastFriday = mService.lastFriday();
+		int lastSaturday = mService.lastSaturday();
+		int lastSunday = mService.lastSunday();
+		
+		// 지난 주 요일별 동호회 개설 수
+		int ClastMonday = clService.lastMonday();
+		int ClastTuesday = clService.lastTuesday();
+		int ClastWednesday = clService.lastWednesday();
+		int ClastThurseday = clService.lastThurseday();
+		int ClastFriday = clService.lastFriday();
+		int ClastSaturday = clService.lastSaturday();
+		int ClastSunday = clService.lastSunday();		
+		
 		model.addAttribute("allClub", clubList);
 		model.addAttribute("allBoard", boardList);
 		model.addAttribute("allMember", memberList);
@@ -129,6 +147,22 @@ public class HomeController {
 		model.addAttribute("newClub", newClub);
 		model.addAttribute("addMember", addMember);
 		model.addAttribute("addClub", addClub);
+		
+		model.addAttribute("lastMonday", lastMonday);
+		model.addAttribute("lastTuesday", lastTuesday);
+		model.addAttribute("lastWednesday", lastWednesday);
+		model.addAttribute("lastThurseday", lastThurseday);
+		model.addAttribute("lastFriday", lastFriday);
+		model.addAttribute("lastSaturday", lastSaturday);
+		model.addAttribute("lastSunday", lastSunday);
+
+		model.addAttribute("ClastMonday", ClastMonday);
+		model.addAttribute("ClastTuesday", ClastTuesday);
+		model.addAttribute("ClastWednesday", ClastWednesday);
+		model.addAttribute("ClastThurseday", ClastThurseday);
+		model.addAttribute("ClastFriday", ClastFriday);
+		model.addAttribute("ClastSaturday", ClastSaturday);
+		model.addAttribute("ClastSunday", ClastSunday);
 		
 		return "admin/admin";
 	}

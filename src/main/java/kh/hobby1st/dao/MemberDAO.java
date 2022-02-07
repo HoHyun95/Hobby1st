@@ -102,6 +102,41 @@ public class MemberDAO {
 		return mybatis.selectOne("member.lastMember");
 	}
 		
+	// 관리자 페이지 지난주 월요일 회원 가입 수
+	public int lastMonday() {
+		return mybatis.selectOne("member.lastMonday");
+	}
+	
+	// 관리자 페이지 지난주 화요일 회원 가입 수
+	public int lastTuesday() {
+		return mybatis.selectOne("member.lastTuesday");
+	}
+	
+	// 관리자 페이지 지난주 수요일 회원 가입 수
+	public int lastWednesday() {
+		return mybatis.selectOne("member.lastWednesday");
+	}
+	
+	// 관리자 페이지 지난주 목요일 회원 가입 수
+	public int lastThurseday() {
+		return mybatis.selectOne("member.lastThurseday");
+	}
+	
+	// 관리자 페이지 지난주 금요일 회원 가입 수
+	public int lastFriday() {
+		return mybatis.selectOne("member.lastFriday");
+	}
+	
+	// 관리자 페이지 지난주 토요일 회원 가입 수
+	public int lastSaturday() {
+		return mybatis.selectOne("member.lastSaturday");
+	}
+	
+	// 관리자 페이지 지난주 일요일 회원 가입 수
+	public int lastSunday() {
+		return mybatis.selectOne("member.lastSunday");
+	}
+	
 		
 		
 }

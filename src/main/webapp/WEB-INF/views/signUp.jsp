@@ -138,7 +138,7 @@
               <img src="" alt="이미지를 선택해 주세요" id="preview_img">
             </div>
             <div class="input">
-              <input name="mem_photo" type="file" onchange="file_check(this)" class="signUpInput" id="input-image" accept="image/*">
+              <input name="mem_photo" type="file" class="signUpInput" id="input-image" accept="image/gif, image/jpeg, image/png">
             </div>
             <div class="validResult" id="mem_photo_Result"></div>
           </div>
@@ -301,8 +301,7 @@
     </div>
     </form>
   </div>
-</body>
-<script>
+  <script>
        $("#mem_pass2").blur("input",function() {
           if($("#mem_pass").val() != $("#mem_pass2").val()) {
  	   $("#mem_pass").val("")
@@ -364,14 +363,21 @@
 			   $("#mem_email_Result").text("2~21글자 내외 @ 포함하여 입력");
 		   }
 	   })
-       function file_check(e) {
-       	    var fileName = document.getElementById("input-image").value;
-            var idxDot = fileName.lastIndexOf(".") + 1;
-            var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
-       	                	             
-       	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp" || filetype="tiff" || filetype="svg" || filetype="webp" || filetype="tif"){
-       		alert("프로필 사진등록이 성공했습니다!");
-       	} 
-       }
-       </script>
+	   
+/*       function file_check(e) {
+      	 var fileName = document.getElementById("input-image").value;
+           var idxDot = fileName.lastIndexOf(".") + 1;
+           var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
+      	                	             
+      	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp" || filetype="tiff" || filetype="svg" || filetype="webp" || filetype="tif"){
+      		alert("프로필 사진등록이 성공했습니다!");
+      	} else {
+      	    alert("이미지를 선택해주세요");
+      	    $("#input-image").val("");
+            $("#preview_img").attr("src", "/images/6.jpg");
+            return false;
+      	}	
+      }  */
+ </script>
+</body>
 </html>

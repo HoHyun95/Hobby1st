@@ -63,6 +63,7 @@
             <div class="title">
               <i class="fas fa-id-card"> 회원 ID</i>
               <span class="validResult" id="mem_id_Result"></span>
+              <span class="validResult" id="mem_id_Result2"></span>
             </div>
             <div class="input">
               <input type="text" class="signUpInput" id="mem_id" maxlength="20" name="mem_id" placeholder="ID를 입력해주세요">
@@ -100,7 +101,7 @@
               <span class="validResult" id="mem_birthday_Result"></span>
             </div>
             <div class="input">
-              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" placeholder="이름을 입력해주세요">
+              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" min="1988-01-01" max="2005-12-31" value="2005-12-31">
             </div>
             <div class="title">
               <i class="fas fa-mobile-alt"> 핸드폰 번호</i>
@@ -137,7 +138,7 @@
               <img src="" alt="이미지를 선택해 주세요" id="preview_img">
             </div>
             <div class="input">
-              <input name="mem_photo" type="file" class="signUpInput" id="input-image" accept="image/*">
+              <input name="mem_photo" type="file" onchange="file_check(this)" class="signUpInput" id="input-image" accept="image/*">
             </div>
             <div class="validResult" id="mem_photo_Result"></div>
           </div>
@@ -301,4 +302,76 @@
     </form>
   </div>
 </body>
+<script>
+       $("#mem_pass2").blur("input",function() {
+          if($("#mem_pass").val() != $("#mem_pass2").val()) {
+ 	   $("#mem_pass").val("")
+	          $("#mem_pw2_Result").text("비밀번호가 일치하지 않습니다.")
+          } else if($("#mem_pass").val() == $("#mem_pass2").val()) {
+	  	      $("#mem_pw2_Result").text("");
+          }     
+      })
+	   $("#mem_id").blur(function() {
+		   var idcheck = RegExp(/^[A-Za-z0-9]{4,16}$/);
+		   if(idcheck.test($("#mem_id").val())){
+			   console.log("아이디 정규표현식 성공");
+               $("#mem_id_Result2").text("");
+               $("#mem_id_Result").text("");
+		   } else{
+			   $("#mem_id").val("");
+               $("#mem_id_Result").text("");
+               $("#mem_id_Result2").text("4~16자 사이의 영어와 숫자만 입력")
+		   }
+	   })
+       $("#mem_pass").blur(function() {
+        var passcheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
+		   if(passcheck.test($("#mem_pass").val())){
+			   console.log("비밀번호 정규표현식 성공");	
+               $("#mem_pw_Result").text("");		   
+		   } else{
+			   $("#mem_pass").val("");
+               $("#mem_pw_Result").text("8~16자 사이 영문,숫자,특수문자 1개 이상입력")
+		   }
+        })
+        $("#mem_name").blur(function() {
+		   var name_check = RegExp(/^[가-힣]{2,5}$/);
+		   if(name_check.test($("#mem_name").val())){
+			   console.log("이름 정규표현식 성공");		
+               $("#mam_name_Result").text(" ");		   
+		   } else{
+			   $("#mem_name").val("");	  
+               $("#mem_name_Result").text("2~5자 사이의 한글만 입력해주세요.");		   
+		   }
+	   })
+       $("#mem_phone").blur(function() {
+		   var phone_check = RegExp(/^01[0179][0-9]{7,9}$/);
+		   if(phone_check.test($("#mem_phone").val())){
+			   console.log("전화번호 정규표현식 성공");
+               $("#mem_phone_Result").text("");		   			   
+		   } else{
+			   $("#mem_phone").val("");	  
+			   $("#mem_phone_Result").text("12자 이하 '-' 없이 입력해주세요.");
+		   }
+	   })
+
+       $("#mem_email").blur(function() {
+		   var email_check = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
+		   if(email_check.test($("#mem_email").val())){
+			   console.log("이메일 정규표현식 성공");
+               $("#mem_email_Result").text("");			   
+		   } else{
+			   $("#mem_email").val("");	  
+			   $("#mem_email_Result").text("2~21글자 내외 @ 포함하여 입력");
+		   }
+	   })
+       function file_check(e) {
+       	    var fileName = document.getElementById("input-image").value;
+            var idxDot = fileName.lastIndexOf(".") + 1;
+            var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
+       	                	             
+       	if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp" || filetype="tiff" || filetype="svg" || filetype="webp" || filetype="tif"){
+       		alert("프로필 사진등록이 성공했습니다!");
+       	} 
+       }
+       </script>
 </html>

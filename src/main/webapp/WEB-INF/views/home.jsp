@@ -393,7 +393,7 @@
         let mem_address_Result = document.getElementById("mem_address_Result");
         
         
-        mem_id.onblur = () => {
+         mem_id.onblur = () => {
           if(mem_id.value == "") {
         	mem_id_Result.style.color = "tomato";
             mem_id_Result.innerText = "ID를 입력해 주세요";  
@@ -421,22 +421,33 @@
           }	  	
         }
         
-        mem_pass.onblur = () => {
+/*         mem_pass.onblur = () => {
+         var passcheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
           if(mem_pass.value == "") {
         	mem_pw_Result.innerText = "패스워드를 입력해 주세요";	  
-          }
+          }else if(passcheck.test($("#mem_pass").val())) {
+              $("#mem_pw_Result").text("");		   
+          }else {
+			  $("#mem_pass").val("");
+              $("#mem_pw_Result").text("8~16자 사이 영문,숫자,특수문자 1개 이상입력")
+          }  
         }
         
         mem_pass.onkeyup = () => {
           if(mem_pass.value != "") {
         	mem_pw_Result.innerText = "";  
           }  	
-        }
+        } */
         
-        mem_pass2.onblur = () => {
+/*         mem_pass2.onblur = () => {
           if(mem_pass2.value == "") {
             mem_pw2_Result.innerText = "패스워드를 한번 더 입력해 주세요";	  
-          }	
+          } else if($("#mem_pass").val() != $("#mem_pass2").val()){
+        	  $("#mem_pass").val("")
+ 	          $("#mem_pw2_Result").text("비밀번호가 일치하지 않습니다.")
+          } else if($("#mem_pass").val() == $("#mem_pass2").val()){
+	  	      $("#mem_pw2_Result").text("");
+          }
         }
 
         mem_pass2.onkeyup = () => {
@@ -447,7 +458,7 @@
         
         mem_name.onblur = () => {
           if(mem_name.value == "") {
-        	mem_name_Result.innerText = "이름을 입력해 주세요";	  
+        	mem_name_Result.innerText = "2~6자 사이의 한글만 입력해주세요.";	  
           }	
         }
 
@@ -467,7 +478,7 @@
           if(mem_nickname.value != "") {
         	mem_nickname_Result.innerText = "";  
           }  	
-        }
+        } */ 
         
         mem_birthday.onblur = () => {
           if(mem_birthday.value == "") {
@@ -481,9 +492,9 @@
           }  	
         }
         
-        mem_phone.onblur = () => {
+/*         mem_phone.onblur = () => {
           if(mem_phone.value == "") {
-        	mem_phone_Result.innerText = "전화번호를 입력해 주세요";	  
+        	mem_phone_Result.innerText = "12자 이하 '-' 없이 입력해주세요.";	  
           }	
         }
 
@@ -491,11 +502,11 @@
           if(mem_phone.value != "") {
         	mem_phone_Result.innerText = "";  
           }  	
-        }
+        } */
         
-        mem_email.onblur = () => {
+/*         mem_email.onblur = () => {
           if(mem_email.value == "") {
-        	mem_email_Result.innerText = "전화번호를 입력해 주세요";	  
+        	mem_email_Result.innerText = "이메일을 입력해 주세요";	  
           }	
         }
 
@@ -503,7 +514,7 @@
           if(mem_email.value != "") {
         	mem_email_Result.innerText = "";  
           }  	
-        }
+        } */
         
         select_gender.onblur = () => {
           if(select_gender.options[0].selected) {

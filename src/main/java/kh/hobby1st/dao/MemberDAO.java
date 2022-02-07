@@ -93,8 +93,15 @@ public class MemberDAO {
 	}
 
 	// 관리자 페이지 오늘 가입한 회원 수
-		public int newMember() {
-			return mybatis.selectOne("member.newMember");
-		}
+	public int newMember() {
+		return mybatis.selectOne("member.newMember");
+	}
 	
+	// 관리자 페이지 지난주 총 회원 수
+	public int lastMember() {
+		return mybatis.selectOne("member.lastMember");
+	}
+		
+		
+		
 }

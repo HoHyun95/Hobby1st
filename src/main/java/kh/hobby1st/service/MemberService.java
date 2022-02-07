@@ -97,4 +97,9 @@ public class MemberService {
 		return mem_dao.newMember();
 	}
 	
+	// 지난주 총 회원 수
+	public int lastMember() {
+		return mem_dao.lastMember();
+	}
+	
 }

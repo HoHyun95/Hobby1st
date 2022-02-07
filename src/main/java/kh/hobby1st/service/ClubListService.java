@@ -141,8 +141,13 @@ public class ClubListService {
 	}
 
 	// 오늘 생성된 동호회 수 관리자용
-		public int newClub() {
-			return cldao.newClub();
-		}
+	public int newClub() {
+		return cldao.newClub();
+	}
 	
+	// 지난주 총 동호회 수
+	public int lastClub() {
+		return cldao.lastClub();
+	}
+		
 }

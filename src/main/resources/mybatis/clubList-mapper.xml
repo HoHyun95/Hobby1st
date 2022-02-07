@@ -146,7 +146,7 @@
 		select * from (select club_list.*, row_number() over (order by cl_memcount desc) rn from club_list) where rn between ${start} and #{end}
 	</select>
 	
-	<!-- 관리자페이지 오늘 가입 회원 수 -->
+	<!-- 관리자페이지 오늘 등록한 동호회 수 -->
 	<select id="newClub" resultType="int">
 		select count(*) 
 		    from club_list
@@ -154,5 +154,11 @@
 		        to_char(trunc(sysdate,'iw'), 'yyyymmdd') 
 	</select>
 	
+	<!-- 관리자페이지 지난주 총 동호회 수 -->
+	<select id="lastClub" resultType="int">
+	SELECT count(*)
+    FROM club_list 
+    WHERE cl_opendate BETWEEN TO_DATE('220101', 'YY/MM/DD') AND TRUNC(sysdate,'IW')-7 + 7
+	</select>
 	
 </mapper>

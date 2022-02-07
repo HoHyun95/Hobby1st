@@ -83,4 +83,11 @@
         to_char(trunc(sysdate,'iw'), 'yyyymmdd') 
 	</select>
 	
+	<!-- 관리자페이지 지난주 총 회원 수 -->
+	<select id="lastMember" resultType="int">
+	SELECT count(*)
+    FROM member 
+    WHERE mem_lastlogin BETWEEN TO_DATE('220101', 'YY/MM/DD') AND TRUNC(sysdate,'IW')-7 + 7
+	</select>
+	
 </mapper>

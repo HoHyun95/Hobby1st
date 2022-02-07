@@ -694,14 +694,14 @@
             <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-instagram"></i></li></a>
             <a href="/clubBoard/boardList?cpage=1"><li class="icon_list_item"><i class="fab fa-twitter"></i></li></a>
             <a href="/clubList/createClubPage"><li class="icon_list_item"><i class="fab fa-github"></i></li></a>
-        	<a href="/notice/noticeListNotPaging"><li class="icon_list_item"><i class="fab fa-google"></i></li></a>
+<!--         	<a href="/notice/noticeListNotPaging"><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
 
 		<!-- FAQ -->        	
 		<!-- <a href="/faq/faqList><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
 		<!-- chat -->
 <!-- 		<a href="/chat/clubChat"><li class="icon_list_item"><i clzass="fab fa-google"></i></li></a> -->
 		<!-- qna -->
-		<!-- <a href="/qna/qnaList?cpage=1"><li class="icon_list_item"><i class="fab fa-google"></i></li></a> -->
+		<a href="/qna/qnaList?cpage=1"><li class="icon_list_item"><i class="fab fa-google"></i></li></a>
           </ul>
         </div>
       </div>

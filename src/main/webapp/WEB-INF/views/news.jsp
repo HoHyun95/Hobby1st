@@ -474,7 +474,8 @@
       <!-- QnA -->
       <div class="qna_wrap">
         <div class="qna_board">
-          <iframe src="qna/qnaList?cpage=1"></iframe>
+          <iframe src="/qna/qnaList?cpage=1"></iframe>
+
         </div>
       </div>
       <!-- FAQ -->

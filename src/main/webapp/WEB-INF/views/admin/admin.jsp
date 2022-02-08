@@ -182,6 +182,14 @@
             <span class="nav-link-text ms-1">회원관리</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/admin/voteAdmin">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">투표관리</span>
+          </a>
+        </li>
         
       </ul>
     </div>
@@ -221,7 +229,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+${addMember }　</span>than lask week</p>
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+${addMember }　</span>than last week</p>
             </div>
           </div>
         </div>
@@ -255,7 +263,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">+${addClub }　</span>than lask week</p>
+              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">+${addClub }　</span>than last week</p>
             </div>
           </div>
         </div>

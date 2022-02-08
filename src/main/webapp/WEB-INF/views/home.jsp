@@ -73,7 +73,6 @@
         if (current_point > 0) {
     	  current_point -= MOVE_WIDTH;
           position += MOVE_WIDTH;
-    	  console.log(position);
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";        	
         } 
       }
@@ -82,7 +81,6 @@
         if (current_point < last_point) {
     	  current_point += MOVE_WIDTH;
           position -= MOVE_WIDTH;
-    	  console.log(position);
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
         
@@ -684,7 +682,8 @@
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
             <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>
@@ -758,14 +757,16 @@
     </div>
 
     <!-- VOTE -->
+    <c:if test="${sessionScope.mem_id ne null}">
 	<div class="vote_preview_title">
       <div class="vote_preview_title_text">
         <h4>VOTE</h4>
       </div>
     </div>
 	<div class="vote_preview">
-	  VOTE CONTENTS
+	  <iframe src="/vote/presentVoteList" scrollbar="no"></iframe>
 	</div>
+	</c:if>
     <!-- VOTE END -->
 
     <div class="container">

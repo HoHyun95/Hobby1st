@@ -1,0 +1,84 @@
+/* vote */
+.vote {
+  width: 1260px;
+  margin: 30px auto;
+}
+
+.vote_box {
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vote_nav {
+  width: 100%;
+  padding: 10px 0px 0px 0px;
+}
+
+.vote_title {
+  height: 50px;
+  padding: 10px 30px 10px 30px
+}
+
+.vote_menu_list {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--bg-color3);
+  margin-left: 30px;
+  list-style-type: none;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--color1);
+}
+
+.vote_menu_list_item {
+  border: none;
+  padding: 10px 20px 10px 20px;
+}
+
+.vote_menu_list_item:hover {
+  cursor: pointer;
+}
+
+#previousVote {
+  border-bottom: 3px solid var(--color1);
+}
+
+.vote_contents {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.vote_contents_box_wrap {
+  width: 95%;
+  height: 100%;
+  border: 1px solid var(--bg-color3);
+}
+
+.previousVote_wrap {
+  width: 95%;
+  min-height: 1000px;
+  margin: 0 auto;
+}
+
+.presentVote_wrap {
+  width: 95%;
+  min-height: 1000px;
+  height: fit-content;
+  margin: 0 auto;
+  display: none;
+}
+
+/* vote end */
+
+iframe {   
+  display: block;   
+  border: none;   
+  width: 100%; 
+  height: 800px;
+}

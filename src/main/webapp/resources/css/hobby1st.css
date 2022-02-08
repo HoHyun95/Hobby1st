@@ -184,7 +184,7 @@
   padding-bottom: 30px;
 }
 
-#createClub {
+#findClub {
   width: 200px;
   height: 40px;
   background-color: transparent;
@@ -195,7 +195,7 @@
   font-weight: 900;
 }
 
-#createClub:hover {
+#findClub:hover {
   cursor: pointer;
   background-color: rgb(137, 33, 160);
   color: white;

@@ -758,6 +758,7 @@
       </div>
     </div>
 
+    <c:if test="${mem_id !=null }">
     <!-- VOTE -->
 	<div class="vote_preview_title">
       <div class="vote_preview_title_text">
@@ -768,7 +769,8 @@
 	  <iframe src="/vote/presentVoteList"></iframe>
 	</div>
     <!-- VOTE END -->
-
+	</c:if>
+	
     <div class="container">
       <div class="fav_club_list_title">
         <div class="fav_club_list_title_text">

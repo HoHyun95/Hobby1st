@@ -81,6 +81,42 @@ div {
 	margin-top: 5px;
 	padding-bottom: 10px;
 }
+
+.voteBtn {
+  border: 1px solid mediumaquamarine;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: mediumaquamarine;
+  background-color: transparent;
+}
+
+.voteBtn:hover {
+  color: white;
+  background-color: mediumaquamarine;
+  cursor: pointer;
+}
+
+.backBtn {
+  border: 1px solid #212121;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: #212121;
+  background-color: transparent;	
+}
+
+.backBtn:hover {
+  color: white;
+  background-color: #212121;
+  cursor: pointer;	
+}
+
+.voteCom {
+  border: 1px solid tomato;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: tomato;
+  background-color: transparent;	
+}
 </style>
 
 </head>
@@ -94,7 +130,7 @@ div {
 	<div class="container">
 		<div class="vote_list">
 			<div class="vote_title">
-				<div class="title">Q. ${voteDetail.vl_title }</div>
+				<div class="title"><i class="fas fa-vote-yea"></i> ${voteDetail.vl_title }</div>
 				<div class="select">복수 선택</div>
 
 				<div class="end_date">투표 종료일 : ${voteDetail.vl_end_date }</div>
@@ -117,15 +153,15 @@ div {
 			</c:forEach>
 			<div class="btn">
 				<c:if test="${voteCheck eq 1 }">
-					<button class="voteCom">투표완료</button>
+					<button class="voteCom"><i class="fas fa-user-check"></i> 투표 완료</button>
 				</c:if>
 				<c:if test="${voteCheck eq 0 }">
-					<button class="voteBtn">투표하러가기</button>
+					<button class="voteBtn"> <i class="fas fa-pen-square"></i> 투표하기</button>
 				</c:if>
 
 
 				&nbsp;
-				<button class="back">목록으로</button>
+				<button class="backBtn"><i class="fas fa-clipboard-list"></i> 목록으로</button>
 			</div>
 		</div>
 	</div>
@@ -151,8 +187,8 @@ div {
 
 	<script>
 		// 목록으로
-		$(".back").on("click", function() {
-			location.href = "/vote/presentVoteList";
+		$(".backBtn").on("click", function() {
+			history.back();
 		})
 
 		// 투표하기

@@ -73,7 +73,6 @@
         if (current_point > 0) {
     	  current_point -= MOVE_WIDTH;
           position += MOVE_WIDTH;
-    	  console.log(position);
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";        	
         } 
       }
@@ -82,7 +81,6 @@
         if (current_point < last_point) {
     	  current_point += MOVE_WIDTH;
           position -= MOVE_WIDTH;
-    	  console.log(position);
           main_bg_inner_bottom_list.style.transform = "translateX(" + (position) + "px)";
         }
         
@@ -167,7 +165,7 @@
               type: "get",
               dataType: "json" 
           }).done((res) => {
-        	  console.log(res);
+        	  
           });
     	}
       });
@@ -183,7 +181,7 @@
             type: "get",
             dataType: "json" 
           }).done((res) => {
-      	    console.log(res);
+      	    
       	    
       	    while (main_bg_inner_bottom_list.hasChildNodes()) {	
       	      main_bg_inner_bottom_list.removeChild(main_bg_inner_bottom_list.firstChild);

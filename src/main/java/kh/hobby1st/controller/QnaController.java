@@ -118,7 +118,7 @@ public class QnaController {
 		List<String> reply_profile = qService.reply_profile(qna_seq);
 
 		model.addAttribute("writerProfile", writerProfile);
-//		model.addAttribute("reply_profile", reply_profile);
+		model.addAttribute("reply_profile", reply_profile);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);
 //		model.addAttribute("replycount", replycount);

@@ -100,7 +100,7 @@
               동호회 사진
             </div>
             <div class="mc_img_box">
-              <img src="" alt="이미지를 선택해 주세요" id="mc_preview_img">
+              <img src="${club.cl_photo }" alt="이미지를 선택해 주세요" id="mc_preview_img">
             </div>
             <div class="mc_input">
               <input name="file" type="file" id="mc-input-image" class="mc_input_box">

@@ -280,7 +280,7 @@
                 <i class="fas fa-archive"> 카테고리 2</i>
               </div>
               <div class="input">
-                <select name="mem_category_2" id="mem_category_2">
+                <select name="mem_category_2" id="mem_category_select_2">
                   <option value="ITEM1" selected disabled hidden>카테고리를 선택해 주세요</option>
                   <option value="개발">개발</option>
                   <option value="운동/스포츠">운동/스포츠</option>

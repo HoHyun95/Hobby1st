@@ -35,7 +35,7 @@
           <div class="contents_item_wrap">
             <div class="contents_item">
                  <div class="desc">
-                    <h3>인증할 이메일 주소를 입력해주세요!</h3>                 
+                    <h3>이메일 주소를 입력해주세요!</h3>                 
                  </div>                        
                  <div class="title">
                     <i class="fas fa-envelope">회원 이메일</i>

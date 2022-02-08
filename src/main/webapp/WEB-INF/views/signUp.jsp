@@ -95,28 +95,28 @@
               <span class="validResult" id="mem_nickname_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_nickname" maxlength="20" name="mem_nickname" placeholder="닉네임을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_nickname" maxlength="40" name="mem_nickname" placeholder="닉네임을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-user"> 생년월일</i>
               <span class="validResult" id="mem_birthday_Result"></span>
             </div>
             <div class="input">
-              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" min="1988-01-01" max="2005-12-31" value="2005-12-31">
+              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" min="1960-01-01" max="2005-12-31" value="2005-12-31">
             </div>
             <div class="title">
               <i class="fas fa-mobile-alt"> 핸드폰 번호</i>
               <span class="validResult" id="mem_phone_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_phone" maxlength="20" name="mem_phone" placeholder="핸드폰 번호를 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_phone" maxlength="11" name="mem_phone" placeholder="핸드폰 번호를 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-envelope"> 이메일</i>
               <span class="validResult" id="mem_email_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_email" maxlength="20" name="mem_email" placeholder="이메일을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_email" maxlength="50" name="mem_email" placeholder="이메일을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-venus-mars"> 성별</i>
@@ -255,7 +255,7 @@
               <h5>Hobby1st에서 관심사가 같은 사람들과 동호회 활동을 즐겨보세요!</h5>
             </div>
             <div class="title">
-              <i class="fas fa-archive"> 대분류</i>
+              <i class="fas fa-archive"> 카테고리 1</i>
             </div>
             <div class="input">
               <select name="mem_category_1" id="mem_category_1">
@@ -277,176 +277,27 @@
             </div>
             <div class="validResult" id="mem_category_1_Result"></div>
             <div class="title">
-              <i class="fas fa-asterisk" id="so_item" style="display: none;">세부분류</i>
-            </div>
-            <!-- 개발 세부분류 -->
-            <div class="input" id="mem_category_2" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="백앤드">백앤드</option>
-                <option value="프론트">프론트</option>
-                <option value="보안">보안</option>
-                <option value="서버">서버</option>
-                <option value="웹디자인">웹디자인</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_2_Result"></div>
-            <!-- 운동/스포츠 세부분류 -->
-            <div class="input" id="mem_category_3" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="축구/풋살">축구/풋살</option>
-                <option value="야구">야구</option>
-                <option value="농구">농구</option>
-                <option value="헬스">헬스</option>
-                <option value="골프">골프</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_3_Result"></div>
-            <!-- 금융 세부분류 -->
-            <div class="input" id="mem_category_4" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="주식">주식</option>
-                <option value="코인">코인</option>
-                <option value="메타버스">메타버스</option>
-                <option value="선물">선물</option>
-                <option value="펀드">펀드</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_4_Result"></div>
-            <!-- 문화생활 세부분류 -->
-            <div class="input" id="mem_category_5" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="영화">영화</option>
-                <option value="전시">전시</option>
-                <option value="콘서트">콘서트</option>
-                <option value="연극">연극</option>
-                <option value="뮤지컬">뮤지컬</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_5_Result"></div>
-            <!-- 핸드메이드 세부분류 -->
-            <div class="input" id="mem_category_6" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="수공예">수공예</option>
-                <option value="커피">커피</option>
-                <option value="베이커리">베이커리</option>
-                <option value="꽃꽃이">꽃꽃이</option>
-                <option value="요리">요리</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_6_Result"></div>
-            <!-- 음악 세부분류 -->
-            <div class="input" id="mem_category_7" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="발라드/R&B">발라드/R&B</option>
-                <option value="힙합">힙합</option>
-                <option value="트로트">트로트</option>
-                <option value="댄스">댄스</option>
-                <option value="해외POP">해외POP</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_7_Result"></div>
-            <!-- 탈 것 -->
-            <div class="input" id="mem_category_8" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="자동차">자동차</option>
-                <option value="오토바이">오토바이</option>
-                <option value="전동킥보드">전동킥보드</option>
-                <option value="자전거">자전거</option>
-                <option value="보드">보드</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_8_Result"></div>
-            <!-- 연령대 -->
-            <div class="input" id="mem_category_9" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="10대">10대</option>
-                <option value="20대">20대</option>
-                <option value="30대">30대</option>
-                <option value="40대">40대</option>
-                <option value="50대">50대</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_9_Result"></div>
-            <!-- 사회공헌활동 -->
-            <div class="input" id="mem_category_10" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="지역봉사">지역봉사</option>
-                <option value="지역후원">지역후원</option>
-                <option value="사회봉사">사회봉사</option>
-                <option value="학교봉사">학교봉시</option>
-                <option value="유기견봉사">유기견봉사</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_10_Result"></div>   
-            <!-- 맛집 -->
-            <div class="input" id="mem_category_11" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="한식">한식</option>
-                <option value="일식">일식</option>
-                <option value="중식">중식</option>
-                <option value="양식">양식</option>
-                <option value="이색">이색</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_11_Result"></div>        
-            <!-- 남자아이돌 -->
-            <div class="input" id="mem_category_12" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="BTS">BTS</option>
-                <option value="NCT">NCT</option>
-                <option value="몬스타엑스">몬스타엑스</option>
-                <option value="세븐틴">세븐틴</option>
-                <option value="샤이니">샤이니</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_12_Result"></div>        
-            <!-- 여자아이돌 -->
-            <div class="input" id="mem_category_13" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="에스파">에스파</option>
-                <option value="트와이스">트와이스</option>
-                <option value="블랙핑크">블랙핑크</option>
-                <option value="아이브">아이브</option>
-                <option value="아이유">아이유</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_13_Result"></div>
-            <!-- 지역친목 -->
-            <div class="input" id="mem_category_14" style="display: none;">
-              <select name="mem_category_2" id="mem_category_select_2">
-                <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
-                <option value="서울">서울</option>
-                <option value="경기">경기</option>
-                <option value="인천">인천</option>
-                <option value="강원">강원</option>
-                <option value="충북">충북</option>
-                <option value="충남">충남</option>
-                <option value="대전">대전</option>
-                <option value="세종">세종</option>
-                <option value="전북">전북</option>
-                <option value="전남">전남</option>
-                <option value="광주">광주</option>
-                <option value="경북">경북</option>
-                <option value="대구">대구</option>
-                <option value="경남">경남</option>
-                <option value="울산">울산</option>
-                <option value="부산">부산</option>
-                <option value="제주">제주</option>
-              </select>
-            </div>
-            <div class="validResult" id="mem_category_14_Result"></div>
+                <i class="fas fa-archive"> 카테고리 2</i>
+              </div>
+              <div class="input">
+                <select name="mem_category_2" id="mem_category_2">
+                  <option value="ITEM1" selected disabled hidden>카테고리를 선택해 주세요</option>
+                  <option value="개발">개발</option>
+                  <option value="운동/스포츠">운동/스포츠</option>
+                  <option value="금융">금융</option>
+                  <option value="문화생활">문화생활</option>
+                  <option value="핸드메이드">핸드메이드</option>
+                  <option value="음악">음악</option>
+                  <option value="라이딩">라이딩</option>
+                  <option value="연령대">연령대</option>
+                  <option value="사회공헌활동">사회공헌활동</option>
+                  <option value="맛집">맛집</option>
+                  <option value="남자아이돌">남자아이돌</option>
+                  <option value="여자아이돌">여자아이돌</option>
+                  <option value="지역친목">지역친목</option>
+                </select>
+              </div>
+              <div class="validResult" id="mem_category_2_Result"></div> 
           </div>
         </div>
       </div>
@@ -461,11 +312,11 @@
     		  return false;
 
     	  }else if($("#mem_category_1 option:selected").val()=="ITEM1"){
-    		  alert("대분류를 선택해주세요!")
+    		  alert("카테고리1 선택해주세요!")
     		  return false;
 
     	  }else if($("#mem_category_select_2 option:selected").val()=="ITEM1"){
-    		  alert("세부분류를 선택해주세요!")
+    		  alert("카테고리2 선택해주세요!")
     		  return false;
     	  }
       });
@@ -549,7 +400,7 @@
 	   })
 	   /* 생년월일 잡아내기 */
 	   $("#mem_birthday").blur(function() {
-		 if($(this).val() > "2005-12-31" || $(this).val() < "1988-01-01"){
+		 if($(this).val() > "2005-12-31" || $(this).val() < "1960-01-01"){
 			 $("#mem_birthday").val("");
 			 $("#mem_birthday_Result").text("제대로된 날짜를 입력해주세요");
 		 }
@@ -569,78 +420,15 @@
     	  }         
        })
 	   
-	   /* 카테고리분류 */
-	   $("#mem_category_1").on("change", function(){
-		   /* 선택한 이름값으로 세부카테고리 항목을 보이고 나머진 숨김 */
-		for(i=0; i<20; i++) {
-		 if($(this).val()==="개발") {
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_2").show();
-			   $("#mem_category_" + i).hide();
-		 }else if($(this).val()==="운동/스포츠"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_3").show();
-			   $("#mem_category_" + i).hide();
-		 }else if($(this).val()==="금융"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_4").show();
-			   $("#mem_category_" + i).hide();
-		 }else if($(this).val()==="문화생활"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_5").show();
-			   $("#mem_category_" + i).hide();		  
-		 }else if($(this).val()==="핸드메이드"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_6").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="음악"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_7").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="라이딩"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_8").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="연령대"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_9").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="사회공헌활동"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_10").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="맛집"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_11").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="남자아이돌"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_12").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="여자아이돌"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_13").show();
-			   $("#mem_category_" + i).hide();			 
-		 }else if($(this).val()==="지역친목"){
-			   $("#so_item").show();
-			   $("#mem_category_1").show();
-			   $("#mem_category_14").show();
-			   $("#mem_category_" + i).hide();			 			 
-		 }
-	   }
-	})
+       /* 탭키로 못넘기게 막기 */
+	   let select_gender = document.getElementById("select_gender");
+       select_gender.addEventListener('keydown', (e) => {
+         if(e.keyCode == 9){ // Tab key
+           e.preventDefault();
+         }
+       })
+
+
  </script>
 </body>
 </html>

@@ -96,7 +96,7 @@
                 <span class="validResult" id="m_nickname_Result"></span>
               </div>
               <div class="input">
-                <input type="text" class="mModifyInput" id="m_nickname" maxlength="20" name="mem_nickname"
+                <input type="text" class="mModifyInput" id="m_nickname" maxlength="40" name="mem_nickname"
                   placeholder="닉네임을 입력해주세요" value="${memberInfo.mem_nickname}">
               </div>
               <div class="title">
@@ -111,7 +111,7 @@
                 <span class="validResult" id="m_phone_Result"></span>
               </div>
               <div class="input">
-                <input type="text" class="mModifyInput" id="m_phone" maxlength="20" name="mem_phone"
+                <input type="text" class="mModifyInput" id="m_phone" maxlength="11" name="mem_phone"
                   placeholder="핸드폰 번호를 입력해주세요" value="${memberInfo.mem_phone}">
               </div>
               <div class="title">
@@ -119,7 +119,7 @@
                 <span class="validResult" id="m_email_Result"></span>
               </div>
               <div class="input">
-                <input type="text" class="mModifyInput" id="m_email" maxlength="20" name="mem_email"
+                <input type="text" class="mModifyInput" id="m_email" maxlength="50" name="mem_email"
                   placeholder="이메일을 입력해주세요" value="${memberInfo.mem_email}">
               </div>
               <div class="title">
@@ -236,7 +236,7 @@
               </div>
               <div class="select_mem_address">
                 <select name="mem_address" id="m_address">
-                  <option selected disabled hidden>지역을 선택해주세요</option>
+                  <option value="" selected disabled hidden>지역을 선택해주세요</option>
                   <option value="서울">서울</option>
                   <option value="경기">경기</option>
                   <option value="인천">인천</option>
@@ -263,11 +263,11 @@
                 <h3>변경할 카테고리를 선택해 주세요!</h3>
               </div>
               <div class="title">
-                <i class="fas fa-archive"> 대분류</i>
+                <i class="fas fa-archive"> 카테고리 1</i>
               </div>
               <div class="input">
                 <select name="mem_category_1" id="m_category_1">
-                  <option value="" disabled hidden>카테고리를 선택해 주세요</option>
+                  <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
                   <option value="개발">개발</option>
                   <option value="운동/스포츠">운동/스포츠</option>
                   <option value="금융">금융</option>
@@ -285,22 +285,24 @@
               </div>
               <div class="validResult" id="m_category_1_Result"></div>
               <div class="title">
-                <i class="fas fa-asterisk"> 소분류</i>
+                <i class="fas fa-archive"> 카테고리 2</i>
               </div>
               <div class="input">
                 <select name="mem_category_2" id="m_category_2">
-                  <option value="ITEM1" disabled hidden>세부 카테고리를 선택해 주세요</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
-                  <option value="ITEM1">ITEM 1</option>
+                  <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
+                  <option value="개발">개발</option>
+                  <option value="운동/스포츠">운동/스포츠</option>
+                  <option value="금융">금융</option>
+                  <option value="문화생활">문화생활</option>
+                  <option value="핸드메이드">핸드메이드</option>
+                  <option value="음악">음악</option>
+                  <option value="라이딩">라이딩</option>
+                  <option value="연령대">연령대</option>
+                  <option value="사회공헌활동">사회공헌활동</option>
+                  <option value="맛집">맛집</option>
+                  <option value="남자아이돌">남자아이돌</option>
+                  <option value="여자아이돌">여자아이돌</option>
+                  <option value="지역친목">지역친목</option>
                 </select>
               </div>
               <div class="validResult" id="m_category_2_Result"></div>

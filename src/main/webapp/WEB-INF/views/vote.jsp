@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/default.css">
-  <link rel="stylesheet" href="/css/news.css">
+  <link rel="stylesheet" href="/css/vote.css">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
   <link rel="stylesheet" href="/css/signUp.css">
@@ -356,44 +356,29 @@
          signUp_wrap.style.display = "none";
        }
 
-      // news menu toggle btn
-      let notice = document.getElementById("notice");
-      let qna = document.getElementById("qna");
-      let faq = document.getElementById("faq");
+      // vote menu toggle btn
+      let previousVote = document.getElementById("previousVote");
+      let presentVote = document.getElementById("presentVote");
+   
+      let previousVote_wrap = document.querySelector(".previousVote_wrap");
+      let presentVote_wrap = document.querySelector(".presentVote_wrap");
+    
+      previousVote.onclick = () => {
+    	previousVote.style.borderBottom = "3px solid var(--bg-color3)";
+    	presentVote.style.borderBottom = "none";
 
-      let notice_wrap = document.querySelector(".notice_wrap");
-      let qna_wrap = document.querySelector(".qna_wrap");
-      let faq_wrap = document.querySelector(".faq_wrap");
-
-      notice.onclick = () => {
-        notice.style.borderBottom = "3px solid var(--bg-color3)";
-        qna.style.borderBottom = "none";
-        faq.style.borderBottom = "none";
-
-        notice_wrap.style.display = "flex";
-        qna_wrap.style.display = "none";
-        faq_wrap.style.display = "none";
+    	previousVote_wrap.style.display = "flex";
+        presentVote_wrap.style.display = "none";
       }
 
-      qna.onclick = () => {
-        notice.style.borderBottom = "none";
-        qna.style.borderBottom = "3px solid var(--bg-color3)";
-        faq.style.borderBottom = "none";
+      presentVote.onclick = () => {
+    	previousVote.style.borderBottom = "none";
+        presentVote.style.borderBottom = "3px solid var(--bg-color3)";
 
-        notice_wrap.style.display = "none";
-        qna_wrap.style.display = "flex";
-        faq_wrap.style.display = "none";
+        previousVote_wrap.style.display = "none";
+        presentVote_wrap.style.display = "flex";
       }
 
-      faq.onclick = () => {
-        notice.style.borderBottom = "none";
-        qna.style.borderBottom = "none";
-        faq.style.borderBottom = "3px solid var(--bg-color3)";
-
-        notice_wrap.style.display = "none";
-        qna_wrap.style.display = "none";
-        faq_wrap.style.display = "flex";
-      }
     }
   </script>
 </head>
@@ -436,7 +421,7 @@
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
             <a href="/vote"><li class="menu_list_item">VOTE</li></a>
             <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
-              <c:if test="${admin != null}">
+            <c:if test="${admin != null}">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>
           </ul>
@@ -444,56 +429,27 @@
       </div>
     </div>
 
-    <div class="news">
-      <div class="news_box">
-        <div class="news_nav">
-          <div class="news_title">
-            <h2>NEWS</h2>
+    <div class="vote">
+      <div class="vote_box">
+        <div class="vote_nav">
+          <div class="vote_title">
+            <h2>VOTE</h2>
           </div>
-          <div class="news_menu_list">
-            <div class="news_menu_list_item" id="notice">공지사항</div>
-            <div class="news_menu_list_item" id="qna">Q&A</div>
-            <div class="news_menu_list_item" id="faq">FAQ</div>
+          <div class="vote_menu_list">
+            <div class="vote_menu_list_item" id="previousVote">완료된 투표</div>
+            <div class="vote_menu_list_item" id="presentVote">진행중인 투표</div>
           </div>
         </div>
       </div>
-      <div class="notice_wrap">
-        <!-- 공지사항 -->
-        <div class="notice_accordian">
-          <c:forEach var="notice" items="${noticeList }" varStatus="status">
-          <input type="checkbox" id="notice${status.count }">
-          <label for="notice${status.count }">${notice.notice_title } 
-            <span id="notice_writeDate"><fmt:formatDate value="${notice.notice_write_date}" pattern="yyyy-MM-dd HH:mm"/></span>
-            <em><i class="fas fa-chevron-circle-down"></i></em>
-          </label>
-          <div>
-          ${notice.notice_contents }
-          </div>
-          </c:forEach>
-        </div>
+      <!-- previousVote -->
+      <div class="previousVote_wrap">
+        previousVote
       </div>
-      <!-- QnA -->
-      <div class="qna_wrap">
-        <div class="qna_board">
-          <iframe src="/qna/qnaList?cpage=1"></iframe>
-
-        </div>
+      <!-- presentVote -->
+      <div class="presentVote_wrap">
+        presentVote
       </div>
-      <!-- FAQ -->
-      <div class="faq_wrap">
-        <div class="faq_accordian">
-          <c:forEach var="faq" items="${faqList }" varStatus="status">
-          <input type="checkbox" id="faq${status.count }">
-          <label for="faq${status.count }">${faq.faq_title }<em><i class="fas fa-chevron-circle-down"></i></em></label>
-          <div>
-            <p>
-              ${faq.faq_contents }
-            </p>
-          </div>
-          </c:forEach>
-        </div>
-      </div>
-    </div>
+      
       <div class="footer">
         <div class="footer_inner">
           <div class="footer_logo">

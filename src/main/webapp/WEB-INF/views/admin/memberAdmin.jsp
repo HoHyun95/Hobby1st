@@ -207,7 +207,7 @@
 				$('.asignMem${dto.mem_id}').on('click', () => {
 					if(confirm("회원을 탈퇴시키겠습니까?")){
 						$.ajax({
-							url : "/member/asignAdmin",
+							url : "/member/signOutAdmin",
 							data : {mem_id : "${dto.mem_id}"}
 						}).done(function(result){
 							if(result == 1){

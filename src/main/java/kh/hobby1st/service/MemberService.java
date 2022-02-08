@@ -53,6 +53,11 @@ public class MemberService {
 	public int id_check(String id) {
 		return mem_dao.id_check(id);
 	}
+	
+	// 이메일중복여부 체크
+	public int email_search(String email) {
+		return mem_dao.email_search(email);
+	}
 
 	// 이메일 찾기 기능
 	public int email_check(String email) {

@@ -583,7 +583,7 @@
         
         mem_email.onblur = () => {
           if(mem_email.value == "") {
-        	mem_email_Result.innerText = "전화번호를 입력해 주세요";	  
+        	mem_email_Result.innerText = "이메일을 입력해 주세요";	  
           }	
         }
 

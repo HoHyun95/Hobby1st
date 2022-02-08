@@ -25,6 +25,10 @@
 		select count(*) from member where mem_id = #{id}
 	</select>
 	
+    <select id="email_search" resultType="Integer">
+		select count(*) from member where mem_email = #{email}
+	</select>
+	
 	<select id="naver_idCheck" resultType="Integer">
 	    select count(*) from member where mem_id = #{naver_id}
 	</select>

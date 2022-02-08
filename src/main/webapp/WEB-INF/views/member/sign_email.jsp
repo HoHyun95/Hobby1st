@@ -27,7 +27,7 @@
             <hr class="active_bg">
             </div>
             <div class="steps_item_title"><span class="active_text">STEP 0</span></div>
-            <div class="steps_item_detail">이메일찾기!(table에 두개의 동일한 이메일이 존재할시 애러납니다 더미삭제하고 테스트해주세요!)</div>
+            <div class="steps_item_detail">이메일찾기!</div>
          </div>
        
          <!-- 몸통 -->

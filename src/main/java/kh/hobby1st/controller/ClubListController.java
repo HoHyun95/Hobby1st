@@ -65,7 +65,9 @@ public class ClubListController {
 			dto.setCl_photo("/upload/club/" + photoName);
 			int result = clService.modifyClubProc(dto);
 		}
-		return "clubHouse?cl_id="+dto.getCl_id();
+		return "redirect:/clubHouse?cl_id="+dto.getCl_id();
+	
+	
 
 	}
 

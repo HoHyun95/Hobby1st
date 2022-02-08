@@ -101,5 +101,23 @@ public class VoteService {
 	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq) {
 		return voteDao.selectOptionByCount(vo_vote_seq);
 	}
+	
+	// 투표 삭제
+	public int deleteVote(int seq) {
+		
+		int result = 0;
+		
+		int deleteVoteList =voteDao.deleteVoteList(seq);
+		int deleteVoteOption =voteDao.deleteVoteOption(seq);
+		int deleteVoteCheck = voteDao.deleteVoteCheck(seq);
+		
+		if(deleteVoteCheck == 1 && deleteVoteList == 1 && deleteVoteOption ==1) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	
 
 }

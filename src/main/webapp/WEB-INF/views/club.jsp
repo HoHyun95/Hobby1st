@@ -1244,6 +1244,47 @@
     </div>
 	</form>
 	<script>
+
+
+	
+	$(document).ready(function() {
+	    $("input:file[name='cl_photo']").change(function () {
+			
+	        let str = $(this).val();
+	        let fileName = str.split('\\').pop().toLowerCase();
+	        checkFileName(fileName);
+	    });
+	});
+
+	function checkFileName(str){
+	 
+	 let ext =  str.split('.').pop().toLowerCase();
+	 if($.inArray(ext, ['png','jpg', 'jpeg']) == -1) {
+
+		  alert(ext+'파일은 업로드 하실 수 없습니다.');
+		  $('#cc-input-image').val("");
+	 }
+
+	 var pattern =   /[\{\}\/?,;:|*~`!^\+<>@\#$%&\\\=\'\"]/gi;
+	 if(pattern.test(str) ){
+		  alert('파일명에 특수문자를 제거해주세요.');
+		  $('#cc-input-image').val("");
+	 }
+	}
+
+	
+//     const previewImage = document.getElementById("preview_img");
+//     select_gender.addEventListener("change", (e) => {
+//       if(e.target.id == "select_gender" && e.target.value == "M") {
+//         previewImage.src = "/images/man" + (getRandomNum(1, 3)) +".png";
+//       } else if(e.target.id == "select_gender" && e.target.value == "F") {
+//         previewImage.src = "/images/woman" + (getRandomNum(1, 3)) +".png";
+//       }
+//     })
+    const previewImage = document.getElementById("cc_preview_img");
+//     previewImage.src = "/images/man.png";
+
+	
 	  function readImage(input) {
 	    if (input.files && input.files[0]) {
 	      const reader = new FileReader()
@@ -1333,9 +1374,9 @@
 			){
 				alert("정보를 정확히 입력해주세요");
 				return false;
-// 	  		}else if($('#image-input').val == ""){
-// 		  		alert("동호회 대표 사진을 등록해주세요");
-// 		  		return false;
+	  		}else if($('#cc-image-input').val() == ""){
+		  		alert("동호회 대표 사진을 등록해주세요");
+		  		return false;
 	  	   }else if(cl_local.value == "지역을 선택해주세요"){
 	  		   alert("활동 지역을 선택해주세요");
 	  			return false;

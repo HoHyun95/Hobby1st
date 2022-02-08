@@ -31,13 +31,14 @@ div {
 
 .vote_list {
 	width: 300px;
-	margin: 15px 45px;
+	margin: 15px 30px;
 	margin-top: 30px;
 	border: 1px solid rgb(0, 0, 0);
 	padding-left: 2%;
 	padding-right: 2%;
 	padding: 1%;
-	border-radius: 10px;
+	box-shadow: 2px 2px 1px 1px rgba(189, 154, 197, 0.5);
+	position: relative;
 }
 
 .vote_title {
@@ -66,6 +67,53 @@ div {
 .btn {
 	text-align: center;
 }
+
+.vote_remove_btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: tomato;
+}
+
+.vote_remove_btn:hover {
+  cursor: pointer;
+}
+
+.voteBtn {
+  border: 1px solid mediumaquamarine;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: mediumaquamarine;
+  background-color: transparent;
+}
+
+.voteBtn:hover {
+  color: white;
+  background-color: mediumaquamarine;
+  cursor: pointer;
+}
+
+.voteResult {
+  border: 1px solid #212121;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: #212121;
+  background-color: transparent;	
+}
+
+.voteResult:hover {
+  color: white;
+  background-color: #212121;
+  cursor: pointer;	
+}
+
+.comVote {
+  border: 1px solid tomato;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: tomato;
+  background-color: transparent;	
+}
 </style>
 </head>
 <body>
@@ -77,29 +125,35 @@ div {
 		<c:forEach var="dto" items="${vote_list }" varStatus="status">
 		    <c:if test="${today > dto.vl_end_date }">
 			<div class="vote_list">
-				<div class="vote_title">${dto.vl_title }</div>
+			    <c:if test="${mem_id eq 'admin' }">
+			      <div class="vote_remove_btn"><i class="fas fa-times-circle"></i></div>
+			    </c:if>
+			    <c:if test="${mem_id ne 'admin' }">
+			      <div class="vote_remove_btn" style="display:none"><i class="fas fa-times-circle"></i></div>
+			    </c:if>
+				<div class="vote_title"><i class="fas fa-vote-yea"></i> ${dto.vl_title }</div>
 
 				<div class="attend">
 					<i class="fas fa-user-check"></i> ${dto.vl_count }명 참여
 				</div>
 
-				<div class="start_date">투표 시작일 : ${dto.formdDate }</div>
+				<div class="start_date"><i class="far fa-clock"></i> 투표 시작일 : ${dto.formdDate }</div>
 
 				<div class="end_date">
-					투표 종료일 : ${dto.vl_end_date }
+					<i class="fas fa-clock"></i> 투표 종료일 : ${dto.vl_end_date }
 					<c:if test="${today > dto.vl_end_date }">(종료)</c:if>
 					
 				</div>
 
 				<div class="btn" id="btn${dto.vl_seq }">
-					<button class="comVote" style="display: none;">투표 완료</button>
+					<button class="comVote" style="display: none;"><i class="fas fa-user-check"></i> 투표 완료</button>
 
 					<button class="voteBtn">
-						투표하러가기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
+						<i class="fas fa-pen-square"></i> 투표하기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
 					</button>
 					&nbsp;
 					<button class="voteResult">
-						결과보기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
+						<i class="fas fa-clipboard-list"></i> 결과보기 <input class="vl_seq" type="hidden" value="${dto.vl_seq }">
 					</button>
 				</div>
 			</div>
@@ -144,6 +198,11 @@ div {
 		$(".voteResult").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
 			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq;
+		})
+		
+		// 투표 삭제
+		$(".vote_remove_btn").on("click", function() {
+		  alert("kk");	
 		})
 	</script>
 

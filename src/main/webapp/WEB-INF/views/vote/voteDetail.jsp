@@ -60,6 +60,34 @@ div {
 	padding-top: 20px;
 	text-align: center;
 }
+
+.voteBtn {
+  border: 1px solid mediumaquamarine;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: mediumaquamarine;
+  background-color: transparent;
+}
+
+.voteBtn:hover {
+  color: white;
+  background-color: mediumaquamarine;
+  cursor: pointer;
+}
+
+.back {
+  border: 1px solid #212121;
+  padding: 3px 5px 3px 5px;
+  font-size: 0.8rem;
+  color: #212121;
+  background-color: transparent;	
+}
+
+.back:hover {
+  color: white;
+  background-color: #212121;
+  cursor: pointer;	
+}
 </style>
 
 </head>
@@ -110,9 +138,9 @@ div {
 			</div>
 
 			<div class="vote">
-				<button class="voteBtn">투표하기</button>
+				<button class="voteBtn"><i class="fas fa-pen-square"></i> 투표하기</button>
 				&nbsp; &nbsp;
-				<button type="button" class="back">목록으로</button>
+				<button type="button" class="back"><i class="fas fa-clipboard-list"></i> 목록으로</button>
 			</div>
 			<input type="hidden" name="vl_seq" value="${voteDetail.vl_seq }">
 		</div>

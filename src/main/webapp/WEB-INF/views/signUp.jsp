@@ -227,7 +227,7 @@
             </div>
             <div class="select_mem_address">
               <select name="mem_address" id="mem_address">
-                <option selected disabled hidden>지역을 선택해주세요</option>
+                <option value="ITEM1" selected disabled hidden>지역을 선택해주세요</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
                 <option value="인천">인천</option>
@@ -259,7 +259,7 @@
             </div>
             <div class="input">
               <select name="mem_category_1" id="mem_category_1">
-                <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
+                <option value="ITEM1" selected disabled hidden>카테고리를 선택해 주세요</option>
                 <option value="개발">개발</option>
                 <option value="운동/스포츠">운동/스포츠</option>
                 <option value="금융">금융</option>
@@ -281,7 +281,7 @@
             </div>
             <!-- 개발 세부분류 -->
             <div class="input" id="mem_category_2" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="백앤드">백앤드</option>
                 <option value="프론트">프론트</option>
@@ -293,7 +293,7 @@
             <div class="validResult" id="mem_category_2_Result"></div>
             <!-- 운동/스포츠 세부분류 -->
             <div class="input" id="mem_category_3" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="축구/풋살">축구/풋살</option>
                 <option value="야구">야구</option>
@@ -305,7 +305,7 @@
             <div class="validResult" id="mem_category_3_Result"></div>
             <!-- 금융 세부분류 -->
             <div class="input" id="mem_category_4" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="주식">주식</option>
                 <option value="코인">코인</option>
@@ -317,7 +317,7 @@
             <div class="validResult" id="mem_category_4_Result"></div>
             <!-- 문화생활 세부분류 -->
             <div class="input" id="mem_category_5" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="영화">영화</option>
                 <option value="전시">전시</option>
@@ -329,7 +329,7 @@
             <div class="validResult" id="mem_category_5_Result"></div>
             <!-- 핸드메이드 세부분류 -->
             <div class="input" id="mem_category_6" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="수공예">수공예</option>
                 <option value="커피">커피</option>
@@ -341,7 +341,7 @@
             <div class="validResult" id="mem_category_6_Result"></div>
             <!-- 음악 세부분류 -->
             <div class="input" id="mem_category_7" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="발라드/R&B">발라드/R&B</option>
                 <option value="힙합">힙합</option>
@@ -353,7 +353,7 @@
             <div class="validResult" id="mem_category_7_Result"></div>
             <!-- 탈 것 -->
             <div class="input" id="mem_category_8" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="자동차">자동차</option>
                 <option value="오토바이">오토바이</option>
@@ -365,7 +365,7 @@
             <div class="validResult" id="mem_category_8_Result"></div>
             <!-- 연령대 -->
             <div class="input" id="mem_category_9" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="10대">10대</option>
                 <option value="20대">20대</option>
@@ -377,7 +377,7 @@
             <div class="validResult" id="mem_category_9_Result"></div>
             <!-- 사회공헌활동 -->
             <div class="input" id="mem_category_10" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="지역봉사">지역봉사</option>
                 <option value="지역후원">지역후원</option>
@@ -389,7 +389,7 @@
             <div class="validResult" id="mem_category_10_Result"></div>   
             <!-- 맛집 -->
             <div class="input" id="mem_category_11" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="한식">한식</option>
                 <option value="일식">일식</option>
@@ -401,11 +401,11 @@
             <div class="validResult" id="mem_category_11_Result"></div>        
             <!-- 남자아이돌 -->
             <div class="input" id="mem_category_12" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="BTS">BTS</option>
                 <option value="NCT">NCT</option>
-                <option value="몬스터엑스">몬스터엑스</option>
+                <option value="몬스타엑스">몬스타엑스</option>
                 <option value="세븐틴">세븐틴</option>
                 <option value="샤이니">샤이니</option>
               </select>
@@ -413,7 +413,7 @@
             <div class="validResult" id="mem_category_12_Result"></div>        
             <!-- 여자아이돌 -->
             <div class="input" id="mem_category_13" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="에스파">에스파</option>
                 <option value="트와이스">트와이스</option>
@@ -425,17 +425,28 @@
             <div class="validResult" id="mem_category_13_Result"></div>
             <!-- 지역친목 -->
             <div class="input" id="mem_category_14" style="display: none;">
-              <select name="mem_category_2">
+              <select name="mem_category_2" id="mem_category_select_2">
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
-                <option value="대구">대구</option>
                 <option value="인천">인천</option>
                 <option value="강원">강원</option>
+                <option value="충북">충북</option>
+                <option value="충남">충남</option>
+                <option value="대전">대전</option>
+                <option value="세종">세종</option>
+                <option value="전북">전북</option>
+                <option value="전남">전남</option>
+                <option value="광주">광주</option>
+                <option value="경북">경북</option>
+                <option value="대구">대구</option>
+                <option value="경남">경남</option>
+                <option value="울산">울산</option>
+                <option value="부산">부산</option>
+                <option value="제주">제주</option>
               </select>
             </div>
             <div class="validResult" id="mem_category_14_Result"></div>
-                    
           </div>
         </div>
       </div>
@@ -443,6 +454,22 @@
     </form>
   </div>
   <script>
+       /* 프로필과, 지역, 취미가 선택이 안되어있는경우 */
+      $("#signUpBtn").on("click",function(){ 
+    	  if($("#mem_address option:selected").val()=="ITEM1") {
+    		  alert("주소를 선택해주세요!")
+    		  return false;
+
+    	  }else if($("#mem_category_1 option:selected").val()=="ITEM1"){
+    		  alert("대분류를 선택해주세요!")
+    		  return false;
+
+    	  }else if($("#mem_category_select_2 option:selected").val()=="ITEM1"){
+    		  alert("세부분류를 선택해주세요!")
+    		  return false;
+    	  }
+      });
+
        /* 이메일중복여부체크 */
        $("#mem_email").blur(function() {
     	  $.ajax({
@@ -517,7 +544,7 @@
                $("#mem_email_Result").text("");			   
 		   } else{
 			   $("#mem_email").val("");	  
-			   $("#mem_email_Result").text("2~21글자 내외 @과 .com 포함하여 입력");
+			   $("#mem_email_Result").text("2~21글자 내외 '@' 과 '.' 포함하여 입력");
 		   }
 	   })
 	   /* 생년월일 잡아내기 */
@@ -541,7 +568,6 @@
     		 $("#mem_photo_Result").text("이미지 형식만 올려주세요!")
     	  }         
        })
-	   
 	   
 	   /* 카테고리분류 */
 	   $("#mem_category_1").on("change", function(){

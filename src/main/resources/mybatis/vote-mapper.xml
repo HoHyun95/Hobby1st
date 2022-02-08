@@ -66,6 +66,21 @@
 		select * from vote_option where vo_vote_seq = #{value} order by vo_count desc
 	</select>
 	
+	<!-- 투표삭제 시 리스트에서 삭제 -->
+	<delete id="deleteVoteList">
+   		delete from vote_list where vl_seq = #{value}
+   	</delete>
+   	
+	<!-- 투표삭제 시 옵션 값 삭제 -->
+	<delete id="deleteVoteOption">
+   		delete from vote_option where vo_vote_seq = #{value}
+   	</delete>
+   	
+	<!-- 투표삭제 시 해당 투표 checklist 삭제 -->
+	<delete id="deleteVoteCheck">
+   		delete from vote_check where vc_vote_seq = #{value}
+   	</delete>
+	
 	
 	
 </mapper>

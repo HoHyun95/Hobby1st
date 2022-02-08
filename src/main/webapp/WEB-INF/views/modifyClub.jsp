@@ -342,6 +342,7 @@
 				return false;
 			}else if(cl_maxMem_valid.innerHTML != ""){
 				alert("동호회 정원을 확인해주세요");
+				return false;
 			}else if(cl_desc.value.length > 199){
 	    		alert("동호회 소개글을 200자 이내로 작성해주세요");
         		return false;

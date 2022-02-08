@@ -141,15 +141,15 @@ public class VoteController {
 
 	// 투표 작성 하기
 	@RequestMapping("voteWrite")
-	public String voteWrite(VoteListDTO listDto, VoteOptionDTO optionDto, String edateY, String edateM, String edateD,
+	public String voteWrite(VoteListDTO listDto, VoteOptionDTO optionDto, String edate,
 			String[] option) {
 
-		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
-		listDto.setVl_end_date(edate);
+		Date Inputedate = Date.valueOf(edate);
+		listDto.setVl_end_date(Inputedate);
 
 		System.out.println(listDto.getVl_title());
 
-		voteService.insertVoteList(listDto, edateY, edateM, edateD);
+		voteService.insertVoteList(listDto, edate);
 
 		for (int i = 0; i < option.length; i++) {
 			System.out.println("항목 : " + option[i]);
@@ -160,4 +160,17 @@ public class VoteController {
 		return "vote/voteWrite";
 	}
 
+	// 투표 삭제하기 (지난 투표로 이동)
+	@RequestMapping("previousVoteDelete")
+	public String previousVoteDelete(int vl_seq) {
+		voteService.deleteVote(vl_seq);
+		return "redirect:previousVoteList";
+	}
+	
+	// 투표 삭제하기 (진행중 투표로 이동)
+	@RequestMapping("presentVoteDelete")
+	public String presentVoteDelete(int vl_seq) {
+		voteService.deleteVote(vl_seq);
+		return "redirect:presentVoteList";
+	}
 }

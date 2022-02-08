@@ -127,10 +127,14 @@ div {
 		    <c:if test="${today <= dto.vl_end_date }">
 			<div class="vote_list">
 			    <c:if test="${mem_id eq 'admin' }">
-			      <div class="vote_remove_btn"><i class="fas fa-times-circle"></i></div>
+			      <div class="vote_remove_btn">
+			      <i class="fas fa-times-circle"><input class="vl_seq" type="hidden" value="${dto.vl_seq }"></i>
+			      </div>
 			    </c:if>
 			    <c:if test="${mem_id ne 'admin' }">
-			      <div class="vote_remove_btn" style="display:none"><i class="fas fa-times-circle"></i></div>
+			      <div class="vote_remove_btn" style="display:none">
+			      <i class="fas fa-times-circle"><input class="vl_seq" type="hidden" value="${dto.vl_seq }"></i>
+			      </div>
 			    </c:if>
 				<div class="vote_title"><i class="fas fa-vote-yea"></i> ${dto.vl_title }</div>
 
@@ -203,7 +207,14 @@ div {
 		
 		// 투표 삭제
 		$(".vote_remove_btn").on("click", function() {
-		  alert("kk");
+			let delConfirm = confirm('해당 투표를 삭제하시겠습니까 ?');
+			if (delConfirm) {
+			      alert('삭제되었습니다.');
+			      let vl_seq = $(this).find(".vl_seq").val();
+				  location.href = "/vote/presentVoteDelete?vl_seq=" + vl_seq;
+			 }else {
+			      alert('삭제가 취소되었습니다.');
+			 }
 		})
 	</script>
 

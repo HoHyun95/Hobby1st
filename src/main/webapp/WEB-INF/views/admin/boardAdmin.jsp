@@ -40,6 +40,15 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+  <style>
+    button {
+      border: 1px solid tomato;
+      padding: 3px 5px 3px 5px;
+      font-size: 0.8rem;
+      color: tomato;
+      background-color: transparent;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

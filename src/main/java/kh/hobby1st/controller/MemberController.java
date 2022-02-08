@@ -95,7 +95,6 @@ public class MemberController {
 		}
 		return url;
 	}
-//	}
 
 	// 로그아웃 버튼 누를시 실행됩니다.
 	@RequestMapping("logout")
@@ -113,6 +112,7 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 	
+   //자동으로 이메일 중복여부를 체크합니다. 
 	@ResponseBody
 	@RequestMapping(value = "emailCheck")
 	public String email_check(String email) {
@@ -188,6 +188,8 @@ public class MemberController {
 			}
 			model.addAttribute("members", mem_service.selectEmail(email));
 			model.addAttribute("random_num", random_num);
+			model.addAttribute("result", result);
+
 		} else if (result == 0) {
 			model.addAttribute("result", result);
 		}
@@ -216,38 +218,31 @@ public class MemberController {
 	// 자료보존
 	// -------------------------------------------------------------------------------------------
 
-	// 네이버 로그인기능
-	// @RequestMapping("Naver_login")
-	 public String login(String naver_id, String naver_mobile, String naver_email, String naver_name, String naver_nickname, String naver_birthyear,
-	 String naver_birthday, String naver_gender) {
-		 
-	 // 네이버 아이디 정보가 없을 시에만 발동
-	 if(naver_id != null) {
-	 // 네이버 아이디가 디비에 저장되어 있는지 확인
-	 int naver_result = mem_service.naver_idCheck(naver_id);
-	   if(0<naver_result) {
-	    // 만약에 네이버 아이디가 디비에 존재한다면 아이디정보를 홈에 세션으로 넘겨줌
-	      MemberDTO mem_dto = new MemberDTO();
-	      String user_name = mem_dto.getMem_name();
-	      session.setAttribute("user_name", user_name);
-	      session.setAttribute("mem_id", naver_id);
-	    }else if(0 == naver_result) {
-	 // 만약에 네이버 아이디가 디비에 존재하지 않는다면 사용자 네이버 정보를 디비에 신규저장하고 로그인 시켜줌
-	 // 네이버에서 넘겨주지 않는 정보는 임의지정값으로 설정
-	 String modf_mobile = naver_mobile.replaceAll("[-]", "");
-	 String naver_login = "naver_login";
-	 String mem_birthday = naver_birthyear + "-" + naver_birthday;
-	 String mem_lastlogin = "default";
+	/*
+	 * // 네이버 로그인기능 // @RequestMapping("Naver_login") public String login(String
+	 * naver_id, String naver_mobile, String naver_email, String naver_name, String
+	 * naver_nickname, String naver_birthyear, String naver_birthday, String
+	 * naver_gender) {
+	 * 
+	 * // 네이버 아이디 정보가 없을 시에만 발동 if(naver_id != null) { // 네이버 아이디가 디비에 저장되어 있는지 확인
+	 * int naver_result = mem_service.naver_idCheck(naver_id); if(0<naver_result) {
+	 * // 만약에 네이버 아이디가 디비에 존재한다면 아이디정보를 홈에 세션으로 넘겨줌 MemberDTO mem_dto = new
+	 * MemberDTO(); String user_name = mem_dto.getMem_name();
+	 * session.setAttribute("user_name", user_name); session.setAttribute("mem_id",
+	 * naver_id); }else if(0 == naver_result) { // 만약에 네이버 아이디가 디비에 존재하지 않는다면 사용자
+	 * 네이버 정보를 디비에 신규저장하고 로그인 시켜줌 // 네이버에서 넘겨주지 않는 정보는 임의지정값으로 설정 String modf_mobile
+	 * = naver_mobile.replaceAll("[-]", ""); String naver_login = "naver_login";
+	 * String mem_birthday = naver_birthyear + "-" + naver_birthday; String
+	 * mem_lastlogin = "default";
+	 * 
+	 * MemberDTO dto = new MemberDTO(naver_id, naver_login,
+	 * naver_name,naver_nickname, mem_birthday, naver_gender,naver_login,
+	 * naver_login, naver_login, naver_login, mem_lastlogin, modf_mobile,
+	 * naver_email); int naver_Rinsert = mem_service.naver_insert(dto);
+	 * session.setAttribute("mem_id", naver_id); } } return "redirect: /"; }
+	 */
 	
-	 MemberDTO dto = new MemberDTO(naver_id, naver_login, naver_name,naver_nickname, mem_birthday, naver_gender,naver_login, naver_login,
-	                               naver_login, naver_login, mem_lastlogin, modf_mobile, naver_email);
-	 int naver_Rinsert = mem_service.naver_insert(dto);
-	 session.setAttribute("mem_id", naver_id);
-	   }
-	 }
-	 return "redirect: /";
-	 }
-
+	// -------------------------------------------------------------------------------------------
 	// 회원 정보 수정
 	@RequestMapping("mModify")
 	public String mModify(MemberDTO dto, MultipartFile file, Model model) throws Exception {

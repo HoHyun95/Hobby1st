@@ -64,11 +64,6 @@ $("#deleteWirte").on("click",function() {
 	alert("삭제성공!")
 	opener.document.location.href="/calendar/do?club_cl_name=${list.club}"
 	self.close();
-	
-	//location.reload();
-	//window.close();
-	
-
 })
 
 //내용등록 update로 

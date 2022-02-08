@@ -79,23 +79,10 @@ public class CalendarController {
          @ResponseBody
 		 @RequestMapping(value = "insertDetail", method = RequestMethod.POST) 
          public String insertDetail(String detail, String member, String club_cl_name, String title) { 
-          System.out.println(detail); 
-          System.out.println(member); 
-           
           int result = cal_service.update(club_cl_name, title, member, detail);
           return "pageJsonReport";
        }
 } 
-
-
-		/*
-		 * @RequestMapping("delete") public String delete(String title, String
-		 * club_cl_name) { int result = cal_service.delete(club_cl_name, title); return
-		 * ("<script language='javascript' type='text/javascript'> alert('에러다.'); </script>"
-		 * );
-		 * 
-		 * }
-		 */
 
 //-------------------------소스 보관용 -------------------------------------	  
 	  //에이작스를 통한 프론트단에서 삭제요청

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SignUp</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -523,12 +524,23 @@
 	   $("#mem_birthday").blur(function() {
 		 if($(this).val() > "2005-12-31" || $(this).val() < "1988-01-01"){
 			 $("#mem_birthday").val("");
-			 $("#mem_birthday_Result").val("제대로된 날짜를 입력해주세요");
+			 $("#mem_birthday_Result").text("제대로된 날짜를 입력해주세요");
 		 }
 	   })
 	   
 	   /* 프로필사진 이미지만 등록하게 하기  */
-
+       $("#input-image").on("change",function() {
+    	  var fileName = $("#input-image").val();
+          var idxDot = fileName.lastIndexOf(".") + 1;
+          var filetype = fileName.substr(idxDot, fileName.length).toLowerCase();
+          
+      	  if(filetype=="jpg" || filetype=="gif" || filetype=="png" || filetype=="jpeg" || filetype=="bmp" || filetype=="tiff" || filetype=="svg" || filetype=="webp" || filetype=="tif"){
+    		 $("#mem_photo_Result").text("프로필 사진등록이 성공했습니다!")
+    	  }else {
+    		 $("#input-image").val("");
+    		 $("#mem_photo_Result").text("이미지 형식만 올려주세요!")
+    	  }         
+       })
 	   
 	   
 	   /* 카테고리분류 */

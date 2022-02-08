@@ -195,43 +195,43 @@
             </div>
     
             <div class="answers" style="display: block;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력" value="">
+                <input class="answers_input" id="option1" type="text" name="option" placeholder="항목 입력" value="">
             </div>
     
             <div class="answers" style="display: block;">
-                <input class="answers_input" type="text" name="option" placeholder="항목 입력">
+                <input class="answers_input" id="option2" type="text" name="option" placeholder="항목 입력" value="">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option3" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option4" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option5" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option6" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option7" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option8" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option9" type="text" placeholder="항목 입력" value=".">
             </div>
     
             <div class="answers" style="display: none;">
-                <input class="answers_input" type="text" placeholder="항목 입력">
+                <input class="answers_input" id="option10" type="text" placeholder="항목 입력" value=".">
             </div>
     
     
@@ -291,13 +291,47 @@
         <div class="write">
             <button type="reset"><i class="fas fa-redo-alt"></i> 다시 작성</button>
             &nbsp;&nbsp;
+<<<<<<< HEAD
+            <button class="insert_vote">작성하기</button>
+=======
             <button><i class="fas fa-pen-square"></i> 작성하기</button>
+>>>>>>> fa9c4ffc77c4149fc5793710e65194ff99fb5da6
         </div>
         
     </div>
 </form>
 
     <script>
+    
+    // 투표 regex
+    $(".insert_vote").on("click", function() {
+    	let regex = /^([\S]){1,2000}/;
+    	let regex_date = (/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+		   
+		let title = $(".title_input").val();
+		let result1 = regex.test(title);
+		
+		let date = $("#datepicker").val();
+		let result2 = regex_date.test(date);
+        
+		if(!result1){
+  			 alert("제목을 한글자 이상 입력해주세요.\n(공백으로 시작될 수 없습니다.)");
+  			 $(".title_input").focus();
+  	   		 return false;
+ 		 }else if(!result2){
+ 			alert("종료일을 형식에 맞게 선택해주세요. \n형식 : yyyy-mm-dd");
+ 			return false;
+ 		 }
+		for(let i = 1; i<11; i++){
+			if($("#option"+i).val() == ""){
+				alert("비어있는 항목이 존재합니다.");
+				return false;
+			}
+		}
+		alert("투표가 성공적으로 업로드 되었습니다.");
+    })
+    
+    
         let index = 1;
 
         $(".plus_aw").on("click", function() {
@@ -319,6 +353,7 @@
             }
 
             $(".items").children(".answers").eq(index).css('display','none');
+            $(".items").children(".answers").eq(index).children("input").val(".")
             $(".items").children(".answers").eq(index).children("input").attr('name','')
             index = index - 1;
         })

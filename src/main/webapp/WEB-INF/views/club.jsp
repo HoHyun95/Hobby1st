@@ -1001,7 +1001,7 @@
   	<span id="createClub_close_btn"><i class="far fa-times"></i></span>
     <span id="slideLeft"><i class="far fa-arrow-alt-circle-left"></i></span>
     <span id="slideRight"><i class="far fa-arrow-alt-circle-right"></i></span>
-    <span id="createClub"><button id="createClubBtn">동호회 생성</button></span>
+    <span id="createClub"><button type="button" id="createClubBtn">동호회 생성</button></span>
     <div class="createClub_container">
       <div class="steps_wrap">
         <div class="steps_item_wrap">
@@ -1197,7 +1197,7 @@
               <h5>Hobby1st에서 관심사가 같은 사람들과 동호회 활동을 즐겨보세요!</h5>
             </div>
             <div class="title">
-              <i class="fas fa-archive"> 대분류</i>
+              <i class="fas fa-archive"> 카테고리 1</i>
             </div>
             <div class="input">
               <select name="cl_category_id" id="cl_category_id">
@@ -1218,22 +1218,24 @@
               </select>
             </div>
             <div class="title">
-              <i class="fas fa-asterisk"> 소분류</i>
+              <i class="fas fa-archive"> 카테고리 2</i>
             </div>
             <div class="input">
               <select name="cl_dCategory_id" id="cl_dCategory_id">
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
+                <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
+                <option value="개발">개발</option>
+                <option value="운동/스포츠">운동/스포츠</option>
+                <option value="금융">금융</option>
+                <option value="문화생활">문화생활</option>
+                <option value="핸드메이드">핸드메이드</option>
+                <option value="음악">음악</option>
+                <option value="라이딩">라이딩</option>
+                <option value="연령대">연령대</option>
+                <option value="사회공헌활동">사회공헌활동</option>
+                <option value="맛집">맛집</option>
+                <option value="남자아이돌">남자아이돌</option>
+                <option value="여자아이돌">여자아이돌</option>
+                <option value="지역친목">지역친목</option>
               </select>
             </div>
           </div>
@@ -1291,17 +1293,62 @@
 		  }
 	  })
 		  
-		let cl_maxMem = document.querySelector('#cl_maxMem');
+        let cl_maxMem = document.querySelector('#cl_maxMem');
 	  	cl_maxMem.addEventListener('blur', () => {
 	  		if (cl_maxMem.value > 100){
 	  			document.querySelector('#cl_maxMem_valid').innerHTML="정원은 100명을 초과할 수 없습니다";
-	  			cl_maxMem.focus();
+	  		}else if(cl_maxMem.value < 2 ){
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="동호회의 정원을 2명 이상 입력해주세요";
 	  		}else{
 	  			document.querySelector('#cl_maxMem_valid').innerHTML="";
 	  		}
 	  })
 	  
-	  //다음 버튼 클릭시 innerHTML 들어가 있다면 다음 페이지로 넘어가는 것 막고, 빈 곳이 있어도 막기 구현 (예정)
+	    let cl_maxMem_valid = document.querySelector('#cl_maxMem_valid');
+// 	    let cl_maxMem = document.querySelector('#cl_maxMem');
+	 	let cl_local = document.querySelector('#cl_local');
+        let cl_category_id = document.querySelector('#cl_category_id');
+        let cl_dCategory_id = document.querySelector('#cl_dCategory_id');
+    
+        	  document.querySelector('#createClubBtn').addEventListener('click', () => {
+			if (cl_name_valid.innerHTML != "") {
+				alert("동호회 이름을 확인해주세요");
+				return false;
+			}else if(cl_maxMem.value < 1){
+				alert("동호회 정원을 확인해주세요");
+				return false;
+			}else if(cl_maxMem_valid.innerHTML != ""){
+				alert("동호회 정원을 확인해주세요");
+				return false;
+			}else if(cl_desc.value.length > 199){
+	    		alert("동호회 소개글을 200자 이내로 작성해주세요");
+        		return false;
+			}else if($("#cl_desc").val() == ""){
+				alert("동호회 소개글을 입력해주세요");
+				return false;
+			}else if(
+				$('#cl_maxMem_valid').text() != "" ||
+				$('#cl_name_valid').text() != ""   ||	
+				$('#cl_desc_valid').text() != ""
+			){
+				alert("정보를 정확히 입력해주세요");
+				return false;
+// 	  		}else if($('#image-input').val == ""){
+// 		  		alert("동호회 대표 사진을 등록해주세요");
+// 		  		return false;
+	  	   }else if(cl_local.value == "지역을 선택해주세요"){
+	  		   alert("활동 지역을 선택해주세요");
+	  			return false;
+	  	   }else if(cl_category_id.value == ""){
+	  		  alert("대분류를 선택해주세요");
+	  			return false;
+	  	   }else if(cl_dCategory_id.value == ""){
+	  		  alert("소분류를 선택해주세요");
+	  			return false;
+	  	   }else{
+	  		 document.querySelector('#clubCreateForm').submit();
+	  	   }}
+	  )
 		  	  
 
 	</script>

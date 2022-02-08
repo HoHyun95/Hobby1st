@@ -91,10 +91,6 @@ public class ClubListController {
 	@RequestMapping("createClubProc")
 	public String createClub(ClubListDTO dto, MultipartFile file) throws Exception {
 
-		System.out.println(dto.getCl_maxMem());
-		System.out.println(dto.getCl_local());
-		System.out.println(dto.getCl_desc());
-
 		String realPath = "/usr/local/tomcat8/apache-tomcat-8.5.73/webapps/upload/club";
 
 		File realPathFile = new File(realPath);
@@ -112,16 +108,16 @@ public class ClubListController {
 //			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
 			dto.setCl_photo("/upload/club/" + photoName);
 			int result = clService.createClub(dto);
+			System.out.println(result);
 		}
 		return "redirect:/";
+		// Test
 
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "searchClub", produces = "application/json; charset=UTF-8")
 	public String searchClub(String searchField, String searchText, Model model) {
-
-		System.out.println(" 검색필드 :" + searchField);
 
 		List<ClubListDTO> searchList = clService.searchClub(searchField, searchText);
 		String result = g.toJson(searchList);
@@ -134,7 +130,6 @@ public class ClubListController {
 	@RequestMapping("nameCheck")
 	public int nameCheck(String cl_name) {
 		int result = clService.nameCheck(cl_name);
-		System.out.println(result);
 		return result;
 	}
 

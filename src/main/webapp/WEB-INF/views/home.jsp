@@ -684,7 +684,8 @@
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>
@@ -757,6 +758,7 @@
       </div>
     </div>
 
+    <c:if test="${mem_id !=null }">
     <!-- VOTE -->
 	<div class="vote_preview_title">
       <div class="vote_preview_title_text">
@@ -764,10 +766,11 @@
       </div>
     </div>
 	<div class="vote_preview">
-	  VOTE CONTENTS
+	  <iframe src="/vote/presentVoteList"></iframe>
 	</div>
     <!-- VOTE END -->
-
+	</c:if>
+	
     <div class="container">
       <div class="fav_club_list_title">
         <div class="fav_club_list_title_text">

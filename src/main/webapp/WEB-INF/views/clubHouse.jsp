@@ -577,11 +577,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <a href="/Hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
+            <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
              <c:if test="${admin != null}">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>
@@ -599,6 +600,7 @@
               <div class="club_profile_member_count">${club.cl_memCount } / ${club.cl_maxMem }</div>
               <div class="club_profile_loc">${club.cl_local }</div>
               <div class="club_profile_themes">${club.cl_category_id } / ${club.cl_dCategory_id }</div>
+              <div class="club_profile_desc">${club.cl_desc}</div>
             </div>
           </div>
           <div class="club_profile_btns">
@@ -644,7 +646,7 @@
             <h2>CLUBHOUSE</h2>
           </div>
           <div class="clubHouse_menu_list">
-            <div class="clubHouse_menu_list_item" id="clubIntro">동호회 소개</div>
+            <div class="clubHouse_menu_list_item" id="clubIntro">동호회 일정</div>
             <div class="clubHouse_menu_list_item" id="club_member_list">회원 목록</div>
             <div class="clubHouse_menu_list_item" id="club_board">게시판</div>
             <div class="clubHouse_menu_list_item" id="club_chat">채팅</div>

@@ -37,7 +37,7 @@
   font-weight: 900;
 }
 
-.club_profile_member_count, .club_profile_loc, .club_profile_themes {
+.club_profile_member_count, .club_profile_loc, .club_profile_themes, .club_profile_desc {
   font-size: 0.9rem;
   padding: 1px 0px 1px 0px;
 }

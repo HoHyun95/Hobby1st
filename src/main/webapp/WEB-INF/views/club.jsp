@@ -583,7 +583,7 @@
         
         mem_email.onblur = () => {
           if(mem_email.value == "") {
-        	mem_email_Result.innerText = "전화번호를 입력해 주세요";	  
+        	mem_email_Result.innerText = "이메일을 입력해 주세요";	  
           }	
         }
 
@@ -746,11 +746,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <a href="/Hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
+            <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>

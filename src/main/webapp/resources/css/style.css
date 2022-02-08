@@ -181,9 +181,8 @@
 .vote_preview {
   width: 1260px;
   margin: 0px auto;
-  min-height: 400px;
+  min-height: fit-content;
   padding: 10px 10px; 
-  border: 1px solid dimgray;
   margin-bottom: 30px;
 }
 
@@ -264,6 +263,7 @@
   border: 2px solid var(--color1);
   color: var(--color1);
 }
+
 .fav_club_list_add_btn input[type="button"]:hover {
   background-color: var(--color1);
   color: var(--color2);
@@ -271,3 +271,9 @@
 }
 /* container end */
 
+iframe {   
+  display: block;   
+  border: none;   
+  width: 100%; 
+  height: 550px;
+}

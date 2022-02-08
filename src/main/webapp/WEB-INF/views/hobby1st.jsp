@@ -28,10 +28,11 @@
       let signupform_btn = document.getElementById("signupform_btn");
       let close_btn = document.getElementById("close_btn");
       let sign_up = document.getElementById("sign_up");
+      let modal_bg = document.querySelector(".modal_bg");
+      let loginForm = document.querySelector(".loginForm");
+      let signUp_wrap = document.querySelector(".signUp_wrap");
 
       loginform_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let loginForm = document.querySelector(".loginForm");
         modal_bg.style.zIndex = 10;
         modal_bg.style.display = "flex";
         loginForm.style.zIndex = 11;
@@ -39,8 +40,6 @@
       }
       
       close_btn.onclick = () => {
-        let modal_bg = document.querySelector(".modal_bg");
-        let loginForm = document.querySelector(".loginForm");
         modal_bg.style.zIndex = -1;
         modal_bg.style.display = "none";
         loginForm.style.zIndex = -1;
@@ -48,14 +47,26 @@
       }
       
       sign_up.onclick = () => {
-    	let modal_bg = document.querySelector(".modal_bg");
-        let loginForm = document.querySelector(".loginForm");
-        let signUp_wrap = document.querySelector(".signUp_wrap");
         loginForm.style.zIndex = -1;
         loginForm.style.display = "none";  
         signUp_wrap.style.zIndex = 11;
         signUp_wrap.style.display = "flex";
       }
+      
+      let createId = document.getElementById("createId");
+      let findClub = document.getElementById("findClub");
+      
+      createId.onclick = () => {
+    	modal_bg.style.zIndex = 10;
+        modal_bg.style.display = "flex";
+        signUp_wrap.style.zIndex = 11;
+        signUp_wrap.style.display = "flex";
+      }
+      
+      findClub.onclick = () => {
+    	location.href = "/club";  
+      }
+      
       
         /* 회원가입 */
         let signUp_close_btn = document.getElementById("signUp_close_btn");
@@ -67,8 +78,6 @@
         let signUp_position = 0;
         
         signupform_btn.onclick = () => {
-          let modal_bg = document.querySelector(".modal_bg");
-          let signUp_wrap = document.querySelector(".signUp_wrap");
           modal_bg.style.zIndex = 10;
           modal_bg.style.display = "flex";
           signUp_wrap.style.zIndex = 11;
@@ -76,8 +85,6 @@
         }
         
         signUp_close_btn.onclick = () => {
-          let modal_bg = document.querySelector(".modal_bg");
-          let signUp_wrap = document.querySelector(".signUp_wrap");
           modal_bg.style.zIndex = -1;
           modal_bg.style.display = "none";
           signUp_wrap.style.zIndex = -1;
@@ -394,7 +401,8 @@
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>
@@ -420,7 +428,12 @@
         </p>
       </div>
       <div class="landing_page_section1_btn">
-        <button type="button" id="createId">지금 시작해보기!</button>
+        <c:if test="${sessionScope.mem_id eq null}">
+          <button type="button" id="createId" style = "display: none">지금 시작해보기!</button>
+        </c:if>
+        <c:if test="${sessionScope.mem_id ne null}">
+          <button type="button" id="createId">지금 시작해보기!</button>
+        </c:if>
       </div>
       <div class="custom-shape-divider-bottom-1644245818">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -554,8 +567,8 @@
             </div>
             <p class="list_contents_text">
               당신의 아이돌은 누구인가요? <br>
-              일-집 반복되는 일상 속에서 <br>
-              지루한 일상을 날려줄 나의 IDOL! <br>
+              반복되는 일상 속에서 <br>
+              지루함을 날려줄 나의 IDOL! <br>
               같은 IDOL 팬덤과 함께 일상의 재미를 찾아보세요!
             </p>
           </div>
@@ -607,10 +620,10 @@
         </svg>
       </div>
       <div class="landing_page_section3_title">
-        원하는 동호회가 없으신가요? 지금 바로 만들어 보세요!
+        원하는 카테고리가 없으신가요? 더 많은 동호회를 찾아보세요!
       </div>
       <div class="landing_page_section3_btn">
-        <button type="button" id="createClub">동호회 만들어보기!</button>
+        <button type="button" id="findClub">동호회 찾아보기!</button>
       </div>
       <div class="custom-shape-divider-bottom-1644251677">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -642,7 +655,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man2.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -656,7 +669,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man3.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -670,7 +683,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man4.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -684,7 +697,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man5.png">
             </div>
           </div>
           <div class="lp_item_profile_area">

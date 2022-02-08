@@ -112,8 +112,8 @@ public class VoteController {
 	}
 
 	// 투표 리스트 이동
-	@RequestMapping("listPage")
-	public String listPage(Model model) {
+	@RequestMapping("previousVoteList")
+	public String previousVoteList(Model model) {
 
 		String mem_id = (String) session.getAttribute("mem_id");
 
@@ -122,7 +122,21 @@ public class VoteController {
 
 		model.addAttribute("voteCheckList", voteCheckList);
 		model.addAttribute("vote_list", vote_list);
-		return "vote/voteList";
+		return "vote/previousVoteList";
+	}
+	
+	// 투표 리스트 이동
+	@RequestMapping("presentVoteList")
+	public String presentVoteList(Model model) {
+		
+		String mem_id = (String) session.getAttribute("mem_id");
+		
+		List<VoteListDTO> vote_list = voteService.selectVoteAll();
+		List<VoteListDTO> voteCheckList = voteService.voteCheckList(mem_id);
+		
+		model.addAttribute("voteCheckList", voteCheckList);
+		model.addAttribute("vote_list", vote_list);
+		return "vote/presentVoteList";
 	}
 
 	// 투표 작성 하기

@@ -42,7 +42,7 @@
         }
         
         .title{
-            border-bottom: 1px solid rgb(177, 177, 177);
+            border: 1px solid rgb(177, 177, 177);
         }
 
 
@@ -291,11 +291,7 @@
         <div class="write">
             <button type="reset"><i class="fas fa-redo-alt"></i> 다시 작성</button>
             &nbsp;&nbsp;
-<<<<<<< HEAD
-            <button class="insert_vote">작성하기</button>
-=======
-            <button><i class="fas fa-pen-square"></i> 작성하기</button>
->>>>>>> fa9c4ffc77c4149fc5793710e65194ff99fb5da6
+            <button class="insert_vote"><i class="fas fa-pen-square"></i> 작성하기</button>
         </div>
         
     </div>

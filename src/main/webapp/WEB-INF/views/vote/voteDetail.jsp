@@ -162,7 +162,11 @@ div {
 
 	<script>
 		$(".back").on("click", function() {
-			location.href="/vote/presentVoteList";
+			if(${voteState == 1}){
+				location.href="/vote/previousVoteList";
+			}else if(${voteState == 2}){
+				location.href="/vote/presentVoteList";
+			}
 		})
 	</script>
 

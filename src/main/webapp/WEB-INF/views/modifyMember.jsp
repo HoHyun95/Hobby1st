@@ -338,6 +338,85 @@
 	
 	 // 관심 카테고리 2
 	$("#m_category_2").val("${memberInfo.mem_category_2 }").attr("selected", "selected");
+	 
+	 // 비밀번호
+	$("#m_pass").blur(function() {
+        var passcheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\,.<>\/?]).{8,16}$/);
+		   if(passcheck.test($("#m_pass").val())){
+			   console.log("비밀번호 정규표현식 성공");	
+               $("#m_pw_Result").text("");		   
+		   } else{
+			   $("#m_pass").val("");
+               $("#m_pw_Result").text("#8~16자 사이 영문,숫자,특수문자 1개 이상입력")
+		   }
+        })
+        
+     // 비밀번호 일치여부
+     $("#m_pass2").blur(function() {
+	       if($("#m_pass").val() != $("#m_pass2").val()) {
+	    	  $("#m_pass2").val("")
+		      $("#m_pw2_Result").text("#비밀번호가 일치하지 않습니다.")
+	       } else if($("#m_pass").val() == $("#m_pass2").val()) {
+			  $("#m_pw2_Result").text("");
+	       }     
+	   })
+	   
+	 // 이메일 정규식
+	 $("#m_email").blur(function() {
+		   var email_check = RegExp(/^[A-Za-z0-9]{2,21}$/);
+		   try{
+		   if(email_check.test($("#m_email").val())){
+			   console.log("이메일 정규표현식 성공");
+               $("#m_email_Result").text("");			   
+		   } else{
+			   $("#m_email").val("");	  
+			   $("#m_email_Result").text("#2~21글자 내외입력");
+		   }
+		   } catch (err) {
+			   $("#m_email").val("");	  
+		   }
+	   })
+	 
+	 // 전화번호 정규식
+	 $("#m_phone").blur(function() {
+		   var phone_check = RegExp(/^01[0179][0-9]{7,9}$/);
+		   if(phone_check.test($("#m_phone").val())){
+			   console.log("전화번호 정규표현식 성공");
+               $("#m_phone_Result").text("");		   			   
+		   } else{
+			   $("#m_phone").val("");	  
+			   $("#m_phone_Result").text("#12자 이하 '-' 없이 입력해주세요.");
+		   }
+	   })
+	   
+	 // 비어있는 값 확인
+	  $("#mModifyBtn").on("click",function() {
+           let pass = $("#m_pass").val()
+           let pass_2 = $("#m_pass_2").val()
+           let phone = $("#m_phone").val()
+           let email = $("#m_email").val()
+          if(pass === "") {
+               alert("비밀번호를 입력해주세요")
+               $("#m_pass").focus();
+               return false;
+           }else if(pass_2 === "") {
+        	   alert("비밀번호 중복체크를 해주세요!")
+        	   $("#m_pass_2").focus();
+        	   return false;
+           }else if($("#m_pass_2").val() != $("#pass_2").val()) {
+        	   alert("비밀번호 중복체크를 다시 확인해주세요!")
+        	   $("#m_pass_2").val("");
+        	   return false;	   
+           }else if(phone === "") {
+               alert("전화번호를 입력해주세요")
+               $("#m_phone").focus();
+               return false;
+           }else if(email === ""){
+               alert("이메일을 입력해주세요")
+               $("#m_email").focus();
+               return false;
+        }
+    })
 </script>
 
 </html>

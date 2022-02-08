@@ -196,13 +196,13 @@ div {
 		// 투표하기
 		$(".voteBtn").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
-			location.href = "/vote/detailPage?vl_seq=" + vl_seq;
+			location.href = "/vote/detailPage?vl_seq=" + vl_seq + "&voteState=2";
 		})
 
 		// 결과보러가기
 		$(".voteResult").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
-			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq;
+			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq + "&voteState=2";
 		})
 		
 		// 투표 삭제

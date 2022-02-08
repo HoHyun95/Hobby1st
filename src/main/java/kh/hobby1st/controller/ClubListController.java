@@ -66,8 +66,6 @@ public class ClubListController {
 			int result = clService.modifyClubProc(dto);
 		}
 		return "redirect:/clubHouse?cl_id="+dto.getCl_id();
-	
-	
 
 	}
 
@@ -105,13 +103,11 @@ public class ClubListController {
 			System.out.println(photoName);
 
 			file.transferTo(new File(realPath + "/" + photoName));
-//			clpService.insertPhoto(new ClubList_PhotoDTO(0,cl_id,photoName));
 			dto.setCl_photo("/upload/club/" + photoName);
 			int result = clService.createClub(dto);
 			System.out.println(result);
 		}
 		return "redirect:/";
-		// Test
 
 	}
 

@@ -78,15 +78,30 @@ public class VoteDAO {
 
 		return mybatis.insert("Vote.insertVoteCheck", map);
 	}
-	
-	//	중복투표시 총 투표수
+
+	// 중복투표시 총 투표수
 	public int voteTotalCount(int vo_vote_seq) {
 		return mybatis.selectOne("Vote.voteTotalCount", vo_vote_seq);
 	}
-	
+
 	// 투표수가 많은 option 순으로 가져오기
-	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq){
-		return  mybatis.selectList("Vote.selectOptionByCount", vo_vote_seq);
+	public List<VoteOptionDTO> selectOptionByCount(int vo_vote_seq) {
+		return mybatis.selectList("Vote.selectOptionByCount", vo_vote_seq);
+	}
+
+	// 투표삭제 시 리스트에서 삭제
+	public int deleteVoteList(int vl_seq) {
+		return mybatis.delete("Vote.deleteVoteList", vl_seq);
+	}
+
+	// 투표삭제 시 옵션 값 삭제
+	public int deleteVoteOption(int vo_vote_seq) {
+		return mybatis.delete("Vote.deleteVoteOption", vo_vote_seq);
+	}
+
+	// 투표삭제 시 해당 투표 checklist 삭제
+	public int deleteVoteCheck(int vc_vote_seq) {
+		return mybatis.delete("Vote.deleteVoteCheck", vc_vote_seq);
 	}
 
 }

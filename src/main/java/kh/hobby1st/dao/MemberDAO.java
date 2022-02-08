@@ -47,6 +47,11 @@ public class MemberDAO {
 	public int id_check(String id) {
 		return mybatis.selectOne("member.id_check", id);
 	}
+	
+	// 이메일 중보겨웁 체크
+	public int email_search(String email) {
+		return mybatis.selectOne("member.email_search", email);
+	}
 
 	public int naver_idCheck(String naver_id) {
 		return mybatis.selectOne("member.naver_idCheck", naver_id);

@@ -112,9 +112,15 @@ public class MemberController {
 		int result = (Integer) mem_service.id_check(id);
 		return String.valueOf(result);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "emailCheck")
+	public String email_check(String email) {
+		int result = (Integer) mem_service.email_search(email);
+		return String.valueOf(result);
+	}
 
 	// 회원가입 성공
-	// SignUp Jsp에 form 형식 만 추가하면 됨
 	@RequestMapping("signUp")
 	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday,
 			String mem_gender, String mem_address, String mem_category_1, String mem_category_2, String mem_phone,

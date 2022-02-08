@@ -159,6 +159,19 @@
 	
 	 .inp:focus { outline: none; background-color: #eee; } 
         
+        
+    button {
+	  border: 1px solid #212121;
+	  padding: 3px 5px 3px 5px;
+	  font-size: 0.8rem;
+	  color: white;
+	  background-color: #212121;	
+	}
+	
+	button:hover {
+	  cursor: pointer;	
+	}
+
     </style>
 </head>
 
@@ -240,7 +253,7 @@
                 <i class="far fa-clock"></i>
 
                 마감일 설정
-                <input type="text" name="edate" id="datepicker" placeholder="마감일을 입력해 주세요">
+                <input type="text" name="edate" id="datepicker" placeholder="마감일을 입력해 주세요" autocomplete="off">
 			    <script>
 			        $(function () {
 			            $("#datepicker").datepicker({ 
@@ -276,9 +289,13 @@
         
 
         <div class="write">
-            <button type="reset">다시 작성</button>
+            <button type="reset"><i class="fas fa-redo-alt"></i> 다시 작성</button>
             &nbsp;&nbsp;
+<<<<<<< HEAD
             <button class="insert_vote">작성하기</button>
+=======
+            <button><i class="fas fa-pen-square"></i> 작성하기</button>
+>>>>>>> fa9c4ffc77c4149fc5793710e65194ff99fb5da6
         </div>
         
     </div>

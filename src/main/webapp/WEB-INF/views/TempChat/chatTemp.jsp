@@ -106,7 +106,7 @@
 						<ul
 							class="msg-box list-inline text-left d-inline-block float-left">
 							<li>
-								<!--  동호회 채팅 이미지 --> <img src="" class="club_photo"> <!--  동호회 이름 -->
+								<!--  동호회 채팅 이미지 --> <img src="${clubInfo.cl_photo }" class="club_photo"> <!--  동호회 이름 -->
 								<span id="cl_name_span"> ${clubInfo.cl_name } </span> <br>
 							</li>
 							<span id="cl_memCount"><i class="fas fa-user-friends"></i>멤버수
@@ -174,7 +174,7 @@
 									<c:if test="${chatList.chat_writer_id != mem_id }">
 
 										<div class="sender">
-											<img class="sender_profile" src=${chatList_chat_user_photo }>
+											<img class="sender_profile" src="${chatList_chat_user_photo }">
 											<sapn>${chatList.chat_writer }</sapn>
 
 											<div class="received_withd_msg">
@@ -200,7 +200,7 @@
 									<c:if test="${chatList.chat_writer_id != mem_id }">
 
 										<div class="sender">
-											<img class="sender_profile" src=${chatList_chat_user_photo }>
+											<img class="sender_profile" src="${chatList_chat_user_photo }">
 											<sapn>${chatList.chat_writer }</sapn>
 
 											<div class="received_withd_msg">
@@ -371,9 +371,9 @@
 	         if(msgData.indexOf("emoji") == 0){
 	        	 
 	        	  let emojiData = msgData;
-	        	  
+	     
 	       	  	  pullTime();
-	    		  htmlData +="<div class='sender'><img class='sender_profile' src='sender_profile'>";
+	    		  htmlData +="<div class='sender'><img class='sender_profile' src='${chatList_chat_user_photo }'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";
@@ -390,7 +390,7 @@
 	        	 
 	       	      pullTime();
 	       	      
-	      		  htmlData +="<div class='sender'><img class='sender_profile' src='sender_profile'>";
+	      		  htmlData +="<div class='sender'><img class='sender_profile' src='${chatList_chat_user_photo }'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";

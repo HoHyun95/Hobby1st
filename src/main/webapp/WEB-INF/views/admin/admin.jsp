@@ -221,7 +221,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+${addMember }　</span>than lask week</p>
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+${addMember }　</span>than last week</p>
             </div>
           </div>
         </div>
@@ -255,7 +255,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">+${addClub }　</span>than lask week</p>
+              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">+${addClub }　</span>than last week</p>
             </div>
           </div>
         </div>

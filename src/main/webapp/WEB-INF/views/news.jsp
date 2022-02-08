@@ -430,7 +430,7 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/Hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
@@ -474,7 +474,8 @@
       <!-- QnA -->
       <div class="qna_wrap">
         <div class="qna_board">
-          <iframe src="qna/qnaList?cpage=1"></iframe>
+          <iframe src="/qna/qnaList?cpage=1"></iframe>
+
         </div>
       </div>
       <!-- FAQ -->

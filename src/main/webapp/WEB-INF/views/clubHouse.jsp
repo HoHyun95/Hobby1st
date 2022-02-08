@@ -103,51 +103,73 @@
    		if(id == 'null') {
     		alert("로그인 후 이용 가능합니다.");
     		return false;
-    	} else {
-   		clubIntro.style.borderBottom = "none";
-   		club_member_list.style.borderBottom = "3px solid var(--bg-color3)";
-   		club_board.style.borderBottom = "none"; 
-   		club_chat.style.borderBottom = "none"; 
+    	} 
    		
-   		clIntro_wrap.style.display = "none";
-   		cm_list_wrap.style.display = "flex";
-   		club_board_wrap.style.display = "none";
-   		club_chat_wrap.style.display = "none";
-    	}
+   		<c:choose>
+ 		  <c:when test="${checkMember eq 0 || checkMember eq 3}">
+ 		    alert("동호회 가입 후 이용 가능합니다.");
+		    return false;
+ 		  </c:when>
+          <c:otherwise>
+   		    clubIntro.style.borderBottom = "none";
+   		    club_member_list.style.borderBottom = "3px solid var(--bg-color3)";
+   		    club_board.style.borderBottom = "none"; 
+   		    club_chat.style.borderBottom = "none"; 
+   		
+   		    clIntro_wrap.style.display = "none";
+   	    	cm_list_wrap.style.display = "flex";
+   		    club_board_wrap.style.display = "none";
+   		    club_chat_wrap.style.display = "none";
+   		  </c:otherwise>
+   		</c:choose>
    	  }
    
    	  club_board.onclick = () => {
    		if(id == 'null') {
     		alert("로그인 후 이용 가능합니다.");
     		return false;
-    	} else {
-   		clubIntro.style.borderBottom = "none";
-   		club_member_list.style.borderBottom = "none"; 
-   		club_board.style.borderBottom = "3px solid var(--bg-color3)";
-   		club_chat.style.borderBottom = "none";   
+    	} 
+   		<c:choose>
+   		  <c:when test="${checkMember eq 0 || checkMember eq 3}">
+		    alert("동호회 가입 후 이용 가능합니다.");
+	        return false;
+		  </c:when>
+          <c:otherwise>
+   	  	    clubIntro.style.borderBottom = "none";
+   		    club_member_list.style.borderBottom = "none"; 
+   		    club_board.style.borderBottom = "3px solid var(--bg-color3)";
+   		    club_chat.style.borderBottom = "none";   
    		
-   		clIntro_wrap.style.display = "none";
-   		cm_list_wrap.style.display = "none";
-   		club_board_wrap.style.display = "flex";
-   		club_chat_wrap.style.display = "none";
-    	}
+   		    clIntro_wrap.style.display = "none";
+   		    cm_list_wrap.style.display = "none";
+   	        club_board_wrap.style.display = "flex";
+   		    club_chat_wrap.style.display = "none";
+   		  </c:otherwise>
+   		</c:choose>
    	  }
    	  
    	  club_chat.onclick = () => {
    		if(id == 'null') {
     		alert("로그인 후 이용 가능합니다.");
     		return false;
-    	} else {
-   		clubIntro.style.borderBottom = "none";
-   		club_member_list.style.borderBottom = "none"; 
-   		club_board.style.borderBottom = "none";    
-   		club_chat.style.borderBottom = "3px solid var(--bg-color3)";
-   		
-   		clIntro_wrap.style.display = "none";
-   		cm_list_wrap.style.display = "none";
-   		club_board_wrap.style.display = "none";
-   		club_chat_wrap.style.display = "flex";
-    	}
+    	} 
+   		<c:choose>
+   		  <c:when test="${checkMember eq 0 || checkMember eq 3}">
+   		    alert("동호회 가입 후 이용 가능합니다.");
+		    return false;
+   		  </c:when>
+          <c:otherwise>
+            clubIntro.style.borderBottom = "none";
+     		club_member_list.style.borderBottom = "none"; 
+     		club_board.style.borderBottom = "none";    
+     		club_chat.style.borderBottom = "3px solid var(--bg-color3)";
+     		
+     		clIntro_wrap.style.display = "none";
+     		cm_list_wrap.style.display = "none";
+     		club_board_wrap.style.display = "none";
+     		club_chat_wrap.style.display = "flex";
+          </c:otherwise>
+   		</c:choose>
    	  }
    	  
       /* 회원가입 */
@@ -662,7 +684,14 @@
           <div class="clIntro_box">
                <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
                <%-- <a href="/calendar/do?club_cl_name=${club.cl_name }">캘린더 이동</a> --%>
-               <iframe src="/calendar/do?club_cl_name=${club.cl_name }"></iframe>
+             <c:choose>
+               <c:when test="${checkMember eq 0 || checkMember eq 3}">
+                 <div class="plz_joinclub">동호회 가입 후 확인 가능합니다</div>
+			   </c:when>
+			   <c:otherwise>
+                 <iframe src="/calendar/do?club_cl_name=${club.cl_name }"></iframe>			   
+			   </c:otherwise>
+			 </c:choose>
           </div>
         </div> 
         

@@ -709,13 +709,6 @@
               <c:forEach var="clubList" items="${list }" begin="0" end="9" varStatus="status">
                 <div class="main_bg_inner_bottom_list_item_wrap">
                   <div class="main_bg_inner_bottom_list_item">
-                    <c:choose>
-    				  <c:when test="${sessionScope.mem_id eq null}">
-    				  </c:when>
-    				  <c:otherwise>
-                        <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
-    				  </c:otherwise>
-    				</c:choose>
                     <div class="badge" id="theme1">개발 ${status.count }위</div>
                     <h3><a href="/clubHouse?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h3>
                     <h5>${clubList.cl_boss_name}</h5> 

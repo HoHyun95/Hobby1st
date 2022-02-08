@@ -74,7 +74,7 @@
 }
 
 #requestClub {
-  width: 100px;
+  width: 150px;
   height: 35px;
   font-size: 0.8rem;
   border: 1px solid #9684A1;
@@ -258,6 +258,14 @@
 .clIntro_box {
   padding-top: 10px;
   width: 100%;
+}
+
+.plz_joinclub {
+  width: 100%;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .club_chat_wrap {

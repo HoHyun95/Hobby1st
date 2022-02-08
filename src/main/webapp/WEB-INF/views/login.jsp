@@ -63,7 +63,7 @@
                 <button id="loginid">LOGIN</button>
               </div>
    			  </form>
-              <div class="divide_line">
+              <!-- <div class="divide_line">
                 <div class="divide_line_item"></div>
                 <div class="divide_line_item text">Or Continue with</div>
                 <div class="divide_line_item"></div>
@@ -72,7 +72,7 @@
                  <a id="naverIdLogin_loginButton" href="#">
                  <button type="button" id="naverIdLogin"> Naver SignUp </button></a>             
               </div>
-                <div id="naver_message" style="display: none;"></div>
+                <div id="naver_message" style="display: none;"></div> -->
             </div>
           </div>
         </div>

@@ -384,9 +384,9 @@
 			){
 				alert("정보를 정확히 입력해주세요");
 				return false;
-// 	  		}else if($('#image-input').val == ""){
-// 		  		alert("동호회 대표 사진을 등록해주세요");
-// 		  		return false;
+	  		}else if($('#cc-image-input').val() == ""){
+		  		alert("동호회 대표 사진을 등록해주세요");
+		  		return false;
 	  	   }else if(cl_local.value == "지역을 선택해주세요"){
 	  		   alert("활동 지역을 선택해주세요");
 	  			return false;

@@ -1272,18 +1272,8 @@
 	 }
 	}
 
-	
-//     const previewImage = document.getElementById("preview_img");
-//     select_gender.addEventListener("change", (e) => {
-//       if(e.target.id == "select_gender" && e.target.value == "M") {
-//         previewImage.src = "/images/man" + (getRandomNum(1, 3)) +".png";
-//       } else if(e.target.id == "select_gender" && e.target.value == "F") {
-//         previewImage.src = "/images/woman" + (getRandomNum(1, 3)) +".png";
-//       }
-//     })
-    const previewImage = document.getElementById("cc_preview_img");
-//     previewImage.src = "/images/man.png";
 
+    const previewImage = document.getElementById("cc_preview_img");
 	
 	  function readImage(input) {
 	    if (input.files && input.files[0]) {

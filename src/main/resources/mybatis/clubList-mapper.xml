@@ -148,10 +148,7 @@
 	
 	<!-- 관리자페이지 오늘 등록한 동호회 수 -->
 	<select id="newClub" resultType="int">
-		select count(*) 
-		    from club_list
-		    where to_char(cl_opendate, 'yyyymmdd') =
-		        to_char(trunc(sysdate,'iw'), 'yyyymmdd') 
+		select count(*) from club_list where cl_opendate = to_char(sysdate,'yyyy-mm-dd')
 	</select>
 	
 	<!-- 관리자페이지 지난주 총 동호회 수 -->

@@ -21,7 +21,7 @@
     <span id="modifyClub_close_btn"><i class="fas fa-times"></i></span>
     <span id="mc_slideLeft"><i class="far fa-arrow-alt-circle-left"></i></span>
     <span id="mc_slideRight"><i class="far fa-arrow-alt-circle-right"></i></span>
-    <span id="modifyClub"><button id="modifyClubBtn">동호회 정보 변경</button></span>
+    <span id="modifyClub"><button type="button" id="modifyClubBtn">동호회 정보 변경</button></span>
     <div class="modifyClub_container">
       <div class="mc_steps_wrap">
         <div class="mc_steps_item_wrap">
@@ -69,7 +69,7 @@
             <span class="resultSpan" id="cl_name_valid"></span>
             <div class="mc_title">
               <i class="fas fa-user"> 동호회장 ID</i>
-            </div>
+            </div> 
             <div class="mc_input">
               <input type="text" id="cl_boss_id" maxlength="30" name="cl_boss_id"class="mc_input_box"  value="${club.cl_boss_id }" readonly>
             </div>
@@ -86,12 +86,12 @@
             <div class="mc_input">
               <input type="text" id="cl_maxMem" maxlength="3" name="cl_maxMem" class="mc_input_box" value="${club.cl_maxMem }"
                 onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
-            </div>
+            </div>           
             <div class="mc_title">
               <i class="far fa-file-alt"> 동호회 소개</i>
             </div>
             <textarea id="mc_desc" name="cl_desc" cols="68" rows="10" style="resize: none;">${club.cl_desc }</textarea>
-          </div>
+          </div>          
           <div class="mc_contents_item">
             <div class="mc_desc">
               <h3>변경할 동호회의 사진을 등록해 주세요!</h3>
@@ -215,7 +215,7 @@
               <h3>변경할 동호회 카테고리를 입력해 주세요!</h3>
             </div>
             <div class="mc_title">
-              <i class="fas fa-archive"> 대분류</i>
+              <i class="fas fa-archive"> 카테고리 1</i>
             </div>
             <div class="mc_input">
               <select name="cl_category_id" id="cl_category_id" class="mc_select_box">
@@ -236,22 +236,24 @@
               </select>
             </div>
             <div class="mc_title">
-              <i class="fas fa-asterisk"> 소분류</i>
+              <i class="fas fa-archive"> 카테고리 2</i>
             </div>
             <div class="mc_input">
               <select name="cl_dCategory_id" id="cl_dCategory_id" class="mc_select_box">
                 <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
+                <option value="개발">개발</option>
+                <option value="운동/스포츠">운동/스포츠</option>
+                <option value="금융">금융</option>
+                <option value="문화생활">문화생활</option>
+                <option value="핸드메이드">핸드메이드</option>
+                <option value="음악">음악</option>
+                <option value="라이딩">라이딩</option>
+                <option value="연령대">연령대</option>
+                <option value="사회공헌활동">사회공헌활동</option>
+                <option value="맛집">맛집</option>
+                <option value="남자아이돌">남자아이돌</option>
+                <option value="여자아이돌">여자아이돌</option>
+                <option value="지역친목">지역친목</option>
               </select>
             </div>
           </div>
@@ -261,5 +263,117 @@
     </form>
   </div>
 </body>
+        <script>
+        
+		  $('#cl_name').on('keyup', () => {
+				if(
+					$('#cl_name').val().length < 3
+				){
+					$('#cl_name_valid').text("동호회명은 3자 이상으로 작성해주세요");
+				}else if($('#cl_name').val().length > 29){
+					$('#cl_name_valid').text("30자 이내로 작성해주세요");
+				}else{
+					$('#cl_name_valid').text("");
+				}
+			})
+			
+			     let cl_name = document.querySelector('#cl_name');
+	 			 let cl_name_valid = document.querySelector('#cl_name_valid');
+	  
+	 		 cl_name.addEventListener('blur', () => {
+		  		if(cl_name.value.length < 3){
+			  		cl_name_valid.innerHTML = "동호회명은 3자 이상으로 작성해주세요";
+		  		}else if(cl_name.value.length > 29){
+			  		cl_name_valid.innerHTML = "30자 이내로 작성해주세요";
+		  		}else{
+			  		cl_name_valid.innerHTML ="";
+			  
+			   $.ajax({
+					  url : "/clubList/nameCheck",
+					  data : { cl_name : cl_name.value }
+					}).done((resp) => {
 
+					  if (cl_name.value !== "") {
+						if (resp > 0) {
+						  cl_name_valid.innerHTML ="이미 사용중인 동호회명입니다";
+						  cl_name.value="";
+						  cl_name.focus();
+						} else {
+						  cl_name_valid.innerHTML="";
+						}
+					  } else {
+						cl_name_valid.innerHTML="동호회명을 입력해주세요";
+					  }
+				    }); 
+		  }
+	  })
+        
+        let cl_maxMem = document.querySelector('#cl_maxMem');
+	  	cl_maxMem.addEventListener('blur', () => {
+	  		if (cl_maxMem.value > 100){
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="정원은 100명을 초과할 수 없습니다";
+	  		}else if(cl_maxMem.value < 2 ){
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="정원을 입력해주세요";
+	  		}else{
+	  			document.querySelector('#cl_maxMem_valid').innerHTML="";
+	  		}
+	  })
+        
+        let cl_desc = document.querySelector('#mc_desc');
+        cl_desc.addEventListener('blur', () => {
+        	if(cl_desc.value == ""){
+        		alert("동호회 소개글을 입력해주세요");
+        		return false;
+        	}
+        	
+        	if(cl_desc.value.length > 199){
+        		alert("200자 이내로 작성해주세요");
+        		return false;
+        	}
+        })
+        
+        
+        let cl_maxMem_valid = document.querySelector('#cl_maxMem_valid');
+	 	let cl_local = document.querySelector('#cl_local');
+        let cl_category_id = document.querySelector('#cl_category_id');
+        let cl_dCategory_id = document.querySelector('#cl_dCategory_id');
+    
+        	  document.querySelector('#modifyClubBtn').addEventListener('click', () => {
+			if (cl_name_valid.innerHTML != "") {
+				alert("동호회 이름을 확인해주세요");
+				return false;
+			}else if(cl_maxMem_valid.innerHTML != ""){
+				alert("동호회 정원을 확인해주세요");
+				return false;
+			}else if(cl_desc.value.length > 199){
+	    		alert("동호회 소개글을 200자 이내로 작성해주세요");
+        		return false;
+			}else if($("#cl_desc").val() == ""){
+				alert("동호회 소개글을 입력해주세요");
+				return false;
+			}else if(
+				$('#cl_maxMem_valid').text() != "" ||
+				$('#cl_name_valid').text() != ""   ||	
+				$('#cl_desc_valid').text() != ""
+			){
+				alert("정보를 정확히 입력해주세요");
+				return false;
+// 	  		}else if($('#image-input').val == ""){
+// 		  		alert("동호회 대표 사진을 등록해주세요");
+// 		  		return false;
+	  	   }else if(cl_local.value == "지역을 선택해주세요"){
+	  		   alert("활동 지역을 선택해주세요");
+	  			return false;
+	  	   }else if(cl_category_id.value == ""){
+	  		  alert("대분류를 선택해주세요");
+	  			return false;
+	  	   }else if(cl_dCategory_id.value == ""){
+	  		  alert("소분류를 선택해주세요");
+	  			return false;
+	  	   }else{
+	  		 document.querySelector('#clubModifyForm').submit();
+	  	   }}
+	  )
+
+          </script>
 </html>

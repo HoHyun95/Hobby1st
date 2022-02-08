@@ -153,14 +153,13 @@ span.chat-time {
 	width: 57%;
 }
 
-.sender_profile {
-	padding : 3px;
-	margin : 0px 3px;
-	width : 30px;
-	height : 30px;
-	border : 1px solid red;
-	border-radius : 50%;
-}
+/* .sender_profile { */
+/* 	padding : 3px; */
+/* 	margin : 0px 3px; */
+/* 	width : 30px; */
+/* 	height : 30px; */
+/* 	border-radius : 50%; */
+/* } */
 
 .received_withd_msg p {
 	background: rgba(0, 123, 255, .5) none repeat scroll 0 0;

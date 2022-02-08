@@ -36,7 +36,7 @@
 			<!-- 제목 입력 -->
 			<div>
 				<input name="cb_title" id="title"
-					style="font-size: 12px; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
+					style="font-size: 12px; width: 100%; margin-top: 10px; margin-bottom: 10px; padding-left: 10px;"
 					type="text" placeholder="제목을 입력해 주세요."
 					class="
                         placeholder-gray-400

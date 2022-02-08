@@ -95,14 +95,14 @@
               <span class="validResult" id="mem_nickname_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_nickname" maxlength="20" name="mem_nickname" placeholder="닉네임을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_nickname" maxlength="40" name="mem_nickname" placeholder="닉네임을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-user"> 생년월일</i>
               <span class="validResult" id="mem_birthday_Result"></span>
             </div>
             <div class="input">
-              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" min="1988-01-01" max="2005-12-31" value="2005-12-31">
+              <input type="date" class="signUpInput" id="mem_birthday" name="mem_birthday" min="1960-01-01" max="2005-12-31" value="2005-12-31">
             </div>
             <div class="title">
               <i class="fas fa-mobile-alt"> 핸드폰 번호</i>
@@ -116,7 +116,7 @@
               <span class="validResult" id="mem_email_Result"></span>
             </div>
             <div class="input">
-              <input type="text" class="signUpInput" id="mem_email" maxlength="20" name="mem_email" placeholder="이메일을 입력해주세요">
+              <input type="text" class="signUpInput" id="mem_email" maxlength="50" name="mem_email" placeholder="이메일을 입력해주세요">
             </div>
             <div class="title">
               <i class="fas fa-venus-mars"> 성별</i>
@@ -405,7 +405,7 @@
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="BTS">BTS</option>
                 <option value="NCT">NCT</option>
-                <option value="몬스터엑스">몬스터엑스</option>
+                <option value="몬스타엑스">몬스타엑스</option>
                 <option value="세븐틴">세븐틴</option>
                 <option value="샤이니">샤이니</option>
               </select>
@@ -429,9 +429,21 @@
                 <option value="ITEM1" selected disabled hidden>세부 카테고리를 선택해 주세요</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
-                <option value="대구">대구</option>
                 <option value="인천">인천</option>
                 <option value="강원">강원</option>
+                <option value="충북">충북</option>
+                <option value="충남">충남</option>
+                <option value="대전">대전</option>
+                <option value="세종">세종</option>
+                <option value="전북">전북</option>
+                <option value="전남">전남</option>
+                <option value="광주">광주</option>
+                <option value="경북">경북</option>
+                <option value="대구">대구</option>
+                <option value="경남">경남</option>
+                <option value="울산">울산</option>
+                <option value="부산">부산</option>
+                <option value="제주">제주</option>
               </select>
             </div>
             <div class="validResult" id="mem_category_14_Result"></div>
@@ -517,12 +529,12 @@
                $("#mem_email_Result").text("");			   
 		   } else{
 			   $("#mem_email").val("");	  
-			   $("#mem_email_Result").text("2~21글자 내외 @과 .com 포함하여 입력");
+			   $("#mem_email_Result").text("2~50글자 내외 @과 .com 포함하여 입력");
 		   }
 	   })
 	   /* 생년월일 잡아내기 */
 	   $("#mem_birthday").blur(function() {
-		 if($(this).val() > "2005-12-31" || $(this).val() < "1988-01-01"){
+		 if($(this).val() > "2005-12-31" || $(this).val() < "1960-01-01"){
 			 $("#mem_birthday").val("");
 			 $("#mem_birthday_Result").text("제대로된 날짜를 입력해주세요");
 		 }
@@ -542,7 +554,14 @@
     	  }         
        })
 	   
-	   
+       /* 탭키로 못넘기게 막기 */
+	   let select_gender = document.getElementById("select_gender");
+       select_gender.addEventListener('keydown', (e) => {
+         if(e.keyCode == 9){ // Tab key
+           e.preventDefault();
+         }
+       })
+       
 	   /* 카테고리분류 */
 	   $("#mem_category_1").on("change", function(){
 		   /* 선택한 이름값으로 세부카테고리 항목을 보이고 나머진 숨김 */

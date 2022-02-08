@@ -160,4 +160,17 @@ public class VoteController {
 		return "vote/voteWrite";
 	}
 
+	// 투표 삭제하기 (지난 투표로 이동)
+	@RequestMapping("previousVoteDelete")
+	public String previousVoteDelete(int vl_seq) {
+		voteService.deleteVote(vl_seq);
+		return "redirect:previousVoteList";
+	}
+	
+	// 투표 삭제하기 (진행중 투표로 이동)
+	@RequestMapping("presentVoteDelete")
+	public String presentVoteDelete(int vl_seq) {
+		voteService.deleteVote(vl_seq);
+		return "redirect:presentVoteList";
+	}
 }

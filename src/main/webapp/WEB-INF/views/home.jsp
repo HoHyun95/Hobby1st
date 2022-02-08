@@ -757,14 +757,16 @@
     </div>
 
     <!-- VOTE -->
+    <c:if test="${sessionScope.mem_id ne null}">
 	<div class="vote_preview_title">
       <div class="vote_preview_title_text">
         <h4>VOTE</h4>
       </div>
     </div>
 	<div class="vote_preview">
-	  VOTE CONTENTS
+	  <iframe src="/vote/presentVoteList" scrollbar="no"></iframe>
 	</div>
+	</c:if>
     <!-- VOTE END -->
 
     <div class="container">

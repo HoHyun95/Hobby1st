@@ -152,7 +152,7 @@ div {
 	<script>
 		// 목록으로
 		$(".back").on("click", function() {
-			location.href = "/vote/listPage";
+			location.href = "/vote/presentVoteList";
 		})
 
 		// 투표하기

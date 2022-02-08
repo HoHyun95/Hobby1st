@@ -21,7 +21,7 @@ div {
 }
 
 .container {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -31,7 +31,7 @@ div {
 
 .vote_list {
 	width: 300px;
-	margin: 15px 33px;
+	margin: 15px 45px;
 	margin-top: 30px;
 	border: 1px solid rgb(0, 0, 0);
 	padding-left: 2%;
@@ -75,6 +75,7 @@ div {
 
 	<div class="container">
 		<c:forEach var="dto" items="${vote_list }" varStatus="status">
+		    <c:if test="${today <= dto.vl_end_date }">
 			<div class="vote_list">
 				<div class="vote_title">${dto.vl_title }</div>
 
@@ -102,6 +103,7 @@ div {
 					</button>
 				</div>
 			</div>
+			</c:if>
 			<c:forEach var="voteCheckList" items="${voteCheckList }"
 				varStatus="status">
 				<c:if test="${voteCheckList.vl_seq eq dto.vl_seq }">

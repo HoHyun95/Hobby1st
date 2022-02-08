@@ -53,7 +53,7 @@
         eventClick: function(arg){
         	console.log(arg.event.title);
         	console.log(arg.event.start)
-        	window.open("/calendar/calendarDetail?title="+arg.event.title+"&end="+arg.event.end+"&start="+arg.event.start+"&club_cl_name=${club_cl_name}","PopupWin","menubar:no,toolbar=no,scrollbars=no,resizable=no,top=500,left=500,width=520,height=400");
+        	window.open("/calendar/calendarDetail?title="+arg.event.title+"&end="+arg.event.end+"&start="+arg.event.start+"&club_cl_name=${club_cl_name}","PopupWin","menubar:no,toolbar=no,scrollbars=no,resizable=no,top=500,left=500,width=510,height=300");
         	
         	//프론트에서 에이작스로 삭제요청
 /*         	if(confirm("정말로 삭제하시겠습니까?")){

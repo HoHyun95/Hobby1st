@@ -370,8 +370,8 @@
         $("#mem_name").blur(function() {
 		   var name_check = RegExp(/^[가-힣]{2,5}$/);
 		   if(name_check.test($("#mem_name").val())){
+               $("#mem_name_Result").text("");
 			   console.log("이름 정규표현식 성공");		
-               $("#mam_name_Result").text(" ");		   
 		   } else{
 			   $("#mem_name").val("");	  
                $("#mem_name_Result").text("2~5자 사이의 한글만 입력해주세요.");		   

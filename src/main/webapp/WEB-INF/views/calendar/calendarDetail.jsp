@@ -14,6 +14,7 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/locales-all.min.js'></script>
 <style>
 	.mainBox{
+	    margin-left: 55pt;
 		border: 1px solid black;
 		width: 500px;
 		height: 380px;
@@ -49,6 +50,7 @@
 	}
 	textarea:hover{
 		cursor: pointer;
+		background-color: #f1f3f4;
 	}
 	button{
 		font-weight: 550;
@@ -65,6 +67,9 @@
 		background-color: rgb(158, 128, 247, 0.9);
 	}
 	#membeinput:hover{
+		cursor: pointer;
+	}
+	#bodys:hover{
 		cursor: pointer;
 	}
 </style>

@@ -264,7 +264,7 @@
 
 .lp_item {
   width: 19%;
-  height: 300px;
+  height: 400px;
   margin: 20px 10px 30px 10px;
   box-shadow: 1px 1px 1px 1px rgba(212, 212, 212, 0.3);
   background-color: white;
@@ -318,6 +318,7 @@
 .lp_item_profile_item {
   font-size: 0.75rem;
   padding: 1px 0px;
+  text-align: center;
 }
 
 .lp_item_btns_area {

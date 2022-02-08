@@ -262,15 +262,94 @@
     
     
     // 동호회 검색
-    let search_input_area_btn = document.querySelector(".search_input_area_btn");
+  	let search_club = document.querySelector(".search_club");
+  	let search_input_area_btn = document.querySelector(".search_input_area_btn");
     let search_result_inner = document.querySelector(".search_result_inner");
+    let selectBox = document.getElementById("selectBox");
+    let create_hobby1st_club = document.querySelector(".create_hobby1st_club");
+    let search_result_title = document.querySelector(".search_result_title");
+    
+    
+  	search_club.addEventListener('keydown', (e) => {
+      if(e.keyCode == 13){ // Enter key
+    	  $.ajax({
+    	        url: "/clubList/searchClub",
+    	        type: "get",
+    	        data: {
+    	          "searchField": (selectBox.value),
+    	          "searchText": (search_club.value)
+    	        },
+    	        dataType: "json"
+    	      }).done((res) => {
+    	        console.log(res);
+    	        create_hobby1st_club.style.display = "none";
+    	        search_result_inner.style.display = "flex";
+    	        search_result_title.innerText = "총 " + (res.length) + "건의 검색 결과가 있습니다.";
+    	        if(search_result_inner.hasChildNodes()) {
+    	          while (search_result_inner.hasChildNodes()) {	
+    	            search_result_inner.removeChild(search_result_inner.firstChild);
+    	    	  }
+    	        }
+    	        
+    	        if(res.length > 0) {
+    	          for(let k = 0; k < res.length; k++) {
+    	            let div1 = document.createElement("div");
+    	            let div2 = document.createElement("div");
+    	            let div3 = document.createElement("div");
+    	            let div4 = document.createElement("div");
+
+    	            let a = document.createElement("a");
+    	            let h3 = document.createElement("h3");
+    	            let h5_1 = document.createElement("h5");
+    	            let h5_2 = document.createElement("h5");
+    	            let h5_3 = document.createElement("h5");
+    	            let i = document.createElement("i");
+    	            let input = document.createElement("input");
+
+    	            div1.classList.add("search_list_box_wrap");
+    	            div2.classList.add("search_list_box");
+    	            div3.classList.add("badge");
+    	            div3.id = "theme1";
+    	            div3.innerHTML = res[k].cl_category_id;
+    	            div4.classList.add("likeBtn");
+    	            if(id != 'null') {
+    	              i.classList.add("far");
+    	              i.classList.add("fa-heart");
+    	            }
+    	            i.id = res[k].cl_id;
+    	          
+    	            a.href = "/clubHouse?cl_id="+res[k].cl_id;
+    	            h3.innerHTML = res[k].cl_name;
+    	            h5_1.innerHTML = res[k].cl_boss_name;
+    	            h5_2.innerHTML = res[k].cl_local;
+    	            h5_3.innerHTML = res[k].cl_desc;
+    	   
+    	            div4.appendChild(i);
+    	            div2.appendChild(div3);
+    	            div2.appendChild(div4);
+    	            a.appendChild(h3);
+    	            div2.appendChild(a);
+    	            div2.appendChild(h5_1);
+    	            div2.appendChild(h5_2);
+    	            div2.appendChild(h5_3);
+    	            div1.appendChild(div2);
+    	            
+    	            search_result_inner.appendChild(div1);
+    	          }
+    	        } else {
+    	          create_hobby1st_club.style.display = "flex";
+    	          search_result_inner.style.display = "none";
+    	        }
+    	      });
+      } 
+    })
+    
+    
+    
+    
+    
     
     search_input_area_btn.onclick = () => {
-      let selectBox = document.getElementById("selectBox");
-      let search_club = document.querySelector(".search_club");
-      let create_hobby1st_club = document.querySelector(".create_hobby1st_club");
-      let search_result_title = document.querySelector(".search_result_title");
-      
       $.ajax({
         url: "/clubList/searchClub",
         type: "get",

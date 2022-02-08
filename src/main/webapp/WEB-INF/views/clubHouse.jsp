@@ -563,6 +563,7 @@
                <c:when test="${mem_id !=null }">
                 <li id="login_id"><b>${mem_id }</b>님 환영합니다</li>
                 <a href="/member/logout">
+                  <li class="login_list_item">로그아웃</li>
                 </a>
                 <li class="login_list_item" id="loginform_btn" style="display:none">로그인</li>
                 <li class="login_list_item" id="signupform_btn" style="display:none">회원가입</li>
@@ -576,11 +577,12 @@
         </div>
         <div class="header_inner_bottom">
           <ul class="menu_list">
-            <li class="menu_list_item">Hobby1st</i></li>
+            <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
              <c:if test="${admin != null}">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>

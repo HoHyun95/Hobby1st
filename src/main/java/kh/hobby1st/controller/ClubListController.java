@@ -111,6 +111,7 @@ public class ClubListController {
 			System.out.println(result);
 		}
 		return "redirect:/";
+		// Test
 
 	}
 

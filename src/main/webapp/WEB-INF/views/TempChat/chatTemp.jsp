@@ -120,8 +120,7 @@
 					<div id="chat_contents">
 
 						<div>
-							<div class="club_openDate">${clubInfo.formDate }동호회가개설
-								되었습니다</div>
+							<div class="club_openDate">${clubInfo.formDate }동호회가 개설되었습니다</div>
 						</div>
 
 						<div class="emojiBox">
@@ -174,7 +173,7 @@
 									<c:if test="${chatList.chat_writer_id != mem_id }">
 
 										<div class="sender">
-											<img class="sender_profile" src="${chatList_chat_user_photo }">
+<%-- 											<img class="sender_profile" src="${chatList.chat_user_photo }"> --%>
 											<sapn>${chatList.chat_writer }</sapn>
 
 											<div class="received_withd_msg">
@@ -200,7 +199,7 @@
 									<c:if test="${chatList.chat_writer_id != mem_id }">
 
 										<div class="sender">
-											<img class="sender_profile" src="${chatList_chat_user_photo }">
+<%-- 											<img class="sender_profile" src="${chatList.chat_user_photo }"> --%>
 											<sapn>${chatList.chat_writer }</sapn>
 
 											<div class="received_withd_msg">
@@ -373,7 +372,7 @@
 	        	  let emojiData = msgData;
 	     
 	       	  	  pullTime();
-	    		  htmlData +="<div class='sender'><img class='sender_profile' src='${chatList_chat_user_photo }'>";
+	    		  htmlData +="<div class='sender'><img class='sender_profile'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";
@@ -390,7 +389,7 @@
 	        	 
 	       	      pullTime();
 	       	      
-	      		  htmlData +="<div class='sender'><img class='sender_profile' src='${chatList_chat_user_photo }'>";
+	      		  htmlData +="<div class='sender'><img class='sender_profile'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";

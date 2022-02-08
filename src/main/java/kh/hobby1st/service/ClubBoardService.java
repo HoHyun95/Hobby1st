@@ -85,23 +85,6 @@ public class ClubBoardService {
 		return cbdao.writerProfile(cb_seq);
 	}
 
-//	// 추천한 게시글에 id 저장
-//	public int insertRec(int cb_seq, String rec_id) {
-//
-//		return cbdao.insertRec(cb_seq, rec_id);
-//	}
-//
-//	// 추천 쉬소
-//	public int deleteRec(int cb_seq, String rec_id) {
-//
-//		return cbdao.deleteRec(cb_seq, rec_id);
-//	}
-//
-//	// 추천수 갱신
-//	public int updateRec(int cb_seq) {
-//		return cbdao.updateRec(cb_seq);
-//	}
-
 	// 추천수
 	public int recCount(int cb_seq) {
 		return cbdao.recCount(cb_seq);
@@ -138,7 +121,7 @@ public class ClubBoardService {
 		return pageTotalCount;
 	}
 
-// 페이지 네비게이터
+// 페이지 네비게이터 
 	public String getPageNavi(int cpage, int seq) throws Exception {
 
 		int recordTotalCount = this.getRecordCount(seq);
@@ -184,16 +167,16 @@ public class ClubBoardService {
 		String pageNavi = "";
 
 		if (needPrev) {
-			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (startNavi - 1) + "'><</a>";
+			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (startNavi - 1) + "&cb_club_id=" + seq + "'><</a>";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
-			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/boardList?cpage=" + i + "'>" + i
+			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/boardList?cpage=" + i + "&cb_club_id=" + seq + "'>" + i
 					+ "</a> ";
 		}
 
 		if (needNext) {
-			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (endNavi + 1) + "'>></a>";
+			pageNavi += "<a class='paging' href='/clubBoard/boardList?cpage=" + (endNavi + 1) + "&cb_club_id=" + seq + "'>></a>";
 		}
 		return pageNavi;
 	}

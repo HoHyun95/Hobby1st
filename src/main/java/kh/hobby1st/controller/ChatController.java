@@ -68,7 +68,7 @@ public class ChatController {
 	
 		model.addAttribute("member", memberInfo);
 		model.addAttribute("clubInfo", map);
-		model.addAttribute("chatList", chatList);
+//		model.addAttribute("chatList", chatList);
 	}
 
 	@RequestMapping("/clubChat")

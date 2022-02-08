@@ -643,7 +643,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man2.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -657,7 +657,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man3.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -671,7 +671,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man4.png">
             </div>
           </div>
           <div class="lp_item_profile_area">
@@ -685,7 +685,7 @@
         <div class="lp_item">
           <div class="lp_item_photo_area">
             <div class="lp_item_photo">
-              <img src="images/man1.png">
+              <img src="images/man5.png">
             </div>
           </div>
           <div class="lp_item_profile_area">

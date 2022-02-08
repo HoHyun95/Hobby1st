@@ -3,6 +3,7 @@ package kh.hobby1st.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,6 @@ import com.google.gson.JsonObject;
 import kh.hobby1st.dao.ClubBoardDAO;
 import kh.hobby1st.dto.ClubBoardDTO;
 import kh.hobby1st.dto.ClubBoardReplyDTO;
-import kh.hobby1st.dto.ClubListDTO;
 import kh.hobby1st.service.ClubBoardReplyService;
 import kh.hobby1st.service.ClubBoardService;
 import kh.hobby1st.service.ClubListService;
@@ -92,13 +92,13 @@ public class ClubBoardController {
 
 	// 게시판 상세페이지 이동
 	@RequestMapping("/boardDetail")
-	public String boardDetail(int cb_seq, int cpage, Model model, int check_num, String keyword, String searchWord, int cb_club_id) {
+	public String boardDetail(int cb_seq, int cpage, Model model, int check_num, String keyword, String searchWord, int cb_club_id) throws Exception {
 
-		if (keyword.equals("title")) {
-			keyword = "제목";
-		} else if (keyword.equals("writer")) {
-			keyword = "작성자";
-		}
+		
+		String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+		String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
+		
+		
 		String rec_id = (String) session.getAttribute("mem_id");
 		int check = club_board_service.checkRec(cb_seq, rec_id);
 		int user = 0;
@@ -121,7 +121,7 @@ public class ClubBoardController {
 		int replycount = club_board_reply_service.replyCount(cb_seq);
 		List<String> reply_profile = club_board_service.reply_profile(cb_seq);
 		
-		System.out.println(reply_profile.size());
+		System.out.println(keyword + "키워드 : " + searchWord);
 
 //		model.addAttribute("list", list.getCl_photo());
 		model.addAttribute("writerProfile", writerProfile);
@@ -141,13 +141,11 @@ public class ClubBoardController {
 	// 댓글 작성
 	@RequestMapping("/insertReply")
 	public String insertReply(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword,
-			String searchWord, int cb_club_id) {
+			String searchWord, int cb_club_id) throws Exception {
 
-		if (keyword.equals("제목")) {
-			keyword = "title";
-		} else if (keyword.equals("작성자")) {
-			keyword = "writer";
-		}
+		
+		String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+		String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
 
 		dto.setCbr_writer((String) session.getAttribute("mem_id"));
 		dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
@@ -156,37 +154,33 @@ public class ClubBoardController {
 		club_board_reply_service.plusReply(cb_seq);
 		int result = club_board_reply_service.insert(dto);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keywordEn
+				+ "&searchWord=" + searchWordEn + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 
 	// 댓글 삭제
 	@RequestMapping("/deleteReply")
-	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) {
+	public String deleteReply(int cbr_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) throws Exception {
 
-		if (keyword.equals("제목")) {
-			keyword = "title";
-		} else if (keyword.equals("작성자")) {
-			keyword = "writer";
-		}
+		
+		String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+		String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
 
 		club_board_reply_service.minusReply(cb_seq);
 		int result = club_board_reply_service.deleteReply(cbr_seq);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keywordEn
+				+ "&searchWord=" + searchWordEn + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 	
 	// 대댓글 작성
 		@RequestMapping("/insertReply_rec")
 		public String insertReply_rec(ClubBoardReplyDTO dto, int cb_seq, int cpage, int check_num, String keyword,
-				String searchWord, int cbr_seq, int cb_club_id) {
+				String searchWord, int cbr_seq, int cb_club_id) throws Exception {
 
-			if (keyword.equals("제목")) {
-				keyword = "title";
-			} else if (keyword.equals("작성자")) {
-				keyword = "writer";
-			}
+			
+			String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+			String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
 			
 			dto.setCbr_writer((String) session.getAttribute("mem_id"));
 			dto.setCbr_nickname((String) session.getAttribute("user_nickName"));
@@ -195,36 +189,37 @@ public class ClubBoardController {
 			club_board_reply_service.plusReply(cb_seq);
 			int result = club_board_reply_service.insert_rec(dto);
 
-			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
+			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keywordEn
+					+ "&searchWord=" + searchWordEn + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 		}
 	
 		// 대댓글 삭제
 		@RequestMapping("/deleteReply_r")
-		public String deleteReply_r(int cbr_r_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) {
+		public String deleteReply_r(int cbr_r_seq, int cb_seq, int cpage, int check_num, String keyword, String searchWord, int cb_club_id) throws Exception {
 
-			if (keyword.equals("제목")) {
-				keyword = "title";
-			} else if (keyword.equals("작성자")) {
-				keyword = "writer";
-			}
+			
+			String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+			String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
 
 			club_board_reply_service.minusReply(cb_seq);
 			int result = club_board_reply_service.deleteReply_r(cbr_r_seq);
 
-			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
+			return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + cb_seq + "&keyword=" + keywordEn
+					+ "&searchWord=" + searchWordEn + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 		}
 	
 	
 
 	// 게시판 삭제
 	@RequestMapping("/deleteBoard")
-	public String deleteBoard(int cpage, int cb_seq, int cb_club_id) {
+	public String deleteBoard(int cpage, int cb_seq, int cb_club_id, Model model) {
 
-		int result = club_board_service.deleteBoard(cb_seq);
+		int delete_result = club_board_service.deleteBoard(cb_seq);
 		
-		return "redirect:/clubBoard/boardList?cpage=" + cpage + "&cb_club_id=" + cb_club_id;
+		model.addAttribute("cpage",cpage);
+		model.addAttribute("cb_club_id",cb_club_id);
+		model.addAttribute("delete_result",delete_result);
+		return "clubBoard/boardList";
 	}
 	
 	// 게시글 삭제 관리자 페이지에서 삭제 
@@ -255,20 +250,18 @@ public class ClubBoardController {
 	// 게시판 수정페이지 수정
 	@RequestMapping("/updateBoard")
 	public String updateBoard(int cpage, Model model, ClubBoardDTO dto, int check_num, String keyword,
-			String searchWord, int cb_club_id) {
+			String searchWord, int cb_club_id) throws Exception {
 
-		if (keyword.equals("제목")) {
-			keyword = "title";
-		} else if (keyword.equals("작성자")) {
-			keyword = "writer";
-		}
+		
+		String keywordEn = URLEncoder.encode(keyword, "UTF-8");
+		String searchWordEn = URLEncoder.encode(searchWord, "UTF-8");
 
 		int result = club_board_service.modifyBoard(dto);
 
 		model.addAttribute("result", result);
 
-		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq() + "&keyword=" + keyword
-				+ "&searchWord=" + searchWord + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
+		return "redirect:/clubBoard/boardDetail?cpage=" + cpage + "&cb_seq=" + dto.getCb_seq() + "&keyword=" + keywordEn
+				+ "&searchWord=" + searchWordEn + "&check_num=" + check_num + "&cb_club_id=" + cb_club_id;
 	}
 
 	// 게시판 검색 기능 
@@ -281,7 +274,6 @@ public class ClubBoardController {
 
 		String navi = club_board_service.getSearchPageNavi(cpage, cb_club_id, keyword, searchWord);
 		
-		System.out.println(navi);
 
 		int totalBoardCount = club_board_service.getRecordSearchCount(cb_club_id, keyword, searchWord);
 

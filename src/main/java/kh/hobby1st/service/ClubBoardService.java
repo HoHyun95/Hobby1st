@@ -201,8 +201,8 @@ public class ClubBoardService {
 	}
 
 	// 게시판 총 페이지
-	public int getSearchTotalCount(int club_board_id, String keyword, String searchWord) throws Exception {
-		int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
+	public int getSearchTotalCount(int cb_club_id, String keyword, String searchWord) throws Exception {
+		int recordTotalCount = this.getRecordSearchCount(cb_club_id, keyword, searchWord);
 		int pageTotalCount = 0;
 
 		if (recordTotalCount % Statics.RECORD_COUNT_PER_PAGE == 0) {
@@ -214,9 +214,9 @@ public class ClubBoardService {
 	}
 
 	// 페이지 네비게이터
-	public String getSearchPageNavi(int cpage, int club_board_id, String keyword, String searchWord) throws Exception {
+	public String getSearchPageNavi(int cpage, int cb_club_id, String keyword, String searchWord) throws Exception {
 
-		int recordTotalCount = this.getRecordSearchCount(club_board_id, keyword, searchWord);
+		int recordTotalCount = this.getRecordSearchCount(cb_club_id, keyword, searchWord);
 		// 총 페이지의 개수
 		int pageTotalCount = 0;
 
@@ -260,17 +260,17 @@ public class ClubBoardService {
 
 		if (needPrev) {
 			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword="
-					+ keyword + "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'><</a>";
+					+ keyword + "&searchWord=" + searchWord + "&cb_club_id=" + cb_club_id + "'><</a>";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
 			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/searchBoard?cpage=" + i
-					+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'>" + i + "</a> ";
+					+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&cb_club_id=" + cb_club_id + "'>" + i + "</a> ";
 		}
 
 		if (needNext) {
 			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'>></a>";
+					+ "&searchWord=" + searchWord + "&cb_club_id=" + cb_club_id + "'>></a>";
 		}
 		return pageNavi;
 	}

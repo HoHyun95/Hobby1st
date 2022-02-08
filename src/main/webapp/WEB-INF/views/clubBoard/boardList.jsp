@@ -142,12 +142,12 @@
 
 	<!----------------------------------- 메인 스크립트 ------------------------------------->
 	
-	<%-- <c:if test="${break_result eq '1' }">
+	<c:if test="${delete_result eq '1' }">
 		<script>
-			alert("해당 동호회가 해체되었습니다...");
-		    location.href = "/club";
+			alert("게시물이 성공적으로 삭제되었습니다.");
+		    location.href = "/clubBoard/boardList?cpage=1&cb_club_id=${cb_club_id }";
 		</script>
-	</c:if> --%>
+	</c:if>
 	
 	<script>
 	// 페이징 스타일

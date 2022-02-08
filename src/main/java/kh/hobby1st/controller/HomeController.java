@@ -257,6 +257,9 @@ public class HomeController {
 	
 	@RequestMapping("vote")
 	public String vote() {
+		if((String)session.getAttribute("mem_id") == null) {
+			return "redirect:/";
+		}
 		return "vote";
 	}
 	

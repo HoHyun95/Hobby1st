@@ -265,6 +265,32 @@
 </body>
         <script>
         
+    	$(document).ready(function() {
+    	    $("input:file[name='cl_photo']").change(function () {
+    			
+    	        let str = $(this).val();
+    	        let fileName = str.split('\\').pop().toLowerCase();
+    	        checkFileName(fileName);
+    	    });
+    	});
+
+    	function checkFileName(str){
+    	 
+    	 let ext =  str.split('.').pop().toLowerCase();
+    	 if($.inArray(ext, ['png','jpg', 'jpeg']) == -1) {
+
+    		  alert(ext+'파일은 업로드 하실 수 없습니다.');
+    		  $('#mc-input-image').val("");
+    	 }
+
+    	 var pattern =   /[\{\}\/?,;:|*~`!^\+<>@\#$%&\\\=\'\"]/gi;
+    	 if(pattern.test(str) ){
+    		  alert('파일명에 특수문자를 제거해주세요.');
+    		  $('#mc-input-image').val("");
+    	 }
+    	}
+        
+        
 		  $('#cl_name').on('keyup', () => {
 				if(
 					$('#cl_name').val().length < 3

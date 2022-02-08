@@ -227,7 +227,7 @@
             </div>
             <div class="select_mem_address">
               <select name="mem_address" id="mem_address">
-                <option selected disabled hidden>지역을 선택해주세요</option>
+                <option value="ITEM1" selected disabled hidden>지역을 선택해주세요</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
                 <option value="인천">인천</option>
@@ -259,7 +259,7 @@
             </div>
             <div class="input">
               <select name="mem_category_1" id="mem_category_1">
-                <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
+                <option value="ITEM1" selected disabled hidden>카테고리를 선택해 주세요</option>
                 <option value="개발">개발</option>
                 <option value="운동/스포츠">운동/스포츠</option>
                 <option value="금융">금융</option>
@@ -280,8 +280,8 @@
                 <i class="fas fa-archive"> 카테고리 2</i>
               </div>
               <div class="input">
-                <select name="mem_category_2" id="m_category_2">
-                  <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
+                <select name="mem_category_2" id="mem_category_2">
+                  <option value="ITEM1" selected disabled hidden>카테고리를 선택해 주세요</option>
                   <option value="개발">개발</option>
                   <option value="운동/스포츠">운동/스포츠</option>
                   <option value="금융">금융</option>
@@ -297,7 +297,7 @@
                   <option value="지역친목">지역친목</option>
                 </select>
               </div>
-              <div class="validResult" id="m_category_2_Result"></div> 
+              <div class="validResult" id="mem_category_2_Result"></div> 
           </div>
         </div>
       </div>
@@ -305,6 +305,22 @@
     </form>
   </div>
   <script>
+       /* 프로필과, 지역, 취미가 선택이 안되어있는경우 */
+      $("#signUpBtn").on("click",function(){ 
+    	  if($("#mem_address option:selected").val()=="ITEM1") {
+    		  alert("주소를 선택해주세요!")
+    		  return false;
+
+    	  }else if($("#mem_category_1 option:selected").val()=="ITEM1"){
+    		  alert("카테고리1 선택해주세요!")
+    		  return false;
+
+    	  }else if($("#mem_category_select_2 option:selected").val()=="ITEM1"){
+    		  alert("카테고리2 선택해주세요!")
+    		  return false;
+    	  }
+      });
+
        /* 이메일중복여부체크 */
        $("#mem_email").blur(function() {
     	  $.ajax({
@@ -354,8 +370,8 @@
         $("#mem_name").blur(function() {
 		   var name_check = RegExp(/^[가-힣]{2,5}$/);
 		   if(name_check.test($("#mem_name").val())){
+               $("#mem_name_Result").text("");
 			   console.log("이름 정규표현식 성공");		
-               $("#mam_name_Result").text(" ");		   
 		   } else{
 			   $("#mem_name").val("");	  
                $("#mem_name_Result").text("2~5자 사이의 한글만 입력해주세요.");		   
@@ -379,7 +395,7 @@
                $("#mem_email_Result").text("");			   
 		   } else{
 			   $("#mem_email").val("");	  
-			   $("#mem_email_Result").text("2~50글자 내외 @과 .com 포함하여 입력");
+			   $("#mem_email_Result").text("2~21글자 내외 '@' 과 '.' 포함하여 입력");
 		   }
 	   })
 	   /* 생년월일 잡아내기 */
@@ -411,6 +427,7 @@
            e.preventDefault();
          }
        })
+
 
  </script>
 </body>

@@ -206,8 +206,15 @@ div {
 		
 		// 투표 삭제
 		$(".vote_remove_btn").on("click", function() {
-		  let vl_seq = $(this).find(".vl_seq").val();
-		  location.href = "/vote/previousVoteDelete?vl_seq=" + vl_seq;
+			
+			let delConfirm = confirm('해당 투표를 삭제하시겠습니까 ?');
+			if (delConfirm) {
+			      alert('삭제되었습니다.');
+			      let vl_seq = $(this).find(".vl_seq").val();
+				  location.href = "/vote/previousVoteDelete?vl_seq=" + vl_seq;
+			 }else {
+			      alert('삭제가 취소되었습니다.');
+			 }
 		})
 	</script>
 

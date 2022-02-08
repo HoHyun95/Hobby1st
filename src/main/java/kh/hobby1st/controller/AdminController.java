@@ -215,6 +215,13 @@ public class AdminController {
 		return "admin/noticeAdmin";
 	}
 	
+	@RequestMapping("/admin/voteAdmin")
+	public String vote(Model model) {
+		
+		return "admin/voteAdmin";
+	}
+	
+	
 	// 로그아웃 버튼 누를시 실행됩니다.
 		@RequestMapping("/admin/logout")
 		public String logout() {

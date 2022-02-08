@@ -273,15 +273,15 @@ public class ClubBoardController {
 
 	// 게시판 검색 기능
 	@RequestMapping("/searchBoard")
-	public String searchBoard(int cpage, String keyword, String searchWord, Model model) throws Exception {
+	public String searchBoard(int cpage, String keyword, String searchWord, Model model, int cb_club_id) throws Exception {
 		int check_num = 2;
 		System.out.println(keyword + searchWord);
-		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardSearchByPaging(cpage, 5, keyword, searchWord);
-		List<ClubBoardDTO> list = dao.selectBoardSearchByPaging(1, 10, 5, keyword, searchWord);
+		List<ClubBoardDTO> clubBoardList = club_board_service.selectBoardSearchByPaging(cpage, cb_club_id, keyword, searchWord);
+		List<ClubBoardDTO> list = dao.selectBoardSearchByPaging(1, 10, cb_club_id, keyword, searchWord);
 
-		String navi = club_board_service.getSearchPageNavi(cpage, 5, keyword, searchWord);
+		String navi = club_board_service.getSearchPageNavi(cpage, cb_club_id, keyword, searchWord);
 
-		int totalBoardCount = club_board_service.getRecordSearchCount(5, keyword, searchWord);
+		int totalBoardCount = club_board_service.getRecordSearchCount(cb_club_id, keyword, searchWord);
 
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchWord", searchWord);

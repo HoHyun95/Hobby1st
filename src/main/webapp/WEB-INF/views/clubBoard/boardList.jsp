@@ -155,10 +155,13 @@
 	
 	
 		$("#writeBtn").on("click", function() {
+			if(${mem_id == null}){
+				alert("로그인 후 이용해주세요.");
+				return false;
+			}
 			location.href = "/clubBoard/boardWrite?cb_club_id=${cb_club_id}"
 		});
 	</script>
-
 
 </body>
 

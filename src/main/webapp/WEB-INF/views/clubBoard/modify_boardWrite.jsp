@@ -74,13 +74,24 @@
 	</form>
 
 	<script>
-		// 제목 입력 안할시 에러
+		// 제목, 내용 입력 안할시 알림
 		$("#modify_board").on("click", function() {
-			let regex = /([\s\S]){1,2000}/;
-			let contents = $("#title").val();
-			let result = regex.test(contents);
-			if (!result) {
-				alert("한글자 이상 입력해주세요.");
+			let regex = /^([\S]){1,2000}/;
+
+			let title = $("#title").val();
+			let result1 = regex.test(title);
+
+			let contents = $("#summernote").val();
+			let result2 = regex.test(contents);
+			if (!result1) {
+				alert("제목을 한글자 이상 입력해주세요.\n(공백으로 시작될 수 없습니다.)");
+				$("#title").focus();
+				return false;
+			}
+
+			if (!result2) {
+				alert("본문 내용을 한글자 이상 입력해주세요.");
+				$("#summernote").focus();
 				return false;
 			}
 		})
@@ -89,7 +100,6 @@
 		$("#back").on("click", function() {
 			history.go(-1);
 		});
-
 	</script>
 
 	<script>
@@ -103,12 +113,12 @@
 			focus : true,
 			callbacks : {
 				onImageUpload : function(files, editor, welEditable) {
-		            // 파일 업로드(다중업로드를 위해 반복문 사용)
-		            for (var i = files.length - 1; i >= 0; i--) {
-		            	sendFile(files[i],this);
+					// 파일 업로드(다중업로드를 위해 반복문 사용)
+					for (var i = files.length - 1; i >= 0; i--) {
+						sendFile(files[i], this);
+					}
 				}
 			}
-		}
 		});
 
 		//<!-- 이미지 업로드 -->

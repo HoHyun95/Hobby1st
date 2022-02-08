@@ -52,7 +52,7 @@
                         h-14
                       " />
 
-<script>
+				<script>
 	let title = document.querySelector('#title');
 	title.addEventListener('keyup', () => {
 		if(title.value.length > 100){
@@ -70,7 +70,7 @@
 					<textarea name="cb_contents" id="summernote"></textarea>
 				</div>
 
-	<script>
+				<script>
 // 	let summernote = document.querySelector('#summernote');
 // 	summernote.addEventListener('keyup', () => {
 // 	console.log("ㅆ ");
@@ -93,7 +93,7 @@
 					<button id="input_board"
 						class="border border-green-500 text-green-500 hover:bg-green-400 hover:text-gray-100 rounded px-4 py-2"
 						style="height: 65%;">등록</button>
-						<input type="hidden" name="cb_club_id" value="${cb_club_id }">
+					<input type="hidden" name="cb_club_id" value="${cb_club_id }">
 				</div>
 			</div>
 		</div>
@@ -149,6 +149,30 @@
 		$("#back").on("click", function() {
 			history.back();
 		})
+		
+		// 제목, 내용 입력 안할시 알림
+		 $("#input_board").on("click",function(){
+		   let regex = /^([\S]){1,2000}/;
+ 		   
+ 		   let title = $("#title").val();
+ 		   let result1 = regex.test(title);
+ 		   
+ 		   let contents = $("#summernote").val();
+		   let result2 = regex.test(contents);
+   		 if(!result1){
+   			 alert("제목을 한글자 이상 입력해주세요.\n(공백으로 시작될 수 없습니다.)");
+   			 $("#title").focus();
+   	   		 return false;
+  		   }
+   		 
+   		if(!result2){
+  	    	 alert("본문 내용을 한글자 이상 입력해주세요.");
+  			 $("#summernote").focus();
+  	   		 return false;
+ 		   }
+		 })
+		 
+		 
 	</script>
 
 

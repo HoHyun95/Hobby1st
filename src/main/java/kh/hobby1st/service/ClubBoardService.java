@@ -260,17 +260,17 @@ public class ClubBoardService {
 
 		if (needPrev) {
 			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (startNavi - 1) + "&keyword="
-					+ keyword + "&searchWord=" + searchWord + "'><</a>";
+					+ keyword + "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'><</a>";
 		}
 
 		for (int i = startNavi; i <= endNavi; i++) {
 			pageNavi += "<a class='paging' id='paging" + i + "'" + " href='/clubBoard/searchBoard?cpage=" + i
-					+ "&keyword=" + keyword + "&searchWord=" + searchWord + "'>" + i + "</a> ";
+					+ "&keyword=" + keyword + "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'>" + i + "</a> ";
 		}
 
 		if (needNext) {
 			pageNavi += "<a class='paging' href='/clubBoard/searchBoard?cpage=" + (endNavi + 1) + "&keyword=" + keyword
-					+ "&searchWord=" + searchWord + "'>></a>";
+					+ "&searchWord=" + searchWord + "&club_board_id=" + club_board_id + "'>></a>";
 		}
 		return pageNavi;
 	}

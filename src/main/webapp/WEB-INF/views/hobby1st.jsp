@@ -428,10 +428,10 @@
         </p>
       </div>
       <div class="landing_page_section1_btn">
-        <c:if test="${sessionScope.mem_id eq null}">
+        <c:if test="${sessionScope.mem_id ne null}">
           <button type="button" id="createId" style = "display: none">지금 시작해보기!</button>
         </c:if>
-        <c:if test="${sessionScope.mem_id ne null}">
+        <c:if test="${sessionScope.mem_id eq null}">
           <button type="button" id="createId">지금 시작해보기!</button>
         </c:if>
       </div>

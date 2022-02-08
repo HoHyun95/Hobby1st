@@ -19,9 +19,9 @@ public class VoteService {
 	private VoteDAO voteDao;
 
 	// 투표 리스트에 추가
-	public int insertVoteList(VoteListDTO dto, String edateY, String edateM, String edateD) {
-		Date edate = Date.valueOf(edateY + "-" + edateM + "-" + edateD);
-		dto.setVl_end_date(edate);
+	public int insertVoteList(VoteListDTO dto, String edate) {
+		Date Inputedate = Date.valueOf(edate);
+		dto.setVl_end_date(Inputedate);
 
 		return voteDao.insertVoteList(dto);
 	}

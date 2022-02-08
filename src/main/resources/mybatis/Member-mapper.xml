@@ -81,7 +81,7 @@
 	
 	<!-- 관리자페이지 오늘 가입 회원 수 -->
 	<select id="newMember" resultType="int">
-		select count(*) from member where mem_lastlogin = to_char(sysdate,'yyyy-mm-dd')
+		select count(*) from member where to_char(mem_lastlogin,'yyyy-mm-dd') = to_char(current_date,'yyyy-mm-dd')
 	</select>
 	
 	<!-- 관리자페이지 지난주 총 회원 수 -->

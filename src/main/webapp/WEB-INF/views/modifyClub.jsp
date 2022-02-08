@@ -215,7 +215,7 @@
               <h3>변경할 동호회 카테고리를 입력해 주세요!</h3>
             </div>
             <div class="mc_title">
-              <i class="fas fa-archive"> 대분류</i>
+              <i class="fas fa-archive"> 카테고리 1</i>
             </div>
             <div class="mc_input">
               <select name="cl_category_id" id="cl_category_id" class="mc_select_box">
@@ -236,22 +236,24 @@
               </select>
             </div>
             <div class="mc_title">
-              <i class="fas fa-asterisk"> 소분류</i>
+              <i class="fas fa-archive"> 카테고리 2</i>
             </div>
             <div class="mc_input">
               <select name="cl_dCategory_id" id="cl_dCategory_id" class="mc_select_box">
                 <option value="" selected disabled hidden>카테고리를 선택해 주세요</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
-                <option value="ITEM1">ITEM 1</option>
+                <option value="개발">개발</option>
+                <option value="운동/스포츠">운동/스포츠</option>
+                <option value="금융">금융</option>
+                <option value="문화생활">문화생활</option>
+                <option value="핸드메이드">핸드메이드</option>
+                <option value="음악">음악</option>
+                <option value="라이딩">라이딩</option>
+                <option value="연령대">연령대</option>
+                <option value="사회공헌활동">사회공헌활동</option>
+                <option value="맛집">맛집</option>
+                <option value="남자아이돌">남자아이돌</option>
+                <option value="여자아이돌">여자아이돌</option>
+                <option value="지역친목">지역친목</option>
               </select>
             </div>
           </div>

@@ -21,8 +21,8 @@ div {
 }
 
 .container {
-	width: 80%;
-	margin: auto;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .container>div {
@@ -31,8 +31,8 @@ div {
 
 .vote_list {
 	width: 300px;
-	margin: 30px;
-	margin-top: 100px;
+	margin: 15px 33px;
+	margin-top: 30px;
 	border: 1px solid rgb(0, 0, 0);
 	padding-left: 2%;
 	padding-right: 2%;

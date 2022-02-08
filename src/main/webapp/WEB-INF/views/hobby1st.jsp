@@ -394,7 +394,8 @@
             <a href="/club"><li class="menu_list_item">동호회</li></a>
             <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
-            <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a>
+            <a href="/vote"><li class="menu_list_item">VOTE</li></a>
+            <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
             <a href="/admin"><li class="menu_list_item">admin</li></a>
             </c:if>

@@ -182,6 +182,7 @@
   width: 1260px;
   margin: 0px auto;
   min-height: 400px;
+
   padding: 10px 10px; 
   border: 1px solid dimgray;
   margin-bottom: 30px;
@@ -264,10 +265,10 @@
   border: 2px solid var(--color1);
   color: var(--color1);
 }
+
 .fav_club_list_add_btn input[type="button"]:hover {
   background-color: var(--color1);
   color: var(--color2);
   cursor: pointer;
 }
 /* container end */
-

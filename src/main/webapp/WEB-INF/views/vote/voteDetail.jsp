@@ -134,7 +134,7 @@ div {
 
 	<script>
 		$(".back").on("click", function() {
-			location.href="/vote/listPage";
+			location.href="/vote/presentVoteList";
 		})
 	</script>
 

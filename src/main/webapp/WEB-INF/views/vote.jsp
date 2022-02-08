@@ -443,13 +443,13 @@
       </div>
       <!-- previousVote -->
       <div class="previousVote_wrap">
-        previousVote
+        <iframe src="/vote/previousVoteList"></iframe>
       </div>
       <!-- presentVote -->
       <div class="presentVote_wrap">
-        presentVote
+        <iframe src="/vote/presentVoteList"></iframe>
       </div>
-      
+    </div>
       <div class="footer">
         <div class="footer_inner">
           <div class="footer_logo">
@@ -466,7 +466,7 @@
           </div>
         </div>
       </div>
-  </div>
+ 
   <jsp:include page="signUp.jsp"></jsp:include>
 </body>
 

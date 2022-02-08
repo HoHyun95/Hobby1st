@@ -188,7 +188,7 @@ div {
 	<script>
 		// 목록으로
 		$(".backBtn").on("click", function() {
-			history.back();
+			location.href = "/vote/presentVoteList?";
 		})
 
 		// 투표하기

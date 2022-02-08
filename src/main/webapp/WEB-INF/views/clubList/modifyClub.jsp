@@ -197,48 +197,48 @@
 		  });
 		  
 		  
-// 		  $('#cl_name').on('keyup', () => {
-// 				if(
-// 					$('#cl_name').val().length < 3
-// 				){
-// 					$('#nameSpan').text("동호회명은 3자 이상으로 작성해주세요");
-// 				}else if($('#cl_name').val().length > 29){
-// 					$('#nameSpan').text("30자 이내로 작성해주세요");
-// 				}else{
-// 					$('#nameSpan').text("");
-// 				}
-// 			})
+		  $('#cl_name').on('keyup', () => {
+				if(
+					$('#cl_name').val().length < 3
+				){
+					$('#nameSpan').text("동호회명은 3자 이상으로 작성해주세요");
+				}else if($('#cl_name').val().length > 29){
+					$('#nameSpan').text("30자 이내로 작성해주세요");
+				}else{
+					$('#nameSpan').text("");
+				}
+			})
 	  
-// 	  let cl_name = document.querySelector('#cl_name');
-// 	  let cl_name_valid = document.querySelector('#cl_name_valid');
+	  let cl_name = document.querySelector('#cl_name');
+	  let cl_name_valid = document.querySelector('#cl_name_valid');
 	  
-// 	  cl_name.addEventListener('blur', () => {
-// 		  if(cl_name.value.length < 3){
-// 			  cl_name_valid.innerHTML = "동호회명은 3자 이상으로 작성해주세요";
-// 		  }else if(cl_name.value.length > 29){
-// 			  cl_name_valid.innerHTML = "30자 이내로 작성해주세요";
-// 		  }else{
-// 			  cl_name_valid.innerHTML ="";
+	  cl_name.addEventListener('blur', () => {
+		  if(cl_name.value.length < 3){
+			  cl_name_valid.innerHTML = "동호회명은 3자 이상으로 작성해주세요";
+		  }else if(cl_name.value.length > 29){
+			  cl_name_valid.innerHTML = "30자 이내로 작성해주세요";
+		  }else{
+			  cl_name_valid.innerHTML ="";
 			  
-// 			   $.ajax({
-// 					  url : "/clubList/nameCheck",
-// 					  data : { cl_name : cl_name.value }
-// 					}).done((resp) => {
+			   $.ajax({
+					  url : "/clubList/nameCheck",
+					  data : { cl_name : cl_name.value }
+					}).done((resp) => {
 
-// 					  if (cl_name.value !== "") {
-// 						if (resp > 0) {
-// 						  cl_name_valid.innerHTML ="이미 사용중인 동호회명입니다";
-// 						  cl_name.value="";
-// 						  cl_name.focus();
-// 						} else {
-// 						  cl_name_valid.innerHTML="";
-// 						}
-// 					  } else {
-// 						cl_name_valid.innerHTML="동호회명을 입력해주세요";
-// 					  }
-// 				    }); 
-// 		  }
-// 	  })
+					  if (cl_name.value !== "") {
+						if (resp > 0) {
+						  cl_name_valid.innerHTML ="이미 사용중인 동호회명입니다";
+						  cl_name.value="";
+						  cl_name.focus();
+						} else {
+						  cl_name_valid.innerHTML="";
+						}
+					  } else {
+						cl_name_valid.innerHTML="동호회명을 입력해주세요";
+					  }
+				    }); 
+		  }
+	  })
 	  
 	  
 	  	let cl_maxMem = document.querySelector('#cl_maxMem');

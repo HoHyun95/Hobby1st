@@ -645,11 +645,11 @@
             </div>
           </div>
           <div class="lp_item_profile_area">
-            <span id="lp_admin_badge">ADMIN</span>
-            <div class="lp_item_profile_title">이름</div>
-            <div class="lp_item_profile_item">FRONT / BACK / DB / AWS</div>
-            <div class="lp_item_profile_item">생년월일</div>
-            <div class="lp_item_profile_item">COMMENT</div>
+            <span id="lp_admin_badge">GITHUB / AWS</span>
+            <div class="lp_item_profile_title">서호현</div>
+            <div class="lp_item_profile_item">BACKEND DEVELOPER</div>
+            <div class="lp_item_profile_item">1995. 02. 01</div>
+            <p class="lp_item_profile_item">"조금도 위험을 감수하지 않는 것은 <br> 인생에서 가장 위험한 일일 것이라 믿는다." <br> 도전을 두려워 하지 말자..!</p>
           </div>
         </div>
         <div class="lp_item">
@@ -659,25 +659,12 @@
             </div>
           </div>
           <div class="lp_item_profile_area">
-            <span id="lp_admin_badge">ADMIN</span>
-            <div class="lp_item_profile_title">이름</div>
-            <div class="lp_item_profile_item">FRONT / BACK / DB / AWS</div>
-            <div class="lp_item_profile_item">생년월일</div>
-            <div class="lp_item_profile_item">COMMENT</div>
-          </div>
-        </div>
-        <div class="lp_item">
-          <div class="lp_item_photo_area">
-            <div class="lp_item_photo">
-              <img src="images/man3.png">
-            </div>
-          </div>
-          <div class="lp_item_profile_area">
-            <span id="lp_admin_badge">ADMIN</span>
-            <div class="lp_item_profile_title">이름</div>
-            <div class="lp_item_profile_item">FRONT / BACK / DB / AWS</div>
-            <div class="lp_item_profile_item">생년월일</div>
-            <div class="lp_item_profile_item">COMMENT</div>
+            <span id="lp_admin_badge">PUBLISHING</span>
+            <div class="lp_item_profile_title">이기훈</div>
+            <div class="lp_item_profile_item">WEB PUBLISHER</div>
+            <div class="lp_item_profile_item">FRONTEND DEVELOPER</div>
+            <div class="lp_item_profile_item">1988. 03. 11</div>
+            <p class="lp_item_profile_item">Practice Makes Perfect! <br> Be Positive! <br> It's Possible</p>
           </div>
         </div>
         <div class="lp_item">
@@ -687,11 +674,25 @@
             </div>
           </div>
           <div class="lp_item_profile_area">
-            <span id="lp_admin_badge">ADMIN</span>
-            <div class="lp_item_profile_title">이름</div>
-            <div class="lp_item_profile_item">FRONT / BACK / DB / AWS</div>
-            <div class="lp_item_profile_item">생년월일</div>
-            <div class="lp_item_profile_item">COMMENT</div>
+            <span id="lp_admin_badge">CHATTING</span>
+            <div class="lp_item_profile_title">이상준</div>
+            <div class="lp_item_profile_item">BACKEND DEVELOPER</div>
+            <div class="lp_item_profile_item">1997. 12. 15</div>
+            <p class="lp_item_profile_item">많은 사람들이 IT 분야는 <br> 공부할 것도 많고 <br> 어렵다라고 말하기도 합니다. <br> 하지만 목표가 뚜렷한 사람에게 <br> 그 많은 기술들은 공부해야 할 과제가 아니라 <br>좋은 도구이자 설레이는 장난감일 뿐 입니다.</p>
+          </div>
+        </div>
+        <div class="lp_item">
+          <div class="lp_item_photo_area">
+            <div class="lp_item_photo">
+              <img src="images/man3.png">
+            </div>
+          </div>
+          <div class="lp_item_profile_area">
+            <span id="lp_admin_badge">API</span>
+            <div class="lp_item_profile_title">이충재</div>
+            <div class="lp_item_profile_item">FRONTEND DEVELOPER</div>
+            <div class="lp_item_profile_item">1995. 01. 09</div>
+            <p class="lp_item_profile_item">알고보니 떨어진건 내돈이 아니라 <br> 나 자신이 아니였을까? <br> 취업만큼은 잘하자 <br> 이젠 더이상 돌아갈곳은 없다</p>
           </div>
         </div>
         <div class="lp_item">
@@ -702,10 +703,10 @@
           </div>
           <div class="lp_item_profile_area">
             <span id="lp_admin_badge">ADMIN</span>
-            <div class="lp_item_profile_title">이름</div>
-            <div class="lp_item_profile_item">FRONT / BACK / DB / AWS</div>
-            <div class="lp_item_profile_item">생년월일</div>
-            <div class="lp_item_profile_item">COMMENT</div>
+            <div class="lp_item_profile_title">장건희</div>
+            <div class="lp_item_profile_item">BACKEND DEVELOPER</div>
+            <div class="lp_item_profile_item">1995. 11. 20</div>
+            <p class="lp_item_profile_item"> ' 세미때 한번 해봤으니 파이널은 할만 하겠다  ' <br> 라는 꿈을 꾸었습니다.</p>
           </div>
         </div>
       </div>

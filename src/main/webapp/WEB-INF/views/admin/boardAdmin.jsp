@@ -166,8 +166,8 @@
                         <p class="text-xs font-weight-bold mb-0 text-center">${dto.cb_seq }</p>
                       </td> 
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><a href="/clubBoard/boardDetail?cb_seq=${dto.cb_seq }&check_num=1&cpage=1&keyword=&searchWord=">
-											${dto.cb_title }</a></p>
+                        <p class="text-xs font-weight-bold mb-0">
+											${dto.cb_title }</p>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">${dto.cb_writer }</span>

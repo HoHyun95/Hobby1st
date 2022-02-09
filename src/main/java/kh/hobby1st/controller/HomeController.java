@@ -122,8 +122,10 @@ public class HomeController {
 		// 2 = 상태순
 		int check = 1;
 
-		List<ClubListDTO> recentlyClubInfo = csService.recentlyClubInfo(my_id, check);	// 최근 활동한 동호회 정보
-		List<ClubJoinStateDTO> recentlyStateInfo = csService.recentlyStateInfo(my_id, check); // 최근 활동한 상태 정보
+		List<ClubListDTO> recentlyClubInfo = csService.recentlyClubInfo(my_id, 1);	// 최근 활동한 동호회 정보
+		List<ClubJoinStateDTO> recentlyStateInfo = csService.recentlyStateInfo(my_id, 1); // 최근 활동한 상태 정보
+		
+		System.out.println(recentlyClubInfo.get(3).getCl_name());
 
 
 		model.addAttribute("recentlyStateInfo", recentlyStateInfo);

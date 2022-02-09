@@ -155,7 +155,7 @@ div {
 	<c:if test="${voteResult eq 1 }">
 		<script>
 			alert("투표에 참여해주셔서 감사합니다.");
-			location.href="/vote/voteResultPage?vl_seq=${vl_seq}";
+			location.href="/vote/voteResultPage?vl_seq=${vl_seq}&voteState=2";
 		</script>
 	</c:if>
 

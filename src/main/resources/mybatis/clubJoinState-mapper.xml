@@ -42,7 +42,7 @@
   	
   	<!-- 나의 동호회 활동 정보 날짜순 (동호회정보)  -->
   	<select id="orderDateClubInfo" resultType="kh.hobby1st.dto.ClubListDTO">
-  		select l.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_date desc) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value}
+  		select l.* from club_list l join (select * from club_join_state where cs_join_id = #{value} order by cs_date desc) j on (l.cl_id = j.cs_board_seq) where j.cs_join_id = #{value} order by j.cs_date desc
   	</select>
   	
   	<!-- 나의 동호회 활동 정보 날짜순 (상태 정보)  -->

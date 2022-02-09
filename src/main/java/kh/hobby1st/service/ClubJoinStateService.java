@@ -65,11 +65,7 @@ public class ClubJoinStateService {
 
 		List<ClubListDTO> list = new ArrayList<>();
 
-		if (check == 1) { // 날짜순
-			list = csDao.orderDateClubInfo(cs_join_id);
-		} else if (check == 2) { // 상태순
-			list = csDao.orderStateClubInfo(cs_join_id);
-		}
+		list = csDao.orderDateClubInfo(cs_join_id);
 
 		return list;
 	}

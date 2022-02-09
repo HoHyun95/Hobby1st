@@ -372,7 +372,7 @@
 	        	  let emojiData = msgData;
 	     
 	       	  	  pullTime();
-	    		  htmlData +="<div class='sender'><img class='sender_profile'>";
+	    		  htmlData +="<div class='sender'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";
@@ -389,7 +389,7 @@
 	        	 
 	       	      pullTime();
 	       	      
-	      		  htmlData +="<div class='sender'><img class='sender_profile'>";
+	      		  htmlData +="<div class='sender'>";
 	           	  htmlData += "	<sapn>"+senderName+"</span>";
 	              htmlData += "		<div class='incoming-msg'>";
 	              htmlData += "			<div class='received_msg'>";

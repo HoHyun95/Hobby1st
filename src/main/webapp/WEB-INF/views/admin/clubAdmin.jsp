@@ -171,7 +171,7 @@
                         <p class="text-xs font-weight-bold mb-0 text-center">${dto.cl_id }</p>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><a href="/clubHouse?cl_id=${dto.cl_id }">${dto.cl_name }</a></p>
+                        <p class="text-xs font-weight-bold mb-0">${dto.cl_name }</p>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">${dto.cl_desc }</span>

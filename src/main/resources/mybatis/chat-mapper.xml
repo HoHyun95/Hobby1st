@@ -24,7 +24,7 @@
 		select c.*, m.mem_photo chat_user_photo from
 		(select * from chat where chat_cl_id = #{value})
 		c, member m where
-		c.chat_writer_id = m.mem_id
+		c.chat_writer_id = m.mem_id order by chat_seq asc
 	</select>
 
 	<select id="whoIsLastChat" resultType="kh.hobby1st.dto.ChatDTO">

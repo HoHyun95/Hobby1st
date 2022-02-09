@@ -45,12 +45,12 @@
         loginForm.style.display = "none";
       }
 
-      for (let i = 0; i < myclub_list_box.length; i++) {
+      /* for (let i = 0; i < myclub_list_box.length; i++) {
         myclub_list_box[i].onclick = () => {
           let clickedList = myclub_list_box[i].children[5].value;
           location.href = "/clubHouse?cl_id=" + clickedList;
         }
-      }
+      } */
       
       let mModify_wrap = document.querySelector(".mModify_wrap");
       let mModifyform_btn = document.getElementById("mModifyform_btn");
@@ -400,7 +400,7 @@
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="my">MY</div>
-              <h3>${my.cl_name }</h3>
+              <a href="/clubHouse?cl_id=${my.cl_id }"><h3>${my.cl_name }</h3></a>
               <h5>${my.cl_boss_name }</h5>
               <h5>${my.cl_local }</h5>
               <c:choose>
@@ -420,7 +420,7 @@
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="join">JOIN</div>
-              <h3>${join.cl_name }</h3>
+              <a href="/clubHouse?cl_id=${join.cl_id }"><h3>${join.cl_name }</h3></a>
               <h5>${join.cl_boss_name }</h5>
               <h5>${join.cl_local }</h5>
               <c:choose>
@@ -440,7 +440,7 @@
           <div class="myclub_list_box_wrap">
             <div class="myclub_list_box">
               <div class="badge" id="like">LIKE</div>
-              <h3>${like.cl_name }</h3>
+              <a href="/clubHouse?cl_id=${like.cl_id }"><h3>${like.cl_name }</h3></a>
               <h5>${like.cl_boss_name }</h5>
               <h5>${like.cl_local }</h5>
               <c:choose>

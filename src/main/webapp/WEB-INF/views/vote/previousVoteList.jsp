@@ -31,6 +31,7 @@ div {
 
 .vote_list {
 	width: 300px;
+	height: 225px;
 	margin: 15px 30px;
 	margin-top: 30px;
 	border: 1px solid rgb(0, 0, 0);
@@ -61,7 +62,7 @@ div {
 .end_date {
 	font-size: small;
 	color: rgb(236, 73, 9);
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 .btn {

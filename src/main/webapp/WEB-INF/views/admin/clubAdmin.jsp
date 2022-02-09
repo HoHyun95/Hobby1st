@@ -151,7 +151,6 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">동호회ID</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">동호회명</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">소개</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">동호회장</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">정원</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">지역</th>
@@ -172,9 +171,6 @@
                       </td>
                       <td>
                         <p class="text-xs font-weight-bold mb-0"><a href="/clubHouse?cl_id=${dto.cl_id }">${dto.cl_name }</a></p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">${dto.cl_desc }</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">${dto.cl_boss_id }</span>

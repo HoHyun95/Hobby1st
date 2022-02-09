@@ -1035,7 +1035,7 @@
               <i class="fas fa-users"> 동호회명</i>
             </div>
             <div class="input">
-              <input type="text" id="cl_name" maxlength="30" name="cl_name" placeholder="동호회명을 입력해주세요">
+              <input type="text" id="cl_name" maxlength="20" name="cl_name" placeholder="동호회명을 입력해주세요">
             </div>
             <span class="resultSpan" id="cl_name_valid"></span>
             <div class="title">

@@ -44,7 +44,7 @@ div {
 .vote_title {
 	margin-bottom: 20px;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 0.9rem;
 }
 
 .attend {

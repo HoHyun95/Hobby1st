@@ -182,7 +182,7 @@
     
     <div class="container">
         <div class="title">
-            <input class="title_input" name="vl_title" type="text" placeholder="투표 제목">
+            <input class="title_input" name="vl_title" type="text" placeholder="투표 제목(40자)" maxlength="40">
         </div>
 
         <div class="items">

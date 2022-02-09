@@ -116,14 +116,10 @@
     	likedList = ${fn:length(clubList)};
     	start = 1;
     	end = 10;
-    	console.log(start);
-    	console.log(end);
         totalList = ${fn:length(listCount)} - likedList;
       } else {
     	start = 11;
     	end = 20;
-    	console.log(start);
-    	console.log(end);
         totalList = ${fn:length(listCount)};
       }
   
@@ -153,7 +149,6 @@
           
           if(res.length > 0) {
         	lcount += res.length;
-            console.log(lcount);
        		start += count;
             end += res.length; 
            
@@ -241,7 +236,6 @@
       }
       position -= MOVE_WIDTH;
       createClub_container.style.transform = "translateX(" + (position) + "px)";
-      console.log(position);
 
     }
 
@@ -257,8 +251,7 @@
       }
       position += MOVE_WIDTH;
       createClub_container.style.transform = "translateX(" + (position) + "px)";
-      console.log(position);
-    }    
+      console.log(position);    }    
     
     
     // 동호회 검색
@@ -281,7 +274,6 @@
     	        },
     	        dataType: "json"
     	      }).done((res) => {
-    	        console.log(res);
     	        create_hobby1st_club.style.display = "none";
     	        search_result_inner.style.display = "flex";
     	        search_result_title.innerText = "총 " + (res.length) + "건의 검색 결과가 있습니다.";
@@ -359,7 +351,6 @@
         },
         dataType: "json"
       }).done((res) => {
-        console.log(res);
         create_hobby1st_club.style.display = "none";
         search_result_inner.style.display = "flex";
         search_result_title.innerText = "총 " + (res.length) + "건의 검색 결과가 있습니다.";
@@ -826,13 +817,13 @@
         <div class="header_inner_bottom">
           <ul class="menu_list">
             <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
-            <a href="/club"><li class="menu_list_item">동호회</li></a>
-            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/club"><li class="menu_list_item">CLUB</li></a>
+            <a href="/myPage"><li class="menu_list_item">MY PAGE</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
             <a href="/vote"><li class="menu_list_item">VOTE</li></a>
             <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
-            <a href="/admin"><li class="menu_list_item">admin</li></a>
+            <a href="/admin"><li class="menu_list_item">ADMIN</li></a>
             </c:if>
           </ul>
         </div>

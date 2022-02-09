@@ -188,7 +188,11 @@ div {
 	<script>
 		// 목록으로
 		$(".backBtn").on("click", function() {
-			location.href = "/vote/presentVoteList?";
+			if(${voteState == 1}){
+				location.href="/vote/previousVoteList";
+			}else if(${voteState == 2}){
+				location.href="/vote/presentVoteList";
+			}
 		})
 
 		// 투표하기

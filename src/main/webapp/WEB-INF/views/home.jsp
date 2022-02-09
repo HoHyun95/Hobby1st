@@ -679,13 +679,13 @@
         <div class="header_inner_bottom">
           <ul class="menu_list">
             <a href="/hobby1st"><li class="menu_list_item">Hobby1st</i></li></a>
-            <a href="/club"><li class="menu_list_item">동호회</li></a>
-            <a href="/myPage"><li class="menu_list_item">마이페이지</li></a>
+            <a href="/club"><li class="menu_list_item">CLUB</li></a>
+            <a href="/myPage"><li class="menu_list_item">MY PAGE</li></a>
             <a href="/news"><li class="menu_list_item">NEWS</li></a>
             <a href="/vote"><li class="menu_list_item">VOTE</li></a>
             <!-- <a href="/fullpage"><li class="menu_list_item">Fullpage</li></a> -->
             <c:if test="${admin != null }">
-            <a href="/admin"><li class="menu_list_item">admin</li></a>
+            <a href="/admin"><li class="menu_list_item">ADMIN</li></a>
             </c:if>
           </ul>
         </div>
@@ -709,13 +709,6 @@
               <c:forEach var="clubList" items="${list }" begin="0" end="9" varStatus="status">
                 <div class="main_bg_inner_bottom_list_item_wrap">
                   <div class="main_bg_inner_bottom_list_item">
-                    <c:choose>
-    				  <c:when test="${sessionScope.mem_id eq null}">
-    				  </c:when>
-    				  <c:otherwise>
-                        <div class="likeBtn"><i class="far fa-heart" id=${clubList.cl_id }></i></div>
-    				  </c:otherwise>
-    				</c:choose>
                     <div class="badge" id="theme1">개발 ${status.count }위</div>
                     <h3><a href="/clubHouse?cl_id=${clubList.cl_id }">${clubList.cl_name }</a></h3>
                     <h5>${clubList.cl_boss_name}</h5> 

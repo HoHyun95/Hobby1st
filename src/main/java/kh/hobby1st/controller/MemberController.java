@@ -124,11 +124,13 @@ public class MemberController {
 	@RequestMapping("signUp")
 	public String signUp(String mem_id, String mem_pass, String mem_name, String mem_nickname, String mem_birthday,
 			String mem_gender, String mem_address, String mem_category_1, String mem_category_2, String mem_phone,
-			String mem_email, MultipartFile[] mem_photo) throws Exception {
+			String mem_email, MultipartFile[] mem_photo, Model model) throws Exception {
 
 		// DB에 디폴트 값을 전달하기 위해 임의 설정
 		String mem_lastlogin = "default";
 		String profile = "";
+		
+		int result = 0;
 		for (MultipartFile mf : mem_photo) {
 			if (mf.getOriginalFilename().isEmpty()) {
 				if (mem_gender.equals("M")) {
@@ -150,11 +152,12 @@ public class MemberController {
 				mf.transferTo(new File(realPath + "/" + sysName));
 				profile = "/upload/profile/" + sysName;
 			}
-			int result = mem_service
+			result = mem_service
 					.insert(new MemberDTO(mem_id, mem_pass, mem_name, mem_nickname, mem_birthday, mem_gender,
 							mem_address, mem_category_1, mem_category_2, profile, mem_lastlogin, mem_phone, mem_email));
 		}
-		return "redirect: /";
+		model.addAttribute("result", result);
+		return "tmp";
 	}
 
 	// 이메일찾기 기능

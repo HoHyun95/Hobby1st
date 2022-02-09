@@ -143,7 +143,7 @@
 	
 	<!-- 회원 수 많은 동호회 TOP 30 / 추천동호회 더보기용 -->
 	<select id="ClubListByTop30" resultType="kh.hobby1st.dto.ClubListDTO">
-		select * from (select club_list.*, row_number() over (order by cl_memcount desc) rn from club_list) where rn between ${start} and #{end}
+		select * from (select club_list.*, row_number() over (order by (cl_memcount/cl_maxmem) desc) rn from club_list) where rn between ${start} and #{end}
 	</select>
 	
 	<!-- 관리자페이지 오늘 개설한 동호회 수 -->

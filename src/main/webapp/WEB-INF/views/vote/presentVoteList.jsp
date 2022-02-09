@@ -31,6 +31,7 @@ div {
 
 .vote_list {
 	width: 300px;
+	height: 225px;
 	margin: 15px 30px;
 	margin-top: 30px;
 	border: 1px solid rgb(0, 0, 0);
@@ -44,7 +45,7 @@ div {
 .vote_title {
 	margin-bottom: 20px;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 0.9rem;
 }
 
 .attend {
@@ -61,7 +62,7 @@ div {
 .end_date {
 	font-size: small;
 	color: rgb(236, 73, 9);
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .btn {
@@ -196,13 +197,13 @@ div {
 		// 투표하기
 		$(".voteBtn").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
-			location.href = "/vote/detailPage?vl_seq=" + vl_seq;
+			location.href = "/vote/detailPage?vl_seq=" + vl_seq + "&voteState=2";
 		})
 
 		// 결과보러가기
 		$(".voteResult").on("click", function() {
 			let vl_seq = $(this).find(".vl_seq").val();
-			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq;
+			location.href = "/vote/voteResultPage?vl_seq=" + vl_seq + "&voteState=2";
 		})
 		
 		// 투표 삭제

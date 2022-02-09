@@ -33,7 +33,7 @@ public class VoteController {
 
 	// 투표 작성 페이지 이동
 	@RequestMapping("detailPage")
-	public String detailPage(int vl_seq, Model model) {
+	public String detailPage(int vl_seq, Model model, int voteState) {
 
 		String mem_id = (String) session.getAttribute("mem_id");
 
@@ -41,6 +41,7 @@ public class VoteController {
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
 		int voteCheck = voteService.voteCheck(vl_seq, mem_id);
 
+		model.addAttribute("voteState", voteState);
 		model.addAttribute("voteDetail", voteDetail);
 		model.addAttribute("voteOption", voteOption);
 		model.addAttribute("voteCheck", voteCheck);
@@ -79,8 +80,8 @@ public class VoteController {
 	
 	//투표 결과 보기
 	@RequestMapping("voteResultPage")
-	public String voteResultPage(int vl_seq, Model model) {
-
+	public String voteResultPage(int vl_seq, Model model, int voteState) {
+		
 		String vc_vote_id = (String) session.getAttribute("mem_id");
 		VoteListDTO voteDetail = voteService.selectVoteDetail(vl_seq);
 		List<VoteOptionDTO> voteOption = voteService.selectVoteOption(vl_seq);
@@ -102,6 +103,7 @@ public class VoteController {
 		int voteCheck = voteService.voteCheck(vl_seq, vc_vote_id);
 		
 		
+		model.addAttribute("voteState", voteState);
 		model.addAttribute("voteDetail", voteDetail);
 		model.addAttribute("voteOption", voteOption);
 		model.addAttribute("resultCountM", resultCountM);

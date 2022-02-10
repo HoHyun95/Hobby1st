@@ -197,7 +197,7 @@ div {
 
 		// 투표하기
 		$(".voteBtn").on("click", function() {
-			location.href = "/vote/detailPage?vl_seq=${voteDetail.vl_seq}";
+			location.href = "/vote/detailPage?vl_seq=${voteDetail.vl_seq}&voteState=${voteState}";
 		})
 	</script>
 

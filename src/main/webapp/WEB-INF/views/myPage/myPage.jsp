@@ -314,20 +314,6 @@
                 <fmt:formatDate value="${rStateInfo.cs_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
               </div>
             </c:when>
-            <c:when test="${rStateInfo.cs_state eq 4 }">
-              <div class="recent_act_contents_list">
-               ${recentlyClubInfo[status.index].cl_name } 동호회 해체
-              </div>
-              <div class="recent_act_contents_list">
-                ${recentlyClubInfo[status.index].cl_name }
-              </div>
-              <div class="recent_act_contents_list">
-                <span id="no5">동호회 해체</span>
-              </div>
-              <div class="recent_act_contents_list">
-                <fmt:formatDate value="${rStateInfo.cs_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
-              </div>
-            </c:when>
           </c:choose>
         </div>
         </c:forEach>
